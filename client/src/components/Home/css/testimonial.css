@@ -1,0 +1,110 @@
+.roberto-testimonials-area {
+    position: relative;
+    z-index: 1; }
+    .roberto-testimonials-area .testimonial-thumbnail {
+      position: relative;
+      z-index: 1;
+      padding-right: 15px; }
+      .roberto-testimonials-area .testimonial-thumbnail img {
+        border-radius: 8px;
+        width: 100% !important; }
+    .roberto-testimonials-area .single-testimonial-slide h5 {
+      color: #636a76;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.8; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .roberto-testimonials-area .single-testimonial-slide h5 {
+          font-size: 16px; } }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .roberto-testimonials-area .single-testimonial-slide h5 {
+          font-size: 16px; } }
+      @media only screen and (max-width: 767px) {
+        .roberto-testimonials-area .single-testimonial-slide h5 {
+          font-size: 16px; } }
+    .roberto-testimonials-area .single-testimonial-slide .rating-title {
+      position: relative;
+      z-index: 1;
+      margin-top: 15px; }
+      .roberto-testimonials-area .single-testimonial-slide .rating-title .rating {
+        display: block;
+        margin-bottom: 10px; }
+        .roberto-testimonials-area .single-testimonial-slide .rating-title .rating i {
+          color: #f5b917;
+          font-size: 14px; }
+      .roberto-testimonials-area .single-testimonial-slide .rating-title h6 {
+        margin-bottom: 0; }
+        .roberto-testimonials-area .single-testimonial-slide .rating-title h6 span {
+          color: #1cc3b2;
+          font-size: 14px;
+          font-weight: 400; }
+  
+  .testimonial-slides .owl-dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 40px; }
+    .testimonial-slides .owl-dots .owl-dot {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 12px;
+      flex: 0 0 12px;
+      max-width: 12px;
+      width: 12px;
+      height: 12px;
+      background-color: #c0c8d7;
+      border-radius: 50%;
+      margin: 0 5px; }
+      .testimonial-slides .owl-dots .owl-dot.active {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 12px;
+        flex: 0 0 12px;
+        max-width: 12px;
+        width: 12px;
+        background-color: #1cc3b2;
+        border-radius: 50%; }
+  
+  .single-testimonial-area {
+    position: relative;
+    z-index: 1; }
+    .single-testimonial-area .testimonial-content {
+      -webkit-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms;
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      border-radius: 3px;
+      box-shadow: 0 15px 9px 0 rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .single-testimonial-area .testimonial-content {
+          padding: 30px; } }
+      @media only screen and (max-width: 767px) {
+        .single-testimonial-area .testimonial-content {
+          padding: 30px; } }
+      .single-testimonial-area .testimonial-content .ratings-icon {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 20px; }
+        .single-testimonial-area .testimonial-content .ratings-icon .rating {
+          color: #f3b409; }
+      .single-testimonial-area .testimonial-content h5 {
+        -webkit-transition-duration: 500ms;
+        -o-transition-duration: 500ms;
+        transition-duration: 500ms;
+        margin-bottom: 0;
+        color: #707070;
+        line-height: 1.5;
+        font-weight: 400; }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+          .single-testimonial-area .testimonial-content h5 {
+            font-size: 16px; } }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .single-testimonial-area .testimonial-content h5 {
+            font-size: 16px; } }
+        @media only screen and (max-width: 767px) {
+          .single-testimonial-area .testimonial-content h5 {
+            font-size: 16px; } }

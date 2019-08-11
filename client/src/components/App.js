@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import NavBar from './Nav'
-import Home from './Home'
+import NavBar from './Home/Nav/Nav'
+import Home from './Home/Home'
 import ListStudio from './ListStudio'
-import FormStudioDetails from './Form/FormStudioDetails'
 import Availibility from './Availibility'
 import SignUp from './SignUp'
 import StudioSearch from './Studios/StudioSearch'
@@ -14,7 +13,7 @@ import Confirmation from './Checkout/OrderConfirmation'
 import {connect} from 'react-redux'
 import Footer from './Footer'
 import * as actions from '../actions'
-
+import Preloader from '../components/assets/preloader'
 
 
 
@@ -30,16 +29,15 @@ componentDidMount(){
   render() {
     return (
       <div>
-   
-
+  
+<Preloader />
        <BrowserRouter>
        <div>
-       <NavBar />
          <Route exact  path="/" component={Home}/> 
          <Route path="/sign-up" component={SignUp} />
          <Route path="/post-studio" component={ListStudio} />
-         <Route path="/search-studio/:search/:location" component={StudioSearch} />
-         <Route path="/find-studio/:id" component={SingleStudio} />
+         <Route path="/search-studio/:search?/:location?" component={StudioSearch} />
+         <Route path="/single-studio/:id" component={SingleStudio} />
          <Route path="/userprofile" component={Profile} />
          <Route path="/payment/:studioid" component={Payment} />
          <Route path="/availibility/:studioName/:id" component={Availibility} />

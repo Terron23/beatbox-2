@@ -12,6 +12,7 @@ import Title from '../assets/Title'
 const Studios = ({studioName, price, guest, rules, id, image, availibility}) => {
   return ( 
     <div className="row" >
+      test
         <Title header={studioName}/>  
     <div className="col-md-7">
     <img className="image img" src={`${image}`} width="100%" height="400px"/>
@@ -55,7 +56,7 @@ componentDidMount(){
 
 
   render() {
-      if (!this.props.fetchStudio) {
+      if (!this.props.studio) {
           return ''
       }
       const { studio } = this.props

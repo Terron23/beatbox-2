@@ -140,7 +140,20 @@ app.get('/api/studio-listing', async (req, res) => {
 
     const studio = await Studio.find({}, function (err, studio) {
         res.send(studio);
-    });
+    })
+    //.select({isListed: true});   
+});
+
+
+app.get('/api/feature/studio-listing', async (req, res) => {
+
+    // const studio = await Studio.find({}, function (err, studio) {
+    //     res.send(studio);
+    // });
+
+    const studio = await Studio.find({}, function (err, studio) {
+        res.send(studio);
+    }).sort({'price':-1}).limit(3);
     //.select({isListed: true});   
 });
 

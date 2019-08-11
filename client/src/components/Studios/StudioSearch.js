@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Schedule from '../Schedule';
-import 'react-datetime/css/react-datetime.css'
-import moment from 'moment'
-import Title from '../assets/Title'
-import FeaturedStudio from '../FeaturedStudios'
-import MapContainer from '../assets/GoogleMap'
+
 import {connect} from 'react-redux';
 import {fetchLocation, fetchStudio} from '../../actions';
-import Image from '../assets/Image';
-import CardInfo from '../assets/CardInfo';
-import axios from 'axios';
+import Nav from '../Home/Nav/Nav';
+import TopNav from '../Home/Nav/TopNav';
+import NavSearch from '../Home/Nav/NavSearch';
+import StudioSearchTemplate from './sub_components/StudioSearchTemplate';
+import Header from './sub_components/header';
+import StudioSideFilter from './sub_components/StudioSideFilter'
+
+
+
+
 
 
 class StudioSearch extends Component {
@@ -26,11 +28,15 @@ this.state = {
   availibility:[],
   guest: "",
   state: "",
-  search: this.props.match.params.search.replace(/[^a-z0-9+]+/gi, ' '),
-  location: this.props.match.params.location.replace(/[^a-z0-9+]+/gi, ' '),
+search: '',//this.props.match.params.search.replace(/[^a-z0-9+]+/gi, ' '),
+location: '',//this.props.match.params.location.replace(/[^a-z0-9+]+/gi, ' '),
   reveal: true,
   filterArr: "",
-  longLat: []
+  longLat: [], 
+  studioType: '',
+  guest:0,
+  startDate: '',
+  applyDate: '',
 }
 
   }
@@ -44,64 +50,42 @@ this.state = {
   }
 
 
-  featureType =()=>{
+  handleChangeStart=(date)=> {
+  
+    this.setState({
+      startDate: date
+    });
 
-    let  filterArr=[...this.props.studio]
+  } 
+
+featureType =()=>{
+let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+let  filterArr=[...this.props.studio]
+let test = [...filterArr]
+console.log("test", test.filter(studio => studio.availibility.filter(studio=>studio.day.includes('Sunday'))))
 let search = filterArr 
-  .sort((a, b)=>a.rating.length + b.rating.length)
-  .sort((a, b)=>{
-    if(this.state.filterArr==="low"){
-      return  a.price - b.price
-    }
+.filter(studio=> this.state.location === ''? studio.city: studio.city.toLowerCase().match(this.state.location.toLowerCase())  || studio.postalCode.toLowerCase()===this.state.location.toLowerCase())
+.filter(studio =>(this.state.studioType==='' ? studio.studioType: studio.studioType ===this.state.studioType))
+.filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
+.filter(studio=>studio.day === days[new Date(this.state.applyDate).getDay()]) !='')
+.map((studio)=>{
 
-    if(this.state.filterArr==="high"){
-      return  b.price - a.price
-    }
-
-  })
-  .filter((studio, i)=> i <= 2000)
-  .filter(studio => {
-   if(this.state.search === 'All' || this.state.search === ''){
-     console.log("all for search", studio.studioType.length > 0)
-   return studio.studioType.length > 0;
-   }
-   else{
-   
-    return studio.studioType.toLowerCase().match(this.state.search.toLowerCase())
-   }
-  })
-  .filter(studio =>{
-    if(this.state.location === 'All' || this.state.location === '' ){
-      console.log("All fro location", studio.city.length > 0)
-      return studio.city.length > 0
-    }
-
-  console.log("match should work", studio.city.toLowerCase().match(this.state.location.toLowerCase()), this.state.location.toLowerCase(), studio.city)
-  return studio.city.toLowerCase().match(this.state.location.toLowerCase())
-
-  })
-  .map((studio)=>{
                 return (
-                  
-                    
-                  <div className={this.state.reveal? 'col-md-6': "col-lg-3 col-md-3 col-sm-12"} key={studio._id}>
-                
-                 
-                      <Image 
-                      src={`${studio.studioImage}`} alt={`${studio.studioName}`} />
-                   
-                    <CardInfo studioName={studio.studioName} 
-                    price={studio.price} 
-                    _id={studio._id} 
-                    studioType={studio.studioType}
-                    city={studio.city}
-                    />
-                   
-                   
-                  
-                </div>)})
-
-
+                <StudioSearchTemplate
+                key={studio._id} 
+                studioImage={studio.studioImage}
+                studioName={studio.studioName}
+                price={studio.price} 
+                _id={studio._id} 
+                studioType={studio.studioType}
+                city={studio.city}
+                studioType={studio.studioType}
+                availibility={studio.availibility}
+                startDate={this.state.startDate}
+                handleChangeStart={this.handleChangeStart}
+                />) })
+                // .filter(studio =>(studio.availibility.startDate.getDay() === this.state.startDate))
+              
    return search
 
 
@@ -113,161 +97,110 @@ handleTime =(e)=>{
 
   this.setState({time: e.target.value})
   
-  console.log(this.state.time.split("T").pop())
-  console.log(this.state.time.substring(this.state.time.indexOf("T"), 4))
-  console.log(this.state.time)
   
   }
 
 
-handleFilters =(filter)=>{
-  if(filter === 'low') {
-  this.setState({filterArr: filter})
-  }
-  else if(filter == 'high'){
-    this.setState({filterArr: filter})
-  }
 
-  else {
-    this.setState({filterArr: filter})
-  }
-}
 
 handleAvailibility = (e) =>{
   e.preventDefault();
-  let location = e.target.location.value;
-  let search = e.target.search.value;
-  // let time = e.target.calendar.value.split("T").pop()
-  // let day = e.target.calendar.value.split("T").shift()
-  // let m = moment(day, "YYYY-MM-DD");
-  // let dow = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  // let guest = e.target.guest.value
-  // let state = e.target.state.value;
-  // console.log(time);
-  //console.log(dow[m.day()]);
-
-  // this.setState({
-  //   filterStudioType: e.target.studioType.value, 
-  //   time, day:dow[m.day()],
-  // guest, location,
-  // state,
-  // })
-
-  this.setState({location, search})
-console.log(this.state.location)
+let location = e.target.location.value;
+let studioType = e.target.studioType.value
+let guest = e.target.guest.value
+let applyDate = e.target.startDate.value
+console.log(applyDate)
+this.setState({location, studioType, guest, applyDate})
 }
 
 handleChange =(e)=>{
   this.setState({search: e.target.search.value})
 }
 
-viewMap =(e)=>{
-e.preventDefault()
-if(this.state.reveal){
-  this.setState({reveal: false})
-}
-else{
-  this.setState({reveal:true})
-}
- 
 
+
+handlePrice =()=>{
+  let  filterArr=[...this.props.studio]
+  let price=filterArr.map(studio =>{
+    return studio.price
+    }).sort();
+
+     return price
+}
+
+handleDropDown =(options)=>{
+  let  filterArr=[...this.props.studio]
+ let data =[];
+  if (options === 'studioType'){
+ 
+  let studioType=filterArr
+  .map(studio =>{
+
+    return (data.push(studio.studioType))
+    })
+
+console.log("data", [...new Set(data)])
+     return [...new Set(data)]
+  }
+  let group=filterArr.map(studio =>{
+    
+    return data.push(studio.guest)
+    })
+ return [...new Set(group)]
+     
+  
 }
 
   render() {
     if(!this.props.studio || !this.props.locate){
       return 'Loading...'
     }
- 
-   console.log(this.props)
-   console.log(this.state)
-    return (<div className="container-fluid">
-      {/* <MapContainer /> */}
-  
-     
-   
-   
-     
-    <div className="bg-light-gray">
+ let {location, startDate} = this.state;
 
-      <div className="container-fluid" style={{marginTop:150}}>
-      
-      <Schedule
-      search ={this.state.search}
-      locate={this.state.location}
-      time = {this.state.time}
-      classProp={`btn btn-secondary btn-md`}
-      buttonTitle={"Search"}
-      handleSubmit ={this.handleAvailibility}
-      />
-
-<div className="container-fluid">
-<hr />
-<nav  className="navbar" >
-
-{/* <ul class="navbar-nav" style={{paddingLeft: 20, paddingRight:20}}>    
-<li class="nav-item dropdown">
-      <a class="nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown">
- Distance
-      </a>
-
-      <div class="dropdown-menu">
-      
-        <a class="dropdown-item" onClick={()=>this.handleFilters('low')}>Venue</a>
-        <a class="dropdown-item" onClick={()=>this.handleFilters('high')}>Distance</a>
-      
-      </div>
-    </li>
-    </ul> */}
-
-<ul class="navbar-nav mr-auto">
-
-    
-<li class="nav-item dropdown">
-      <a class="nav-item dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-     Sort by
-      </a>
-      <div class="dropdown-menu">
-      
-        <a class="dropdown-item" onClick={()=>this.handleFilters('low')}>Price (Low -> High)</a>
-        <a class="dropdown-item" onClick={()=>this.handleFilters('high')}>Price (High -> Low)</a>
-      
-      </div>
-    </li>
-       
-            </ul>
-
-<ul className="navbar-nav ml-auto">
-            <li class="nav-item">
-            <button onClick={this.viewMap}>View Map</button>
-            </li>
-           
-        </ul>
-
-</nav>
-
-<hr />  
+    return (
+<section>
+  <div className="header-area">
+<NavSearch />
+  <TopNav />
+<Nav />
+<Header />
 </div>
 
-{this.state.reveal === false ?
-<div className="col-md-12">
-  <FeaturedStudio featureType={this.featureType}
-  
-  />
-  </div>
-:
+      <div className="roberto-rooms-area section-padding-100-0">
+        
+                 
+        <div className="container">
+            <div className="row">
+                <div className="col-12 col-lg-8">
+                   
+            
 
-<div className="row">
-<div className="col-md-6">
-<FeaturedStudio featureType={this.featureType}/>
-</div>
-<div className="col-md-6">
-<MapContainer /> 
-</div> 
-</div>}
-     
+                {this.featureType()}
+                  
+                    <nav className="roberto-pagination wow fadeInUp mb-100" data-wow-delay="1000ms">
+                        <ul className="pagination">
+                            <li className="page-item"><a className="page-link" href="#">1</a></li>
+                            <li className="page-item"><a className="page-link" href="#">2</a></li>
+                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item"><a className="page-link" href="#">Next <i className="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+             <StudioSideFilter location={location} 
+             submit={this.handleAvailibility} priceLow={this.handlePrice()[0]} 
+             priceHigh={this.handlePrice().pop()}
+            studioType={this.handleDropDown('studioType')}
+            group={this.handleDropDown()}
+            startDate={startDate}
+            handleChangeStart={this.handleChangeStart}
+             />
+          
+          
+            </div>
         </div>
-        </div>
-      </div>
+    </div>
+    </section>
     );
   }
 }

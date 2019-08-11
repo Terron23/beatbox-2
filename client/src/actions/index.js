@@ -25,7 +25,7 @@ dispatch({type: FETCH_BOOKING, payload: res.data})
 export const fetchLocation= () => async dispatch => {
 const res = await axios.get('https://json.geoiplookup.io');
 dispatch({type: FETCH_LOCATION, payload: res.data})
-console.log("Redux", res.data.city)
+
 }
 
 export const fetchStudioType= () => async dispatch => {
@@ -34,4 +34,7 @@ export const fetchStudioType= () => async dispatch => {
     }
 
 
-
+    export const fetchFeatureStudioType= () => async dispatch => {
+        const res = await axios.get('/api/feature/studio-listing');
+        dispatch({type: FETCH_STUDIOTYPES, payload: res.data})
+        }

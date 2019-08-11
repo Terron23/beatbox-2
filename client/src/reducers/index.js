@@ -9,6 +9,7 @@ import studiotypeReducers from './studiotypeReducers'
 
 
 
+
 export default combineReducers({
     auth: authReducers,
     studio: studioReducers,
