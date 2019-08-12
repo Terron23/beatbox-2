@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { fetchStudio} from '../.././actions';
 import bg1 from '../../images/bg-img/57.jpg'
-import bg2 from '../../images/bg-img/62.jpg'
 import Heading from './sub_components/heading'
-import OwlCarousel from 'react-owl-carousel2';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { Link } from 'react-router-dom';
 
 
@@ -30,13 +31,7 @@ const SingleFeaturedStudio =({bg, studiotype, price, group, amenities, studioNam
 
 
 
-const options = {
-    items: 1,
-    rewind: true,
-    autoplaySpeed: true,
-    autoplaySpeed: 50,
-    dots: false,
-};
+
 class FeaturedStudios extends Component {
 
 
@@ -67,14 +62,15 @@ render(){
         <div className="rooms-slides ">
           
           
-               <OwlCarousel ref="img" options={options}>
-           {this.showStudio().length >0 ? this.showStudio(): 
-           <SingleFeaturedStudio  bg={bg1} 
-            studiotype={'Recording - Music'}
-            price={50} studioName={'Top Studio'}
-            rating={[1, 1, 1, 1, 1].map(star=><i className="icon_star"></i>)}
-            group={4}
-            id={1}/>}
+               <OwlCarousel ref="img" items="1" className="owl-theme"
+    loop
+    margin={10}
+    nav={false}
+    dots={false}
+    dotsContainer={false}
+    >
+          {this.showStudio()} 
+           
                
                </OwlCarousel>
                <div className="owl-nav"> <div className="owl-prev" onClick={() => this.refs.img.prev()}> <i className="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</div>

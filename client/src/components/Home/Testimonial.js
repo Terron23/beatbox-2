@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import OwlCarousel from 'react-owl-carousel2';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './css/testimonial.css'
 
 
 const Heading =({children})=> (<section class="roberto-testimonials-area section-padding-100-0">
 <div class="container">{children}</div></section>)
 
-const options = {
-    items: 1,
-    rewind: true,
-    autoplaySpeed: true,
-    autoplaySpeed: 50
-};
+
 
 const TestimonialTemplate =({img, description, name, title})=>{
     return(<div class="item">
@@ -60,7 +57,10 @@ export default class Testimonials extends Component {
     return (
        <Heading>
             
-                <OwlCarousel options={options} clas>
+                <OwlCarousel  items="1" className="owl-theme"
+    loop
+    margin={10}
+    nav>
                 <div className="item">
                     <TestimonialTemplate description={"Studio Hunt is awesome! I scheduled a sip & paint class for my best friends party and also use it to shoot some of my best photography work. Hands down this app is second to none."}
                 name="Rebecca Nunce"

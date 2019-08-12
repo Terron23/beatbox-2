@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
-import SearchCriteria from '../sub_components/SearchCriteria'
+import SearchCriteria from './Home/sub_components/SearchCriteria'
 //Should come from database
 
 
@@ -34,10 +34,9 @@ handleSubmit =(e)=>{
 let search = e.target.studio.value==="" ? 'All' : e.target.studio.value
 let location = e.target.location.value
 let startDate = e.target.checkinDate.value
-let startTime = e.target.checkinTime.value
   this.props.history.push({
     pathname: '/search-studio/'+search+'/'+location,
-    search: '?startday='+startDate+'&startime='+startTime
+    search: '?startday='+startDate
   })
 }
 
@@ -63,7 +62,7 @@ console.log(this.props)
                           <label htmlFor="checkIn">Location</label>
                           <input type="text" className="form-control" id="location" name="location" defaultValue={locate}/>
                       </div>
-                      <div className="col-4 col-md-1 col-lg-2">
+                      <div className="col-6 col-md-2 col-lg-3">
                           <label htmlFor="checkIn">Start Time</label>
                           
                           <DatePicker 
@@ -71,12 +70,7 @@ console.log(this.props)
                            onChange={this.handleChangeStart}
                           id="checkin" className="form-control" name="checkinDate" />
                       </div>
-                      <div className="col-3 col-md-2 col-lg-2">
-                          <label htmlFor="checkOut">Start Time</label>
-                          <input className="form-control" type="time" name="checkinTime" id="checkOut"/>
-
-                       
-                      </div>
+                    
                      <SearchCriteria title="studio"/>
                    
                     

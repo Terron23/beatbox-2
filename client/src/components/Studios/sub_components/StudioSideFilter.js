@@ -47,31 +47,49 @@ class StudioSideFilter extends Component{
             </div>
         </div>
 
+
+        <div className="form-group mb-30">
+            
+            <div className="input-daterange" id="datepicker">
+                <div className="row no-gutters">
+                    
+                   
+                        
+      
+
+<SearchCriteria title="Studio Type"  dropVal={studioType} name="studioType" col='12'/>
+ 
+
+               
+       
+                </div>
+            </div>
+        </div>
         <div className="form-group mb-30">
             <label for="checkInDate">Check In Date</label>
             <div className="input-daterange" id="datepicker">
                 <div className="row no-gutters">
-                    <div className="col-12">
+                <div class="row">
+                    <div className="col-md-12">
                        
                     <DatePicker 
                            selected={startDate}
                            onChange={handleChangeStart}
-                          id="checkin" className="form-control" name="startDate" />
+                           className="form-control" name="startDate" 
+                           style={{"width":"1000px"}}
+                          />
                     </div>
+
                  
+                </div>
                 </div>
             </div>
         </div>
-        
-        <div className="form-group mb-30">
-
-<SearchCriteria title="Studio Type"  dropVal={studioType} name="studioType"/>
- 
-</div>
+   
 
     
         <div className="form-group mb-30">
-<button className="btn btn-primary" onClick={this.reveal}>Advanced Filters</button>
+<a className="" onClick={this.reveal}>Advanced Filters</a>
  
 </div>
 <section className={ active === true ? '' :'d-none'}>
@@ -82,7 +100,8 @@ class StudioSideFilter extends Component{
                     
                     <TimeDropDown col="col-6" label="Time In" name="timein"/>
                    
-                   
+ 
+
                     <TimeDropDown col="col-6" label="Time Out" name="timeout"/>
        
                 </div>

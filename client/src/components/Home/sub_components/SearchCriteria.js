@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 const SearchCriteria =({title, type})=>{
-    return( <div className="col-6 col-md-2">
+    return( <div className="col-6 col-md-2 col-lg-3">
     <label htmlFor={title}>{title.toUpperCase()}</label>
     <select name={title} id={title} className="form-control">
         <option value="01">Recording - Music</option>

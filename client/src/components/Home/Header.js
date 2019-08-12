@@ -39,8 +39,8 @@ let {locate, history}=this.props;
   <NavSearch active={this.state.active}/>
 <TopNav /> 
 <Navbar revealSearch={this.revealSearch}/>
-<Hero />
-<Schedule locate={locate} history={history}/>
+{/* <Hero />
+<Schedule locate={locate} history={history}/> */}
 
 </HeaderArea >
 

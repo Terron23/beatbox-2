@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import NavBar from './Home/Nav/Nav'
+import Header from './Home/Header'
 import Home from './Home/Home'
 import ListStudio from './ListStudio'
 import Availibility from './Availibility'
@@ -31,8 +31,11 @@ componentDidMount(){
       <div>
   
 <Preloader />
+
        <BrowserRouter>
+     
        <div>
+       <Header />
          <Route exact  path="/" component={Home}/> 
          <Route path="/sign-up" component={SignUp} />
          <Route path="/post-studio" component={ListStudio} />

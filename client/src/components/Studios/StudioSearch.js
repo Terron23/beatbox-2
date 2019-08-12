@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 
 import {connect} from 'react-redux';
 import {fetchLocation, fetchStudio} from '../../actions';
-import Nav from '../Home/Nav/Nav';
-import TopNav from '../Home/Nav/TopNav';
-import NavSearch from '../Home/Nav/NavSearch';
 import StudioSearchTemplate from './sub_components/StudioSearchTemplate';
-import Header from './sub_components/header';
+import StudioSearchHeader from './sub_components/StudioSearchHeader';
 import StudioSideFilter from './sub_components/StudioSideFilter'
 
 
@@ -61,8 +58,6 @@ location: '',//this.props.match.params.location.replace(/[^a-z0-9+]+/gi, ' '),
 featureType =()=>{
 let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 let  filterArr=[...this.props.studio]
-let test = [...filterArr]
-console.log("test", test.filter(studio => studio.availibility.filter(studio=>studio.day.includes('Sunday'))))
 let search = filterArr 
 .filter(studio=> this.state.location === ''? studio.city: studio.city.toLowerCase().match(this.state.location.toLowerCase())  || studio.postalCode.toLowerCase()===this.state.location.toLowerCase())
 .filter(studio =>(this.state.studioType==='' ? studio.studioType: studio.studioType ===this.state.studioType))
@@ -139,7 +134,7 @@ handleDropDown =(options)=>{
     return (data.push(studio.studioType))
     })
 
-console.log("data", [...new Set(data)])
+
      return [...new Set(data)]
   }
   let group=filterArr.map(studio =>{
@@ -160,10 +155,8 @@ console.log("data", [...new Set(data)])
     return (
 <section>
   <div className="header-area">
-<NavSearch />
-  <TopNav />
-<Nav />
-<Header />
+
+<StudioSearchHeader />
 </div>
 
       <div className="roberto-rooms-area section-padding-100-0">

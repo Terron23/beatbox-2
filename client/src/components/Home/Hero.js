@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import Schedule from '../Schedule'
-import Typist from 'react-typist';
-import Navbar from './Nav/Nav'
-import TopNav from './Nav/TopNav'
 import bg1 from '../../images/01.jpg'
 import bg2 from '../../images/02.jpg'
 import bg3 from '../../images/bg-img/59.jpg'
-import OwlCarousel from 'react-owl-carousel2';
+// import OwlCarousel from 'react-owl-carousel2';
 
 const options = {
     items: 1,
@@ -43,11 +39,11 @@ export default class Hero extends Component {
         <section className="welcome-area">
         <div className="welcome-slides">
       
-<OwlCarousel options={options}>
+{/* <OwlCarousel options={options}> */}
        <Herobg bg={bg1}/>
-       <Herobg bg={bg2}/>
+       {/* <Herobg bg={bg2}/>
        <Herobg bg={bg3}/>
-            </OwlCarousel>
+            </OwlCarousel> */}
         </div>
     </section>
   

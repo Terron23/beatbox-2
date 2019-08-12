@@ -3,7 +3,7 @@ import bg1 from '../../../images/bg-img/59.jpg';
 import { Link } from 'react-router-dom';
 
 
-const Header =({})=>{
+const StudioSearchHeader =({})=>{
 
     return(
     
@@ -32,5 +32,5 @@ bg1:{
     "backgroundImage": `url(${bg1})`
 }
 }
-  export default Header
+  export default StudioSearchHeader
 
