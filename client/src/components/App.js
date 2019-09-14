@@ -6,7 +6,7 @@ import ListStudio from './ListStudio'
 import Availibility from './Availibility'
 import SignUp from './SignUp'
 import StudioSearch from './Studios/StudioSearch'
-import SingleStudio from './Studios/SingleStudio'
+import SingleStudio from './Studios/SingleStudio/SingleStudio'
 import Profile from './Profile/Profile'
 import Payment from './Checkout/Payment'
 import Confirmation from './Checkout/OrderConfirmation'
@@ -39,11 +39,11 @@ componentDidMount(){
          <Route exact  path="/" component={Home}/> 
          <Route path="/sign-up" component={SignUp} />
          <Route path="/post-studio" component={ListStudio} />
-         <Route path="/search-studio/:search?/:location?" component={StudioSearch} />
+         <Route path="/search-studio/:search?/:location?/:startdate?" component={StudioSearch} />
          <Route path="/single-studio/:id" component={SingleStudio} />
          <Route path="/userprofile" component={Profile} />
          <Route path="/payment/:studioid" component={Payment} />
-         <Route path="/availibility/:studioName/:id" component={Availibility} />
+         <Route path="/availibility/:studioName?/:id?" component={Availibility} />
          <Route path="/post-studio/:studioname/:id" component={ListStudio} />
          <Route path="/confirmation" component={Confirmation} />
          <Footer />

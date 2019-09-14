@@ -64,7 +64,7 @@ module.exports = (app) => {
         app.post('/api/post-listing', async (req, res) => {
     
             const {name, phone, venue, address1, address2, postalCode, region, city, email, isPremium, price, 
-                rules, guest, studioName, studioImage, studioType, hoursOfOperation} = req.body
+                rules, guest, studioName, studioImage, studioType, hoursOfOperation, timeOut, timeIn, date} = req.body
             const existingUser = await Studio.findOne({_user: req.user.id, studioName, address1, city, postalCode})
             console.log(req.body)
             
@@ -90,6 +90,9 @@ module.exports = (app) => {
                         hoursOfOperation,
                         studioType,
                         studioImage,
+                        timeOut,
+                        timeIn,
+                        date
                     },
                     { upsert: true },
                     (err,data)=>{
@@ -121,7 +124,7 @@ module.exports = (app) => {
                 rules,
                 hoursOfOperation,
                 studioType,
-                studioImage,
+                studioImage, timeOut, timeIn, date,
                 }).save((err, inserted)=>{
                     console.log(inserted._id)
                     res.send(inserted._id)

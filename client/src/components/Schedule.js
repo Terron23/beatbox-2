@@ -31,12 +31,12 @@ handleChangeEnd =(date)=> {
   
 handleSubmit =(e)=>{
   e.preventDefault()
-let search = e.target.studio.value==="" ? 'All' : e.target.studio.value
-let location = e.target.location.value
-let startDate = e.target.checkinDate.value
+let search = e.target.studio.value==="" ? "All" : e.target.studio.value
+let location = e.target.location.value==="" ? "All" : e.target.location.value
+let startDate =  e.target.checkinDate.value
   this.props.history.push({
-    pathname: '/search-studio/'+search+'/'+location,
-    search: '?startday='+startDate
+    pathname: '/search-studio/'+search+'/'+location+'/'+startDate.replace(/[/]/g,'-'),
+    // search: '?startday='+startDate
   })
 }
 

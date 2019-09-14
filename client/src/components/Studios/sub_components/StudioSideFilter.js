@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchCriteria from './SearchCriteria';
-import TimeDropDown from './TimeDropDown';
+import TimeDropDown from '../../assets/TimeDropDown';
+import FormAttr from './FormAttr'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -32,90 +33,64 @@ class StudioSideFilter extends Component{
         <div className="col-12 col-lg-4">      
 <div className="hotel-reservation--area mb-100">
     <form onSubmit={submit}>
-    <div className="form-group mb-30">
-            <label for="checkInDate">Location</label>
-            <div className="input-daterange" id="datepicker">
-                <div className="row no-gutters">
-                    <div className="col-12">
-                        <input type="text" 
+                    
+    <FormAttr col="12" label="Location">
+    <input type="text" 
                         defaultValue={location}
                         className="input-small form-control" id="checkInDate" name="location" 
-                        placeholder="City or Zip" />
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-
-
-        <div className="form-group mb-30">
-            
-            <div className="input-daterange" id="datepicker">
-                <div className="row no-gutters">
-                    
-                   
+                        placeholder="City or Zip"
+                        autoComplete="off"
+                        />
+ </FormAttr>        
                         
-      
+      <FormAttr>
 
 <SearchCriteria title="Studio Type"  dropVal={studioType} name="studioType" col='12'/>
- 
+ </FormAttr>
 
-               
-       
-                </div>
-            </div>
-        </div>
-        <div className="form-group mb-30">
-            <label for="checkInDate">Check In Date</label>
-            <div className="input-daterange" id="datepicker">
-                <div className="row no-gutters">
-                <div class="row">
-                    <div className="col-md-12">
-                       
+     
+ <FormAttr label="Check In Date">
                     <DatePicker 
                            selected={startDate}
                            onChange={handleChangeStart}
                            className="form-control" name="startDate" 
                            style={{"width":"1000px"}}
-                          />
-                    </div>
-
-                 
-                </div>
-                </div>
-            </div>
-        </div>
+                           autoComplete="off"
+                          />           
+                   </FormAttr>
    
 
     
         <div className="form-group mb-30">
-<a className="" onClick={this.reveal}>Advanced Filters</a>
- 
+        <div className="row no-gutters">
+
+{/* <a style={{"color": "lightgray"}} 
+className="ad_filter" onClick={this.reveal}>Advanced Filters
+{ active? <i class="fa fa-angle-up" aria-hidden="true"></i> : <i class="fa fa-angle-down" aria-hidden="true"></i>}
+</a>  */}
+ </div>
 </div>
-<section className={ active === true ? '' :'d-none'}>
-        <div className="form-group mb-30">
-            
-            <div className="input-daterange" id="datepicker">
-                <div className="row no-gutters">
-                    
-                    <TimeDropDown col="col-6" label="Time In" name="timein"/>
+
+{/* <section className={ active === true ? '' :'d-none'}>
+
+
+
+    <FormAttr label>
+               
+                    <TimeDropDown col="6" label="Time In" name="timeIn"/>
                    
  
 
-                    <TimeDropDown col="col-6" label="Time Out" name="timeout"/>
+                    <TimeDropDown col="6" label="Time Out" name="timeOut"/>
        
-                </div>
-            </div>
-        </div>
+                    </FormAttr>
 
            
-        <div className="form-group mb-30">
+     <FormAttr>
            
-            <div className="row">
-           
-            <SearchCriteria title="Guest" dropVal={group} name="guest"/>
-            </div>
-        </div>
+            <SearchCriteria title="Guest" dropVal={group} name="guest" col="8"/>
+            
+            </FormAttr>
         
         <div className="form-group mb-50">
             <div className="slider-range">
@@ -126,8 +101,8 @@ class StudioSideFilter extends Component{
                     <span className="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                 </div>
             </div>
-        </div>
-        </section>
+        </div> */}
+        {/* </section> */}
         <div className="form-group">
             <button type="submit" className="btn roberto-btn w-100">Check Available</button>
         </div>

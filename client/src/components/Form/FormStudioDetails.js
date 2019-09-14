@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../assets/Input'
 import DropDown from '../assets/DropDown'
+import TimeDropDown from '../assets/TimeDropDown'
 import axios from 'axios'
 
 class FormStudioDetails extends Component {
@@ -10,6 +11,7 @@ class FormStudioDetails extends Component {
 this.state ={
   venue: ['Home', 'Business', 'Online'],
   studiotype: ['Recording - Music', 'Recording - Podcast/Radio', 'Art', 'Film', 'Yoga', 'Spa', 'Photography'],
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   value: this.props.studioid
 }
     }
@@ -50,9 +52,6 @@ this.state ={
     let hoursOfOperation = ""
     let files = ""
     let studioImage;
-
-
-    
     }
 
 
@@ -70,6 +69,7 @@ this.state ={
           label="Studio Type"  
           placeholder="Enter Studio Type"/>
           <DropDown options={this.handleVenue} name="venue" type="text" label="Venue"  placeholder="Enter Venue"/>
+         
           <Input name="price" type="number" label="Price"  placeholder="Enter Price" />
        
           <Input name="file" type="file" label="Business Images"  placeholder="Upload Photos" />

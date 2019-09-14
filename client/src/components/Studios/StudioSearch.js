@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-
 import {connect} from 'react-redux';
 import {fetchLocation, fetchStudio} from '../../actions';
 import StudioSearchTemplate from './sub_components/StudioSearchTemplate';
 import StudioSearchHeader from './sub_components/StudioSearchHeader';
-import StudioSideFilter from './sub_components/StudioSideFilter'
-
+import StudioSideFilter from './sub_components/StudioSideFilter';
+import './css/studio.css';
 
 
 
@@ -25,21 +24,21 @@ this.state = {
   availibility:[],
   guest: "",
   state: "",
-search: '',//this.props.match.params.search.replace(/[^a-z0-9+]+/gi, ' '),
-location: '',//this.props.match.params.location.replace(/[^a-z0-9+]+/gi, ' '),
+location: this.props.match.params.location === 'All' ? '': this.props.match.params.location || '',
   reveal: true,
   filterArr: "",
   longLat: [], 
-  studioType: '',
+  studioType: this.props.match.params.search || '',
   guest:0,
   startDate: '',
   applyDate: '',
+  startTime: '',
 }
 
   }
 
   componentDidMount(){
-    let longLat =[]
+ 
     this.props.fetchLocation()
     this.props.fetchStudio()
  
@@ -58,9 +57,14 @@ location: '',//this.props.match.params.location.replace(/[^a-z0-9+]+/gi, ' '),
 featureType =()=>{
 let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 let  filterArr=[...this.props.studio]
+console.log(days[3])
 let search = filterArr 
-.filter(studio=> this.state.location === ''? studio.city: studio.city.toLowerCase().match(this.state.location.toLowerCase())  || studio.postalCode.toLowerCase()===this.state.location.toLowerCase())
+.filter(studio=> this.state.location === '' ? studio.city: studio.city.toLowerCase().match(this.state.location.toLowerCase())  || studio.postalCode.toLowerCase()===this.state.location.toLowerCase())
 .filter(studio =>(this.state.studioType==='' ? studio.studioType: studio.studioType ===this.state.studioType))
+// .filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
+// .filter(studio=>studio.day.toLowerCase() === days[new Date(this.state.applyDate).getDay()].toLowerCase()) !='')
+// .filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
+// .filter(studio=>this.state.startDate==='' ? studio.startDate: this.state.startDate === studio.startDate) !='')
 .filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
 .filter(studio=>studio.day === days[new Date(this.state.applyDate).getDay()]) !='')
 .map((studio)=>{
@@ -88,24 +92,17 @@ let search = filterArr
 
  
 
-handleTime =(e)=>{
-
-  this.setState({time: e.target.value})
-  
-  
-  }
-
-
 
 
 handleAvailibility = (e) =>{
   e.preventDefault();
+  let days = ["Sunday"]
+
 let location = e.target.location.value;
 let studioType = e.target.studioType.value
-let guest = e.target.guest.value
+// let guest = e.target.guest.value
 let applyDate = e.target.startDate.value
-console.log(applyDate)
-this.setState({location, studioType, guest, applyDate})
+this.setState({location, studioType,  applyDate})
 }
 
 handleChange =(e)=>{
@@ -150,7 +147,7 @@ handleDropDown =(options)=>{
     if(!this.props.studio || !this.props.locate){
       return 'Loading...'
     }
- let {location, startDate} = this.state;
+ let {location, startDate, studioType} = this.state;
 
     return (
 <section>
@@ -183,7 +180,7 @@ handleDropDown =(options)=>{
              <StudioSideFilter location={location} 
              submit={this.handleAvailibility} priceLow={this.handlePrice()[0]} 
              priceHigh={this.handlePrice().pop()}
-            studioType={this.handleDropDown('studioType')}
+            studioType={studioType}
             group={this.handleDropDown()}
             startDate={startDate}
             handleChangeStart={this.handleChangeStart}

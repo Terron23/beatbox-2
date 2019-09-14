@@ -7,6 +7,7 @@ import Availibility from './Availibility'
 import Title from './assets/Title'
 import DropDown from './assets/DropDown'
 import Input from './assets/Input'
+import TimeDropDown from './assets/TimeDropDown'
 
 
 
@@ -24,6 +25,7 @@ this.state ={
     region: ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
     venue: ['Home', 'Business', 'Online'],
     studiotype: ['Recording - Music', 'Recording - Podcast/Radio', 'Art', 'Film', 'Yoga', 'Spa', 'Photography'],
+    dates: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
    
 }
 }
@@ -63,7 +65,7 @@ let price =  event.target.price.value
 let rules = ""
 let guest = 0
 let studioType = event.target.studioType.value
-let hoursOfOperation = event.target.hoursOfOperation.value
+// let hoursOfOperation = event.target.hoursOfOperation.value
 let files = this.state.files
 let studioImage; 
 
@@ -78,33 +80,26 @@ axios.post(`https://api.cloudinary.com/v1_1/etlt/image/upload`, formData)
     axios.post('/api/post-listing', 
         {studioName, price, rules, name, 
         email,address1, address2, postalCode, city, region, phone, 
-        venue,  studioImage, guest, studioType, hoursOfOperation }).
+        venue,  studioImage, guest, studioType}).
         then(res=>{
-            this.props.history.push(`/availibility/${studioName}/${res.data}`)
+           this.props.history.push(`/availibility/${studioName}/${res.data}`)
         })
         console.log(cloudResponse.data)
 
     
 }).catch(err=>console.log(err))
-
-
 }
 
-handleStudioTypes =()=>{
-    return this.state.studiotype.map(types=>{
-       
-            return <option>{types}</option>
-        
-    });
-}
+handleStudioTypes =()=>this.state.studiotype.map(types=><option>{types}</option>);
 
-handleVenue =()=>{
-    return this.state.venue.map((types , i) =>{
-     
-            return <option key={i}>{types}</option>
-    
-    });
-}
+
+handleVenue =()=>this.state.venue.map((types , i) => <option key={i}>{types}</option>)
+
+
+handleDropDown =()=> this.state.dates.map((types , i) => <option key={i}>{types}</option>)
+
+
+
 
 handleClick =(e)=>{
     e.preventDefault()
@@ -143,14 +138,10 @@ handleRegion =()=>{
             <Input name="name1" type="text" label="Contact Name"  placeholder="Enter Full Name Here" />
             <Input name="studioName" label='Studio Name' type="text" placeholder="Enter the Name of Your Studio" />
             <Input name="price" label='Price' type="number" placeholder="Enter your prices" />
-            <DropDown options={this.handleStudioTypes} name="studioType" placeholder="Enter Studio Type"/>
+            <DropDown options={this.handleStudioTypes} name="studioType" label="Studio Type" placeholder="Enter Studio Type"/>
              <DropDown options={this.handleVenue} name="venue" type="text" label="Venue"  placeholder="Enter Venue"/>
-                  <div className="form-group d-none">
-                <label className="control-label">Availibility</label><br />
-
-                <a data-toggle="modal" data-target="#myModal">Add Hours of Availibility</a>
-                <input name="hoursOfOperation" value="none" className="d-none hide" />
-                  </div>
+            
+        
            
           <Input name="email" type="email" label="Bussiness Email"  placeholder="Email" />
           <Input name="phone" type="phone" label="Bussiness Phone Number"  placeholder="Enter Phone Number" />

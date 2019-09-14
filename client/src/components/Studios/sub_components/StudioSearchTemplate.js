@@ -11,10 +11,13 @@ const StudioSearchTemplate =({studioName, _id, studioImage, price, guest, studio
     
     <div className="room-content">
         <h2>{studioName}</h2>
-        <h4>{price}$ <span>/ hr</span></h4>
+        <h4>${price}.00 <span>/ hr</span></h4>
         <div className="">
         <h6>Studio Type: <span>{studioType}</span></h6>
-<h6>Hours of Operation: {availibility.map(hours=>(<li><span>{hours.day} :{hours.starttime} - {hours.endtime}</span></li>))}</h6>
+<h6>Hours of Operation: {availibility.map(hours=>(<li>
+    <span>{hours.day} :{hours.starttime} - {hours.endtime}
+    {}
+    </span></li>))}</h6>
             {/* <h6>Size: <span>30 ft</span></h6> */}
            
             {/* <h6>Bed: <span>King beds</span></h6>

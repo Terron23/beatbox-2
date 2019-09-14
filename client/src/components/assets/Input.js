@@ -7,8 +7,7 @@ class Input extends Component {
    super(props);
  }
   render() {
-    console.log("input",this.props)
-    return (<div className="form-group">
+    return (<div className={`form-group ${this.props.classProp}`}>
         <label htmlFor={this.props.label}>{this.props.label}</label>
         <input type={this.props.type} className="form-control"  name={this.props.name} 
         placeholder={this.props.placeholder} 

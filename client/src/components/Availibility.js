@@ -5,6 +5,7 @@ import { fetchUser } from '../actions';
 import DropDown from './assets/DropDown';
 import Input from './assets/Input';
 import Title from './assets/Title';
+import TimeDropDown from './assets/TimeDropDown'
 
 
 
@@ -13,7 +14,7 @@ constructor(props){
 super(props);
 this.state ={
     alert: "d-none",
-    dates: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    dates: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     error1: "",
     error2: "",
     dateArr:[],
@@ -38,38 +39,22 @@ handleDates =(e)=>{
 e.preventDefault()
    let timeSlot = [...this.state.timeSlot] 
 
-   timeSlot.push([<form key={timeSlot.length+1} className="form-inline col-md-12" onSubmit={this.handleTime}>         
- 
-   <div className="form-group mb-2">
+   timeSlot.push([
+<center><form key={timeSlot.length+1} className="col-md-12" onSubmit={this.handleTime}>         
+ <div className="row ">
    <DropDown options={this.handDays}
-
    name="days" 
-   type="text" 
-   label="Days of the Week"  />
-        
-    </div>
-
-    <div className="form-group mb-2 mx-sm-3">
-     
-    <Input name="timeFrom" type="text" label="Start Time (EX: 9:30 AM)"  placeholder="Enter Start Time" />
-
-        </div>
-  
-        <div className="form-group mb-2 mx-sm-3">
-    
-        <Input name="endTime" 
-        type="text" label="End Time (EX: 9:30 PM)" 
-         placeholder="Enter Time Finished" 
-        
-         />
-        </div>
-    
-
-        <div className="form-group mb-2 mx-sm-3">
-   <button className="btn btn-secondary mb-2" type="submit">Submit</button>
-   </div>
-               
-           </form>])
+   label="Days of the Week"  
+   col="col-4"
+   />
+<TimeDropDown name="starttime" label="Open" col="4"/>
+<TimeDropDown name="endtime" label="Close" col="4"/> 
+</div>
+<div className="col-4">
+    <br/>
+<button className="btn btn-primary" type="submit">Add Time</button>
+   </div>  
+</form></center>])
 
 
   this.setState({timeSlot})
@@ -79,8 +64,8 @@ e.preventDefault()
 handleTime =(event)=>{
 event.preventDefault();
 let day = event.target.days.value
-let endtime= event.target.endTime.value
-let starttime = event.target.timeFrom.value
+let endtime= event.target.endtime.value
+let starttime = event.target.starttime.value
 
 let dateArr = this.state.dateArr;
 
@@ -128,14 +113,14 @@ handleSubmit =  (event) => {
       }
   
     return (
-    <div className="container">
+    <div className="container" style={{"padding": "50px"}}>
   
    <Title header="Hours of Availibility" margin={0} />
 
-    {this.state.timeSlot}
+        {this.state.timeSlot}
         {this.handleSchedule()}
 
-     <a href="" onClick={this.handleDates}>Add Hours of Operation</a>
+     <button  className="btn btn-primary" onClick={this.handleDates}>Add Hours of Operation</button>
      {this.state.reveal ?
      <button className="btn btn-primary" onClick={this.handleSubmit}>Submit Schedule</button>
      : ""
