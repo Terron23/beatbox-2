@@ -2,7 +2,7 @@ import React from 'react';
 
 const Ameneties =({})=>{
     return (<div class="room-service mb-50">
-        <h4>Room Services</h4>
+        <h4>Studio Services</h4>
 
         <ul>
             <li><img src="img/core-img/icon1.png" alt="" /> Air Conditioning</li>

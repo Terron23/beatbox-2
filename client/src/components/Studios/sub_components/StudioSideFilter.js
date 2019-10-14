@@ -4,7 +4,7 @@ import TimeDropDown from '../../assets/TimeDropDown';
 import FormAttr from './FormAttr'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-
+import { Link } from 'react-router-dom';
 
 class StudioSideFilter extends Component{
     constructor(props){
@@ -27,7 +27,7 @@ class StudioSideFilter extends Component{
       }
 
    render(){  
-       let {children, submit, priceLow, priceHigh, location, studioType, group, startDate, handleChangeStart} = this.props;
+       let {children, submit, priceLow, priceHigh, location, studioType, group, startDate, handleChangeStart, id} = this.props;
        let {active} =this.state;
        return(      
         <div className="col-12 col-lg-4">      
@@ -63,48 +63,10 @@ class StudioSideFilter extends Component{
     
         <div className="form-group mb-30">
         <div className="row no-gutters">
-
-{/* <a style={{"color": "lightgray"}} 
-className="ad_filter" onClick={this.reveal}>Advanced Filters
-{ active? <i class="fa fa-angle-up" aria-hidden="true"></i> : <i class="fa fa-angle-down" aria-hidden="true"></i>}
-</a>  */}
  </div>
 </div>
-
-{/* <section className={ active === true ? '' :'d-none'}>
-
-
-
-    <FormAttr label>
-               
-                    <TimeDropDown col="6" label="Time In" name="timeIn"/>
-                   
- 
-
-                    <TimeDropDown col="6" label="Time Out" name="timeOut"/>
-       
-                    </FormAttr>
-
-           
-     <FormAttr>
-           
-            <SearchCriteria title="Guest" dropVal={group} name="guest" col="8"/>
-            
-            </FormAttr>
-        
-        <div className="form-group mb-50">
-            <div className="slider-range">
-                <div className="range-price">Max Price: ${priceLow} - ${priceHigh}</div>
-                <div data-min="0" data-max="3000" data-unit="$" className="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="3000" data-label-result="Max Price: ">
-                    <div className="ui-slider-range ui-widget-header ui-corner-all"></div>
-                    <span className="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                    <span className="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                </div>
-            </div>
-        </div> */}
-        {/* </section> */}
         <div className="form-group">
-            <button type="submit" className="btn roberto-btn w-100">Check Available</button>
+        <Link to={`/payment/${id}`} className="btn btn-primary py-3 px-5">Book</Link>
         </div>
     </form>
 </div>

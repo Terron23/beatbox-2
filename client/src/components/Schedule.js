@@ -50,7 +50,6 @@ let startDate =  e.target.checkinDate.value
       buttonTitle, 
       search, handleChange,
       handleSubmit} = this.props
-console.log(this.props)
   return( 
   <section className="roberto-about-area section-padding-100-0">
   <div className="hotel-search-form-area">

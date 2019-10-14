@@ -23,7 +23,8 @@ class  TopNav extends Component  {
                     <div className="top-header-content">
                     
                         <div className="top-social-area ml-auto">
-                            <Link target="_blank" to="https://www.facebook.com/Studio-Hunt-337007926930145/"><i className="fa fa-facebook" aria-hidden="true"></i></Link>
+                            <Link target="_blank" to="https://www.facebook.com/Studio-Hunt-337007926930145/">
+                           <i className="fa fa-facebook" aria-hidden="true"></i></Link>
                             <Link to="/"><i className="fa fa-twitter" aria-hidden="true"></i></Link>
                             
                             <Link to="/"><i className="fa fa-instagram" aria-hidden="true"></i></Link>

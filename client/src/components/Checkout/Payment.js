@@ -41,7 +41,7 @@ return (<div>
         </tr>
         <tr>
           <th>Price</th>
-           <td>{studio.price}</td>
+           <td>${studio.price}.00</td>
        
         </tr>
 
@@ -50,6 +50,7 @@ return (<div>
            <td>{studio.venue}</td>
           
         </tr>
+       
 
         </tbody>
     </table>

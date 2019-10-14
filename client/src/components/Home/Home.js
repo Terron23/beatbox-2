@@ -7,8 +7,10 @@ import StudioType from './StudioType';
 import Testimonials from './Testimonial';
 import City from './City'
 import PostStudio from './PostStudio'
-import Hero from './Hero';
+import Hero from './Hero/Hero';
 import Schedule from '../Schedule'
+
+
 class Home extends Component {
 
 

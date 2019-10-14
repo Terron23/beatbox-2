@@ -9,7 +9,7 @@ import Features from './sub_components/Features'
 import Ameneties from './sub_components/Ameneties';
 import Reviews from './sub_components/Reviews'
 import BreadCrumb from './sub_components/BreadCrumb'
-
+import SingleStudioSideFilter from './sub_components/SingleStudioSideFilter'
 
 const Studios = ({studioName, price, guest, rules, id, image, availibility}) => {
   return ( 
@@ -24,41 +24,10 @@ const Studios = ({studioName, price, guest, rules, id, image, availibility}) => 
                    <Reviews />
                  
                     
-</div>
-                <div className="col-12 col-lg-4">
-                
-                    <div className="hotel-reservation--area mb-100">
-                    <p><Link to={`/payment/${id}`} className="btn btn-primary py-3 px-5">Book</Link></p>
-                    </div>
-                </div>
+               </div>
+             <SingleStudioSideFilter id={id}/>
             </div>
-            </Wrapper>
- 
-//         <Title header={studioName}/>  
-//     <div className="col-md-7">
-//     <img className="image img" src={`${image}`} width="100%" height="400px"/>
-// </div>
-//       <div className="col-md-4">
-  
-//         <div className="price" style={{margin: 50}}><h2>
-//           <sup>$</sup><span className="number3">{price}</span>
-//           <sub>/per hour</sub>
-//           </h2>
-//         <h5>Availible Studio Times</h5>
-//         {availibility.map(a =>{
-//           return (a.day +': '+a.starttime +' '+a.endtime)
-//         })}
-
-
-//         <p><Link to={`/payment/${id}`} className="btn btn-primary py-3 px-5">Book</Link></p>
-
-// </div>
-//     </div>
-
-
-//   </div>  
-
-    
+            </Wrapper>   
 )
 }
 
@@ -83,7 +52,7 @@ componentDidMount(){
       //Needs to be refactored
       //Pulling in all data 
       const { studio } = this.props
-      console.log(studio)
+      console.log(this.props)
     return (<div>
      {studio.map(studio=>{
           if(this.props.match.params.id === studio._id){

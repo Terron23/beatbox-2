@@ -59,7 +59,7 @@ class SignUp extends Component  {
 
 
     function mapStateToProps({auth}){
-      //State from reducers/index.js file  gets passed to header component as props
+  
       return {auth}
     }
 
