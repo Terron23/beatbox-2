@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from "react-router-dom";
 
 
 export default class Footer extends Component {
@@ -34,10 +34,10 @@ export default class Footer extends Component {
 
                            
                             <ul className="footer-nav">
-                                <li><a href="#"><i className="fa fa-caret-right" aria-hidden="true"></i> About Us</a></li>
-                                <li><a href="#"><i className="fa fa-caret-right" aria-hidden="true"></i> Book Now</a></li>
-                                <li><a href="#"><i className="fa fa-caret-right" aria-hidden="true"></i> Career</a></li>
-                                <li><a href="#"><i className="fa fa-caret-right" aria-hidden="true"></i> FAQs</a></li>
+                                <li><Link to="/"><i className="fa fa-caret-right" aria-hidden="true"></i>Home</Link></li>
+                                <li><Link to="/search-studio"><i className="fa fa-caret-right" aria-hidden="true"></i> Book Now</Link></li>
+                                <li><Link to="#"><i className="fa fa-caret-right" aria-hidden="true"></i> Career</Link></li>
+                                <li><Link to="#"><i className="fa fa-caret-right" aria-hidden="true"></i> FAQs</Link></li>
                             </ul>
                         </div>
                     </div>
