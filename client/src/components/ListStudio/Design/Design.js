@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { fetchUser } from "../actions";
+import { fetchUser } from "../.././../actions";
 import { Link } from "react-router-dom";
-import Title from "./assets/Title";
+import Title from "./../../assets/Title";
 import Input from "./../../assets/Input";
+
 
 const Wrapper = ({ children }) => (
   <div className="container-fluid site-section">
     <div className="container">
-      <Title header="Add Studio Up to 8 Images" />
+      <Title header="Add Studio Up to 10 Images" />
       <form
         id="myForm"
-        className="form-horizontal col-md-6"
+        className="form-horizontal col-md-12"
         onSubmit={this.handleSubmit}
       >
         <fieldset>{children}</fieldset>
@@ -21,13 +22,12 @@ const Wrapper = ({ children }) => (
   </div>
 );
 
-
-const ButtonWrapper = ({ children }) => (
+const ButtonWrapper = ({ children , onClick}) => (
   <div className="form-group row">
-  <button className="btn btn-secondary" type="submit">
-    {children}
-   </button>
-   </div>
+    <button className="btn btn-secondary" type="submit" onClick={onClick}>
+      {children}
+    </button>
+  </div>
 );
 
 class Design extends Component {
@@ -48,25 +48,36 @@ class Design extends Component {
     this.setState({ files: [...this.state.files, ...event.target.files] });
   };
 
-  addInput(){
-let arr = []
-let i = 0
-    if(arr.length < 11){
-      i++
-      arr.push(<Input
-        name={"file"+i}
-        type="file"
-        label="AddImages"
-        placeholder="Upload Photos"
-        handleChange={this.handleFiles}
-        multiple
-        required
-      />)
+  addInput = e => {
+    e.preventDefault();
+    let arr = [];
+    let len = this.state.images.length;
+    if (this.state.images.length < 11) {
+  
+
+      arr.push( <div className="col-md-2">
+        <Input
+          name={"file" + len}
+          type="file"
+          label={len < 1 ? "Main Image" : "Image "+len}
+          placeholder="Upload Photos"
+          handleChange={this.handleFiles}
+          style={{"width": "300px"}}
+          required="true"
+        />
+        </div>
+      );
     }
 
-    this.setState({images:arr})
-  }
+    this.setState({ images: [...this.state.images, ...arr] });
+  };
 
+
+  handleImageInput =()=>{
+    return this.state.images.map((value, i)=>{
+      return value
+    })
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -88,9 +99,7 @@ let i = 0
               studioImage
             })
             .then(res => {
-              this.props.history.push(
-                `/availibility/`
-              );
+              this.props.history.push(`/availibility/`);
             });
         })
         .catch(err => console.log(err));
@@ -102,28 +111,21 @@ let i = 0
       return "";
     }
     const { auth } = this.props;
-    const { alert, studioName } = this.state;
+    const { alert, studioName, images } = this.state;
     return (
       <Wrapper>
-        <div className="col-md-8">
-        <Input
-          name="file"
-          type="file"
-          label="AddImages"
-          placeholder="Upload Photos"
-          handleChange={this.handleFiles}
-          multiple
-          required
-        /></div>
-
-<div className="col-md-4"> <button onClick={this.addInput}>Add More Images</button></div>
-
-        <hr />
-
-        <ButtonWrapper>
-            Save & Continue
-          </ButtonWrapper>
+        <div className="row">
        
+       {this.handleImageInput()}
+        
+        </div>
+ 
+        <hr />
+        <ButtonWrapper onClick={this.addInput}>
+            Add More Images
+          </ButtonWrapper>
+
+        <ButtonWrapper onSubmit={this.handleSubmit}>Save & Continue</ButtonWrapper>
       </Wrapper>
     );
   }

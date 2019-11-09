@@ -163,7 +163,7 @@ class ListStudio extends Component {
             studioType
           })
           .then(res => {
-            this.props.history.push(`/availibility/${studioName}/${res.data}`);
+            this.props.history.push(`/design/${studioName}/${res.data}`);
           });
       })
       .catch(err => console.log(err));

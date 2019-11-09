@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 
-const Herobg = ({ bg }) => {
+const Herobg = ({ bg, logo }) => {
   return (
     <div
       className="single-welcome-slide bg-img bg-overlay animateOut animateIn"
       style={{ backgroundImage: `url(${bg})` }}
     >
+     
       <div className="welcome-content h-100">
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12">
               <div className="welcome-text text-center">
                 <h6 data-animation="fadeInUp" data-delay="200ms">
-                  Find Book Go
+                
                 </h6>
                 <h2 data-animation="fadeInUp" data-delay="500ms">
-                  Studio Hunt
+                <img src={logo} width="25%" />
                 </h2>
                 <a
                   href="/search-studio"

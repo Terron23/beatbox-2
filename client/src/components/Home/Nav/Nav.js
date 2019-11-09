@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import navImg from './images/logo/sh_logo.png';
 
 
 class  NavBar extends Component  {  
@@ -42,12 +43,12 @@ isActive: "",
     return (
       <div className="main-header-area">
       <div className="classy-nav-container breakpoint-off">
-          <div className="container">
+          <div className="container-fluid">
          
               <nav className="classy-navbar justify-content-between" id="robertoNav">
 
               
-                  <Link className="nav-brand" to="/"></Link>
+                  <Link className="nav-brand" to="/">Studio Hunt</Link>
 
                 
                   <div className="classy-navbar-toggler">
