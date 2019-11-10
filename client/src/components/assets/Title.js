@@ -1,44 +1,30 @@
-import React, { Component } from 'react';
-
-
-
+import React, { Component } from "react";
 
 export default class Title extends Component {
-
   render() {
-    let {classProp} = this.props
+    let { classProp } = this.props;
     return (
-
-        <div className={ classProp=== "" || !classProp ? `container text-center`: classProp} 
-        style={
-          !this.props.margin?
-          styles.titleStyle : ""
-          }>
+      <div
+        className={
+          classProp === "" || !classProp ? `container text-center` : classProp
+        }
+        style={!this.props.margin ? styles.titleStyle : ""}
+      >
         <hr />
-        <h2>{this.props.header}</h2> 
+        <h2>{this.props.header}</h2>
         <small>{this.props.subtitle}</small>
-             <hr />
+        <hr />
 
-            <div className="container-fluid">
-               {this.props.children}
-               </div>
-            
-         </div>
-
-
+        <div className="container-fluid">{this.props.children}</div>
+      </div>
     );
   }
 }
 
-
 const styles = {
-    titleStyle:{
-    width: '100%', 
+  titleStyle: {
+    width: "100%",
     marginTop: 75,
-    marginBottom:75
-    }
-} 
-
-
-
-
+    marginBottom: 75
+  }
+};

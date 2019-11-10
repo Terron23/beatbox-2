@@ -5,7 +5,6 @@ import { fetchUser } from "../.././../actions";
 import Title from "./../../assets/Title";
 import Input from "./../../assets/Input";
 
-
 const Wrapper = ({ children }) => (
   <div className="container-fluid site-section">
     <div className="container">
@@ -21,7 +20,7 @@ const Wrapper = ({ children }) => (
   </div>
 );
 
-const ButtonWrapper = ({ children , onClick}) => (
+const ButtonWrapper = ({ children, onClick }) => (
   <div className="form-group row">
     <button className="btn btn-secondary" type="submit" onClick={onClick}>
       {children}
@@ -52,18 +51,17 @@ class Design extends Component {
     let arr = [];
     let len = this.state.images.length;
     if (this.state.images.length < 11) {
-  
-
-      arr.push( <div className="col-md-2">
-        <Input
-          name={"file" + len}
-          type="file"
-          label={len < 1 ? "Main Image" : "Image "+len}
-          placeholder="Upload Photos"
-          handleChange={this.handleFiles}
-          style={{"width": "300px"}}
-          required="true"
-        />
+      arr.push(
+        <div className="col-md-2">
+          <Input
+            name={"file" + len}
+            type="file"
+            label={len < 1 ? "Main Image" : "Image " + len}
+            placeholder="Upload Photos"
+            handleChange={this.handleFiles}
+            style={{ width: "300px" }}
+            required="true"
+          />
         </div>
       );
     }
@@ -71,12 +69,11 @@ class Design extends Component {
     this.setState({ images: [...this.state.images, ...arr] });
   };
 
-
-  handleImageInput =()=>{
-    return this.state.images.map((value, i)=>{
-      return value
-    })
-  }
+  handleImageInput = () => {
+    return this.state.images.map((value, i) => {
+      return value;
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -112,18 +109,14 @@ class Design extends Component {
     const { alert, studioName, images } = this.state;
     return (
       <Wrapper>
-        <div className="row">
-       
-       {this.handleImageInput()}
-        
-        </div>
- 
-        <hr />
-        <ButtonWrapper onClick={this.addInput}>
-            Add More Images
-          </ButtonWrapper>
+        <div className="row">{this.handleImageInput()}</div>
 
-        <ButtonWrapper onSubmit={this.handleSubmit}>Save & Continue</ButtonWrapper>
+        <hr />
+        <ButtonWrapper onClick={this.addInput}>Add More Images</ButtonWrapper>
+
+        <ButtonWrapper onSubmit={this.handleSubmit}>
+          Save & Continue
+        </ButtonWrapper>
       </Wrapper>
     );
   }
@@ -133,7 +126,4 @@ function mapStateToProps({ studio, auth }) {
   return { studio, auth };
 }
 
-export default connect(
-  mapStateToProps,
-  { fetchUser }
-)(Design);
+export default connect(mapStateToProps, { fetchUser })(Design);

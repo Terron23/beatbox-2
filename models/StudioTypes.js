@@ -1,14 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 //const Schema = mongoose.Schema;
 //Destructured Versioon is live
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 studioTypeSchema = new Schema({
-   
-    studioType: String,
- 
+  studioType: String
 });
 
- mongoose.model('studiotypes', studioTypeSchema);
-
-
+mongoose.model("studiotypes", studioTypeSchema);

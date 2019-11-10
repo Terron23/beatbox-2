@@ -11,13 +11,10 @@ export default class Footer extends Component {
               <div className="col-12 col-sm-6 col-lg-3">
                 <div className="single-footer-widget mb-80">
                   <Link to="/" className="footer-logo">
-                
                     Studio Hunt
                   </Link>
 
-                 
                   <span>studiohunt@outlook.com.com</span>
-                
                 </div>
               </div>
 
@@ -86,16 +83,32 @@ export default class Footer extends Component {
               </div>
               <div className="col-12 col-md-4">
                 <div className="social-info">
-                  <a href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa fa-facebook" aria-hidden="true"></i>
                   </a>
-                  <a href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa fa-twitter" aria-hidden="true"></i>
                   </a>
-                  <a href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa fa-instagram" aria-hidden="true"></i>
                   </a>
-                  <a href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fa fa-linkedin" aria-hidden="true"></i>
                   </a>
                 </div>

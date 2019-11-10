@@ -29,14 +29,12 @@
 // //     .then(res=>{
 // //       console.log("Response", res.data.results);
 // //     let studios = studio.studioName
-// //     let obj = 
+// //     let obj =
 // //     //longLat.push({lng:res.data.results["0"].geometry.location.lng, lat:res.data.results["0"].geometry.location.lat, studioName: studios})
 // //     this.setState({longLat})
 // //     console.log("longlat", this.state.longLat);
 // //     })
 // //       })
-
-
 
 // //  }
 
@@ -59,25 +57,23 @@
 //   render() {
 
 //     return (
-    
-//         <Map 
+
+//         <Map
 //         google={this.props.google}
 //         zoom={10}
 //         style={styles}
 //         visible={true}
 //         initialCenter={{lat: this.props.locate.latitude, lng:  this.props.locate.longitude }}
 //         >
-   
 
-// {this.state.longLat.map(marker=><Marker 
+// {this.state.longLat.map(marker=><Marker
 //         onClick={this.onMarkerClick}
 //                 name={marker.studioName}
 //                 position={{lat: marker.lat, lng:marker.lng }}
 //                  />)
 
 // }
-         
-      
+
 //         <InfoWindow
 //           marker={this.state.activeMarker}
 //           visible={this.state.showingInfoWindow}
@@ -88,7 +84,7 @@
 //           </div>
 //         </InfoWindow>
 //       </Map>
-  
+
 //     );
 //   }
 // }
@@ -96,7 +92,6 @@
 // function mapStateToProps({locate, studio}) {
 //   return { locate , studio};
 // }
-
 
 // export default connect(mapStateToProps, {  fetchLocation, fetchStudio })(GoogleApiWrapper({
 //   apiKey: 'AIzaSyCvUna-ZY2L065FZg9zRXsMWgVE8s9lHvw'

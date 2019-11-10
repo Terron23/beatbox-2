@@ -15,7 +15,7 @@ class Input extends Component {
           placeholder={this.props.placeholder}
           onChange={this.props.handleChange}
           defaultValue={this.props.value}
-          multiple = {this.props.multiple=== "true"  ? true: false}
+          multiple={this.props.multiple === "true" ? true : false}
         />
       </div>
     );

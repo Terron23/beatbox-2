@@ -94,7 +94,7 @@ class ListStudio extends Component {
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday",
+        "Saturday"
       ]
     };
   }
@@ -191,7 +191,6 @@ class ListStudio extends Component {
     }
     return (
       <div className="container-fluid site-section">
-
         <div className="container">
           <Title header="Add Your Studio" />
           <form
@@ -306,7 +305,4 @@ function mapStateToProps({ studio, auth }) {
   return { studio, auth };
 }
 
-export default connect(
-  mapStateToProps,
-  { fetchUser }
-)(ListStudio);
+export default connect(mapStateToProps, { fetchUser })(ListStudio);

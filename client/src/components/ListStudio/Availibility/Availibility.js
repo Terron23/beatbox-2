@@ -96,12 +96,11 @@ class Availibility extends Component {
     let studioname = this.props.match.params.studioName;
     let studioid = this.props.match.params.id;
     let schedule = this.state.dateArr;
-    
 
     axios
       .post("/api/post-listing-time", { schedule, studioname, studioid })
       .then(res => {
-       this.props.history.push("/design");
+        this.props.history.push("/design");
       });
   };
 
@@ -136,7 +135,4 @@ function mapStateToProps({ studio, auth }) {
   return { studio, auth };
 }
 
-export default connect(
-  mapStateToProps,
-  { fetchUser }
-)(Availibility);
+export default connect(mapStateToProps, { fetchUser })(Availibility);
