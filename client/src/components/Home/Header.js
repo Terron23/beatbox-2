@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Schedule from "../Schedule";
+import Schedule from "./Schedule";
 import Typist from "react-typist";
 import Navbar from "./Nav/Nav";
 import TopNav from "./Nav/TopNav";
@@ -28,15 +28,12 @@ export default class Header extends Component {
   };
 
   render() {
-    let { locate, history } = this.props;
 
     return (
       <HeaderArea>
         <NavSearch active={this.state.active} />
         <TopNav />
         <Navbar revealSearch={this.revealSearch} />
-        {/* <Hero />
-<Schedule locate={locate} history={history}/> */}
       </HeaderArea>
     );
   }

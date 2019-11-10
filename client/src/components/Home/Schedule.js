@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
-import SearchCriteria from "./Home/sub_components/SearchCriteria";
+import SearchCriteria from "./sub_components/SearchCriteria";
 //Should come from database
 
 class Schedule extends Component {

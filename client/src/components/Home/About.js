@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import Schedule from "../Schedule";
-import Typist from "react-typist";
-import Navbar from "./Nav/Nav";
-import TopNav from "./Nav/TopNav";
 import bg1 from "../../images/01.jpg";
-import Heading from "./sub_components/heading";
+
 
 const ImageGallery = () => {
   return (

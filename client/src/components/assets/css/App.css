@@ -441,3 +441,8 @@
     .continue-btn:focus, .continue-btn:hover {
       text-decoration: underline;
       color: #000000; }
+
+    .signup{
+    position: relative;
+    bottom: 50px;
+    }

@@ -4,7 +4,7 @@ import Title from "./assets/Title";
 
 const LeftSide = ({ oauth }) => {
   return (
-    <div className="col-md-6">
+    
       <form action="">
         <div className="form-group">
           <label htmlFor="email">Email address:</label>
@@ -19,37 +19,49 @@ const LeftSide = ({ oauth }) => {
             <input type="checkbox" /> Remember me
           </label>
         </div>
-        <button type="submit" className="btn btn-default">
-          Submit
+        <button type="submit" className="btn roberto-btn btn-2">
+          <span style={{color:"black"}}>Submit</span>
         </button>
       </form>
-    </div>
+  
   );
 };
 
 const RightSide = ({ oauth }) => {
   return (
-    <div className="col-md-6">
-      <a className="btn btn-block btn-primary" href="/auth/google">
+    <div className="row">
+   
+    <div className="col-md-4">
+      </div>
+    <div className="col-md-4">
+      <a className="btn btn-block roberto-btn btn-1" href="/auth/google">
         Login With Google
       </a>
-      <a className="btn btn-block btn-primary" href="/auth/facebook">
+      <a className="btn btn-block roberto-btn btn-1" href="/auth/facebook">
         Login With Facebook
       </a>
+      <hr />
+      <LeftSide />
     </div>
+      <div className="col-md-4">
+      </div>
+
+  
+      </div>
   );
 };
 
 class SignUp extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid signup text-center">
+   
         <Title header="Sign In/Sign Up" classProp={`container`} />
 
         <RightSide />
-        <hr />
-        <LeftSide />
+    
       </div>
+  
     );
   }
 }
