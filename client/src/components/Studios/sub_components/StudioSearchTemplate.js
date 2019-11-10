@@ -18,10 +18,6 @@ const StudioSearchTemplate =({studioName, _id, studioImage, price, guest, studio
     <span>{hours.day} :{hours.starttime} - {hours.endtime}
     {}
     </span></li>))}</h6>
-            {/* <h6>Size: <span>30 ft</span></h6> */}
-           
-            {/* <h6>Bed: <span>King beds</span></h6>
-            <h6>Services: <span>Wifi, television ...</span></h6> */}
             <h6>Location: <span>{city}</span></h6>
             <h6>Capacity: <span>Max person {guest}</span></h6>
         </div>

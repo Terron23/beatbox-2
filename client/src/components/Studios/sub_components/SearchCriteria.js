@@ -1,21 +1,45 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchStudioType} from '../../../actions';
 
-const SearchCriteria =({title, type, dropVal, name, col})=>{
 
+class SearchCriteria extends Component{
+
+
+    componentDidMount(){
+        this.props.fetchStudioType()
+    }
+
+    render(){
+        if(!this.props.studiotype){
+            return 'Loading'
+        }
+      
+        let {col, title, name, studiotype, search}=this.props;
+        console.log(search)
     return( <div className={`col-${col}`}>
     <label htmlFor={title}>{title.charAt(0).toUpperCase() + title.slice(1)}</label>
     <select name={name} id={title} className="form-control">
-    <option value=''>All Studios</option>
-    <option   value="Recording - Music">Recording - Music</option>
-        <option value="Podcast">Podcast</option>
-        <option value="Dance">Dance</option>
-        <option value="Photography">Photography</option>
-        <option value="Art">Art</option>
+  <option value="">All</option>
+    {studiotype.map(m=>{
+    let option = <option key={m._id} value={m._id}>{m.studioType}</option>
+    if(m._id === search){
+        option = <option key={m._id} selected value={m._id}>{m.studioType}</option>
+    }
+    return option;
+
+})}
+   
     </select>
 
     </div>)
     }
-  
+}
 
-  export default SearchCriteria
+
+function mapStateToProps({studiotype}) {
+    return { studiotype};
+  }
+  
+  export default connect(mapStateToProps, {  fetchStudioType })(SearchCriteria);
 

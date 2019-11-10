@@ -43,15 +43,12 @@ module.exports = (app) => {
         const {starttime, endtime, day, studioname, studioid, schedule} = req.body
         let studioName = studioname;
         //delete req.body.studioname;
-        console.log(schedule)
-        console.log(studioName)
-        console.log(studioid)
         try{
        const studioUpdate = await Studio.update(
             { studioName:studioName, _id:studioid},
             { availibility: schedule}
             )
-            console.log(studioUpdate)
+       
             res.send("Update")
         }
         catch(err){
@@ -163,15 +160,9 @@ app.get('/api/feature/studio-listing', async (req, res) => {
 
 
 app.get('/api/studio-type', async (req, res) => {
-
-    // const studio = await Studio.find({}, function (err, studio) {
-    //     res.send(studio);
-    // });
-
-    const studio = await StudioType.find({}, function (err, studiotypes) {
-        res.send(studiotypes);
-    });
-    //.select({isListed: true});   
+    const studiotype = await StudioType.find({}, function (err, studiotype) {
+        res.send(studiotype);
+    })
 });
 
 app.get('/api/availibility', async (req, res) => {

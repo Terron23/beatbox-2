@@ -4,6 +4,7 @@ import {fetchLocation, fetchStudio} from '../../actions';
 import StudioSearchTemplate from './sub_components/StudioSearchTemplate';
 import StudioSearchHeader from './sub_components/StudioSearchHeader';
 import StudioSideFilter from './sub_components/StudioSideFilter';
+import Pagination from './sub_components/Pagination';
 import './css/studio.css';
 
 
@@ -24,13 +25,13 @@ this.state = {
   availibility:[],
   guest: "",
   state: "",
-location: this.props.match.params.location === 'All' ? '': this.props.match.params.location || '',
+  location: this.props.match.params.location === 'All' ? '': this.props.match.params.location || '',
   reveal: true,
   filterArr: "",
   longLat: [], 
   studioType: this.props.match.params.search || '',
   guest:0,
-  startDate: '',
+ startDate: !this.props.match.params.startdate  ? '': new Date(this.props.match.params.startdate || '11/23/2045') ,
   applyDate: '',
   startTime: '',
 }
@@ -41,7 +42,8 @@ location: this.props.match.params.location === 'All' ? '': this.props.match.para
  
     this.props.fetchLocation()
     this.props.fetchStudio()
- 
+
+
       
   }
 
@@ -57,7 +59,6 @@ location: this.props.match.params.location === 'All' ? '': this.props.match.para
 featureType =()=>{
 let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 let  filterArr=[...this.props.studio]
-console.log(days[3])
 let search = filterArr 
 .filter(studio=> this.state.location === '' ? studio.city: studio.city.toLowerCase().match(this.state.location.toLowerCase())  || studio.postalCode.toLowerCase()===this.state.location.toLowerCase())
 .filter(studio =>(this.state.studioType==='' ? studio.studioType: studio.studioType ===this.state.studioType))
@@ -96,8 +97,6 @@ let search = filterArr
 
 handleAvailibility = (e) =>{
   e.preventDefault();
-  let days = ["Sunday"]
-
 let location = e.target.location.value;
 let studioType = e.target.studioType.value
 // let guest = e.target.guest.value
@@ -119,6 +118,7 @@ handlePrice =()=>{
 
      return price
 }
+
 
 handleDropDown =(options)=>{
   let  filterArr=[...this.props.studio]
@@ -166,21 +166,14 @@ handleDropDown =(options)=>{
             
 
                 {this.featureType()}
-                  
-                    <nav className="roberto-pagination wow fadeInUp mb-100" data-wow-delay="1000ms">
-                        <ul className="pagination">
-                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item"><a className="page-link" href="#">2</a></li>
-                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                            <li className="page-item"><a className="page-link" href="#">Next <i className="fa fa-angle-right"></i></a></li>
-                        </ul>
-                    </nav>
+                 
+                    
                 </div>
 
              <StudioSideFilter location={location} 
              submit={this.handleAvailibility} priceLow={this.handlePrice()[0]} 
              priceHigh={this.handlePrice().pop()}
-            studioType={studioType}
+            search={studioType}
             group={this.handleDropDown()}
             startDate={startDate}
             handleChangeStart={this.handleChangeStart}

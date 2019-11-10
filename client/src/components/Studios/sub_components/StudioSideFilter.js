@@ -27,17 +27,19 @@ class StudioSideFilter extends Component{
       }
 
    render(){  
-       let {children, submit, priceLow, priceHigh, location, studioType, group, startDate, handleChangeStart, id} = this.props;
+       let {children, submit, priceLow, priceHigh, location, search, group, startDate, handleChangeStart, id} = this.props;
        let {active} =this.state;
        return(      
         <div className="col-12 col-lg-4">      
-<div className="hotel-reservation--area mb-100">
-    <form onSubmit={submit}>
-                    
+      <div className="hotel-reservation--area mb-100">
+        <form onSubmit={submit}>
+  
     <FormAttr col="12" label="Location">
     <input type="text" 
                         defaultValue={location}
-                        className="input-small form-control" id="checkInDate" name="location" 
+                        className="input-small form-control" 
+                        id="location"
+                         name="location" 
                         placeholder="City or Zip"
                         autoComplete="off"
                         />
@@ -45,16 +47,17 @@ class StudioSideFilter extends Component{
                         
       <FormAttr>
 
-<SearchCriteria title="Studio Type"  dropVal={studioType} name="studioType" col='12'/>
+<SearchCriteria title="Studio Type"  search={search} name="studioType" col='12'/>
  </FormAttr>
 
      
  <FormAttr label="Check In Date">
+
                     <DatePicker 
                            selected={startDate}
                            onChange={handleChangeStart}
                            className="form-control" name="startDate" 
-                           style={{"width":"1000px"}}
+                           style={{"width":"100%"}}
                            autoComplete="off"
                           />           
                    </FormAttr>
@@ -66,7 +69,8 @@ class StudioSideFilter extends Component{
  </div>
 </div>
         <div className="form-group">
-        <Link to={`/payment/${id}`} className="btn btn-primary py-3 px-5">Book</Link>
+    
+        <button type="submit" className="btn btn-primary py-3 px-5">Search</button>
         </div>
     </form>
 </div>

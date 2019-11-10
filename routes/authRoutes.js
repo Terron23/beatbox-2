@@ -59,7 +59,7 @@ app.post('/api/update_user', (req, res)=>{
     {  _id: req.user.id },
     {
      email,
-     name: "Terron",
+     name,
      social: [instagram, twitter, facebook]
     },
     { upsert: true },

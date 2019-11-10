@@ -29,7 +29,7 @@ dispatch({type: FETCH_LOCATION, payload: res.data})
 }
 
 export const fetchStudioType= () => async dispatch => {
-    const res = await axios.get('/api/studiotypes');
+    const res = await axios.get('/api/studio-type');
     dispatch({type: FETCH_STUDIOTYPES, payload: res.data})
     }
 
