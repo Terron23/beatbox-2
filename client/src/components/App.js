@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Home/Header";
 import Home from "./Home/Home";
-import ListStudio from "./ListStudio";
-import Availibility from "./Availibility";
+import ListStudio from "./ListStudio/ListStudio";
+import Availibility from "./ListStudio/Availibility/Availibility";
 import SignUp from "./SignUp";
-import StudioSearch from "./Studios/StudioSearch";
+import StudioSearch from "./Studios/AllStudios/StudioSearch";
 import SingleStudio from "./Studios/SingleStudio/SingleStudio";
 import Profile from "./Profile/Profile";
 import Payment from "./Checkout/Payment";
 import Confirmation from "./Checkout/OrderConfirmation";
 import { connect } from "react-redux";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 import * as actions from "../actions";
-import Preloader from "../components/assets/preloader";
-import "./css/App.css";
+import Preloader from "./assets/preloader";
+import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
 
 class App extends Component {

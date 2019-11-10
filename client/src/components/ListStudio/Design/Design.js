@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { fetchUser } from "../.././../actions";
-import { Link } from "react-router-dom";
 import Title from "./../../assets/Title";
 import Input from "./../../assets/Input";
 
@@ -83,7 +82,6 @@ class Design extends Component {
     event.preventDefault();
 
     let file = this.state.files;
-    let studioImage;
 
     file.forEach(files => {
       let formData = new FormData();

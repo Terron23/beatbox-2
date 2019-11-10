@@ -16,7 +16,7 @@ class SearchCriteria extends Component{
         if(!this.props.studiotype){
             return 'Loading'
         }
-        let {col, title, name, studiotype}=this.props;
+        let {title, name, studiotype}=this.props;
     return( <div className="col-6 col-md-2 col-lg-3">
     <label htmlFor={title}>{title.toUpperCase()}</label>
     <select name={name} id={title} className="form-control">

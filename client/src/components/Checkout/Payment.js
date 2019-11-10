@@ -3,7 +3,7 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
 import {connect} from 'react-redux';
 import { fetchUser, fetchStudio } from '../../actions';
-import axios from 'axios';
+
 
 
 class Payment extends Component {
@@ -87,7 +87,7 @@ return (<div>
                 handleSubmit={this.handleSubmit}
                 studioData={this.studioData}
                 auth = {this.props.auth}
-                handleSubmit={this.handleSubmit}
+               
                 push={this.push}
                 />
               </Elements>

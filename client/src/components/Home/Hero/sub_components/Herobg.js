@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Herobg = ({ bg, logo }) => {
   return (
@@ -16,7 +16,7 @@ const Herobg = ({ bg, logo }) => {
                 
                 </h6>
                 <h2 data-animation="fadeInUp" data-delay="500ms">
-                <img src={logo} width="25%" />
+                <img src={logo} width="25%" alt={`Studio Hunt Main bg pic`}/>
                 </h2>
                 <a
                   href="/search-studio"

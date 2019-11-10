@@ -30,9 +30,8 @@ class SingleStudioSideFilter extends Component{
 
 
    render(){  
-       let {children,  priceLow, priceHigh, location, studioType, group, id} = this.props;
-       let {active, handleChangeStart, startDate} =this.state;
-       console.log("hello", this.props)
+       let {id} = this.props;
+       let {handleChangeStart, startDate} =this.state;
        return(      
         <div className="col-12 col-lg-4">      
 <div className="hotel-reservation--area mb-100">

@@ -21,8 +21,3 @@ export default class Hero extends Component {
   }
 }
 
-const styles = {
-  background: {
-    backgroundImage: `url(${bg1})`
-  }
-};

@@ -42,6 +42,7 @@ showStudio =()=>{
         return i <=2
     }).map((s)=>{
         return (<SingleFeaturedStudio 
+            key ={s._id}
             bg={s.studioImage} 
             studiotype={s.studioType}
             price={s.price} studioName={s.studioName}

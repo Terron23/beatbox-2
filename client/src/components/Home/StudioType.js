@@ -4,7 +4,6 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import Heading from './sub_components/heading'
 import dance from '../../images/bg-img/60.png'
-import podcast from '../../images/bg-img/61.jpg'
 import art from '../../images/bg-img/62.jpg'
 import photo from '../../images/bg-img/63.jpg'
 import { Link } from 'react-router-dom';
