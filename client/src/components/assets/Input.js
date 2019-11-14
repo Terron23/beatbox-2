@@ -5,19 +5,23 @@ class Input extends Component {
     super(props);
   }
   render() {
+    let {name, placeholder, handleChange, value, multiple, label, classProp, type, prepend} = this.props;
     return (
-      <div className={`form-group ${this.props.classProp}`}>
-        <label htmlFor={this.props.label}>{this.props.label}</label>
+      <div className={`form-group ${classProp} `}>
+          <label htmlFor={label}>{label}</label>
+       
         <input
-          type={this.props.type}
-          className="form-control"
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          onChange={this.props.handleChange}
-          defaultValue={this.props.value}
-          multiple={this.props.multiple === "true" ? true : false}
+          type={type}
+          className={`form-control`}
+          name={name}
+          placeholder={placeholder}
+          onChange={handleChange}
+          defaultValue={value}
+          multiple={multiple === "true" ? true : false}
         />
+
       </div>
+   
     );
   }
 }

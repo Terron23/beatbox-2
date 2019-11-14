@@ -5,15 +5,11 @@ import { fetchUser } from "../.././../actions";
 import Title from "./../../assets/Title";
 import Input from "./../../assets/Input";
 
-const Wrapper = ({ children }) => (
+const Wrapper = ({ children, submit }) => (
   <div className="container-fluid site-section">
     <div className="container">
       <Title header="Add Studio Up to 10 Images" />
-      <form
-        id="myForm"
-        className="form-horizontal col-md-12"
-        onSubmit={this.handleSubmit}
-      >
+      <form id="myForm" className="form-horizontal col-md-12" onSubmit={submit}>
         <fieldset>{children}</fieldset>
       </form>
     </div>
@@ -22,7 +18,7 @@ const Wrapper = ({ children }) => (
 
 const ButtonWrapper = ({ children, onClick }) => (
   <div className="form-group row">
-    <button className="btn btn-secondary" type="submit" onClick={onClick}>
+    <button className="btn btn-secondary" onClick={onClick}>
       {children}
     </button>
   </div>
@@ -40,6 +36,7 @@ class Design extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
+    console.log(this.props, "props")
   }
 
   handleFiles = event => {
@@ -79,19 +76,20 @@ class Design extends Component {
     event.preventDefault();
 
     let file = this.state.files;
-
+    let studioid = this.props.match.params.id
     file.forEach(files => {
       let formData = new FormData();
       formData.append("file", files);
       formData.append("upload_preset", "nyv0ihyq");
-
+      
       axios
         .post(`https://api.cloudinary.com/v1_1/etlt/image/upload`, formData)
         .then(cloudResponse => {
-          let studioImage = cloudResponse.data.url;
+          let studioImageSecondary = cloudResponse.data.url;
           axios
             .post("/api/post-listing", {
-              studioImage
+              studioid,
+              studioImageSecondary
             })
             .then(res => {
               this.props.history.push(`/availibility/`);
@@ -108,15 +106,15 @@ class Design extends Component {
     const { auth } = this.props;
     const { alert, studioName, images } = this.state;
     return (
-      <Wrapper>
+      <Wrapper submit={this.handleSubmit}>
         <div className="row">{this.handleImageInput()}</div>
 
         <hr />
         <ButtonWrapper onClick={this.addInput}>Add More Images</ButtonWrapper>
 
-        <ButtonWrapper onSubmit={this.handleSubmit}>
+        <button type="submit" className="btn btn-secondary">
           Save & Continue
-        </ButtonWrapper>
+        </button>
       </Wrapper>
     );
   }
@@ -126,4 +124,7 @@ function mapStateToProps({ studio, auth }) {
   return { studio, auth };
 }
 
-export default connect(mapStateToProps, { fetchUser })(Design);
+export default connect(
+  mapStateToProps,
+  { fetchUser }
+)(Design);

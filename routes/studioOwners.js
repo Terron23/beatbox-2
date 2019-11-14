@@ -68,8 +68,11 @@ module.exports = app => {
       hoursOfOperation,
       timeOut,
       timeIn,
-      date
+      date,
+      studioImageSecondary,
+      studioid,
     } = req.body;
+
     const existingUser = await Studio.findOne({
       _user: req.user.id,
       studioName,
@@ -77,7 +80,7 @@ module.exports = app => {
       city,
       postalCode
     });
-    console.log(req.body);
+    console.log(req.body, existingUser);
 
     if (existingUser) {
       Studio.update(
@@ -102,8 +105,9 @@ module.exports = app => {
           studioImage,
           timeOut,
           timeIn,
-          date
+          date,
         },
+        { $push: {studioImageSecondary: 95 } },
         { upsert: true },
         (err, data) => {
           if (err) {
@@ -135,7 +139,8 @@ module.exports = app => {
         studioImage,
         timeOut,
         timeIn,
-        date
+        date,
+        studioImageSecondary,
       }).save((err, inserted) => {
         console.log(inserted._id);
         res.send(inserted._id);

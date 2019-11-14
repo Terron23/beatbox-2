@@ -27,7 +27,8 @@ studioSchema = new Schema({
   rating: Array,
   timeIn: String,
   timeOut: String,
-  date: String
+  date: String,
+  studioImageSecondary: Array,
 });
 //Mongo two arguments mean load something in
 //1 argument means take data out

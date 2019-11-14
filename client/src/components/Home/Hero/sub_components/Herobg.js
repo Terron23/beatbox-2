@@ -13,7 +13,7 @@ const Herobg = ({ bg, logo }) => {
               <div className="welcome-text text-center">
                 <h6 data-animation="fadeInUp" data-delay="200ms"></h6>
                 <h2 data-animation="fadeInUp" data-delay="500ms">
-                  <img src={logo} width="25%" alt={`Studio Hunt Main bg pic`} />
+                  <img src={logo} width="35%" alt={`Studio Hunt Main bg pic`} />
                 </h2>
                 <a
                   href="/search-studio"

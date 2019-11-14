@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Home/Header";
 import Home from "./Home/Home";
-import ListStudio from "./ListStudio/ListStudio";
+import ListStudio from "./ListStudio/AddStudioForm/ListStudio";
 import Availibility from "./ListStudio/Availibility/Availibility";
 import SignUp from "./SignUp";
 import StudioSearch from "./Studios/AllStudios/StudioSearch";
