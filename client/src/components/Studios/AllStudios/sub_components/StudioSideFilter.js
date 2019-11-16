@@ -39,7 +39,7 @@ class StudioSideFilter extends Component {
       <div className="col-12 col-lg-4">
         <div className="hotel-reservation--area mb-100">
           <form onSubmit={submit}>
-            <FormAttr col="12" label="Location">
+            <FormAttr Kob label="Location">
               <input
                 type="text"
                 defaultValue={location}
@@ -75,7 +75,7 @@ class StudioSideFilter extends Component {
               <div className="row no-gutters"></div>
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary py-3 px-5">
+              <button type="submit" className="btn roberto-btn w-100">
                 Search
               </button>
             </div>

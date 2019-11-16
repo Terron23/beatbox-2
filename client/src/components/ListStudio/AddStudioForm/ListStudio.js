@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { fetchUser } from "../../../actions";
+import { fetchUser, fetchStudioType } from "../../../actions";
 import Title from "../../assets/Title"
 import DropDown from "../../assets/DropDown";
 import SearchCriteria from "./sub_component/SearchCriteria";
@@ -80,29 +80,13 @@ class ListStudio extends Component {
         "Wyoming"
       ],
       venue: ["Home", "Business", "Online"],
-      studiotype: [
-        "Recording - Music",
-        "Recording - Podcast/Radio",
-        "Art",
-        "Film",
-        "Yoga",
-        "Spa",
-        "Photography"
-      ],
-      dates: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ]
+    
     };
   }
 
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchStudioType()
   }
 
   handleFiles = event => {
@@ -133,6 +117,7 @@ class ListStudio extends Component {
     const formData = new FormData();
     formData.append("file", files);
     formData.append("upload_preset", "nyv0ihyq");
+    // formData.append("public_id", files.name.split('.')[0]+'_'+studioname+'_'+studioid);
 
     axios
       .post(`https://api.cloudinary.com/v1_1/etlt/image/upload`, formData)
@@ -164,13 +149,12 @@ class ListStudio extends Component {
   };
 
   handleStudioTypes = () =>
-    this.state.studiotype.map(types => <option>{types}</option>);
+    this.props.studiotype.map(types => <option key={types._id} value={types._id}>{types.studioType}</option>);
 
   handleVenue = () =>
     this.state.venue.map((types, i) => <option key={i}>{types}</option>);
 
-  handleDropDown = () =>
-    this.state.dates.map((types, i) => <option key={i}>{types}</option>);
+  
 
   handleClick = e => {
     e.preventDefault();
@@ -188,16 +172,21 @@ class ListStudio extends Component {
   };
 
   render() {
-    if (!this.props.auth) {
-      return "";
+    if (!this.props.auth || !this.props.studiotype) {
+      return "Loading";
     }
     return (
       <div className="container-fluid site-section">
         <div className="container">
           <Title header="Add Your Studio" />
+            <div className="row">
+          <div
+            className="col-md-2"
+            onSubmit={this.handleSubmit}
+          ></div>
           <form
             id="myForm"
-            className="form-horizontal col-md-6"
+            className="form-horizontal col-md-8 "
             onSubmit={this.handleSubmit}
           >
             <fieldset>
@@ -292,10 +281,10 @@ class ListStudio extends Component {
               <Input
                 name="file"
                 type="file"
-                label="AddImages"
+                label="Add Images"
                 placeholder="Upload Photos"
                 handleChange={this.handleFiles}
-                multiple
+                multiple={true}
                 required
                 classProp="form-style-8"
               />
@@ -304,20 +293,26 @@ class ListStudio extends Component {
               <hr />
 
               <div className="form-group row">
-                <button className="btn btn-secondary" type="submit">
+                <button className="btn roberto-btn w-100" type="submit">
                   Save & Continue
                 </button>
               </div>
             </fieldset>
           </form>
+
+          <div
+            className="col-md-2"
+            onSubmit={this.handleSubmit}
+          ></div>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ studio, auth }) {
-  return { studio, auth };
+function mapStateToProps({ studiotype, auth }) {
+  return { studiotype, auth };
 }
 
-export default connect(mapStateToProps, { fetchUser })(ListStudio);
+export default connect(mapStateToProps, { fetchUser, fetchStudioType })(ListStudio);

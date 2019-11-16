@@ -100,7 +100,7 @@ class Availibility extends Component {
     axios
       .post("/api/post-listing-time", { schedule, studioname, studioid })
       .then(res => {
-        this.props.history.push("/design");
+        this.props.history.push("/confirmation");
       });
   };
 

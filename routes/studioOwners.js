@@ -27,9 +27,6 @@ mongoose.connect(keys.mongoURI);
 module.exports = app => {
   app.post("/api/post-listing-time", async (req, res) => {
     const {
-      starttime,
-      endtime,
-      day,
       studioname,
       studioid,
       schedule
@@ -41,7 +38,27 @@ module.exports = app => {
         { availibility: schedule }
       );
 
-      res.send("Update");
+      res.send(`Updated ${studioName}`);
+    } catch (err) {
+      throw err;
+    }
+  });
+
+  app.post("/api/post-images", async (req, res) => {
+    const {
+      studioname,
+      studioid,
+      studioImageSecondary
+    } = req.body;
+    let studioName = studioname;
+    try {
+      const studioUpdate = await Studio.update(
+        { studioName: studioName, _id: studioid },
+        { $push: {studioImageSecondary: studioImageSecondary} }
+
+      );
+console.log(`Updated ${studioName} with ${studioImageSecondary}` )
+      res.send(`Updated ${studioName}`);
     } catch (err) {
       throw err;
     }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { fetchUser } from "../.././../actions";
 import Title from "./../../assets/Title";
 import Input from "./../../assets/Input";
+import StudioDropZone from "./sub_components/Dropzone"
 
 const Wrapper = ({ children, submit }) => (
   <div className="container-fluid site-section">
@@ -30,7 +31,9 @@ class Design extends Component {
     this.state = {
       files: [],
       url: null,
-      images: []
+      images: [],
+      studioname: this.props.match.params.studioName,
+      studioid: this.props.match.params.id
     };
   }
 
@@ -49,7 +52,7 @@ class Design extends Component {
     let len = this.state.images.length;
     if (this.state.images.length < 11) {
       arr.push(
-        <div className="col-md-2">
+        <div className="col-md-4">
           <Input
             name={"file" + len}
             type="file"
@@ -58,6 +61,7 @@ class Design extends Component {
             handleChange={this.handleFiles}
             style={{ width: "300px" }}
             required="true"
+            classProp="form-style-8"
           />
         </div>
       );
@@ -76,27 +80,35 @@ class Design extends Component {
     event.preventDefault();
 
     let file = this.state.files;
-    let studioid = this.props.match.params.id
-    file.forEach(files => {
+    let studioname = this.props.match.params.studioName;
+    let studioid = this.props.match.params.id;
+    file.forEach((files, i) => {
       let formData = new FormData();
       formData.append("file", files);
       formData.append("upload_preset", "nyv0ihyq");
-      
+      formData.append("folder", studioname+'_'+studioid);
+      formData.append("public_id", files.name.split('.')[0]+'_'+studioname+'_'+studioid);
+      console.log(formData, file)
       axios
         .post(`https://api.cloudinary.com/v1_1/etlt/image/upload`, formData)
         .then(cloudResponse => {
           let studioImageSecondary = cloudResponse.data.url;
           axios
-            .post("/api/post-listing", {
-              studioid,
+            .post("/api/post-images", {
+              studioid, studioname,
               studioImageSecondary
             })
             .then(res => {
-              this.props.history.push(`/availibility/`);
+              if(i === file.length-1){
+                this.props.history.push(`/availibility/${studioname}/${studioid}`);
+              }
+              console.log(res.data)
             });
         })
         .catch(err => console.log(err));
     });
+
+ 
   };
 
   render() {
@@ -104,17 +116,22 @@ class Design extends Component {
       return "";
     }
     const { auth } = this.props;
-    const { alert, studioName, images } = this.state;
+    const { alert, studioName, images, studioname, studioid } = this.state;
     return (
       <Wrapper submit={this.handleSubmit}>
         <div className="row">{this.handleImageInput()}</div>
-
+<StudioDropZone 
+studioid={studioid} 
+studioname={studioname}
+classProp="form-style-8"
+history = {this.props.history}
+/>
         <hr />
-        <ButtonWrapper onClick={this.addInput}>Add More Images</ButtonWrapper>
+        {/* {<ButtonWrapper onClick={this.addInput}>Add More Images</ButtonWrapper> }
 
         <button type="submit" className="btn btn-secondary">
           Save & Continue
-        </button>
+        </button> */}
       </Wrapper>
     );
   }
