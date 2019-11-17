@@ -45,7 +45,7 @@ module.exports = app => {
   });
 
   app.post("/api/post-bin", async (req, res) => {
-  
+    res.status(200);
   });
 
   app.post("/api/post-images", async (req, res) => {
