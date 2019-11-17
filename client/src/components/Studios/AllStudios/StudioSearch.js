@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchLocation, fetchStudio } from "../../../actions";
+import { fetchLocation, fetchStudio, fetchStudioType } from "../../../actions";
 import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";
@@ -39,6 +39,7 @@ class StudioSearch extends Component {
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
+    this.props.fetchStudioType();
   }
 
   handleChangeStart = date => {
@@ -86,6 +87,7 @@ class StudioSearch extends Component {
             ) != ""
       )
       .map(studio => {
+        console.log(this.props)
         return (
           <StudioSearchTemplate
             key={studio._id}
@@ -102,7 +104,6 @@ class StudioSearch extends Component {
           />
         );
       });
-    // .filter(studio =>(studio.availibility.startDate.getDay() === this.state.startDate))
 
     return search;
   };
@@ -182,10 +183,10 @@ class StudioSearch extends Component {
   }
 }
 
-function mapStateToProps({ locate, studio }) {
-  return { locate, studio };
+function mapStateToProps({ locate, studio , type}) {
+  return { locate, studio, type };
 }
 
-export default connect(mapStateToProps, { fetchLocation, fetchStudio })(
+export default connect(mapStateToProps, { fetchLocation, fetchStudio, fetchStudioType })(
   StudioSearch
 );

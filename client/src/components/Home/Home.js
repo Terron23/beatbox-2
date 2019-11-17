@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { fetchLocation, fetchStudio } from "../.././actions";
 import About from "./About";
 import StudioType from "./StudioType";
-import Testimonials from "./Testimonial";
 import City from "./City";
 import PostStudio from "./PostStudio";
 import Hero from "./Hero/Hero";
@@ -41,7 +40,7 @@ class Home extends Component {
         <About />
         <FeaturedStudios />
         <PostStudio />
-        <Testimonials />
+       
         <StudioType />
         <City />
       </div>

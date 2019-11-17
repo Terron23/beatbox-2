@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-const TimeDropDown = ({ col, label, name, classProp }) => (
+const TimeDropDown = ({ col, label, name, classProp, id="checkin" }) => (
   <div className={`col-${col} ${classProp}`}>
     <label htmlFor={label}>{label}</label>
-    <select className="form-control" id="checkIn" name={name}>
+    <select className="form-control" id={id} name={name}>
       <option value="">Please Choose</option>
       <option value="5:00 AM">5:00 AM</option>
       <option value="5:15 AM">5:15 AM</option>

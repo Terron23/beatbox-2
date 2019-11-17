@@ -44,6 +44,10 @@ module.exports = app => {
     }
   });
 
+  app.post("/api/post-bin", async (req, res) => {
+  
+  });
+
   app.post("/api/post-images", async (req, res) => {
     const {
       studioname,

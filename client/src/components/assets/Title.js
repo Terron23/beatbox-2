@@ -24,7 +24,7 @@ export default class Title extends Component {
 const styles = {
   titleStyle: {
     width: "100%",
-    marginTop: 75,
-    marginBottom: 75
+    marginTop: 25,
+    marginBottom: 50
   }
 };
