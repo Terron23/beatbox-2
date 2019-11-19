@@ -30,7 +30,7 @@ let days = this.state.days;
   for(let i=0; i< 7; i++){
     timeSlot.push(
    
-      <td className="col-2">
+      <td className="col-2" key={i}>
        <TimeDropDown id={`${days[i]}_starttime`} 
        name={`${days[i]}_starttime`} 
        label="Open" 
@@ -72,7 +72,7 @@ return timeSlot;
     axios
       .post("/api/post-listing-time", { schedule, studioname, studioid })
       .then(res => {
-        this.props.history.push("/confirmation");
+        this.props.history.push(`/details/${studioname}/${studioid}`);
       });
   };
 

@@ -281,8 +281,8 @@ class ListStudio extends Component {
               <Input
                 name="file"
                 type="file"
-                label="Add Images"
-                placeholder="Upload Photos"
+                label="Add Main Studio Image"
+                placeholder="Upload Photo"
                 handleChange={this.handleFiles}
                 multiple={true}
                 required

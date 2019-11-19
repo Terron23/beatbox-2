@@ -26,7 +26,7 @@ const StudioSearchTemplate = ({
       </h4>
       <div className="">
         <h6>
-          Studio Type: <span>{studioType}</span>
+          Studio Type: <span>{studioType.filter}</span>
         </h6>
         <h6>
           Hours of Operation:{" "}
@@ -42,9 +42,9 @@ const StudioSearchTemplate = ({
         <h6>
           Location: <span>{city}</span>
         </h6>
-        <h6>
+        {/* <h6>
           Capacity: <span>Max person {guest}</span>
-        </h6>
+        </h6> */}
       </div>
       <Link to={`/single-studio/${_id}`} className="btn view-detail-btn">
         View Details{" "}

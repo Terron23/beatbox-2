@@ -16,6 +16,7 @@ import * as actions from "../actions";
 import Preloader from "./assets/preloader";
 import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
+import Details from "./ListStudio/Details/Details";
 
 class App extends Component {
   componentDidMount() {
@@ -45,6 +46,7 @@ class App extends Component {
               component={Availibility}
             />
             <Route path="/design/:studioName?/:id?" component={Design} />
+            <Route path="/details/:studioName?/:id?" component={Details} />
             <Route path="/post-studio/:studioname/:id" component={ListStudio} />
             <Route path="/confirmation" component={Confirmation} />
             <Footer />

@@ -32,11 +32,11 @@ const StudioDropZone = ({studioid, studioname, history, classProp}) => {
               studioImageSecondary
             })
             .then(res => {
-                console.log(res.data)
+              
               if(i === files.length-1){
                history.push(`/availibility/${studioname}/${studioid}`);
               }
-              console.log(res.data)
+              
               
             });
         })
@@ -45,6 +45,11 @@ const StudioDropZone = ({studioid, studioname, history, classProp}) => {
     });}
 
   return (
+
+
+    <div>
+
+
     <Dropzone
       // getUploadParams={getUploadParams}
       submitButtonContent="Save & Continue"
@@ -56,6 +61,8 @@ const StudioDropZone = ({studioid, studioname, history, classProp}) => {
       inputWithFilesContent="Add More Files"
       classNames={classNames}
     />
+
+    </div>
   )
 }
 const classNames={

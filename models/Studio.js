@@ -29,6 +29,10 @@ studioSchema = new Schema({
   timeOut: String,
   date: String,
   studioImageSecondary: Array,
+  capacity: String,
+  equipment: String,
+  services: String,
+  description:String,
 });
 //Mongo two arguments mean load something in
 //1 argument means take data out

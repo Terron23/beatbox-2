@@ -52,19 +52,46 @@ module.exports = app => {
     const {
       studioname,
       studioid,
-      studioImageSecondary
+      studioImageSecondary,
+      studioImage
     } = req.body;
     let studioName = studioname;
     try {
       const studioUpdate = await Studio.update(
         { studioName: studioName, _id: studioid },
+        {studioImage: studioImage},
         { $push: {studioImageSecondary: studioImageSecondary} }
 
       );
-console.log(`Updated ${studioName} with ${studioImageSecondary}` )
-      res.send(`Updated ${studioName}`);
+      res.send(`Updated ${studioName} with ${studioImageSecondary}`);
     } catch (err) {
       throw err;
+    }
+  });
+
+
+  app.put("/api/post-details", async (req, res) => {
+    const {
+      capacity,
+      equipment,
+      services,
+      description,
+      studioname,
+      studioid
+    } = req.body;
+    let studioName = studioname;
+    try {
+      const studioUpdate = await Studio.update(
+        { studioName: studioName, _id: studioid },
+        {capacity:capacity,
+          equipment: equipment,
+          services:services,
+          description:description},
+          {upsert:true}
+
+      );
+      res.send(`Updated ${studioName} with ${description}`);
+    } catch (err) {
     }
   });
 
