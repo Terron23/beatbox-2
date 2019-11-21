@@ -53,13 +53,11 @@ module.exports = app => {
       studioname,
       studioid,
       studioImageSecondary,
-      studioImage
     } = req.body;
     let studioName = studioname;
     try {
       const studioUpdate = await Studio.update(
         { studioName: studioName, _id: studioid },
-        {studioImage: studioImage},
         { $push: {studioImageSecondary: studioImageSecondary} }
 
       );

@@ -28,7 +28,7 @@ class SingleStudioSideFilter extends Component {
 
   render() {
     let { id } = this.props;
-    let { handleChangeStart, startDate } = this.state;
+    let { startDate } = this.state;
     return (
       <div className="col-12 col-lg-4">
         <div className="hotel-reservation--area mb-100">
@@ -36,7 +36,7 @@ class SingleStudioSideFilter extends Component {
             <FormAttr label="Check In Date">
               <DatePicker
                 selected={startDate}
-                onChange={handleChangeStart}
+                onChange={this.handleChangeStart}
                 className="form-control"
                 name="startDate"
                 autoComplete="off"

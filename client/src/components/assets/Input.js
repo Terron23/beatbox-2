@@ -18,6 +18,7 @@ class Input extends Component {
           onChange={handleChange}
           defaultValue={value}
           multiple={multiple === "true" ? true : false}
+         required
         />
 
       </div>

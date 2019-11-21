@@ -18,13 +18,14 @@ const Studios = ({
   rules,
   id,
   image,
-  availibility
+  availibility,
+  thumbnails,
 }) => {
   return (
     <Wrapper>
       <div className="row">
         <div className="col-12 col-lg-8">
-          <Carousel img={image} />
+          <Carousel img={image} thumbnails={thumbnails}/>
           <Features />
           <Ameneties />
           <Reviews />
@@ -47,7 +48,7 @@ class SingleStudio extends Component {
     //Needs to be refactored
     //Pulling in all data
     const { studio } = this.props;
-    console.log(this.props);
+    console.log("Studio", this.props);
     return (
       <div>
         {studio.map(studio => {
@@ -71,6 +72,7 @@ class SingleStudio extends Component {
                     id={studio._id}
                     image={studio.studioImage}
                     availibility={studio.availibility}
+                    thumbnails={studio.studioImageSecondary}
                   />
                 );
               } else {

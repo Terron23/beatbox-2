@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class Carousel extends Component {
   render() {
-    let { img } = this.props;
+    let { img, thumbnails } = this.props;
     return (
       <div className="single-room-details-area mb-50">
         <div className="room-thumbnail-slides mb-50">
@@ -12,43 +12,32 @@ export default class Carousel extends Component {
             data-ride="carousel"
           >
             <div className="carousel-inner">
-              <div className="carousel-item active">
+            <div className="carousel-item active" style={{"width": "730px", "height":"430px"}}>
                 <img src={img} className="d-block w-100" alt="" />
               </div>
-              <div className="carousel-item">
-                <img src={img} className="d-block w-100" alt="" />
-              </div>
-              <div className="carousel-item">
-                <img src={img} className="d-block w-100" alt="" />
-              </div>
-              <div className="carousel-item">
-                <img src={img} className="d-block w-100" alt="" />
-              </div>
-              <div className="carousel-item">
-                <img src={img} className="d-block w-100" alt="" />
-              </div>
+              {thumbnails.map((studio, i)=>{
+                return (<div className="carousel-item" style={{"width": "730px", "height":"430px"}}>
+                <img src={studio} className="d-block w-100" alt="" />
+              </div>)
+              })}
+
+            
             </div>
 
             <ol className="carousel-indicators">
-              <li
-                data-target="#room-thumbnail--slide"
-                data-slide-to="0"
-                className="active"
-              >
+            <li style={{"width": "45px", "height":"90px"}}>
                 <img src={img} className="d-block w-100" alt="" />
               </li>
-              <li data-target="#room-thumbnail--slide" data-slide-to="1">
-                <img src={img} className="d-block w-100" alt="" />
-              </li>
-              <li data-target="#room-thumbnail--slide" data-slide-to="2">
-                <img src={img} className="d-block w-100" alt="" />
-              </li>
-              <li data-target="#room-thumbnail--slide" data-slide-to="3">
-                <img src={img} className="d-block w-100" alt="" />
-              </li>
-              <li data-target="#room-thumbnail--slide" data-slide-to="4">
-                <img src={img} className="d-block w-100" alt="" />
-              </li>
+
+            {thumbnails.map((studio, i)=>{
+                return (<li style={{"width": "45px", "height":"90px"}}
+                  data-target="#room-thumbnail--slide"
+                  data-slide-to={i+1}
+                  className="active"
+                >
+                  <img src={studio} className="d-block w-100" alt="" style={{"width": "45px", "height":"29px"}}/>
+                </li>)
+              })}
             </ol>
           </div>
         </div>
