@@ -1,35 +1,28 @@
 import React from "react";
 
-const Features = ({}) => {
+const Features = ({capacity, description, equipment, services}) => {
   return (
     <div>
       <div className="room-features-area d-flex flex-wrap mb-50">
-        <h6>
+        {/* <h6>
           Size: <span>350-425sqf</span>
+        </h6> */}
+        <h6>
+          Capacity: <span>Max persion {capacity}</span>
         </h6>
         <h6>
-          Capacity: <span>Max persion 5</span>
+          Equipment: <span>{equipment}</span>
         </h6>
         <h6>
-          Bed: <span>King beds</span>
-        </h6>
-        <h6>
-          Services: <span>Wifi, television ...</span>
+          Services: <span>{services}</span>
         </h6>
       </div>
 
       <p>
-        If you live in New York City or travel to and from New York City a lot,
-        you know all about the traffic there. Getting places is often next to
-        impossible, even with the gazillion yellow cabs. If you’re like me you
-        often look with envy at those shiny limousines with their unformed
-        drivers and wish you could sit in one. Well, you can. New York limo
-        service is more affordable than you think, whether it’s for Newark
-        airport transportation, LaGuardia airport transportation, or to drive
-        wherever you wish to go.
+       {description}
       </p>
 
-      <ul>
+      {/* <ul>
         <li>
           <i className="fa fa-check"></i> Mauris molestie lectus in irdiet
           auctor.
@@ -50,7 +43,7 @@ const Features = ({}) => {
           <i className="fa fa-check"></i> Vestibulum rutrum diam vel eros
           tristique.
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
