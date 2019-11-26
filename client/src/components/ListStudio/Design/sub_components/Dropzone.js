@@ -5,9 +5,9 @@ import axios from 'axios'
  
 const StudioDropZone = ({studioid, studioname, history, classProp}) => {
   // specify upload params and url for your files
-//  const getUploadParams = ({ meta, file }) => {
- 
-//   return { url: "/api/post-bin"} }
+ const getUploadParams = ({ meta, file }) => {
+  return { url: "https://httpbin.org/post"} 
+}
   
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file) }
@@ -51,7 +51,7 @@ const StudioDropZone = ({studioid, studioname, history, classProp}) => {
 
 
     <Dropzone
-      // getUploadParams={getUploadParams}
+      getUploadParams={getUploadParams}
       submitButtonContent="Save & Continue"
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}

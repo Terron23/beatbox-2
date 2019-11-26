@@ -44,9 +44,9 @@ class SingleStudioSideFilter extends Component {
             </FormAttr>
 
             <FormAttr label>
-              <TimeDropDown col="6" label="Time In" name="timeIn" />
+              <TimeDropDown col="6" label="Time In" name="timeIn" id='timein' />
 
-              <TimeDropDown col="6" label="Time Out" name="timeOut" />
+              <TimeDropDown col="6" label="Time Out" name="timeOut" id='timein' />
             </FormAttr>
 
             <div className="form-group">

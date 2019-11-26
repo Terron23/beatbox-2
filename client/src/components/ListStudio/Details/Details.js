@@ -5,6 +5,7 @@ import { fetchUser, fetchStudioType } from "../../../actions";
 import Title from "../../assets/Title"
 import Input from "../../assets/Input";
 import TextArea from "../../assets/TextArea";
+import MultiSelect from "../../assets/MultiSelect";
 
 
 class Details extends Component {
@@ -14,7 +15,7 @@ class Details extends Component {
       from: [],
       formControl: null,
       studioName: "",
-    
+     
     };
   }
 
@@ -51,7 +52,10 @@ class Details extends Component {
       .catch(err => console.log(err));
   };
 
-
+handleOptions =()=>{
+return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks', 'Food', 'Television']
+.map((op, i)=><option selected="true" key={i}>{op}</option>)
+}
 
   
 
@@ -88,12 +92,10 @@ class Details extends Component {
                 placeholder="Enter Name of Equipment"
                 classProp="form-style-8"
               />
-              <Input
-                name="services"
-                type="text"
-                label="Services"
-                placeholder="Ex: Production, Audio Engineering, Teaching"
-                classProp="form-style-8"
+
+
+              <MultiSelect
+                
               />
             
            

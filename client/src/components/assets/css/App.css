@@ -524,8 +524,23 @@
     }
     
      input:focus, select:focus, textarea:focus{
-      outline: none;
-      -webkit-box-shadow: none;
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border-bottom: 2px solid #34CACA !important;
+    }
+
+    .react-select__value-container>input{
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border-bottom: 2px solid #34CACA !important;
+
+    }
+
+    .react-select__control{
+      outline: none !important;
+      -webkit-box-shadow: none !important;
       box-shadow: none !important;
       border-bottom: 2px solid #34CACA !important;
     }
