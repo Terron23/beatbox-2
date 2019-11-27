@@ -18,7 +18,7 @@ class SearchCriteria extends Component {
         <select name={name} id={title} className="form-control">
           <option value="">All Studios</option>
           {studiotype.map(m => (
-            <option value={m._id}>{m.studioType}</option>
+            <option value={m.studioType}>{m.studioType}</option>
           ))}
         </select>
       </div>

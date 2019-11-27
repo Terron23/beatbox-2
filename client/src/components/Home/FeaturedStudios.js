@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudio } from "../.././actions";
-import bg1 from "../../images/bg-img/57.jpg";
 import Heading from "./sub_components/heading";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -106,7 +105,7 @@ class FeaturedStudios extends Component {
 
   render() {
     if (!this.props.studio) {
-      return "";
+      window.location.reload(true);
     }
 
     return (

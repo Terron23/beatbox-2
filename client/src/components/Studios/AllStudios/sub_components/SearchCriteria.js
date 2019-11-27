@@ -23,13 +23,13 @@ class SearchCriteria extends Component {
           <option value="">All</option>
           {studiotype.map(m => {
             let option = (
-              <option key={m._id} value={m._id}>
+              <option key={m._id} value={m.studioType}>
                 {m.studioType}
               </option>
             );
             if (m._id === search) {
               option = (
-                <option key={m._id} selected value={m._id}>
+                <option key={m._id} selected value={m.studioType}>
                   {m.studioType}
                 </option>
               );

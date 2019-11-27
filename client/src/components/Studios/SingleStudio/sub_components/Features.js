@@ -4,17 +4,18 @@ const Features = ({capacity, description, equipment, services}) => {
   return (
     <div>
       <div className="room-features-area d-flex flex-wrap mb-50">
-        {/* <h6>
-          Size: <span>350-425sqf</span>
-        </h6> */}
-        <h6>
-          Capacity: <span>Max persion {capacity}</span>
+      <h6>
+          Included: <span>{services.length > 0 ? services : 'N/A'}</span>
         </h6>
         <h6>
-          Equipment: <span>{equipment}</span>
+          Capacity: <span> { capacity.length > 0 ? `Max persion ${capacity}` : 'Contact Owner'}</span>
         </h6>
         <h6>
-          Services: <span>{services}</span>
+          Equipment: <span>{equipment.length > 0 ? equipment: 'Contact Owner'}</span>
+        </h6>
+       
+        <h6>
+        Add-ons: <span>N/A</span>
         </h6>
       </div>
 

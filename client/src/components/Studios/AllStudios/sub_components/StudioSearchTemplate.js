@@ -26,7 +26,7 @@ const StudioSearchTemplate = ({
       </h4>
       <div className="">
         <h6>
-          Studio Type: <span>{studioType.filter}</span>
+          Studio Type: <span>{studioType}</span>
         </h6>
         <h6>
           Hours of Operation:{" "}

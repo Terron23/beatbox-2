@@ -31,7 +31,7 @@ const Studios = ({
         <div className="col-12 col-lg-8">
           <Carousel img={image} thumbnails={thumbnails}/>
           <Features capacity={capacity} description={description} equipment={equipment} services={services} />
-          <Ameneties />
+          <Ameneties services={services}/>
           <Reviews />
         </div>
         <SingleStudioSideFilter id={id} />
@@ -52,7 +52,7 @@ class SingleStudio extends Component {
     //Needs to be refactored
     //Pulling in all data
     const { studio } = this.props;
-    console.log("Studio", this.props);
+    
     return (
       <div>
         {studio.map(studio => {
