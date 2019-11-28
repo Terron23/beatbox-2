@@ -113,7 +113,7 @@ class StudioSearch extends Component {
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
     // let guest = e.target.guest.value
-    let applyDate = e.target.startDate.value;
+    let applyDate = this.state.startDate;
     this.setState({ location, studioType, applyDate });
   };
 

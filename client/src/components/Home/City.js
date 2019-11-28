@@ -40,13 +40,13 @@ export default class City extends Component {
         <div className="container">
           <Heading
             title={"Explore"}
-            subtitle="Find & Book Studio Time Wherever You Are"
+            subtitle="Find & Book Studios At Your Convience"
           />
 
           <div className="row">
             <CityTemplate title="NYC" img={bg1} />
-            <CityTemplate title="London" img={bg3} />
-            <CityTemplate title="Philadeliphia" img={bg2} />
+            {/* <CityTemplate title="London" img={bg3} />
+            <CityTemplate title="Philadeliphia" img={bg2} /> */}
           </div>
         </div>
       </section>

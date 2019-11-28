@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import Schedule from "./Schedule";
-import Typist from "react-typist";
 import Navbar from "./Nav/Nav";
 import TopNav from "./Nav/TopNav";
-import Hero from "./Hero/Hero";
 import NavSearch from "./Nav/NavSearch";
 
 const HeaderArea = ({ children }) => {

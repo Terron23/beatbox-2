@@ -10,7 +10,7 @@ import './css/style.css'
 const Wrapper = ({ children, }) => (
   <div className="container-fluid site-section">
     <div className="container">
-      <Title header="Add Up to 10 Images" />
+      <Title header="Upload More Content" subtitle={'Add Images, Art Work, Photographs, Music, and Videos'}/>
     
         <fieldset style={{"padding":"25px"}}>{children}</fieldset>
    

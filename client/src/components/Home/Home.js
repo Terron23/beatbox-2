@@ -8,6 +8,7 @@ import City from "./City";
 import PostStudio from "./PostStudio";
 import Hero from "./Hero/Hero";
 import Schedule from "./Schedule";
+import StudioCards from './StudioCards'
 
 class Home extends Component {
   componentDidMount() {
@@ -39,10 +40,10 @@ class Home extends Component {
         />
         <About />
         <FeaturedStudios />
-        <PostStudio />
        
         <StudioType />
-        <City />
+        <PostStudio />
+     
       </div>
     );
   }

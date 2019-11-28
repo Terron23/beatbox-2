@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import SearchCriteria from "./SearchCriteria";
 import FormAttr from "./FormAttr";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Calendar from 'react-calendar';
 
 class StudioSideFilter extends Component {
   constructor(props) {
@@ -59,16 +58,8 @@ class StudioSideFilter extends Component {
                 col="12"
               />
             </FormAttr>
-
             <FormAttr label="Check In Date">
-              <DatePicker
-                selected={startDate}
-                onChange={handleChangeStart}
-                className="form-control"
-                name="startDate"
-                style={{ width: "100%" }}
-                autoComplete="off"
-              />
+             <Calendar selectRange={false} onChange={handleChangeStart} />
             </FormAttr>
 
             <div className="form-group mb-30">

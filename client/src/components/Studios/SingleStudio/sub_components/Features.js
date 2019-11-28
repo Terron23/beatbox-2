@@ -1,21 +1,21 @@
 import React from "react";
 
-const Features = ({capacity, description, equipment, services}) => {
+const Features = ({capacity, description, equipment, services, includes}) => {
   return (
     <div>
       <div className="room-features-area d-flex flex-wrap mb-50">
       <h6>
-          Included: <span>{services.length > 0 ? services : 'N/A'}</span>
+          Included: <span>{includes.length > 0 ? includes : 'N/A'}</span>
         </h6>
         <h6>
-          Capacity: <span> { capacity.length > 0 ? `Max persion ${capacity}` : 'Contact Owner'}</span>
+          Capacity: <span> { capacity.length > 0 ? `Max person ${capacity}` : 'Contact Owner'}</span>
         </h6>
         <h6>
           Equipment: <span>{equipment.length > 0 ? equipment: 'Contact Owner'}</span>
         </h6>
        
         <h6>
-        Add-ons: <span>N/A</span>
+        Services: <span><span>{services.length > 0 ? services : 'N/A'}</span></span>
         </h6>
       </div>
 

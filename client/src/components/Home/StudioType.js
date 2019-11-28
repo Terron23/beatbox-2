@@ -63,7 +63,7 @@ export default class StudioType extends Component {
         <OwlCarousel className="owl-theme" loop margin={2}>
           <CarouselItems
             title="Dance"
-            description="Work on your moves like a professional."
+            description="Practice your moves."
             img={dance}
           />
 
@@ -74,7 +74,7 @@ export default class StudioType extends Component {
           />
           <CarouselItems
             title="Art"
-            description="Paint, sketch and indulge your artistic side."
+            description="Paint, sketch and embrace your artistic side."
             img={art}
           />
         </OwlCarousel>

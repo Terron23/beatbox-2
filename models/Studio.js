@@ -33,6 +33,7 @@ studioSchema = new Schema({
   equipment: String,
   services: String,
   description:String,
+  includes: String,
 });
 //Mongo two arguments mean load something in
 //1 argument means take data out

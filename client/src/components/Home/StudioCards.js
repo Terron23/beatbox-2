@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import Schedule from "../Schedule";
-import Typist from "react-typist";
-import Navbar from "./Nav/Nav";
-import TopNav from "./Nav/TopNav";
-import Hero from "./Hero";
+
 
 const Cards = ({ img, title }) => {
   return (
@@ -11,7 +7,7 @@ const Cards = ({ img, title }) => {
       className="single-service--area mb-100 wow fadeInUp"
       data-wow-delay="100ms"
     >
-      <i className={img} style={{ fontSize: "70px", color: "#1cc3b2" }}></i>
+      <i className={img} style={{ fontSize: "40px", color: "#1cc3b2" }}></i>
       <h5>{title}</h5>
     </div>
   );
@@ -19,7 +15,7 @@ const Cards = ({ img, title }) => {
 
 const SectionHeader = ({ children }) => {
   return (
-    <div className="roberto-service-area">
+    <div className="roberto-service-area" style={{"padding-top":"50px"}}>
       <div className="container">
         <div className="row">
           <div className="col-12">

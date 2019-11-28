@@ -7,6 +7,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
 
+
 const SingleFeaturedStudio = ({
   bg,
   studiotype,
@@ -16,7 +17,8 @@ const SingleFeaturedStudio = ({
   studioName,
   venue,
   rating,
-  id
+  id,
+  equipment
 }) => {
   return (
     <div className="single-room-slide d-flex align-items-center">
@@ -38,12 +40,13 @@ const SingleFeaturedStudio = ({
           data-animation="fadeInUp"
           data-delay="500ms"
         >
-          <li>
+           <li>
             <span>
-              <i className="fa fa-check"></i> Capacity
+              <i className="fa fa-check"></i> Studio Type
             </span>{" "}
-            <span>: Max person {group}</span>
+            <span>: {studiotype}</span>
           </li>
+         
           <li>
             <span>
               <i className="fa fa-check"></i> Amenities
@@ -52,9 +55,9 @@ const SingleFeaturedStudio = ({
           </li>
           <li>
             <span>
-              <i className="fa fa-check"></i> Venue
+              <i className="fa fa-check"></i> Equipment
             </span>{" "}
-            <span>: {venue}</span>
+            <span>: {equipment}</span>
           </li>
           <li>
             <span>
@@ -66,8 +69,6 @@ const SingleFeaturedStudio = ({
         <Link
           to={`/single-studio/${id}`}
           className="btn roberto-btn mt-30"
-          data-animation="fadeInUp"
-          data-delay="700ms"
         >
           View Details
         </Link>
@@ -98,6 +99,8 @@ class FeaturedStudios extends Component {
             ))}
             group={s.guest}
             id={s._id}
+            amenities={s.services}
+            equipment={s.equipment}
           />
         );
       });
@@ -105,7 +108,7 @@ class FeaturedStudios extends Component {
 
   render() {
     if (!this.props.studio) {
-      window.location.reload(true);
+      window.location.reload();
     }
 
     return (

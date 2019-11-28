@@ -73,7 +73,8 @@ module.exports = app => {
       services,
       description,
       studioname,
-      studioid
+      studioid,
+      include,
     } = req.body;
     let studioName = studioname;
     try {
@@ -82,6 +83,7 @@ module.exports = app => {
         {capacity:capacity,
           equipment: equipment,
           services:services,
+          includes: include,
           description:description},
           {upsert:true}
 

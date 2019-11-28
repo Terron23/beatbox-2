@@ -149,7 +149,7 @@ class ListStudio extends Component {
   };
 
   handleStudioTypes = () =>
-    this.props.studiotype.map(types => <option key={types._id} value={types._id}>{types.studioType}</option>);
+    this.props.studiotype.map(types => <option key={types._id} value={types.studioType}>{types.studioType}</option>);
 
   handleVenue = () =>
     this.state.venue.map((types, i) => <option key={i}>{types}</option>);
@@ -206,7 +206,7 @@ class ListStudio extends Component {
               />
               <Input
                 name="price"
-                label="Price"
+                label="Price Per Hour"
                 type="number"
                 placeholder="Enter your prices"
                 classProp="form-style-8"
@@ -302,8 +302,10 @@ class ListStudio extends Component {
 
           <div
             className="col-md-2"
-            onSubmit={this.handleSubmit}
-          ></div>
+          
+          >
+            
+          </div>
           </div>
         </div>
       </div>

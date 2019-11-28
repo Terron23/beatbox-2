@@ -3,6 +3,7 @@ import TimeDropDown from "../../../assets/TimeDropDown";
 import FormAttr from "./FormAttr";
 import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
+import Calendar from 'react-calendar';
 import "react-datepicker/dist/react-datepicker.css";
 
 class SingleStudioSideFilter extends Component {
@@ -15,6 +16,7 @@ class SingleStudioSideFilter extends Component {
   }
 
   handleChangeStart = date => {
+    console.log(date)
     this.setState({
       startDate: date
     });
@@ -26,6 +28,8 @@ class SingleStudioSideFilter extends Component {
     });
   };
 
+
+
   render() {
     let { id } = this.props;
     let { startDate } = this.state;
@@ -34,13 +38,8 @@ class SingleStudioSideFilter extends Component {
         <div className="hotel-reservation--area mb-100">
           <form onSubmit={this.submit}>
             <FormAttr label="Check In Date">
-              <DatePicker
-                selected={startDate}
-                onChange={this.handleChangeStart}
-                className="form-control"
-                name="startDate"
-                autoComplete="off"
-              />
+              
+              <Calendar  selectRange={false} onChange={this.handleChangeStart} />
             </FormAttr>
 
             <FormAttr label>

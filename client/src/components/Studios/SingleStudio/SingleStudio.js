@@ -23,14 +23,20 @@ const Studios = ({
   capacity,
   equipment,
   description,
-  services
+  services,
+  includes,
 }) => {
   return (
     <Wrapper>
       <div className="row">
         <div className="col-12 col-lg-8">
           <Carousel img={image} thumbnails={thumbnails}/>
-          <Features capacity={capacity} description={description} equipment={equipment} services={services} />
+          <Features capacity={capacity} 
+          description={description}
+           equipment={equipment} 
+          services={services}
+          includes={includes}
+           />
           <Ameneties services={services}/>
           <Reviews />
         </div>
@@ -81,6 +87,7 @@ class SingleStudio extends Component {
                     equipment={studio.equipment}
                     description={studio.description}
                     services={studio.services}
+                    includes={studio.includes}
                   />
                 );
               } else {

@@ -32,6 +32,7 @@ class Details extends Component {
     let equipment = event.target.equipment.value;
     let services = event.target.services.value;
     let description = event.target.description.value;
+    let include = event.target.include.value;
     let studioname= this.props.match.params.studioName;
     let studioid= this.props.match.params.id;
 
@@ -44,6 +45,7 @@ class Details extends Component {
             services,
             description,
             studioname,
+            include,
             studioid
           })
           .then(res => {
@@ -61,7 +63,7 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
 
   render() {
     if (!this.props.auth || !this.props.studiotype) {
-      return "Loading";
+      return "Loading...";
     }
     return (
       <div className="container-fluid site-section">
@@ -70,7 +72,6 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
             <div className="row">
           <div
             className="col-md-2"
-            onSubmit={this.handleSubmit}
           ></div>
           <form
             id="myForm"
@@ -78,35 +79,45 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
             onSubmit={this.handleSubmit}
           >
             <fieldset>
-              <Input
-                name="capacity"
-                type="text"
-                label="Capacity"
-                placeholder="Enter Number of People Allowed"
-                classProp="form-style-8"
-              />
-              <Input
-                name="equipment"
-                label="Add Equipment"
-                type="text"
-                placeholder="Enter Name of Equipment"
-                classProp="form-style-8"
-              />
-
-
-              <MultiSelect
-                
-              />
-            
-           
-              <TextArea
+            <TextArea
                 name="description"
                 type="textarea"
                 label="Studio Description"
                 placeholder="Enter Studio's Description "
                 classProp="form-style-8"
               />
-             
+
+              <Input
+                name="capacity"
+                type="text"
+                label="Capacity"
+                placeholder="Enter Number of People Allowed. Enter 0 if Undecided."
+                classProp="form-style-8"
+              />
+              <Input
+                name="equipment"
+                label="Add Equipment"
+                type="text"
+                placeholder="Please list Any Notable Equipment You May Use."
+                classProp="form-style-8"
+              />
+
+
+              <MultiSelect
+              options={['Parking', 'Lounge', 'Wi-Fi', 'Bathroom', 'Food & Beverages', 'Air & Heating']}
+              label={'Amenities'}
+              id={'services'}
+              placeholder="Parking, Drinks, Wifi"
+              custom={true}
+              />
+
+              <MultiSelect
+              options={['Audio Engineer', 'Instructor', 'Assistant', 'Host']}
+              label={'Include In Booking'}
+              id={'include'}
+              placeholder="Add Any Special Features or Resources Included with your Venue"
+              custom={true}
+                            />
             
               <hr />
 
@@ -120,7 +131,6 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
 
           <div
             className="col-md-2"
-            onSubmit={this.handleSubmit}
           ></div>
           </div>
         </div>
