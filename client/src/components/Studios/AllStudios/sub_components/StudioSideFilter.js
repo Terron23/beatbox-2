@@ -24,6 +24,8 @@ class StudioSideFilter extends Component {
     let {
       children,
       submit,
+      priceLow,
+      priceHigh,
       location,
       search,
       group,
