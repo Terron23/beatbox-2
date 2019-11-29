@@ -3,7 +3,7 @@ import TimeDropDown from "../../../assets/TimeDropDown";
 import FormAttr from "./FormAttr";
 import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import "react-datepicker/dist/react-datepicker.css";
 
 class SingleStudioSideFilter extends Component {
@@ -39,7 +39,7 @@ class SingleStudioSideFilter extends Component {
           <form onSubmit={this.submit}>
             <FormAttr label="Check In Date">
               
-              <Calendar  selectRange={false} onChange={this.handleChangeStart} />
+              {/* <Calendar  selectRange={false} onChange={this.handleChangeStart} /> */}
             </FormAttr>
 
             <FormAttr label>

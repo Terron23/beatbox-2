@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchCriteria from "./SearchCriteria";
 import FormAttr from "./FormAttr";
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 
 class StudioSideFilter extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class StudioSideFilter extends Component {
               />
             </FormAttr>
             <FormAttr label="Check In Date">
-             <Calendar selectRange={false} onChange={handleChangeStart} />
+             {/* <Calendar selectRange={false} onChange={handleChangeStart} /> */}
             </FormAttr>
 
             <div className="form-group mb-30">
