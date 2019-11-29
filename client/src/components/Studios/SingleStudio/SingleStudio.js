@@ -94,6 +94,7 @@ class SingleStudio extends Component {
                 return "";
               }
             })}
+            
           </div>
         </div>
       </div>
