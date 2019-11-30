@@ -9,11 +9,10 @@ class SelectBox extends React.Component {
       text: "",
       arr: this.props.options,
       newOptions: "",
-      newText: "",
-      hideOption: false,
-      classOp: "",
+      newText: [],
       otherText: [],
-      modalId: ""
+      check: true,
+  
     };
   }
 
@@ -26,22 +25,72 @@ class SelectBox extends React.Component {
     }
   };
 
-  addText = (id = "services") => {
+  addText = (e, id = null) => {
+    let {newText}=this.state;
+
     let check = document.getElementById(`${id}`);
-    let arr = [];
+
+
     if (this.state.text.length > 1) {
       let x = this.state.text;
       x.split(", ").map(val => {
-        arr.push(val);
+        newText.concat(val);
       });
     }
+    let arr = newText;
     if (check.checked) {
       arr.push(check.value);
       this.setState({ text: arr.join(", ") });
     } else {
-      this.setState({ text: arr.filter(x => x !== check.value).join(", ") });
+      arr = arr.filter(x => x !== check.value)
+      this.setState({ 
+        text: arr.join(", "),
+        newText: arr
+       
+    });
     }
   };
+
+  handleList =(input)=>{
+    
+    return input
+  }
+
+  handleOptions = () => {
+    return this.state.arr.map((op, i) => {
+      let opLow = op.toLowerCase();
+
+      if(this.state.arr.length > this.props.options.length && this.props.options.length-1 < i){
+      
+       return <li key={i}>
+          <input
+            type="checkbox"
+            name={opLow}
+            value={op}
+            onChange={(e) => this.addText(e, opLow)}
+            id={opLow}
+            width="50%"
+           defaultChecked={true}
+          />{" "}
+          {op}
+        </li>
+      }
+
+      return (
+        <li key={i}>
+          <input
+            type="checkbox"
+            name={opLow}
+            value={op}
+            onChange={(e) => this.addText(e, opLow)}
+            id={opLow}
+            width="50%"
+          />{" "}
+          {op}
+        </li>
+      );
+    })
+  }
 
   handleOther = (e, id) => {
     let otherText = this.state.otherText;
@@ -65,15 +114,16 @@ class SelectBox extends React.Component {
 
   handleAdditions = (e, id = null) => {
     e.preventDefault();
+    let {newText}=this.state;
     let value = document.getElementById(`${id}`).value;
     if (value.length > 0) {
       let arr = this.state.arr.concat(value);
-      this.setState({ arr });
+      this.setState({ arr, text: newText.concat(value).join(", ") });
       document.getElementById(`${id}`).value = "";
     }
   };
   render() {
-    let { hide, text, otherText } = this.state;
+    let { hide, text } = this.state;
     let { custom, id, placeholder, label } = this.props;
     return (
       <div className="form-style-8">
@@ -90,22 +140,7 @@ class SelectBox extends React.Component {
         />
 
         <ul style={{ listStyle: "none" }} className={hide ? "d-none" : ""}>
-          {this.state.arr.map((op, i) => {
-            let opLow = op.toLowerCase();
-            return (
-              <li key={i}>
-                <input
-                  type="checkbox"
-                  name={opLow}
-                  value={op}
-                  onClick={() => this.addText(opLow)}
-                  id={opLow}
-                  width="50%"
-                />{" "}
-                {op}
-              </li>
-            );
-          })}
+          {this.handleOptions()}
           {custom ? (
             <li>
               <input
