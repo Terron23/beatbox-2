@@ -30,17 +30,18 @@ let days = this.state.days;
   for(let i=0; i< 7; i++){
     timeSlot.push(
    
-      <td className="col-2" key={i}>
+      <div className="col-md-3 col-lg-3" key={i} style={{"border": "#0e2737 solid 1px"}}>
+       
        <TimeDropDown id={`${days[i]}_starttime`} 
        name={`${days[i]}_starttime`} 
-       label="Open" 
+       label={<b style={{"color":"#34CACA"}}>{days[i]} - Start Time </b>} 
        classProp="form-style-8 time_slot" required={true}/>
 
         <TimeDropDown id={`${days[i]}_endtime`}
          name={`${days[i]}_endtime`} 
-         label="Close" 
+         label={<b style={{"color":"#34CACA"}}>{days[i]} - End Time </b>} 
          classProp="form-style-8 time_slot"  required={true}/>
-        </td>
+        </div>
        )
   }
 return timeSlot;
@@ -84,25 +85,11 @@ return timeSlot;
     return (
       <div className="container" >
         <Title header="Hours of Availibility"  />
-   <table className="table table-xl table-responsive table-avail table-bordered">
-    <thead>
-      <tr className="d-flex ">
-        <th className="col-2">Sunday</th>
-        <th className="col-2">Monday</th>
-        <th className="col-2">Tuesday</th>
-        <th className="col-2">Wednesday</th>
-        <th className="col-2">Thursday</th>
-        <th className="col-2">Friday</th>
-        <th className="col-2">Saturday</th>
-      </tr>
-     
-      <tr className="d-flex">
+  <div className="row">
         
       {this.handleDates()}
-      </tr>
-      </thead>
-  </table>
-  <div className="form-group row">
+      </div>
+  <div className="form-group row" style={{"padding":"20px"}}>
                 <button className="btn roberto-btn w-100" onClick={this.handleSubmit}>
                   Save & Continue
                 </button>
