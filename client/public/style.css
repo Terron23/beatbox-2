@@ -2480,7 +2480,16 @@ html .ui-button.ui-state-disabled:active {
   color: #1cc3b2;
 }
 
+.navbar-brand>a:hover{
+  color: #1cc3b2;
+}
 
+.studio-content > h6{
+  color: black;
+}
+.studio-content > h6 > span, .studio-content > h6 > li{
+  color: #9c9fa5;
+}
 
 
 /*# sourceMappingURL=style.css.map */

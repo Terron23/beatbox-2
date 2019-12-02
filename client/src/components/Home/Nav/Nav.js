@@ -10,7 +10,8 @@ class NavBar extends Component {
       newclassNameName: "",
       isActive: "",
       width: "",
-      height: ""
+      height: "",
+      fade: false,
     };
   }
 
@@ -54,9 +55,18 @@ class NavBar extends Component {
     }
   }
 
+handleFade =()=>{
+if(this.state.fade){
+  this.setState({fade:false})
+}
+else{
+  this.setState({fade:true})
+}
+}
+
   render() {
     let { revealSearch } = this.props;
-    let { width } = this.state;
+    let { width, fade } = this.state;
     return (
       <div className={`main-header-area`}>
         <div className="container">
@@ -76,7 +86,9 @@ class NavBar extends Component {
                 <i className="fa fa-search" onClick={revealSearch}></i>
               </Nav.Link>
               <Nav.Link>
-                <Link style={styles.bookStyles} to="/search-studio">
+                <Link onMouseOver={this.handleFade} 
+                onMouseLeave={this.handleFade}
+                style={ !fade ? styles.bookStyles: styles.navFocus} to="/search-studio">
                   Book Now{" "}
                   <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </Link>
@@ -107,7 +119,15 @@ const styles = {
   navPad: {
     height: "auto",
     padding: "20"
+  },
+  navFocus:{
+    backgroundColor: "#2a303b",
+    color: "#ffffff",
+    height: "80px",
+    lineHeight: "80px",
+    padding: "30px"
   }
+  
 };
 
 function mapStateToProps({ auth }) {

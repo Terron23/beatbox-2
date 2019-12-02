@@ -1,11 +1,11 @@
 import React from "react";
-import bg59 from "../img/59.jpg";
 
-const BreadCrumb = ({ studioName, price }) => {
+
+const BreadCrumb = ({ studioName, price, image }) => {
   return (
     <div
       className="breadcrumb-area bg-img bg-overlay jarallax"
-      style={{ backgroundImage: "url(" + bg59 + ")" }}
+      style={{ backgroundImage: "url(" + image + ")" }}
     >
       <div className="container h-100">
         <div className="row h-100 align-items-end">

@@ -24,7 +24,7 @@ const StudioSearchTemplate = ({
       <h4>
         ${price}.00 <span>/ hr</span>
       </h4>
-      <div className="">
+      <div className="studio-content">
         <h6>
           Studio Type: <span>{studioType}</span>
         </h6>

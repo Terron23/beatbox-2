@@ -17,6 +17,7 @@ import Preloader from "./assets/preloader";
 import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
 import Details from "./ListStudio/Details/Details";
+import ViewStudio from './ListStudio/ViewStudio/ViewStudio'
 
 class App extends Component {
   componentDidMount() {
@@ -37,6 +38,10 @@ class App extends Component {
             <Route
               path="/search-studio/:search?/:location?/:startdate?"
               component={StudioSearch}
+            />
+            <Route
+              path="/view-studio/:id"
+              component={ViewStudio}
             />
             <Route path="/single-studio/:id" component={SingleStudio} />
             <Route path="/userprofile" component={Profile} />

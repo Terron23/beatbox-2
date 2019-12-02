@@ -49,7 +49,7 @@ class Details extends Component {
             studioid
           })
           .then(res => {
-            this.props.history.push(`/confirmation`);
+            this.props.history.push(`/view-studio/${studioid}`);
           })
       .catch(err => console.log(err));
   };

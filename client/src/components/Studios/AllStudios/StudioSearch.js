@@ -46,6 +46,7 @@ class StudioSearch extends Component {
     this.setState({
       startDate: date
     });
+    document.getElementById("startDate").focus();
   };
 
   featureType = () => {

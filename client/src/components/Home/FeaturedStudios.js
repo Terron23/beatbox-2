@@ -116,7 +116,7 @@ class FeaturedStudios extends Component {
         <Heading
           title="Featured Studios"
           color="black"
-          subtitle="Top Rated Studios Near You"
+          subtitle="View Our Top Rated Studios"
         />
         <div className="rooms-slides ">
           <OwlCarousel

@@ -11,7 +11,10 @@ const StudioTemplate =({addForm})=>{
  return (
  <form>
    <FormAttr label="Check In Date">
-     <Calendar  selectRange={false} onChange={this.handleChangeStart} selectRange={true} /> 
+     <Calendar  
+     selectRange={false} 
+     onChange={this.handleChangeStart} 
+     selectRange={false} /> 
    </FormAttr>
 
    <FormAttr label>

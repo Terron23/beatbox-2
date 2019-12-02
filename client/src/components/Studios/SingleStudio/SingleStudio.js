@@ -64,7 +64,10 @@ class SingleStudio extends Component {
         {studio.map(studio => {
           if (this.props.match.params.id === studio._id) {
             return (
-              <BreadCrumb studioName={studio.studioName} price={studio.price} />
+              <BreadCrumb studioName={studio.studioName}
+               price={studio.price} 
+               image={studio.studioImage}
+               />
             );
           }
         })}

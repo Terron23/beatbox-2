@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import f_logo from './images/sh_logo.png';
 
 export default class Footer extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Footer extends Component {
               <div className="col-12 col-sm-6 col-lg-3">
                 <div className="single-footer-widget mb-80">
                   <Link to="/" className="footer-logo">
-                    Studio Hunt
+                   <img src={f_logo} width="70%" />
                   </Link>
 
                   <span>studiohunt@outlook.com.com</span>

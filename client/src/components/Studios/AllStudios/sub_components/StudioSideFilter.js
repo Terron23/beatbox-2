@@ -7,16 +7,17 @@ class StudioSideFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false
+      active: false,
+      revealCal: false,
     };
   }
 
-  reveal = e => {
+  handleReveal = e => {
     e.preventDefault();
-    if (this.state.active === false) {
-      this.setState({ active: true });
+    if (this.state.revealCal === false) {
+      this.setState({ revealCal: true });
     } else {
-      this.setState({ active: false });
+      this.setState({ revealCal: false });
     }
   };
 
@@ -33,12 +34,12 @@ class StudioSideFilter extends Component {
       handleChangeStart,
       id
     } = this.props;
-    let { active } = this.state;
+    let { active, revealCal } = this.state;
     return (
       <div className="col-12 col-lg-4">
         <div className="hotel-reservation--area mb-100">
           <form onSubmit={submit}>
-            <FormAttr Kob label="Location">
+            <FormAttr  label="Location">
               <input
                 type="text"
                 defaultValue={location}
@@ -59,7 +60,24 @@ class StudioSideFilter extends Component {
               />
             </FormAttr>
             <FormAttr label="Check In Date">
-          <Calendar selectRange={false} onChange={handleChangeStart} /> 
+            <input
+                type="text"
+               value={startDate.toString().substring(0, 15)}
+                className="input-small form-control"
+                id="startDate"
+                name="startDate"
+                placeholder="All Available Dates"
+                autoComplete="off"
+                onClick={this.handleReveal}
+                
+              
+              />
+              
+          <Calendar selectRange={false} 
+          onChange={handleChangeStart} 
+          className={revealCal ? "" : "d-none"} 
+          /> 
+       
             </FormAttr>
 
             <div className="form-group mb-30">
