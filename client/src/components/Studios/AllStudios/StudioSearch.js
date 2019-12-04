@@ -4,6 +4,8 @@ import { fetchLocation, fetchStudio, fetchStudioType } from "../../../actions";
 import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";
+import StudioMobileFilter from "./sub_components/StudioMobileFilter";
+import ModalMobile from "./sub_components/Modal";
 import "./css/studio.css";
 
 class StudioSearch extends Component {
@@ -32,7 +34,8 @@ class StudioSearch extends Component {
         ? ""
         : new Date(this.props.match.params.startdate || "11/23/2045"),
       applyDate: "",
-      startTime: ""
+      startTime: "",
+      setShow: false
     };
   }
 
@@ -60,6 +63,7 @@ class StudioSearch extends Component {
       "Saturday"
     ];
     let filterArr = [...this.props.studio];
+  
     let search = filterArr
       .filter(studio =>
         this.state.location === ""
@@ -111,11 +115,13 @@ class StudioSearch extends Component {
 
   handleAvailibility = e => {
     e.preventDefault();
+  
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
     // let guest = e.target.guest.value
     let applyDate = this.state.startDate;
     this.setState({ location, studioType, applyDate });
+    this.handleClose()
   };
 
   handleChange = e => {
@@ -148,23 +154,58 @@ class StudioSearch extends Component {
     });
     return [...new Set(group)];
   };
+  handleClose = () => this.setState({setShow:false});
+  handleShow = (e) => {
+    e.preventDefault()
+    this.setState({setShow:true})
+  }
 
   render() {
     if (!this.props.studio || !this.props.locate) {
       return "Loading...";
     }
-    let { location, startDate, studioType } = this.state;
-
+    let { location, startDate, studioType , setShow} = this.state;
+    let {width} = this.props;
     return (
       <section>
-        <div className="header-area">
+       {width > 1000 ? 
+          <div className={`header-area`}>
           <StudioSearchHeader />
-        </div>
-
+          </div> 
+          : 
+          <div>
+            <hr />
+         <center>
+           <button style={{"color":"black"}} 
+          className="btn roberto-btn btn-2" onClick={this.handleShow}>Filter Studios
+          </button>
+          </center> 
+          <ModalMobile id={"filterId"} fullBody={true} show={setShow} 
+          handleShow={this.handleShow}
+          handleClose={this.handleClose}
+          >
+          <StudioMobileFilter
+                location={location}
+                submit={this.handleAvailibility}
+                priceLow={this.handlePrice()[0]}
+                priceHigh={this.handlePrice().pop()}
+                search={studioType}
+                group={this.handleDropDown()}
+                startDate={startDate}
+                handleChangeStart={this.handleChangeStart}
+              
+             
+              />
+            </ModalMobile>
+          </div>
+}
+     
         <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
-              <div className="col-12 col-lg-8">{this.featureType()}</div>
+            
+              <div className="col-12 col-lg-8">
+              {this.featureType()}</div>
 
               <StudioSideFilter
                 location={location}
@@ -175,6 +216,8 @@ class StudioSearch extends Component {
                 group={this.handleDropDown()}
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
+                width={this.props.width}
+                hide={"d-none"}
               />
             </div>
           </div>

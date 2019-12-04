@@ -104,7 +104,7 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
 
 
               <MultiSelect
-              options={['Parking', 'Lounge', 'Wi-Fi', 'Bathroom', 'Food & Beverages', 'Air & Heating']}
+              options={['Parking', 'Lounge', 'Wi-Fi', 'Bathroom', 'Food & Beverages', 'Air & Heating', 'N/A']}
               label={'Amenities'}
               id={'services'}
               placeholder="Parking, Drinks, Wifi"
@@ -112,7 +112,7 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
               />
 
               <MultiSelect
-              options={['Audio Engineer', 'Instructor', 'Assistant', 'Host']}
+              options={['Audio Engineer', 'Instructor', 'Assistant', 'Host', 'N/A']}
               label={'Include In Booking'}
               id={'include'}
               placeholder="Add Any Special Features or Resources Included with your Venue"
@@ -121,8 +121,9 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
             
               <hr />
 
-              <div className="form-group row">
-                <button className="btn roberto-btn w-100" type="submit">
+              <div className="form-group">
+                <button className="btn roberto-btn w-100" 
+                type="submit">
                   Save & Continue
                 </button>
               </div>

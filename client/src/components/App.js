@@ -20,9 +20,27 @@ import Details from "./ListStudio/Details/Details";
 import ViewStudio from './ListStudio/ViewStudio/ViewStudio'
 
 class App extends Component {
+  constructor(props){
+super(props);
+this.state = {
+  width: "",
+};
+  }
+
   componentDidMount() {
     this.props.fetchUser();
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+ 
+  };
 
   render() {
     return (
@@ -37,7 +55,7 @@ class App extends Component {
             <Route path="/post-studio" component={ListStudio} />
             <Route
               path="/search-studio/:search?/:location?/:startdate?"
-              component={StudioSearch}
+              component={(props) => <StudioSearch {...props} width={this.state.width} />}
             />
             <Route
               path="/view-studio/:id"

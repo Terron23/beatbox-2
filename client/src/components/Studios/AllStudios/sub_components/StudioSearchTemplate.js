@@ -12,8 +12,7 @@ const StudioSearchTemplate = ({
   availibility
 }) => (
   <div
-    className="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
-    data-wow-delay="100ms"
+    className="single-room-area d-flex align-items-center mb-50"
   >
     <div className="room-thumbnail">
       <img src={studioImage} alt={studioName} />

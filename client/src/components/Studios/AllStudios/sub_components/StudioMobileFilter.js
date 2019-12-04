@@ -3,7 +3,7 @@ import SearchCriteria from "./SearchCriteria";
 import FormAttr from "./FormAttr";
 import Calendar from 'react-calendar';
 
-class StudioSideFilter extends Component {
+class StudioMobileFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,8 +38,8 @@ class StudioSideFilter extends Component {
     } = this.props;
     let { active, revealCal } = this.state;
     return (
-      <div className={`col-12 col-lg-4`}>
-        <div className={`hotel-reservation--area mb-100 ${hide && width < 1000 ? hide : ""}`}>
+      <div className={`col-lg-12 col-md-12 col-sm-12`}>
+        <div className={`${hide && width < 1000 ? hide : ""}`}>
           <form onSubmit={submit}>
             <FormAttr  label="Location">
               <input
@@ -97,4 +97,4 @@ class StudioSideFilter extends Component {
   }
 }
 
-export default StudioSideFilter;
+export default StudioMobileFilter;
