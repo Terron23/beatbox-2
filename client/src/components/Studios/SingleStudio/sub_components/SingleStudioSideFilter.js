@@ -7,21 +7,20 @@ import { Link } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const StudioTemplate =({addForm})=>{
+const StudioTemplate =({handleChangeStart})=>{
  return (
  <form>
    <FormAttr label="Check In Date">
      <Calendar  
      selectRange={false} 
-     onChange={this.handleChangeStart} 
-     selectRange={false} /> 
+     onChange={handleChangeStart} 
+    /> 
    </FormAttr>
 
    <FormAttr label>
      <TimeDropDown col="6" label="Time In" name="timeIn" id='timein' />
 
      <TimeDropDown col="6" label="Time Out" name="timeOut" id='timein' />
-     <span style={{"color":"#34CACA"}} onClick={addForm}>+Add More Time</span>
    </FormAttr>
  </form>)
 }
@@ -39,7 +38,7 @@ class SingleStudioSideFilter extends Component {
   }
 
   handleChangeStart = date => {
-    console.log(date)
+    alert(date)
     this.setState({
       startDate: date
     });
@@ -53,7 +52,7 @@ class SingleStudioSideFilter extends Component {
 
   showStudioForm=()=>{
  return this.state.studioForm.concat(
- <StudioTemplate addForm={this.addForm} />).map(s=>s);
+ <StudioTemplate addForm={this.addForm} handleChangeStart={this.handleChangeStart} />).map(s=>s);
   }
 
   addForm =()=>{
@@ -68,7 +67,7 @@ class SingleStudioSideFilter extends Component {
       <div className="col-12 col-lg-4">
         <div className="hotel-reservation--area mb-100">
        {this.showStudioForm()}
-              <Link to={`/payment/${id}`} className="btn roberto-btn w-100">
+              <Link to={`/payment/${id}?startDate=${startDate.toString().substring(0,15)}`} className="btn roberto-btn w-100">
                 Book 
               </Link>
               </div>

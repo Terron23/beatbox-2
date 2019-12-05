@@ -34,13 +34,15 @@ class StudioMobileFilter extends Component {
       handleChangeStart,
       id,
       hide,
+      reveal,
       width
     } = this.props;
     let { active, revealCal } = this.state;
     return (
       <div className={`col-lg-12 col-md-12 col-sm-12`}>
-        <div className={`${hide && width < 1000 ? hide : ""}`}>
+        <div className={`${!reveal ? "d-none" : ""}`}>
           <form onSubmit={submit}>
+
             <FormAttr  label="Location">
               <input
                 type="text"

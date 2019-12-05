@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudio } from "../../../actions";
+import { fetchStudio, fetchUser } from "../../../actions";
 import { Link } from "react-router-dom";
 import Title from "../../assets/Title";
 import Wrapper from "./sub_components/Wrapper";
@@ -25,11 +25,12 @@ const Studios = ({
   description,
   services,
   includes,
+  auth
 }) => {
   return (
     <Wrapper>
       <div className="row">
-        <div className="col-12 col-lg-8">
+        <div className="col-lg-8 col-md-12 col-sm-8">
           <Carousel img={image} thumbnails={thumbnails}/>
           <Features capacity={capacity} 
           description={description}
@@ -37,8 +38,8 @@ const Studios = ({
           services={services}
           includes={includes}
            />
-          <Ameneties services={services}/>
-          <Reviews />
+          <Ameneties services={services} contact={auth}/>
+          {/* <Reviews /> */}
         </div>
         <SingleStudioSideFilter id={id} />
       </div>
@@ -49,15 +50,16 @@ const Studios = ({
 class SingleStudio extends Component {
   componentDidMount() {
     this.props.fetchStudio();
+    this.props.fetchUser()
   }
 
   render() {
-    if (!this.props.studio) {
+    if (!this.props.studio || !this.props.auth) {
       return "";
     }
     //Needs to be refactored
     //Pulling in all data
-    const { studio } = this.props;
+    const { studio , auth} = this.props;
     
     return (
       <div>
@@ -91,6 +93,7 @@ class SingleStudio extends Component {
                     description={studio.description}
                     services={studio.services}
                     includes={studio.includes}
+                    auth ={auth.name + " "+ auth.email}
                   />
                 );
               } else {
@@ -105,8 +108,8 @@ class SingleStudio extends Component {
   }
 }
 
-function mapStateToProps({ studio }) {
-  return { studio };
+function mapStateToProps({ studio, auth }) {
+  return { studio , auth};
 }
 
-export default connect(mapStateToProps, { fetchStudio })(SingleStudio);
+export default connect(mapStateToProps, { fetchStudio, fetchUser })(SingleStudio);

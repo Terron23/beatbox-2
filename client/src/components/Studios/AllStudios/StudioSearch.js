@@ -157,7 +157,13 @@ class StudioSearch extends Component {
   handleClose = () => this.setState({setShow:false});
   handleShow = (e) => {
     e.preventDefault()
-    this.setState({setShow:true})
+    if(!this.state.setShow){
+      this.setState({setShow:true})
+    }
+    else{
+      this.setState({setShow:false})
+    }
+  
   }
 
   render() {
@@ -173,17 +179,14 @@ class StudioSearch extends Component {
           <StudioSearchHeader />
           </div> 
           : 
-          <div>
+          <div className="mobile-filter">
             <hr />
          <center>
            <button style={{"color":"black"}} 
-          className="btn roberto-btn btn-2" onClick={this.handleShow}>Filter Studios
+          className="btn roberto-btn btn-2" onClick={this.handleShow}> Filter Studios
           </button>
           </center> 
-          <ModalMobile id={"filterId"} fullBody={true} show={setShow} 
-          handleShow={this.handleShow}
-          handleClose={this.handleClose}
-          >
+         
           <StudioMobileFilter
                 location={location}
                 submit={this.handleAvailibility}
@@ -193,10 +196,10 @@ class StudioSearch extends Component {
                 group={this.handleDropDown()}
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
-              
+                reveal={setShow}
              
               />
-            </ModalMobile>
+          
           </div>
 }
      

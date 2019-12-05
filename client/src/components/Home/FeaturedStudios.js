@@ -21,59 +21,27 @@ const SingleFeaturedStudio = ({
   equipment
 }) => {
   return (
-    <div className="single-room-slide d-flex align-items-center">
-      <div
-        className="room-thumbnail h-100 bg-img"
-        style={{ backgroundImage: `url(${bg}` }}
-      ></div>
-      <div className="room-content">
-        <h2 data-animation="fadeInUp" data-delay="100ms">
-          {studioName}
-        </h2>
-        <small>{studiotype}</small>
-        <h3 data-animation="fadeInUp" data-delay="300ms">
-          ${price}
-          <span>/ hr</span>
-        </h3>
-        <ul
-          className="room-feature"
-          data-animation="fadeInUp"
-          data-delay="500ms"
-        >
-           <li>
-            <span>
-              <i className="fa fa-check"></i> Studio Type
-            </span>{" "}
-            <span>: {studiotype}</span>
-          </li>
-         
-          <li>
-            <span>
-              <i className="fa fa-check"></i> Amenities
-            </span>{" "}
-            <span>: {amenities}</span>
-          </li>
-          <li>
-            <span>
-              <i className="fa fa-check"></i> Equipment
-            </span>{" "}
-            <span>: {equipment}</span>
-          </li>
-          <li>
-            <span>
-              <i className="fa fa-check"></i> Rating
-            </span>{" "}
-            <span>: {rating}</span>
-          </li>
-        </ul>
-        <Link
+    <div className="col-md-4 cell">
+    <a class="rig-cell" >
+        <img class="rig-img" src={bg} />
+        <span class="rig-overlay"></span>
+        <span class="rig-text">
+      
+            <p>{studioName}</p>
+            <p>{studiotype}</p>
+            <p>{price}</p>
+          <p><Link 
           to={`/single-studio/${id}`}
           className="btn roberto-btn mt-30"
         >
           View Details
-        </Link>
-      </div>
-    </div>
+        </Link></p>
+       
+        </span>
+    </a>
+</div>
+        
+     
   );
 };
 
@@ -84,7 +52,7 @@ class FeaturedStudios extends Component {
         return s2["price"] - s1["price"];
       })
       .filter((curr, i, arr) => {
-        return i <= 2;
+        return i <= 5;
       })
       .map(s => {
         return (
@@ -112,37 +80,17 @@ class FeaturedStudios extends Component {
     }
 
     return (
-      <section className="roberto-rooms-area">
+      <section className="">
         <Heading
           title="Featured Studios"
           color="black"
           subtitle="View Our Top Rated Studios"
         />
-        <div className="rooms-slides ">
-          <OwlCarousel
-            ref="img"
-            items="1"
-            className="owl-theme"
-            loop
-            margin={10}
-            nav={false}
-            dots={false}
-            dotsContainer={false}
-          >
+     
+     <div id="rig" className="row">
+          
             {this.showStudio()}
-          </OwlCarousel>
-          <div className="owl-nav">
-            {" "}
-            <div className="owl-prev" onClick={() => this.refs.img.prev()}>
-              {" "}
-              <i className="fa fa-long-arrow-left" aria-hidden="true"></i>{" "}
-              Previous
-            </div>
-            <div className="owl-next" onClick={() => this.refs.img.next()}>
-              Next <i className="fa fa-long-arrow-right" aria-hidden="true"></i>{" "}
-            </div>
-          </div>
-        </div>
+         </div>
       </section>
     );
   }
