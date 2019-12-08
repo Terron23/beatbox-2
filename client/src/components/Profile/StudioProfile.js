@@ -76,11 +76,6 @@ const StudioProfile = ({
           <div className="form-group d-none">
             <label className="control-label">Availibility</label>
             <br />
-            {/* {this.state.dates.map(dates =>{
-        return dates
-    })}
-    
-    <a href="" onClick={this.handleDates}>Add Hours of Operation</a> */}
             <input
               name="hoursOfOperation"
               value="none"

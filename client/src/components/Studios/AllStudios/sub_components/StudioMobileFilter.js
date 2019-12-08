@@ -1,100 +1,47 @@
 import React, { Component } from "react";
-import SearchCriteria from "./SearchCriteria";
-import FormAttr from "./FormAttr";
-import Calendar from 'react-calendar';
+ import { Modal , Button} from "react-bootstrap";
+import "react-datepicker/dist/react-datepicker.css";
+
+
+
 
 class StudioMobileFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
-      revealCal: false,
+      setShow: false,
     };
   }
 
-  handleReveal = e => {
-    e.preventDefault();
-    if (this.state.revealCal === false) {
-      this.setState({ revealCal: true });
-    } else {
-      this.setState({ revealCal: false });
-    }
-  };
+handleClose = () => {
+    this.setState({setShow:false});
+}
+handleShow = () => {
+    this.setState({setShow:true});
+};
+
+
 
   render() {
-    let {
-      children,
-      submit,
-      priceLow,
-      priceHigh,
-      location,
-      search,
-      group,
-      startDate,
-      handleChangeStart,
-      id,
-      hide,
-      reveal,
-      width
-    } = this.props;
-    let { active, revealCal } = this.state;
+    let { id , children, studioName, price} = this.props;
+    let { startDate, setShow } = this.state;
     return (
-      <div className={`col-lg-12 col-md-12 col-sm-12`}>
-        <div className={`${!reveal ? "d-none" : ""}`}>
-          <form onSubmit={submit}>
-
-            <FormAttr  label="Location">
-              <input
-                type="text"
-                defaultValue={location}
-                className="input-small form-control"
-                id="location"
-                name="location"
-                placeholder="City or Zip"
-                autoComplete="off"
-              />
-            </FormAttr>
-
-            <FormAttr>
-              <SearchCriteria
-                title="Studio Type"
-                search={search}
-                name="studioType"
-                col="12"
-              />
-            </FormAttr>
-            <FormAttr label="Check In Date">
-            <input
-                type="text"
-               value={startDate.toString().substring(0, 15)}
-                className="input-small form-control"
-                id="startDate"
-                name="startDate"
-                placeholder="All Available Dates"
-                autoComplete="off"
-                onClick={this.handleReveal}
-                
-              
-              />
-              
-          <Calendar selectRange={false} 
-          onChange={handleChangeStart} 
-          className={revealCal ? "" : "d-none"} 
-          /> 
-       
-            </FormAttr>
-
-            <div className="form-group mb-30">
-              <div className="row no-gutters"></div>
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn roberto-btn w-100">
-                Search
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+     <center> <div className="col-4" >
+       <Modal show={setShow} onHide={this.handleClose} 
+       dialogClassName="modal-full modal-content"
+      bsClass="my-modal">
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <Modal.Body>{children}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      <a className="btn roberto-btn" onClick={this.handleShow}>Search</a>
+     
+      </div></center>
     );
   }
 }

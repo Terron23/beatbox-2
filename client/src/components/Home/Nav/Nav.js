@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Nav, Navbar, NavDropdown, Form, FormControl } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 
 class NavBar extends Component {
   constructor(props) {

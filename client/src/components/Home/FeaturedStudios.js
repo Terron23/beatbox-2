@@ -18,9 +18,13 @@ const SingleFeaturedStudio = ({
   equipment
 }) => {
   return (
-    <div className="col-md-4 feature-images image-thumbnail">
-      <Link to={`/single-studio/${id}`}><img src={`${bg}`} /></Link>
-      <div class="row feature-text text-muted">
+    <div className="col-md-4 feature-images">
+      <Link to={`/single-studio/${id}`}><img src={`${bg}`} className="img img-fluid img-thumbnail image" />
+      <div className="middle">
+      <div className="text"><button className="btn btn-primary roberto-btn">View Details</button></div>
+       </div>
+       </Link>
+      <div className="row feature-text text-muted">
       <div className="col-md-8"> <span className="feature-name">{studioName}</span></div>
       <div className="col-md-4 feature-price">{price}.00/hr</div>
       <div className="col-md-8 "> {studiotype}</div>

@@ -180,14 +180,9 @@ class StudioSearch extends Component {
           </div> 
           : 
           <div className="mobile-filter">
-            <hr />
-         <center>
-           <button style={{"color":"black"}} 
-          className="btn roberto-btn btn-2" onClick={this.handleShow}> Filter Studios
-          </button>
-          </center> 
-         
-          <StudioMobileFilter
+         <hr />
+          <StudioMobileFilter>
+          <StudioSideFilter
                 location={location}
                 submit={this.handleAvailibility}
                 priceLow={this.handlePrice()[0]}
@@ -196,8 +191,10 @@ class StudioSearch extends Component {
                 group={this.handleDropDown()}
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
-                reveal={setShow}
+                width={this.props.width}
+               
               />
+          </StudioMobileFilter>
           
           </div>
 }
