@@ -197,7 +197,6 @@ class StudioSearch extends Component {
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
                 reveal={setShow}
-             
               />
           
           </div>

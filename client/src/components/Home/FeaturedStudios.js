@@ -27,15 +27,15 @@ const SingleFeaturedStudio = ({
         <span class="rig-overlay"></span>
         <span class="rig-text">
       
-            <p>{studioName}</p>
-            <p>{studiotype}</p>
-            <p>{price}</p>
-          <p><Link 
+           Studio Nam: {studioName}
+            Studio Type: {studiotype}
+            Price: {price}
+          <Link 
           to={`/single-studio/${id}`}
           className="btn roberto-btn mt-30"
         >
           View Details
-        </Link></p>
+        </Link>
        
         </span>
     </a>

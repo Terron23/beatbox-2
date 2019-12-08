@@ -10,6 +10,7 @@ import Ameneties from "./sub_components/Ameneties";
 import Reviews from "./sub_components/Reviews";
 import BreadCrumb from "./sub_components/BreadCrumb";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
+import MobileBook from "./sub_components/SingleStudioMobileFilter"
 
 const Studios = ({
   studioName,
@@ -25,13 +26,14 @@ const Studios = ({
   description,
   services,
   includes,
-  auth
+  auth,
+  width
 }) => {
   return (
     <Wrapper>
       <div className="row">
         <div className="col-lg-8 col-md-12 col-sm-8">
-          <Carousel img={image} thumbnails={thumbnails}/>
+          <Carousel img={image} thumbnails={thumbnails} width={width}/>
           <Features capacity={capacity} 
           description={description}
            equipment={equipment} 
@@ -41,7 +43,9 @@ const Studios = ({
           <Ameneties services={services} contact={auth}/>
           {/* <Reviews /> */}
         </div>
+        {width < 1000 ?<MobileBook id={id}/>:
         <SingleStudioSideFilter id={id} />
+        }
       </div>
     </Wrapper>
   );
@@ -57,9 +61,8 @@ class SingleStudio extends Component {
     if (!this.props.studio || !this.props.auth) {
       return "";
     }
-    //Needs to be refactored
-    //Pulling in all data
-    const { studio , auth} = this.props;
+
+    const { studio , auth, width} = this.props;
     
     return (
       <div>
@@ -93,7 +96,8 @@ class SingleStudio extends Component {
                     description={studio.description}
                     services={studio.services}
                     includes={studio.includes}
-                    auth ={auth.name + " "+ auth.email}
+                    auth ={auth.name + " "+ auth.email3}
+                    width={width}
                   />
                 );
               } else {

@@ -18,6 +18,7 @@ import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
 import Details from "./ListStudio/Details/Details";
 import ViewStudio from './ListStudio/ViewStudio/ViewStudio'
+import ScrollTop from './assets/ScrollTop'
 
 class App extends Component {
   constructor(props){
@@ -46,9 +47,9 @@ this.state = {
     return (
       <div>
         <Preloader />
-
+      
         <BrowserRouter>
-          <div>
+        <ScrollTop>
             <Header />
             <Route exact path="/" component={Home} />
             <Route path="/sign-up" component={SignUp} />
@@ -61,7 +62,9 @@ this.state = {
               path="/view-studio/:id"
               component={ViewStudio}
             />
-            <Route path="/single-studio/:id" component={SingleStudio} />
+            <Route path="/single-studio/:id" 
+            component={(props) => <SingleStudio {...props} width={this.state.width} />}
+            />
             <Route path="/userprofile" component={Profile} />
             <Route path="/payment/:studioid" component={Payment} />
             <Route
@@ -73,7 +76,8 @@ this.state = {
             <Route path="/post-studio/:studioname/:id" component={ListStudio} />
             <Route path="/confirmation" component={Confirmation} />
             <Footer />
-          </div>
+       
+          </ScrollTop>
         </BrowserRouter>
       </div>
     );

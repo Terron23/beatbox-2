@@ -1103,6 +1103,21 @@ input:focus {
     border-radius: 3px;
     box-shadow: 0 15px 9px 0 rgba(0, 0, 0, 0.08);
     margin-bottom: 40px; }
+
+    .search-img{
+      width: 350px;
+      height: 350px;
+    }
+    .image-gallery-image > img{
+      width: 650px;
+      height: 650px;
+    }
+
+    .image-gallery-thumbnail-inner img{
+      width: 92px;
+      height: 92px;
+    }
+
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
       .single-testimonial-area .testimonial-content {
         padding: 30px; } }
@@ -2546,6 +2561,7 @@ html .ui-button.ui-state-disabled:active {
   margin: auto;
   background: #0e2737 no-repeat center 20%;
   background-size:50px 50px;
+  width:inherit;
   opacity:0;
   filter:alpha(opacity=0);/*For IE6 - IE8*/
   transition:all 0.6s;
@@ -2561,7 +2577,7 @@ html .ui-button.ui-state-disabled:active {
   box-sizing:border-box;
   position:absolute;
   left:0;
-  width:inherit;
+  width:100%;
   text-align:center;
   text-transform:capitalize;
   font-size:18px;
