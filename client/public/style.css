@@ -1888,6 +1888,7 @@ html .ui-button.ui-state-disabled:active {
     @media only screen and (max-width: 767px) {
       .google-maps-contact-content .single-contact-info h4 {
         font-size: 14px; } }
+      
     .google-maps-contact-content .single-contact-info i {
       display: inline-block;
       font-size: 30px;
@@ -2513,19 +2514,9 @@ html .ui-button.ui-state-disabled:active {
   max-width:80%;
   margin:0 auto; /*center aligned*/
   padding:0;
-  font-size:0; /* Remember to change it back to normal font size if have captions */
-  list-style:none;
-  background-color:white;
+
 }
-#rig .cell {
-  display: inline-block;
-  *display:inline;/*for IE6 - IE7*/
-  width:100%;
-  vertical-align:middle;
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+
       
 /* The wrapper for each item */
 .rig-cell {
@@ -2566,8 +2557,8 @@ html .ui-button.ui-state-disabled:active {
   filter:alpha(opacity=0);/*For IE6 - IE8*/
   transition:all 0.6s;
 }
-#rig .cell:hover .rig-overlay {
-  opacity:0.8;
+#rig .cell .rig-overlay {
+  opacity:0.6;
 }
 
 /* If have captions */
@@ -2597,10 +2588,34 @@ html .ui-button.ui-state-disabled:active {
   padding: 0;
 }
 
+#rig .cell .rig-text {
+  opacity:0.9;
+}
+
 #rig .cell:hover .rig-text {
   transform:translateY(0px);
   opacity:0.9;
 }
+
+.feature-images {
+  padding:10px;
+}
+
+.feature-images img{
+  height: 320px;
+  width:650px;
+}
+
+
+.feature-name{
+  font-weight: bold;
+  font-size:18px
+  }
+
+  .feature-price{
+    color: #1cc3b2;
+  }
+
 
 @media (max-width: 9000px) {
   #rig li {
@@ -2618,4 +2633,19 @@ html .ui-button.ui-state-disabled:active {
   #rig li {
       width:50%;
   }
+}
+.modal-full {
+  min-width: 100%;
+  margin: 0;
+}
+
+.modal-full .modal-content {
+  min-height: 100vh;
+}
+
+.mobile-form-pop-up{
+  color:white;
+}
+.mobile-form-pop-up .pop-up-text{
+  font-size: 20px;
 }

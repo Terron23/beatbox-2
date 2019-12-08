@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudio } from "../.././actions";
 import Heading from "./sub_components/heading";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
 
 
@@ -21,25 +18,16 @@ const SingleFeaturedStudio = ({
   equipment
 }) => {
   return (
-    <div className="col-md-4 cell">
-    <a class="rig-cell" >
-        <img class="rig-img" src={bg} />
-        <span class="rig-overlay"></span>
-        <span class="rig-text">
-      
-           Studio Nam: {studioName}
-            Studio Type: {studiotype}
-            Price: {price}
-          <Link 
-          to={`/single-studio/${id}`}
-          className="btn roberto-btn mt-30"
-        >
-          View Details
-        </Link>
-       
-        </span>
-    </a>
-</div>
+    <div className="col-md-4 feature-images image-thumbnail">
+      <Link to={`/single-studio/${id}`}><img src={`${bg}`} /></Link>
+      <div class="row feature-text text-muted">
+      <div className="col-md-8"> <span className="feature-name">{studioName}</span></div>
+      <div className="col-md-4 feature-price">{price}.00/hr</div>
+      <div className="col-md-8 "> {studiotype}</div>
+      <div className="col-md-4">{venue}</div>
+      </div>
+    
+      </div>
         
      
   );
@@ -75,9 +63,6 @@ class FeaturedStudios extends Component {
   };
 
   render() {
-    if (!this.props.studio) {
-      window.location.reload();
-    }
 
     return (
       <section className="">
@@ -87,7 +72,7 @@ class FeaturedStudios extends Component {
           subtitle="View Our Top Rated Studios"
         />
      
-     <div id="rig" className="row">
+     <div  className="row" id="rig">
           
             {this.showStudio()}
          </div>

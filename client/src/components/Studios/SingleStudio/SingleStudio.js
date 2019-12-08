@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudio, fetchUser } from "../../../actions";
-import { Link } from "react-router-dom";
-import Title from "../../assets/Title";
 import Wrapper from "./sub_components/Wrapper";
 import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
@@ -43,7 +41,7 @@ const Studios = ({
           <Ameneties services={services} contact={auth}/>
           {/* <Reviews /> */}
         </div>
-        {width < 1000 ?<MobileBook id={id}/>:
+        {width < 1000 ? <MobileBook price={price} studioName={studioName}> <SingleStudioSideFilter id={id} /></MobileBook>:
         <SingleStudioSideFilter id={id} />
         }
       </div>
