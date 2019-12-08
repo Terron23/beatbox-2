@@ -29,7 +29,7 @@ class Home extends Component {
       return "";
     }
 
-    let { locate, history } = this.props;
+    let { locate, history, width } = this.props;
     return (
       <div>
         <Hero />
@@ -41,7 +41,7 @@ class Home extends Component {
         <About />
         <FeaturedStudios />
        
-        <StudioType />
+        <StudioType width={width}/>
         <PostStudio />
      
       </div>

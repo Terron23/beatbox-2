@@ -9,6 +9,7 @@ import Reviews from "./sub_components/Reviews";
 import BreadCrumb from "./sub_components/BreadCrumb";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
 import MobileBook from "./sub_components/SingleStudioMobileFilter"
+import './css/single.css'
 
 const Studios = ({
   studioName,
@@ -61,7 +62,7 @@ class SingleStudio extends Component {
     }
 
     const { studio , auth, width} = this.props;
-    
+    console.log("Studio", studio)
     return (
       <div>
         {studio.map(studio => {
@@ -70,6 +71,7 @@ class SingleStudio extends Component {
               <BreadCrumb studioName={studio.studioName}
                price={studio.price} 
                image={studio.studioImage}
+               studiotype={studio.studioType}
                />
             );
           }

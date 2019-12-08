@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchStudio } from "../.././actions";
 import Heading from "./sub_components/heading";
 import { Link } from "react-router-dom";
+import './css/feature.css'
 
 
 const SingleFeaturedStudio = ({
@@ -19,7 +20,7 @@ const SingleFeaturedStudio = ({
 }) => {
   return (
     <div className="col-md-4 feature-images">
-      <Link to={`/single-studio/${id}`}><img src={`${bg}`} className="img img-fluid img-thumbnail image" />
+      <Link to={`/single-studio/${id}`}><img src={`${bg}`} className="img img-thumbnail image feat-img" />
       <div className="middle">
       <div className="text"><button className="btn btn-primary roberto-btn">View Details</button></div>
        </div>
@@ -75,10 +76,11 @@ class FeaturedStudios extends Component {
           color="black"
           subtitle="View Our Top Rated Studios"
         />
-     
-     <div  className="row" id="rig">
+     <div className="container">
+     <div className="row" id="feature-section">
           
             {this.showStudio()}
+         </div>
          </div>
       </section>
     );

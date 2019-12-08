@@ -51,7 +51,11 @@ this.state = {
         <BrowserRouter>
         <ScrollTop>
             <Header />
-            <Route exact path="/" component={Home} />
+         
+            <Route
+              exact path="/"
+              component={(props) => <Home {...props} width={this.state.width} />}
+            />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/post-studio" component={ListStudio} />
             <Route
