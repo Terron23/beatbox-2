@@ -49,7 +49,7 @@ this.state = {
         <Preloader />
       
         <BrowserRouter>
-        <div>
+        <ScrollTop>
             <Header />
          
             <Route
@@ -81,7 +81,7 @@ this.state = {
             <Route path="/confirmation" component={Confirmation} />
             <Footer />
        
-          </div>
+            </ScrollTop>
         </BrowserRouter>
       </div>
     );
