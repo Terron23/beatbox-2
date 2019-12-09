@@ -121,7 +121,7 @@ class StudioSearch extends Component {
     // let guest = e.target.guest.value
     let applyDate = this.state.startDate;
     this.setState({ location, studioType, applyDate });
-    this.handleClose()
+    this.handleClose(e)
   };
 
   handleChange = e => {
@@ -154,7 +154,10 @@ class StudioSearch extends Component {
     });
     return [...new Set(group)];
   };
-  handleClose = () => this.setState({setShow:false});
+  handleClose = (e) => {
+    e.preventDefault()
+    this.setState({setShow:false});
+  }
   handleShow = (e) => {
     e.preventDefault()
     if(!this.state.setShow){
@@ -181,7 +184,7 @@ class StudioSearch extends Component {
           : 
           <div className="mobile-filter">
          <hr />
-          <StudioMobileFilter>
+          <StudioMobileFilter handleShow={this.handleShow} handleClose={this.handleClose} setShow={setShow}>
           <StudioSideFilter
                 location={location}
                 submit={this.handleAvailibility}

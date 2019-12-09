@@ -6,40 +6,29 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 class StudioMobileFilter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      setShow: false,
-    };
-  }
-
-handleClose = () => {
-    this.setState({setShow:false});
-}
-handleShow = () => {
-    this.setState({setShow:true});
-};
-
+  
 
 
   render() {
-    let { id , children, studioName, price} = this.props;
-    let { startDate, setShow } = this.state;
+    let { id , children, studioName, price, handleClose, handleShow, setShow} = this.props;
     return (
      <center> <div className="col-4" >
-       <Modal show={setShow} onHide={this.handleClose} 
+       <Modal show={setShow} onHide={handleClose} 
        dialogClassName="modal-full modal-content"
       bsClass="my-modal">
-          <Modal.Header closeButton>
+          <Modal.Header>
+          <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
           </Modal.Header>
           <Modal.Body>{children}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
           </Modal.Footer>
         </Modal>
-      <a className="btn roberto-btn" onClick={this.handleShow}>Search</a>
+      <a className="btn roberto-btn" onClick={handleShow}>Search</a>
      
       </div></center>
     );
