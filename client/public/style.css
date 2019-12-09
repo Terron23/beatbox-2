@@ -116,8 +116,14 @@ ul {
 .bg-img {
   background-position: center center !important;
   background-size: cover !important;
-  background-repeat: no-repeat !important; }
-
+  background-repeat: no-repeat !important; 
+  background-attachment: fixed !important;
+}
+.bg-image-no-fix{
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important; 
+}
 .jarallax {
   position: relative;
   z-index: 0; }

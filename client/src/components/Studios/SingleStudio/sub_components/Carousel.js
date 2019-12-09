@@ -35,7 +35,7 @@ componentDidMount(){
         showThumbnails={width < 1000 ? false : true}
         showFullscreenButton={false}
         showFullscreenButton={false}
-        sizes=""
+        showNav={width < 1000 ? true : false}
         />
 
       );

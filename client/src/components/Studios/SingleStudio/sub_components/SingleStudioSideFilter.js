@@ -50,13 +50,18 @@ class SingleStudioSideFilter extends Component {
     });
   };
 
+  handleSubmit =(e)=>{
+    e.preventDefault();
+    alert("test")
+  }
+
   showStudioForm=()=>{
  return this.state.studioForm.concat(
  <StudioTemplate addForm={this.addForm} handleChangeStart={this.handleChangeStart} />).map(s=>s);
   }
 
   addForm =()=>{
-    let form =  <StudioTemplate addForm={this.addForm} />
+    let form =  <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit}/>
     this.setState({studioForm:this.state.studioForm.concat(form)})
   }
 

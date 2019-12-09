@@ -8,8 +8,8 @@ import Ameneties from "./sub_components/Ameneties";
 import Reviews from "./sub_components/Reviews";
 import BreadCrumb from "./sub_components/BreadCrumb";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
-import MobileBook from "./sub_components/SingleStudioMobileFilter"
-import './css/single.css'
+import MobileBook from "./sub_components/SingleStudioMobileFilter";
+import "./css/single.css";
 
 const Studios = ({
   studioName,
@@ -26,53 +26,80 @@ const Studios = ({
   services,
   includes,
   auth,
-  width
+  width,
+  handleClose,
+  handleShow,
+  setShow
 }) => {
   return (
     <Wrapper>
       <div className="row">
         <div className="col-lg-8 col-md-12 col-sm-8">
-          <Carousel img={image} thumbnails={thumbnails} width={width}/>
-          <Features capacity={capacity} 
-          description={description}
-           equipment={equipment} 
-          services={services}
-          includes={includes}
-           />
-          <Ameneties services={services} contact={auth}/>
+          <Carousel img={image} thumbnails={thumbnails} width={width} />
+          <Features
+            capacity={capacity}
+            description={description}
+            equipment={equipment}
+            services={services}
+            includes={includes}
+          />
+          <Ameneties services={services} contact={auth} />
           {/* <Reviews /> */}
         </div>
-        {width < 1000 ? <MobileBook price={price} studioName={studioName}> <SingleStudioSideFilter id={id} /></MobileBook>:
-        <SingleStudioSideFilter id={id} />
-        }
+        {width < 1000 ? (
+          <MobileBook price={price} studioName={studioName} 
+          setShow={setShow} 
+          handleClose={handleClose}
+          handleShow={handleShow}
+          >
+            <SingleStudioSideFilter id={id} handleClose={handleClose}/>
+          </MobileBook>
+        ) : (
+          <SingleStudioSideFilter id={id} handleClose={handleClose}/>
+        )}
       </div>
     </Wrapper>
   );
 };
 
 class SingleStudio extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      setShow: false,
+    }
+  }
   componentDidMount() {
     this.props.fetchStudio();
-    this.props.fetchUser()
+    this.props.fetchUser();
   }
 
+  handleClose = (e) => {
+ e.preventDefault()
+    this.setState({setShow:false});
+}
+handleShow = (e) => {
+  e.preventDefault();
+    this.setState({setShow:true});
+};
   render() {
     if (!this.props.studio || !this.props.auth) {
       return "";
     }
 
-    const { studio , auth, width} = this.props;
-    console.log("Studio", studio)
+    const { studio, auth, width } = this.props;
+    const {setShow} = this.state
     return (
       <div>
         {studio.map(studio => {
           if (this.props.match.params.id === studio._id) {
             return (
-              <BreadCrumb studioName={studio.studioName}
-               price={studio.price} 
-               image={studio.studioImage}
-               studiotype={studio.studioType}
-               />
+              <BreadCrumb
+                studioName={studio.studioName}
+                price={studio.price}
+                image={studio.studioImage}
+                studiotype={studio.studioType}
+              />
             );
           }
         })}
@@ -96,15 +123,17 @@ class SingleStudio extends Component {
                     description={studio.description}
                     services={studio.services}
                     includes={studio.includes}
-                    auth ={auth.name + " "+ auth.email3}
+                    auth={auth.name + " " + auth.email3}
                     width={width}
+                    setShow={setShow}
+                    handleClose={this.handleClose}
+                    handleShow={this.handleShow}
                   />
                 );
               } else {
                 return "";
               }
             })}
-            
           </div>
         </div>
       </div>
@@ -113,7 +142,9 @@ class SingleStudio extends Component {
 }
 
 function mapStateToProps({ studio, auth }) {
-  return { studio , auth};
+  return { studio, auth };
 }
 
-export default connect(mapStateToProps, { fetchStudio, fetchUser })(SingleStudio);
+export default connect(mapStateToProps, { fetchStudio, fetchUser })(
+  SingleStudio
+);

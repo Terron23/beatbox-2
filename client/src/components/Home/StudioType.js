@@ -19,7 +19,7 @@ const CarouselItems = ({
   return (
     <div className="projects-slides">
       <div
-        className={`single-project-slide active bg-img`}
+        className={`single-project-slide active bg-image-no-fix`}
         onClick={hover}
         style={{ backgroundImage: `url(${img})` }}
       >

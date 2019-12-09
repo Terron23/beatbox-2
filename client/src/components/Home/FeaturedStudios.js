@@ -20,7 +20,7 @@ const SingleFeaturedStudio = ({
 }) => {
   return (
     <div className="col-md-4 feature-images">
-      <Link to={`/single-studio/${id}`}><img src={`${bg}`} className="img img-thumbnail image feat-img" />
+      <Link to={`/single-studio/${id}`}><img src={`${bg}`} className="feat-img" />
       <div className="middle">
       <div className="text"><button className="btn btn-primary roberto-btn">View Details</button></div>
        </div>

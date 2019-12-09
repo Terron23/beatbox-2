@@ -7,12 +7,25 @@ const BreadCrumb = ({ studioName, price, image, studiotype }) => {
   return (
     <div
       className="breadcrumb-area bg-img bg-overlay jarallax"
-      style={studiotype==="Art" ? styles.artStyle: {backgroundImage:"url(" + image  + ")" }}>
+      style={
+      studiotype.toLowerCase()==="art" 
+      ? 
+      styles.artStyle
+      : 
+      studiotype.toLowerCase()==="recording - music"
+      ?
+      styles.studioStyle
+      :
+      {backgroundImage:"url(" + image  + ")" }}
+      >
       <div className="container h-100">
         <div className="row h-100 align-items-end">
           <div className="col-12">
             <div className="breadcrumb-content d-flex align-items-center justify-content-between pb-5">
-              <h2 className="room-title">{studioName} <br /><small>{studiotype}</small></h2>
+              <h2 className="room-title">
+              {studioName} 
+              <br />
+              <small>{studiotype}</small></h2>
               <h2 className="room-price">
                 ${price} <span>/ Per hour</span>
               </h2>
