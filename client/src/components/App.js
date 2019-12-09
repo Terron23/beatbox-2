@@ -49,9 +49,9 @@ this.state = {
         <Preloader />
       
         <BrowserRouter>
-      
+        <div>
             <Header />
-         <div>
+         
             <Route
               exact path="/"
               component={(props) => <Home {...props} width={this.state.width} />}
@@ -81,7 +81,7 @@ this.state = {
             <Route path="/confirmation" component={Confirmation} />
             <Footer />
        
-            </div>
+          </div>
         </BrowserRouter>
       </div>
     );
