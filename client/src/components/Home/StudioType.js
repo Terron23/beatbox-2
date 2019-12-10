@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import Heading from "./sub_components/heading";
 import dance from "../../images/bg-img/60.png";
 import art from "../../images/bg-img/62.jpg";
@@ -61,7 +58,7 @@ export default class StudioType extends Component {
           subtitle="Find the Studio For You"
         />
 
-        <OwlCarousel className="owl-theme" loop margin={2}>
+     
           <CarouselItems
             title="Dance"
             description="Practice your moves."
@@ -78,7 +75,7 @@ export default class StudioType extends Component {
             description="Paint, sketch and embrace your artistic side."
             img={art}
           />
-        </OwlCarousel>
+   
       </section>
     );
   }

@@ -46,7 +46,7 @@ this.state = {
   render() {
     return (
       <div>
-        <Preloader />
+        {/* <Preloader /> */}
       
         <BrowserRouter>
         <ScrollTop>
