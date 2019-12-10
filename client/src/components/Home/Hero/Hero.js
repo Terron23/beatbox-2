@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Herobg from "./sub_components/Herobg";
-import { Carousel } from 'react-responsive-carousel';
 import bg1 from "./images/01.jpg";
 import navImg from "./images/sh_logo.png";
 import "./css/hero.css";
