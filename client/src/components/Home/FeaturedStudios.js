@@ -74,7 +74,7 @@ class FeaturedStudios extends Component {
   render() {
 
     return (
-      <section className="">
+      <section style={{padding:"100px"}}>
         <Heading
           title="Featured Studios"
           color="black"

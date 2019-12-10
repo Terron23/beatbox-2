@@ -2,9 +2,10 @@ import React from "react";
 
 const Herobg = ({ bg, logo }) => {
   return (
-    <div
+    <div 
       className="single-welcome-slide bg-img bg-overlay animateOut animateIn"
-      style={{ backgroundImage: `url(${bg})` }}
+      style={{backgroundImage: `url(${bg})` }}
+      data-img-url={`${bg}`}
     >
       <div className="welcome-content h-100">
         <div className="container h-100">

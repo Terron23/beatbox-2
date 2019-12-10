@@ -36,14 +36,11 @@ class Home extends Component {
         <Schedule
           locate={locate.city}
           history={history}
-          handleSubmit={this.handleSubmit}
-        />
-        <About />
+          handleSubmit={this.handleSubmit}/>
         <FeaturedStudios />
-       
-        <StudioType width={width}/>
         <PostStudio />
-     
+        <StudioType width={width}/>
+        <About />
       </div>
     );
   }

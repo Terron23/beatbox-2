@@ -25,6 +25,7 @@
     "react": "^16.12.0",
     "react-available-times": "^1.2.2",
     "react-bootstrap": "^1.0.0-beta.16",
+    "react-bootstrap-carousel": "^4.0.1",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-bootstrap-sidebar": "0.0.1",
     "react-calendar": "^2.19.1",
