@@ -12,25 +12,24 @@ class StudioMobileFilter extends Component {
   render() {
     let { id , children, studioName, price, handleClose, handleShow, setShow} = this.props;
     return (
-     <center> <div className="col-4" >
-       <Modal show={setShow} onHide={handleClose} 
-       dialogClassName="modal-full modal-content"
-      bsClass="my-modal">
-          <Modal.Header>
-          <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Header>
-          <Modal.Body>{children}</Modal.Body>
-          <Modal.Footer>
+     <center> 
+        
+       <a className={`btn roberto-btn ${setShow? "d-none" :""}`} onClick={handleShow}>Search</a>
+       <a className={`btn roberto-btn ${!setShow ? "d-none" :""}`} onClick={handleClose}>Close</a>
+       <div className={`col-12 ${!setShow ? "d-none": ""}`} >
+         
+         
+          {children}
+        
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-          </Modal.Footer>
-        </Modal>
-      <a className="btn roberto-btn" onClick={handleShow}>Search</a>
+         
+       
+      
      
-      </div></center>
+      </div>
+      </center>
     );
   }
 }

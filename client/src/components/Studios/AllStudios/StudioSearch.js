@@ -79,10 +79,6 @@ class StudioSearch extends Component {
           ? studio.studioType
           : studio.studioType === this.state.studioType
       )
-      // .filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
-      // .filter(studio=>studio.day.toLowerCase() === days[new Date(this.state.applyDate).getDay()].toLowerCase()) !='')
-      // .filter((studio)=> this.state.applyDate === '' ? studio.availibility : studio.availibility
-      // .filter(studio=>this.state.startDate==='' ? studio.startDate: this.state.startDate === studio.startDate) !='')
       .filter(studio =>
         this.state.applyDate === ""
           ? studio.availibility
@@ -92,7 +88,7 @@ class StudioSearch extends Component {
             ) != ""
       )
       .map(studio => {
-        console.log(this.props)
+       
         return (
           <StudioSearchTemplate
             key={studio._id}
@@ -118,7 +114,6 @@ class StudioSearch extends Component {
   
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
-    // let guest = e.target.guest.value
     let applyDate = this.state.startDate;
     this.setState({ location, studioType, applyDate });
     this.handleClose(e)
@@ -177,13 +172,9 @@ class StudioSearch extends Component {
     let {width} = this.props;
     return (
       <section>
-       {width > 1000 ? 
-          <div className={`header-area`}>
-          <StudioSearchHeader />
-          </div> 
-          : 
-          <div className="mobile-filter">
+        {width < 1000 ? <div className="mobile-filter">
          <hr />
+        
           <StudioMobileFilter handleShow={this.handleShow} handleClose={this.handleClose} setShow={setShow}>
           <StudioSideFilter
                 location={location}
@@ -200,14 +191,19 @@ class StudioSearch extends Component {
           </StudioMobileFilter>
           
           </div>
-}
-     
-        <div className="roberto-rooms-area section-padding-100-0">
+          :
+
+          <div className={`header-area ${setShow ? "d-none":""}`}>
+          <StudioSearchHeader />
+          </div> 
+          }
+            <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
             
-              <div className="col-12 col-lg-8">
-              {this.featureType()}</div>
+              <div className={`col-12 col-lg-8 ${setShow ? "d-none":""}`}>
+              {this.featureType()}
+              </div>
 
               <StudioSideFilter
                 location={location}
