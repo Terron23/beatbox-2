@@ -19,22 +19,30 @@ const SingleFeaturedStudio = ({
   equipment
 }) => {
   return (
-    <div className="col-md-4 feature-images">
+   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+   
       <Link to={`/single-studio/${id}`}>
         
-        <img src={`${bg}`} className="feat-img" />
+       
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div className="hovereffect">
+    <img src={`${bg}`} className="gallery-img image-responsive"/>
+        <div className="overlay">
+        <Link to={`/single-studio/${id}`} className="info align-self-center">
+          View Details
+        </Link>
+        </div>
+    </div>
+</div>
+</Link>
 
-      <div className="middle">
-      <div className="text"><button className="btn btn-primary roberto-btn">View Details</button></div>
-       </div>
-       </Link>
-
-      <div className="row feature-text text-muted">
-      <div className="col-md-8"> <span className="feature-name">{studioName}</span></div>
-      <div className="col-md-4 feature-price">{price}.00/hr</div>
-      <div className="col-md-8 "> {studiotype}</div>
-      <div className="col-md-4">{venue}</div>
-      </div>
+       <div className="row text-muted">
+      <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12"> 
+      <span className="feature-name">{studioName}</span></div>
+      <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 feature-price">{price}.00/hr</div>
+      <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12"> {studiotype}</div>
+      <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">{venue}</div>
+      </div> 
     
       </div>
         
@@ -74,14 +82,14 @@ class FeaturedStudios extends Component {
   render() {
 
     return (
-      <section style={{padding:"100px"}}>
+      <section className="feature-section">
         <Heading
           title="Featured Studios"
           color="black"
           subtitle="View Our Top Rated Studios"
         />
      <div className="container">
-     <div className="row" id="feature-section">
+     <div className="row ">
           
             {this.showStudio()}
          </div>

@@ -19,8 +19,6 @@ componentDidMount(){
       this.setState({images})
 }
 
-
-  
     render() {
       const images = this.state.images;
       let {width} = this.props;
@@ -29,13 +27,10 @@ componentDidMount(){
 
         <ImageGallery 
         items={images} 
-        originalClass="img-responsive" 
         lazyLoad={true} 
         showBullets={true}
-        showThumbnails={width < 1000 ? false : true}
         showFullscreenButton={false}
         showFullscreenButton={false}
-        showNav={width < 1000 ? true : false}
         />
 
       );

@@ -35,7 +35,8 @@ class StudioSearch extends Component {
         : new Date(this.props.match.params.startdate || "11/23/2045"),
       applyDate: "",
       startTime: "",
-      setShow: false
+      setShow: false,
+      search:[]
     };
   }
 
@@ -43,6 +44,7 @@ class StudioSearch extends Component {
     this.props.fetchLocation();
     this.props.fetchStudio();
     this.props.fetchStudioType();
+    
   }
 
   handleChangeStart = date => {
@@ -63,7 +65,6 @@ class StudioSearch extends Component {
       "Saturday"
     ];
     let filterArr = [...this.props.studio];
-  
     let search = filterArr
       .filter(studio =>
         this.state.location === ""
@@ -90,7 +91,7 @@ class StudioSearch extends Component {
       .map(studio => {
        
         return (
-          <StudioSearchTemplate
+        <StudioSearchTemplate
             key={studio._id}
             studioImage={studio.studioImage}
             studioName={studio.studioName}
@@ -107,11 +108,11 @@ class StudioSearch extends Component {
       });
 
     return search;
+   
   };
 
   handleAvailibility = e => {
     e.preventDefault();
-  
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
     let applyDate = this.state.startDate;
@@ -119,9 +120,7 @@ class StudioSearch extends Component {
     this.handleClose(e)
   };
 
-  handleChange = e => {
-    this.setState({ search: e.target.search.value });
-  };
+ 
 
   handlePrice = () => {
     let filterArr = [...this.props.studio];
@@ -165,11 +164,12 @@ class StudioSearch extends Component {
   }
 
   render() {
-    if (!this.props.studio || !this.props.locate) {
+    if (!this.props.studio || !this.props.locate ) {
       return "Loading...";
     }
     let { location, startDate, studioType , setShow} = this.state;
     let {width} = this.props;
+    console.log("search",this.state.search)
     return (
       <section>
         {width < 1000 ? <div className="mobile-filter">
