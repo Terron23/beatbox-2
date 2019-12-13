@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import f_logo from './images/sh_logo.png';
+import './css/footer.css'
 
 export default class Footer extends Component {
   render() {
@@ -26,25 +27,25 @@ export default class Footer extends Component {
                   <ul className="footer-nav">
                     <li>
                       <Link to="/">
-                        <i className="fa fa-caret-right" aria-hidden="true"></i>
+                        <i className="fa fa-caret-right" ></i>
                         Home
                       </Link>
                     </li>
                     <li>
                       <Link to="/search-studio">
-                        <i className="fa fa-caret-right" aria-hidden="true"></i>{" "}
+                        <i className="fa fa-caret-right" ></i>{" "}
                         Book Now
                       </Link>
                     </li>
                     <li>
                       <Link to="/">
-                        <i className="fa fa-caret-right" aria-hidden="true"></i>{" "}
+                        <i className="fa fa-caret-right" ></i>{" "}
                         Career
                       </Link>
                     </li>
                     <li>
                       <Link to="/faqs">
-                        <i className="fa fa-caret-right" aria-hidden="true"></i>{" "}
+                        <i className="fa fa-caret-right" ></i>{" "}
                         FAQs
                       </Link>
                     </li>
@@ -67,7 +68,7 @@ export default class Footer extends Component {
                       placeholder="Enter your email..."
                     />
                     <button type="submit">
-                      <i className="fa fa-paper-plane" aria-hidden="true"></i>
+                      <i className="fa fa-paper-plane" ></i>
                     </button>
                   </form>
                 </div>
@@ -89,28 +90,28 @@ export default class Footer extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fa fa-facebook" aria-hidden="true"></i>
+                    <i className="fa fa-facebook" ></i>
                   </a>
                   <a
                     href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fa fa-twitter" aria-hidden="true"></i>
+                    <i className="fa fa-twitter" ></i>
                   </a>
                   <a
                     href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fa fa-instagram" aria-hidden="true"></i>
+                    <i className="fa fa-instagram" ></i>
                   </a>
                   <a
                     href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fa fa-linkedin" aria-hidden="true"></i>
+                    <i className="fa fa-linkedin" ></i>
                   </a>
                 </div>
               </div>

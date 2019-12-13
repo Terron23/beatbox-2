@@ -10,23 +10,19 @@ const SingleFeaturedStudio = ({
   bg,
   studiotype,
   price,
-  group,
-  amenities,
   studioName,
   venue,
-  rating,
   id,
-  equipment
 }) => {
   return (
-   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-   
+   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 feature-gallery">
+     <div className="row text-muted">
       <Link to={`/single-studio/${id}`}>
-        
+    
        
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div className="hovereffect">
-    <img src={`${bg}`} className="gallery-img image-responsive"/>
+    <img src={`${bg}`} className="gallery-img"/>
         <div className="overlay">
         <Link to={`/single-studio/${id}`} className="info align-self-center">
           View Details
@@ -36,7 +32,7 @@ const SingleFeaturedStudio = ({
 </div>
 </Link>
 
-       <div className="row text-muted">
+       
       <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12"> 
       <span className="feature-name">{studioName}</span></div>
       <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 feature-price">{price}.00/hr</div>

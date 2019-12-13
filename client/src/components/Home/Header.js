@@ -3,6 +3,7 @@ import Navbar from "./Nav/Nav";
 import TopNav from "./Nav/TopNav";
 import NavSearch from "./Nav/NavSearch";
 
+
 const HeaderArea = ({ children }) => {
   return <header className="header-area">{children}</header>;
 };
