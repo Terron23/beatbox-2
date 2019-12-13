@@ -34,9 +34,7 @@ this.state = {
     window.addEventListener("resize", this.updateWindowDimensions);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  }
+
 
   updateWindowDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });

@@ -130,6 +130,7 @@ ul {
     background-position: center center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important; 
+    background-attachment: scroll !important;
   }}
 
 .bg-image-no-fix{
