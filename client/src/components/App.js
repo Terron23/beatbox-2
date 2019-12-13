@@ -23,28 +23,19 @@ import ScrollTop from './assets/ScrollTop'
 class App extends Component {
   constructor(props){
 super(props);
-this.state = {
-  width: "",
-};
+
   }
 
   componentDidMount() {
     this.props.fetchUser();
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
   }
 
 
 
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
- 
-  };
-
   render() {
     return (
       <div>
-        {/* <Preloader /> */}
+     
       
         <BrowserRouter>
         <ScrollTop>
@@ -52,7 +43,7 @@ this.state = {
          
             <Route
               exact path="/"
-              component={(props) => <Home {...props} width={this.state.width} />}
+              component={Home}
             />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/post-studio" component={ListStudio} />
@@ -65,7 +56,7 @@ this.state = {
               component={ViewStudio}
             />
             <Route path="/single-studio/:id" 
-            component={(props) => <SingleStudio {...props} width={this.state.width} />}
+            component={SingleStudio}
             />
             <Route path="/userprofile" component={Profile} />
             <Route path="/payment/:studioid" component={Payment} />

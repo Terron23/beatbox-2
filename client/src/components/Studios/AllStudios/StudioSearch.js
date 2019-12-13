@@ -174,11 +174,30 @@ class StudioSearch extends Component {
   
     return (
       <section>
-          <div className={`header-area ${setShow ? "d-none":""}`}>
+          <div className={`header-area`}>
+          
+
           <StudioSearchHeader />
           </div> 
           
             <div className="roberto-rooms-area section-padding-100-0">
+              <div className="d-none">
+            <StudioMobileFilter handleShow={this.handleShow} handleClose={this.handleClose} setShow={setShow}>
+            <StudioSideFilter
+                location={location}
+                submit={this.handleAvailibility}
+                priceLow={this.handlePrice()[0]}
+                priceHigh={this.handlePrice().pop()}
+                search={studioType}
+                group={this.handleDropDown()}
+                startDate={startDate}
+                handleChangeStart={this.handleChangeStart}
+                width={this.props.width}
+                
+                
+              />
+            </StudioMobileFilter>
+            </div>
           <div className="container">
             <div className="row">
             
@@ -196,7 +215,7 @@ class StudioSearch extends Component {
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
                 width={this.props.width}
-                hide={"d-none"}
+               
                 
               />
             </div>

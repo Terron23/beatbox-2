@@ -34,14 +34,13 @@ class StudioSideFilter extends Component {
       handleChangeStart,
       id,
       hide,
-      width
     } = this.props;
     let { active, revealCal } = this.state;
     return (
       <div className={`col-12 col-lg-4`}>
         <div className={`hotel-reservation--area mb-100`}>
-          <form onSubmit={(e)=>submit(e)}>
-            <FormAttr  label="Location">
+          <form onSubmit={submit}>
+            <FormAttr label="Location">
               <input
                 type="text"
                 defaultValue={location}

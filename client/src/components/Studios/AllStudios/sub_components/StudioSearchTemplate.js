@@ -15,7 +15,9 @@ const StudioSearchTemplate = ({
     className="single-room-area d-flex align-items-center mb-50"
   >
     <div className="room-thumbnail">
+    <Link to={`/single-studio/${_id}`} >
       <img src={studioImage} alt={studioName} className="img-thumbnail search-img img-responsive"/>
+      </Link>
     </div>
 
     <div className="room-content">
