@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import postStudio from './images/57.jpg';
 
 export default class PostStudio extends Component {
   render() {
@@ -8,7 +9,7 @@ export default class PostStudio extends Component {
         <div className="container">
           <div
             className="cta-content bg-img bg-overlay jarallax"
-            style={{ backgroundImage: "url(img/bg-img/57.jpg)" }}
+            style={{ backgroundImage: "url("+postStudio+")" }}
           >
             <div className="row align-items-center">
               <div className="col-12 col-md-7">

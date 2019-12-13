@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
+import './css/nav.css'
 
 class NavBar extends Component {
   constructor(props) {
@@ -70,9 +71,7 @@ else{
         <div className="container">
           <Navbar
             expand="lg"
-            style={width > 1000 ? styles.navStyles : styles.navPad}
-            className="justify-content-between"
-            id="robertoNav"
+            className="studio-nav"
           >
             <Navbar.Brand>
               <Link to="/">StudioHunt</Link>
@@ -84,9 +83,7 @@ else{
                 <i className="fa fa-search" onClick={revealSearch}></i>
               </Nav.Link>
               <Nav.Link>
-                <Link onMouseOver={this.handleFade} 
-                onMouseLeave={this.handleFade}
-                style={ !fade ? styles.bookStyles: styles.navFocus} to="/search-studio">
+                <Link className="navFade"  to="/search-studio">
                   Book Now{" "}
                   <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </Link>
@@ -99,34 +96,7 @@ else{
   }
 }
 
-const styles = {
-  bookStyles: {
-    padding: "0 30px",
-    backgroundColor: "#1cc3b2",
-    height: "80px",
-    lineHeight: "80px",
-    textAlign: "center",
-    color: "#ffffff",
-    fontSize: "16px",
-    padding: "30px"
-  },
-  navStyles: {
-    height: "80px",
-    padding: "0"
-  },
-  navPad: {
-    height: "auto",
-    padding: "20"
-  },
-  navFocus:{
-    backgroundColor: "#2a303b",
-    color: "#ffffff",
-    height: "80px",
-    lineHeight: "80px",
-    padding: "30px"
-  }
-  
-};
+
 
 function mapStateToProps({ auth }) {
   //State from reducers/index.js file  gets passed to header component as props

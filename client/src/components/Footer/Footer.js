@@ -27,7 +27,7 @@ export default class Footer extends Component {
                   <ul className="footer-nav">
                     <li>
                       <Link to="/">
-                        <i className="fa fa-caret-right" ></i>
+                        <i className="fa fa-caret-right" ></i>{" "}
                         Home
                       </Link>
                     </li>
