@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import postStudio from './images/57.jpg';
+import './css/cta.css';
 
 export default class PostStudio extends Component {
   render() {
@@ -19,8 +20,8 @@ export default class PostStudio extends Component {
                 </div>
               </div>
               <div className="col-12 col-md-5 text-right">
-                <Link to="/post-studio" className="btn roberto-btn mb-50">
-                  Add Your Studio
+                <Link to="/post-studio" className="btn cta-btn mb-50">
+                  Add Studio
                 </Link>
               </div>
             </div>

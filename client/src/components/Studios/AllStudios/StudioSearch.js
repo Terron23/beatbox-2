@@ -43,7 +43,6 @@ class StudioSearch extends Component {
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
-    this.props.fetchStudioType();
     
   }
 
@@ -55,6 +54,7 @@ class StudioSearch extends Component {
   };
 
   featureType = () => {
+
     let days = [
       "Sunday",
       "Monday",
@@ -163,45 +163,26 @@ class StudioSearch extends Component {
   
   }
 
+
+
   render() {
     if (!this.props.studio || !this.props.locate ) {
       return "Loading...";
     }
     let { location, startDate, studioType , setShow} = this.state;
-    let {width} = this.props;
-    console.log("search",this.state.search)
+  
+  
     return (
       <section>
-        {width < 1000 ? <div className="mobile-filter">
-         <hr />
-        
-          <StudioMobileFilter handleShow={this.handleShow} handleClose={this.handleClose} setShow={setShow}>
-          <StudioSideFilter
-                location={location}
-                submit={this.handleAvailibility}
-                priceLow={this.handlePrice()[0]}
-                priceHigh={this.handlePrice().pop()}
-                search={studioType}
-                group={this.handleDropDown()}
-                startDate={startDate}
-                handleChangeStart={this.handleChangeStart}
-                width={this.props.width}
-               
-              />
-          </StudioMobileFilter>
-          
-          </div>
-          :
-
           <div className={`header-area ${setShow ? "d-none":""}`}>
           <StudioSearchHeader />
           </div> 
-          }
+          
             <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
             
-              <div className={`col-12 col-lg-8 ${setShow ? "d-none":""}`}>
+              <div className={`col-12 col-lg-8`}>
               {this.featureType()}
               </div>
 
@@ -216,6 +197,7 @@ class StudioSearch extends Component {
                 handleChangeStart={this.handleChangeStart}
                 width={this.props.width}
                 hide={"d-none"}
+                
               />
             </div>
           </div>

@@ -63,21 +63,21 @@ export default class StudioType extends Component {
           <CarouselItems
             title="Dance"
             description="Practice your moves."
-            img={ dance}
-            link={dance}
+            img={dance}
+            link={'dance'}
           />
 
           <CarouselItems
             title="Photography"
             description="Hold photo shoots like a boss."
             img={photo}
-            link={photo}
+            link={'photography'}
           />
           <CarouselItems
             title="Art"
             description="Paint, sketch and embrace your artistic side."
             img={art}
-            link={art}
+            link={'art'}
           />
 
             <CarouselItems

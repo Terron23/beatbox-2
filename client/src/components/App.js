@@ -58,7 +58,7 @@ this.state = {
             <Route path="/post-studio" component={ListStudio} />
             <Route
               path="/search-studio/:search?/:location?/:startdate?"
-              component={(props) => <StudioSearch {...props} width={this.state.width} />}
+              component={StudioSearch}
             />
             <Route
               path="/view-studio/:id"

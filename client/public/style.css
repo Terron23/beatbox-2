@@ -893,20 +893,7 @@ input:focus {
     visibility: visible; }
 
 /* :: 12.0 CTA CSS */
-.roberto-cta-area {
-  position: relative;
-  z-index: 1; }
-  .roberto-cta-area .cta-content {
-    padding-top: 50px;
-    padding-left: 50px;
-    padding-right: 50px; }
-  .roberto-cta-area .cta-text h2 {
-    color: #ffffff;
-    font-size: 36px;
-    margin-bottom: 10px; }
-  .roberto-cta-area .cta-text h6 {
-    margin-bottom: 0;
-    color: #ffffff; }
+
 
 /* :: 13.0 Testimonial Area CSS */
 .roberto-testimonials-area {

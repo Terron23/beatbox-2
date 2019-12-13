@@ -34,7 +34,7 @@ const SingleFeaturedStudio = ({
 
        
       <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12"> 
-      <span className="feature-name">{studioName}</span></div>
+      <h3 className="feature-name">{studioName}</h3></div>
       <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 feature-price">{price}.00/hr</div>
       <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12"> {studiotype}</div>
       <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">{venue}</div>

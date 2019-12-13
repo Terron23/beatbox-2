@@ -39,8 +39,8 @@ class StudioSideFilter extends Component {
     let { active, revealCal } = this.state;
     return (
       <div className={`col-12 col-lg-4`}>
-        <div className={`hotel-reservation--area mb-100 ${hide && width < 1000 ? hide : ""}`}>
-          <form onSubmit={submit}>
+        <div className={`hotel-reservation--area mb-100`}>
+          <form onSubmit={(e)=>submit(e)}>
             <FormAttr  label="Location">
               <input
                 type="text"
@@ -50,6 +50,7 @@ class StudioSideFilter extends Component {
                 name="location"
                 placeholder="City or Zip"
                 autoComplete="off"
+                
               />
             </FormAttr>
 
