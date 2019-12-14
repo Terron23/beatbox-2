@@ -1,4 +1,4 @@
-td:hover{
+/* td:hover{
     background-color: #27A0A0;;
 }
 
@@ -75,7 +75,7 @@ td:hover{
    input:focus, select:focus{
     box-shadow: none !important;
     border-bottom: 2px solid #34CACA !important;
-  }
+  } */
 
 .weekCalendar__headerWrapper{
   background-color:#34CACA;

@@ -1,43 +1,24 @@
 import React, { Component } from "react";
 import SearchCriteria from "./SearchCriteria";
 import FormAttr from "./FormAttr";
-import Calendar from 'react-calendar';
+import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker'
 
 class StudioSideFilter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      active: false,
-      revealCal: false,
-    };
-  }
-
-  handleReveal = e => {
-    e.preventDefault();
-    if (this.state.revealCal === false) {
-      this.setState({ revealCal: true });
-    } else {
-      this.setState({ revealCal: false });
-    }
   };
 
   render() {
     let {
-      children,
       submit,
-      priceLow,
-      priceHigh,
       location,
       search,
-      group,
-      startDate,
-      handleChangeStart,
-      id,
       hide,
+      revealCal,
     } = this.props;
-    let { active, revealCal } = this.state;
+  
     return (
-      <div className={`col-12 col-lg-4`}>
+      <div className={`col-12 col-lg-4 ${hide}`}>
         <div className={`hotel-reservation--area mb-100`}>
           <form onSubmit={submit}>
             <FormAttr label="Location">
@@ -62,24 +43,21 @@ class StudioSideFilter extends Component {
               />
             </FormAttr>
             <FormAttr label="Check In Date">
-            <input
-                type="text"
-               value={startDate.toString().substring(0, 15)}
-                className="input-small form-control"
-                id="startDate"
-                name="startDate"
-                placeholder="All Available Dates"
-                autoComplete="off"
-                onClick={this.handleReveal}
-                
-              
+
+            <StudioHuntDatePicker 
+              type="text"
+              classNames="input-small form-control startDate"
+              id="search-id"
+              name="startDate"
+              placeholder="All Available Dates"
+              autoComplete="off"
+            
+          selectRange={false} 
+          revealCal={revealCal}
+          calendarClass={"startDate"} 
               />
-              
-          <Calendar selectRange={false} 
-          onChange={handleChangeStart} 
-          className={revealCal ? "" : "d-none"} 
-          /> 
-       
+        
+         
             </FormAttr>
 
             <div className="form-group mb-30">

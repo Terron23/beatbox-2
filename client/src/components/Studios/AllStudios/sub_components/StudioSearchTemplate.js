@@ -16,7 +16,7 @@ const StudioSearchTemplate = ({
   >
     <div className="room-thumbnail">
     <Link to={`/single-studio/${_id}`} >
-      <img src={studioImage} alt={studioName} className="img-thumbnail search-img img-responsive"/>
+      <img src={studioImage} alt={studioName} className="search-img"/>
       </Link>
     </div>
 

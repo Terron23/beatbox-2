@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import StudioHuntDatePicker from "../Reusable/DatePicker/StudioHuntDatePicker";
+import "../Reusable/DatePicker/css/datepick.css";
 import SearchCriteria from "./sub_components/SearchCriteria";
-//Should come from database
 
 class Schedule extends Component {
   constructor(props) {
@@ -11,20 +10,23 @@ class Schedule extends Component {
       city: "",
       search: "",
       startDate: new Date(),
-      endDate: new Date()
+      reveal: false,
     };
   }
 
   handleChangeStart = date => {
+    document.getElementById("schedule-check").focus();
     this.setState({
-      startDate: date
+      startDate: date, reveal:false
     });
   };
 
-  handleChangeEnd = date => {
-    this.setState({
-      endDate: date
-    });
+  handleReveal = () => {
+    if (this.state.reveal) {
+      this.setState({ reveal: false });
+    } else {
+      this.setState({ reveal: true });
+    }
   };
 
   handleSubmit = e => {
@@ -46,19 +48,8 @@ class Schedule extends Component {
   };
 
   render() {
-    let {
-      studioTypeFilter,
-      time,
-      handleTime,
-      handleAvailibility,
-      block,
-      locate,
-      classNameProp,
-      buttonTitle,
-      search,
-      handleChange,
-      handleSubmit
-    } = this.props;
+    let { locate } = this.props;
+    let { startDate , reveal} = this.state;
     return (
       <section className="roberto-about-area section-padding-100-0">
         <div className="hotel-search-form-area">
@@ -69,7 +60,7 @@ class Schedule extends Component {
                   <div className="col-6 col-md-2 col-lg-3">
                     <label htmlFor="checkIn">Location</label>
                     <input
-                      type="text"
+                      type="search"
                       className="form-control"
                       id="location"
                       name="location"
@@ -77,14 +68,22 @@ class Schedule extends Component {
                     />
                   </div>
                   <div className="col-6 col-md-2 col-lg-3">
-                    <label htmlFor="checkIn">Start Time</label>
+                    <label htmlFor="checkIn">Check In</label>
 
-                    <DatePicker
-                      selected={this.state.startDate}
-                      onChange={this.handleChangeStart}
-                      id="checkin"
-                      className="form-control"
+                    <StudioHuntDatePicker
+                      type="text"
+                      value={startDate.toString().substring(0, 15)}
+                      classNames="input-small form-control startDate"
+                      id="schedule-check"
                       name="checkinDate"
+                      placeholder="Choose Date"
+                      autoComplete="off"
+                      selectRange={false}
+                      handleChangeStart={this.handleChangeStart}
+                      calendarClass={"startDate"}
+                      handleReveal={this.handleReveal}
+                      revealCal={reveal}
+                      move={true}
                     />
                   </div>
 

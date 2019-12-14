@@ -1,6 +1,6 @@
 import React, { Component } from "react";
  import { Modal , Button} from "react-bootstrap";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -17,17 +17,17 @@ class MobileBook extends Component {
     return (
       <div className="col-12 fixed-bottom" 
       style={{backgroundColor: "#0e2737", padding:"20px"}} >
-       <Modal show={setShow} onHide={handleClose} 
+       <Modal show={setShow}
        dialogClassName="modal-full modal-content"
       bsClass="my-modal">
           <Modal.Header >
-          <a className="btn btn-secondary" onClick={handleClose}>
-              close
+          <a className="modal-close ml-auto" onClick={handleClose}>
+              X
             </a>
           </Modal.Header>
           <Modal.Body>{children}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary modal-close-button" onClick={handleClose}>
               Close
             </Button>
           </Modal.Footer>

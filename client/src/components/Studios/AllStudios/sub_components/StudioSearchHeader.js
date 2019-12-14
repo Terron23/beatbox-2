@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import bg1 from "../images/59.jpg";
 import { Link } from "react-router-dom";
 
-const StudioSearchHeader = ({}) => {
+const StudioSearchHeader = ({bg, slideNum}) => {
   return (
     <div
-      className="breadcrumb-area bg-img bg-overlay jarallax"
+      className={`breadcrumb-area bg-img bg-overlay jarallax ${slideNum}`}
       style={styles.bg1}
     >
       <div className="container h-100">

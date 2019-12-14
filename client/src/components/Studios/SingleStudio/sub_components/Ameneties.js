@@ -14,8 +14,9 @@ const Ameneties = ({services, contact}) => {
       
       </ul>
       <div >
-      <a className="btn roberto-btn btn-2">Contact Owner</a>
+     
       </div>
+      <a className="btn roberto-btn btn-2">Contact Owner</a>
     </div>
   );
 };

@@ -5,7 +5,6 @@ import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";
 import StudioMobileFilter from "./sub_components/StudioMobileFilter";
-import ModalMobile from "./sub_components/Modal";
 import "./css/studio.css";
 
 class StudioSearch extends Component {
@@ -25,10 +24,10 @@ class StudioSearch extends Component {
         this.props.match.params.location === "All"
           ? ""
           : this.props.match.params.location || "",
-      reveal: true,
+      reveal: false,
       filterArr: "",
       longLat: [],
-      studioType: this.props.match.params.search || "",
+      studioType: this.props.match.params.search === "All" ? "" : this.props.match.params.search || "",
       guest: 0,
       startDate: !this.props.match.params.startdate
         ? ""
@@ -36,25 +35,25 @@ class StudioSearch extends Component {
       applyDate: "",
       startTime: "",
       setShow: false,
-      search:[]
+      search: []
     };
   }
 
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
-    
   }
 
   handleChangeStart = date => {
-    this.setState({
-      startDate: date
-    });
     document.getElementById("startDate").focus();
+    this.setState({
+      startDate: date,
+      reveal: false
+    });
+   
   };
 
   featureType = () => {
-
     let days = [
       "Sunday",
       "Monday",
@@ -89,9 +88,8 @@ class StudioSearch extends Component {
             ) != ""
       )
       .map(studio => {
-       
         return (
-        <StudioSearchTemplate
+          <StudioSearchTemplate
             key={studio._id}
             studioImage={studio.studioImage}
             studioName={studio.studioName}
@@ -101,14 +99,13 @@ class StudioSearch extends Component {
             city={studio.city}
             studioType={studio.studioType}
             availibility={studio.availibility}
-            startDate={this.state.startDate}
-            handleChangeStart={this.handleChangeStart}
+           
+         
           />
         );
       });
 
     return search;
-   
   };
 
   handleAvailibility = e => {
@@ -117,10 +114,8 @@ class StudioSearch extends Component {
     let studioType = e.target.studioType.value;
     let applyDate = this.state.startDate;
     this.setState({ location, studioType, applyDate });
-    this.handleClose(e)
+    this.handleClose(e);
   };
-
- 
 
   handlePrice = () => {
     let filterArr = [...this.props.studio];
@@ -148,62 +143,63 @@ class StudioSearch extends Component {
     });
     return [...new Set(group)];
   };
-  handleClose = (e) => {
-    e.preventDefault()
-    this.setState({setShow:false});
-  }
-  handleShow = (e) => {
-    e.preventDefault()
-    if(!this.state.setShow){
-      this.setState({setShow:true})
+  handleClose = e => {
+    e.preventDefault();
+    this.setState({ setShow: false });
+  };
+  handleShow = e => {
+    e.preventDefault();
+    if (!this.state.setShow) {
+      this.setState({ setShow: true });
+    } else {
+      this.setState({ setShow: false });
     }
-    else{
-      this.setState({setShow:false})
-    }
-  
-  }
+  };
+
+  handleReveal =()=>{
 
 
+if(this.state.reveal){
+  this.setState({reveal:false})
+}
+else{
+  this.setState({reveal:true})
+}
+  }
 
   render() {
-    if (!this.props.studio || !this.props.locate ) {
+    if (!this.props.studio || !this.props.locate) {
       return "Loading...";
     }
-    let { location, startDate, studioType , setShow} = this.state;
-  
-  
+    let { location, startDate, studioType, setShow, reveal } = this.state;
+
     return (
       <section>
-          <div className={`header-area`}>
-          
-
+        <div className={`header-area web-search`}>
           <StudioSearchHeader />
-          </div> 
-          
-            <div className="roberto-rooms-area section-padding-100-0">
-              <div className="d-none">
-            <StudioMobileFilter handleShow={this.handleShow} handleClose={this.handleClose} setShow={setShow}>
+        </div>
+        <div className="mobile-search">
+          <hr />
+          <StudioMobileFilter
+            handleShow={this.handleShow}
+            handleClose={this.handleClose}
+            setShow={setShow}
+          >
             <StudioSideFilter
-                location={location}
-                submit={this.handleAvailibility}
-                priceLow={this.handlePrice()[0]}
-                priceHigh={this.handlePrice().pop()}
-                search={studioType}
-                group={this.handleDropDown()}
-                startDate={startDate}
-                handleChangeStart={this.handleChangeStart}
-                width={this.props.width}
-                
-                
-              />
-            </StudioMobileFilter>
-            </div>
+              location={location}
+              submit={this.handleAvailibility}
+              priceLow={this.handlePrice()[0]}
+              priceHigh={this.handlePrice().pop()}
+              search={studioType}
+              group={this.handleDropDown()}
+          
+            />
+          </StudioMobileFilter>
+        </div>
+        <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
-            
-              <div className={`col-12 col-lg-8`}>
-              {this.featureType()}
-              </div>
+              <div className={`col-12 col-lg-8`}>{this.featureType()}</div>
 
               <StudioSideFilter
                 location={location}
@@ -215,8 +211,9 @@ class StudioSearch extends Component {
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
                 width={this.props.width}
-               
-                
+                hide="web-search"
+                revealCal={reveal}
+                handleReveal={this.handleReveal}
               />
             </div>
           </div>
@@ -226,10 +223,12 @@ class StudioSearch extends Component {
   }
 }
 
-function mapStateToProps({ locate, studio , type}) {
+function mapStateToProps({ locate, studio, type }) {
   return { locate, studio, type };
 }
 
-export default connect(mapStateToProps, { fetchLocation, fetchStudio, fetchStudioType })(
-  StudioSearch
-);
+export default connect(mapStateToProps, {
+  fetchLocation,
+  fetchStudio,
+  fetchStudioType
+})(StudioSearch);

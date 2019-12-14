@@ -1,27 +1,40 @@
 import React, { Component } from "react";
-import TimeDropDown from "../../../assets/TimeDropDown";
+import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
-import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
- import Calendar from 'react-calendar';
-import "react-datepicker/dist/react-datepicker.css";
+import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker';
 
 
-const StudioTemplate =({handleChangeStart})=>{
+
+const StudioTemplate =({handleChangeStart, handleReveal, startDate, revealCal})=>{
  return (
  <form>
    <FormAttr label="Check In Date">
-     <Calendar  
-     selectRange={false} 
-     onChange={handleChangeStart} 
-    /> 
+   <StudioHuntDatePicker  
+        type="text"
+        classNames="input-small form-control startDate"
+        id="startDate"
+        name="startDate"
+        placeholder="All Available Dates"
+        autoComplete="off"
+        handleReveal={handleReveal}
+        selectRange={false} 
+       calendarClass={"startDate"} 
+    />   
    </FormAttr>
 
-   <FormAttr label>
-     <TimeDropDown col="6" label="Time In" name="timeIn" id='timein' />
-
-     <TimeDropDown col="6" label="Time Out" name="timeOut" id='timein' />
+   <div className="row">
+<div className="col-6">
+   <FormAttr label="Time In" >
+     <TimeDropDown  name="timeIn" id='timein' required={true} />
    </FormAttr>
+   </div>
+   <div className="col-6">
+   <FormAttr label="Time Out" >
+     <TimeDropDown  name="timeOut" id='timeout' required={true} />
+   </FormAttr>
+   </div>
+   </div>
  </form>)
 }
 
@@ -33,47 +46,35 @@ class SingleStudioSideFilter extends Component {
     this.state = {
       active: false,
       startDate: "",
-      studioForm: []
+      studioForm: [],
     };
   }
 
-  handleChangeStart = date => {
-    alert(date)
-    this.setState({
-      startDate: date
-    });
-  };
 
-  handleChangeEnd = date => {
-    this.setState({
-      endDate: date
-    });
-  };
 
   handleSubmit =(e)=>{
     e.preventDefault();
-    alert("test")
+   
   }
 
   showStudioForm=()=>{
  return this.state.studioForm.concat(
- <StudioTemplate addForm={this.addForm} handleChangeStart={this.handleChangeStart} />).map(s=>s);
+ <StudioTemplate addForm={this.addForm} />).map(s=>s);
   }
 
   addForm =()=>{
-    let form =  <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit}/>
+    let form =  <StudioTemplate addForm={this.addForm} />
     this.setState({studioForm:this.state.studioForm.concat(form)})
   }
 
   render() {
-    let { id } = this.props;
-    let { startDate } = this.state;
+    let { id , hide} = this.props;
     return (
-      <div className="col-12 col-lg-4">
+      <div className={`col-12 col-lg-4 ${hide ? "web-search":""}`}>
         <div className="hotel-reservation--area mb-100">
        {this.showStudioForm()}
-              <Link to={`/payment/${id}?startDate=${startDate.toString().substring(0,15)}`} className="btn roberto-btn w-100">
-                Book 
+        <Link to={`/payment/${id}`} className="btn roberto-btn w-100">
+                Reserve 
               </Link>
               </div>
       </div>

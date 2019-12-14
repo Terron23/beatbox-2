@@ -18,13 +18,13 @@ class StudioMobileFilter extends Component {
        dialogClassName="modal-full modal-content"
       bsClass="my-modal">
           <Modal.Header >
-          <a className="btn btn-secondary" onClick={handleClose}>
-              close
+          <a className="ml-auto modal-close" onClick={handleClose}>
+             X
             </a>
           </Modal.Header>
-          <Modal.Body>{children}</Modal.Body>
+          <Modal.Body className="center-modal-body">{children}</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary modal-close-button" onClick={handleClose}>
               Close
             </Button>
           </Modal.Footer>

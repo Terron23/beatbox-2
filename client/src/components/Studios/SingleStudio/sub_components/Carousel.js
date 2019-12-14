@@ -28,9 +28,12 @@ componentDidMount(){
         <ImageGallery 
         items={images} 
         lazyLoad={true} 
-        showBullets={true}
+        showBullets={false}
         showFullscreenButton={false}
         showFullscreenButton={false}
+        additionalClass="single-studio-gallery"
+        originalClass="single-studio-gallery-image"
+        thumbnailClass="single-studio-gallery-image-thumbnail"
         />
 
       );

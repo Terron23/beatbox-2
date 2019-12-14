@@ -46,17 +46,19 @@ const Studios = ({
           <Ameneties services={services} contact={auth} />
           {/* <Reviews /> */}
         </div>
-        {width < 1000 ? (
+        <SingleStudioSideFilter id={id} handleClose={handleClose} hide="web-search"/>
+
+        <div className="col-lg-12 col-md-12 col-sm-8 mobile-search">
           <MobileBook price={price} studioName={studioName} 
           setShow={setShow} 
           handleClose={handleClose}
           handleShow={handleShow}
           >
-            <SingleStudioSideFilter id={id} handleClose={handleClose}/>
+            <SingleStudioSideFilter id={id} handleClose={handleClose} />
           </MobileBook>
-        ) : (
-          <SingleStudioSideFilter id={id} handleClose={handleClose}/>
-        )}
+        </div>
+         
+      
       </div>
     </Wrapper>
   );
