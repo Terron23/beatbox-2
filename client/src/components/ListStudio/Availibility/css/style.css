@@ -75,7 +75,7 @@
    input:focus, select:focus{
     box-shadow: none !important;
     border-bottom: 2px solid #34CACA !important;
-  } */
+  } 
 
 .weekCalendar__headerWrapper{
   background-color:#34CACA;
@@ -83,4 +83,4 @@
 
 .weekCalendar__overlay{
   background-color:#34CACA;
-}
+} */

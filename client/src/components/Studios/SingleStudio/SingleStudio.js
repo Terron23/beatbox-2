@@ -46,7 +46,7 @@ const Studios = ({
           <Ameneties services={services} contact={auth} />
           {/* <Reviews /> */}
         </div>
-        <SingleStudioSideFilter id={id} handleClose={handleClose} hide="web-search"/>
+        <SingleStudioSideFilter history={this.props} id={id} handleClose={handleClose} hide="web-search"/>
 
         <div className="col-lg-12 col-md-12 col-sm-8 mobile-search">
           <MobileBook price={price} studioName={studioName} 

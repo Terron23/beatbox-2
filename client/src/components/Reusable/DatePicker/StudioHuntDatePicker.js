@@ -25,6 +25,7 @@ class StudioHuntDatePicker extends Component {
       handleChangeStart = date => {
       let id = this.props.id
        document.getElementById(`${id}`).focus();
+ 
         this.setState({
           startDate: date,
           reveal: false
@@ -42,7 +43,8 @@ class StudioHuntDatePicker extends Component {
    autoComplete,
    selectRange,
    calendarClass,
-  move
+  move,
+  required,
     } = this.props;
     let {reveal, startDate}=this.state;
   
@@ -56,6 +58,7 @@ class StudioHuntDatePicker extends Component {
                 placeholder={placeholder}
                 autoComplete={autoComplete}
                 onClick={this.handleReveal}
+                required={required ? "true" : false}
               />
           <Calendar selectRange={selectRange} 
           onChange={this.handleChangeStart} 

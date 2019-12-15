@@ -1,9 +1,10 @@
 import React from "react";
+import {Row, Col} from 'react-bootstrap'
 
 const Features = ({capacity, description, equipment, services, includes}) => {
   return (
     <div>
-      <div className="room-features-area d-flex flex-wrap mb-50">
+      <div className="room-features-area d-flex flex-wrap mb-50 row">
       <h6>
           Included: <span>{includes.length > 0 ? includes : 'N/A'}</span>
         </h6>

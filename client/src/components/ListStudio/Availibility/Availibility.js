@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { fetchUser } from "../../../actions";
-import DropDown from "../../assets/DropDown";
 import Title from "../../assets/Title";
 import TimeDropDown from "../../assets/TimeDropDown";
 import './css/style.css'

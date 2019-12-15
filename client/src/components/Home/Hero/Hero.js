@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Herobg from "./sub_components/Herobg";
 import bg1 from "./images/01.jpg";
+import bg3 from "./images/03.jpg";
+import bg4 from "./images/04.jpg";
+import bg5 from "./images/07.jpg";
+import bg6 from "./images/06.jpg";
 import navImg from "./images/sh_logo.png";
 import "./css/hero.css";
+import {Carousel, CarouselItem} from 'react-bootstrap'
 //Wrapper for Component
 
 
@@ -13,30 +18,37 @@ const Wrapper = ({ children }) => (
 );
 
 export default class Hero extends Component {
-
-  
- 
-  
-  cycleImages = (container, step) => {
-    const images = [`${bg1}`,`${navImg}`];
-    const node = document.getElementsByClassName("single-welcome-slide");
-    container=node;
-    step=2000;
-      images.forEach((image, index) => (
-      setTimeout(() => {
-          container.style.backgroundImage = `url(${image})`  
-      }, step * (index + 1))
-    ))
-    setTimeout(() => this.cycleImages(container, step), step * images.length)
+constructor(){
+  super();
+  this.state={
+   index:"",
+   direction:""
   }
-  
+}
+ 
+
+handleSelect = (selectedIndex, e) => {
+  this.setState({index:selectedIndex, direction:e.direction});
+};
+
   render() {
+    let {direction, index} = this.state;
     return (
       <Wrapper>
-     
-        <Herobg bg={bg1} logo={navImg} />
-       
-  
+     <Carousel activeIndex={index} direction={direction} onSelect={this.handleSelect} fade={true}
+     pauseOnHover={false} interval={2000} controls={false}
+     >
+        <Carousel.Item>
+     <Herobg bg={bg1} logo={navImg} />
+        </Carousel.Item>
+        <Carousel.Item>
+     <Herobg bg={bg3} logo={navImg} />
+        </Carousel.Item>
+        <Carousel.Item>
+     <Herobg bg={bg6} logo={navImg} />
+        </Carousel.Item>
+
+        </Carousel>
       </Wrapper>
     );
   }

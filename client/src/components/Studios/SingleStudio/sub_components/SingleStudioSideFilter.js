@@ -1,25 +1,26 @@
 import React, { Component } from "react";
 import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
-import { Link } from "react-router-dom";
 import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker';
+import {ListGroup, ListGroupItem} from 'react-bootstrap'
+import { withRouter } from 'react-router';
 
 
 
-const StudioTemplate =({handleChangeStart, handleReveal, startDate, revealCal})=>{
+const StudioTemplate =({addForm})=>{
  return (
- <form>
+ <div>
    <FormAttr label="Check In Date">
    <StudioHuntDatePicker  
         type="text"
         classNames="input-small form-control startDate"
-        id="startDate"
-        name="startDate"
+        id="singleDatepicker"
+        name="singleDatepicker"
         placeholder="All Available Dates"
         autoComplete="off"
-        handleReveal={handleReveal}
         selectRange={false} 
        calendarClass={"startDate"} 
+       required={true}
     />   
    </FormAttr>
 
@@ -33,9 +34,11 @@ const StudioTemplate =({handleChangeStart, handleReveal, startDate, revealCal})=
    <FormAttr label="Time Out" >
      <TimeDropDown  name="timeOut" id='timeout' required={true} />
    </FormAttr>
+   <p className="add-time" onClick={addForm}>+Add Selected time</p>
    </div>
+
    </div>
- </form>)
+ </div>)
 }
 
 
@@ -54,32 +57,69 @@ class SingleStudioSideFilter extends Component {
 
   handleSubmit =(e)=>{
     e.preventDefault();
-   
+    let {id}=this.props
+  this.props.history.push(`/payment/${id}`);
+
   }
 
-  showStudioForm=()=>{
- return this.state.studioForm.concat(
- <StudioTemplate addForm={this.addForm} />).map(s=>s);
-  }
 
-  addForm =()=>{
-    let form =  <StudioTemplate addForm={this.addForm} />
-    this.setState({studioForm:this.state.studioForm.concat(form)})
+
+  addForm =(e)=>{
+    e.preventDefault()
+    let timeIn = document.getElementById("timein").value;
+    let timeOut=document.getElementById("timeout").value;
+    let singleDatePicker = document.getElementById("singleDatepicker").value;
+
+    let values = [
+      {
+    "timeIn" : timeIn, 
+    "timeOut": timeOut, 
+    "singleDatePicker": singleDatePicker
+  }]
+  
+  let form = [...this.state.studioForm, ...values];
+ 
+   this.setState({studioForm : form})
+
+    // document.getElementById("timein").value="";
+    // document.getElementById("timeout").value="";
+    // document.getElementById("singleDatepicker").value="";
+ 
   }
 
   render() {
     let { id , hide} = this.props;
     return (
       <div className={`col-12 col-lg-4 ${hide ? "web-search":""}`}>
+        <div className="selected-date-times">
+          <ListGroup>
+            <p>Selected Schedule:</p>
+
+     {this.state.studioForm.length < 1 ? <ListGroupItem className="text-muted select-book-time"> Please Choose Date And Time you would like to book.
+     </ListGroupItem>
+       :
+       this.state.studioForm.map((sched, i)=>{
+       
+       return <ListGroupItem key={i} className="text-muted select-book-time"> Date: {sched.singleDatePicker} <br/>Time In: {sched.timeIn} {" "}
+       Time Out: {sched.timeOut}</ListGroupItem>
+     })}
+        </ListGroup>
+        <hr />
+        </div>
         <div className="hotel-reservation--area mb-100">
-       {this.showStudioForm()}
-        <Link to={`/payment/${id}`} className="btn roberto-btn w-100">
+        <form onSubmit={this.handleSubmit}>
+        <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit} addform={this.addForm}/>
+      {this.state.studioForm < 1 ? "": 
+       <button type="submit" className="btn roberto-btn w-100">
                 Reserve 
-              </Link>
-              </div>
+              </button>
+      }
+              </form> 
+             
       </div>
+     </div>
     );
   }
 }
 
-export default SingleStudioSideFilter;
+export default withRouter(SingleStudioSideFilter);

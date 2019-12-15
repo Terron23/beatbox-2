@@ -112,7 +112,7 @@ class StudioSearch extends Component {
     e.preventDefault();
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
-    let applyDate = this.state.startDate;
+    let applyDate = e.target.startDate.value;
     this.setState({ location, studioType, applyDate });
     this.handleClose(e);
   };

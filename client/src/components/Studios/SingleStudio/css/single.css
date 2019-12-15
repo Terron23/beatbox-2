@@ -1,16 +1,34 @@
 .single-studio-gallery{
     width:100%;
     padding-bottom:25px;
+   
 }
 
-.image-gallery-image{
+.image-gallery-image > img{
   height:500px !important;
   width: 100%;
 
 }
-.image-gallery-thumbnail-inner{
+.image-gallery-thumbnail-inner > img{
     height:50px !important;
     width: 100%;
+}
+
+.image-gallery-thumbnail-inner{
+    height:50px !important;
+    
+}
+
+.contact-btn{
+    margin:20px;
+}
+
+.select-book-time{
+    font-size: .8em;
+}
+
+.add-time:hover{
+   cursor: pointer;
 }
    
 @media only screen and (max-width: 1000px) {
@@ -18,31 +36,11 @@
         width:100%;
         padding-bottom:25px;
     }
-
-.image-gallery-image{
-    height:200px;
-    width: 100%;
-  
-  }
-  .image-gallery-thumbnail-inner{
-      height:200px;
-      width: 100%;
-  }
+    .image-gallery-thumbnails {
+       display:none;
     }
 
-    @media only screen and (max-width: 500px) {
-        .single-studio-gallery{
-            width:50%;
-            padding-bottom:25px;
-        }
 
-.image-gallery-image{
-    height:200px;
-    width: 100%;
+    }
+
   
-  }
-  .image-gallery-thumbnail-inner{
-      height:200px;
-      width: 100%;
-  }
-        }
