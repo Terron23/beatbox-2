@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Herobg from "./sub_components/Herobg";
 import bg1 from "./images/01.jpg";
 import bg3 from "./images/03.jpg";
-import bg4 from "./images/04.jpg";
-import bg5 from "./images/07.jpg";
 import bg6 from "./images/06.jpg";
 import navImg from "./images/sh_logo.png";
 import "./css/hero.css";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Heading from "./sub_components/heading";
 import dance from "./images/60.png";
-import art from "./images/62.jpg";
+import art from "./images/07.jpg";
 import photo from "./images/63.jpg";
 import viewAll from './images/sh_logo.png'
 import { Link } from "react-router-dom";
