@@ -2,14 +2,43 @@ import React, { Component } from "react";
 import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker';
-import {ListGroup, ListGroupItem} from 'react-bootstrap'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { withRouter } from 'react-router';
+import { object } from "prop-types";
 
 
 
-const StudioTemplate =({addForm})=>{
+const StudioTemplate =({addForm, studioForm, 
+  startDate, handleChangeStartProps, 
+  revealProps, 
+  closeSelectBtn,
+  handleRevealProp,
+handleTime,
+addField
+})=>{
  return (
  <div>
+     <ListGroup className="select-book-time-group">
+            <p>Selected Schedule:</p>
+            {studioForm.length < 1 ? 
+            <ListGroupItem className="text-muted select-book-time"> 
+            Please Choose Date And Time you would like to book. 
+            </ListGroupItem>
+              :
+              studioForm.map((sched, i) => {
+                return <ListGroupItem key={sched.singleDatePicker} 
+                className="text-muted select-book-time"
+                id={`temp_${i}`}
+                > 
+                <span onClick={()=>closeSelectBtn(`close-select-time-btn${i}`)}
+                className="pull-right add-time"
+                >
+                  x
+                </span>
+                Date: {sched.singleDatePicker} <br />Time In: {sched.timeIn} {" "}
+                  Time Out: {sched.timeOut}</ListGroupItem>
+              })}
+          </ListGroup>
    <FormAttr label="Check In Date">
    <StudioHuntDatePicker  
         type="text"
@@ -21,20 +50,25 @@ const StudioTemplate =({addForm})=>{
         selectRange={false} 
        calendarClass={"startDate"} 
        required={true}
+       stateText={startDate}
+       handleChangeStartProps={handleChangeStartProps}
+       revealProps={revealProps}
+       handleRevealProp={handleRevealProp}
+       
     />   
    </FormAttr>
 
    <div className="row">
 <div className="col-6">
    <FormAttr label="Time In" >
-     <TimeDropDown  name="timeIn" id='timein' required={true} />
+     <TimeDropDown  name="timeIn" id='timein' required={true} handleChange={(e)=>handleTime(e, 'timein')} />
    </FormAttr>
    </div>
    <div className="col-6">
    <FormAttr label="Time Out" >
-     <TimeDropDown  name="timeOut" id='timeout' required={true} />
+     <TimeDropDown  name="timeOut" id='timeout' required={true} handleChange={(e)=>handleTime(e, 'timeout')} />
    </FormAttr>
-   <p className="add-time" onClick={addForm}>+Add Selected time</p>
+   <p className="add-time" onClick={addForm}>+{addField}</p>
    </div>
 
    </div>
@@ -49,74 +83,120 @@ class SingleStudioSideFilter extends Component {
     this.state = {
       active: false,
       startDate: "",
-      studioForm: [],
+      studioForm:[],
+      clearCal:false,
+      reveal: false,
+      timeIn: "",
+      timeOut: "",
+      addField: "Add Date & Time"
     };
   }
 
+  closeSelectBtn=(id)=>{
+   let form= this.state.studioForm;
+   form.splice(id, 1);
 
+   this.setState({studioForm:form})
+  }
+
+  addForm = (e) => {
+
+    let timeIn = this.state.timein;
+    let timeOut = this.state.timeout;
+    let startDate = this.state.startDate
+    let obj =    {
+      "timeIn": timeIn,
+      "timeOut": timeOut,
+      "singleDatePicker": startDate.toString().substring(0, 15)
+    }
+    let values = [obj]
+    
+    let form = [...this.state.studioForm, ...values];
+  let error = Object.values(obj)
+  for(let i=0; i<error.length; i++){
+    if(error[i]===""){
+      alert("Please Fill In All Values")
+      return;
+    }
+  }
+
+    this.setState({ studioForm: form , 
+    startDate:"", 
+    timeIn:"", 
+    timeOut:"",
+     addField: "Add More Date & Times"})
+    this.myFormRef.reset();
+  
+  }
+
+  handleChangeStartProps = date => {
+    this.setState({
+      startDate: date,
+      reveal:false,
+    });
+  };
+
+
+handleTime =(e, id)=>{
+if(id==='timein'){
+  this.setState({timein:e.target.value})
+}
+else{
+  this.setState({timeout:e.target.value})
+}
+  }
+
+
+  handleReveal =()=>{
+   
+
+    if(this.state.reveal){
+      this.setState({reveal:false})
+    }
+    else{
+      this.setState({reveal:true})
+    }
+      }
 
   handleSubmit =(e)=>{
     e.preventDefault();
-    let {id}=this.props
-  this.props.history.push(`/payment/${id}`);
+    let {id}=this.props;
+    let {studioForm}=this.state;
+    let queryString =""   
+   studioForm.map(q=>{
+     queryString+="timeIn="+q.timeIn+"?timeout="+q.timeOut+"?singleDatePicker="+q.singleDatePicker+"?";
+   })
+  this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);
 
   }
 
 
 
-  addForm =(e)=>{
-    e.preventDefault()
-    let timeIn = document.getElementById("timein").value;
-    let timeOut=document.getElementById("timeout").value;
-    let singleDatePicker = document.getElementById("singleDatepicker").value;
-
-    let values = [
-      {
-    "timeIn" : timeIn, 
-    "timeOut": timeOut, 
-    "singleDatePicker": singleDatePicker
-  }]
-  
-  let form = [...this.state.studioForm, ...values];
- 
-   this.setState({studioForm : form})
-
-    // document.getElementById("timein").value="";
-    // document.getElementById("timeout").value="";
-    // document.getElementById("singleDatepicker").value="";
- 
-  }
 
   render() {
-    let { id , hide} = this.props;
+    let { studioForm,startDate, reveal, addField } = this.state;
     return (
-      <div className={`col-12 col-lg-4 ${hide ? "web-search":""}`}>
-        <div className="selected-date-times">
-          <ListGroup>
-            <p>Selected Schedule:</p>
-
-     {this.state.studioForm.length < 1 ? <ListGroupItem className="text-muted select-book-time"> Please Choose Date And Time you would like to book.
-     </ListGroupItem>
-       :
-       this.state.studioForm.map((sched, i)=>{
-       
-       return <ListGroupItem key={i} className="text-muted select-book-time"> Date: {sched.singleDatePicker} <br/>Time In: {sched.timeIn} {" "}
-       Time Out: {sched.timeOut}</ListGroupItem>
-     })}
-        </ListGroup>
-        <hr />
-        </div>
         <div className="hotel-reservation--area mb-100">
-        <form onSubmit={this.handleSubmit}>
-        <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit} addform={this.addForm}/>
-      {this.state.studioForm < 1 ? "": 
+        <form onSubmit={this.handleSubmit} ref={(el) => this.myFormRef = el}>
+
+        <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit} 
+        addForm={this.addForm} studioForm={studioForm} 
+        startDate={startDate}
+        handleChangeStartProps={this.handleChangeStartProps}
+        handleRevealProp={this.handleReveal}
+        revealProps={reveal}
+        closeSelectBtn={this.closeSelectBtn}
+        handleTime={this.handleTime}
+        addField={addField}
+        />
+    
        <button type="submit" className="btn roberto-btn w-100">
                 Reserve 
               </button>
-      }
+      
               </form> 
              
-      </div>
+    
      </div>
     );
   }

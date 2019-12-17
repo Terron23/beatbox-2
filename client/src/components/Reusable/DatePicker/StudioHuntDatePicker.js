@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import Calendar from 'react-calendar';
 import './css/datepick.css'
+import {Popover, PopoverContent, PopoverTitle, Overlay} from 'react-bootstrap';
+
+
+
 
 class StudioHuntDatePicker extends Component {
   constructor(props) {
@@ -12,7 +16,7 @@ class StudioHuntDatePicker extends Component {
   };
 
   handleReveal =()=>{
-
+    
 
     if(this.state.reveal){
       this.setState({reveal:false})
@@ -23,8 +27,8 @@ class StudioHuntDatePicker extends Component {
       }
 
       handleChangeStart = date => {
-      let id = this.props.id
-       document.getElementById(`${id}`).focus();
+        let id = this.props.id
+     document.getElementById(`${id}`).focus();
  
         this.setState({
           startDate: date,
@@ -33,6 +37,9 @@ class StudioHuntDatePicker extends Component {
        
       };
 
+   
+  
+    
   render() {
     let {
    type,
@@ -45,24 +52,29 @@ class StudioHuntDatePicker extends Component {
    calendarClass,
   move,
   required,
+  stateText,
+  handleChangeStartProps,
+  revealProps,
+  handleRevealProp
     } = this.props;
     let {reveal, startDate}=this.state;
   
     return (<div className="studiohunt-datepicker-tag">
-              <input
+            <input
                 type={type}
-                value={startDate.toString().substring(0, 15)}
-                className={classNames}
+                value={ stateText ? stateText.toString().substring(0, 15): startDate.toString().substring(0, 15)}
+                className={`${classNames}`}
                 id={id}
                 name={name}
                 placeholder={placeholder}
                 autoComplete={autoComplete}
-                onClick={this.handleReveal}
+                onClick={handleRevealProp ? handleRevealProp: this.handleReveal}
                 required={required ? "true" : false}
               />
+  
           <Calendar selectRange={selectRange} 
-          onChange={this.handleChangeStart} 
-          className={`${reveal ? calendarClass: "d-none" } ${move ? "studiohunt-datepicker-calendar-class" : ""}`} 
+          onChange={handleChangeStartProps ? handleChangeStartProps:this.handleChangeStart} 
+          className={`${revealProps ? calendarClass: "d-none" } ${move ? "studiohunt-datepicker-calendar-class" : ""}`} 
           /> 
        </div>
          

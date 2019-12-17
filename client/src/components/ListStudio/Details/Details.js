@@ -5,7 +5,8 @@ import { fetchUser, fetchStudioType } from "../../../actions";
 import Title from "../../assets/Title"
 import Input from "../../assets/Input";
 import TextArea from "../../assets/TextArea";
-import MultiSelect from "../../assets/MultiSelect";
+import MultiSelect from "../../Reusable/MultiSelect/MultiSelect";
+import '../AddStudioForm/css/style.css'
 
 
 class Details extends Component {
@@ -84,7 +85,7 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
                 type="textarea"
                 label="Studio Description"
                 placeholder="Enter Studio's Description "
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
 
               <Input
@@ -92,31 +93,35 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
                 type="text"
                 label="Capacity"
                 placeholder="Enter Number of People Allowed. Enter 0 if Undecided."
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="equipment"
                 label="Add Equipment"
                 type="text"
                 placeholder="Please list Any Notable Equipment You May Use."
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
 
 
               <MultiSelect
-              options={['Parking', 'Lounge', 'Wi-Fi', 'Bathroom', 'Food & Beverages', 'Air & Heating', 'N/A']}
+              options={['Parking', 'Lounge', 'Wi-Fi', 'Bathroom', 'Food & Beverages', 'Air & Heating']}
               label={'Amenities'}
               id={'services'}
               placeholder="Parking, Drinks, Wifi"
               custom={true}
+              other_id="amen"
+              text_id="amen_select"
               />
 
               <MultiSelect
-              options={['Audio Engineer', 'Instructor', 'Assistant', 'Host', 'N/A']}
+              options={['Audio Engineer', 'Instructor', 'Assistant', 'Host']}
               label={'Include In Booking'}
               id={'include'}
               placeholder="Add Any Special Features or Resources Included with your Venue"
               custom={true}
+              other_id="incl"
+              text_id="incl_select"
                             />
             
               <hr />

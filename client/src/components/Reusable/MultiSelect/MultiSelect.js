@@ -98,7 +98,7 @@ class SelectBox extends React.Component {
     otherText.push(
       <input
         type="text"
-        id="other_id"
+        id={`${this.props.text_id}`}
         className="col-md-4"
         defaultValue=""
         placeholder="Add Custom"
@@ -147,7 +147,7 @@ class SelectBox extends React.Component {
                 type="checkbox"
                 name="other"
                 value="Other"
-                id="other"
+                id={`${this.props.other_id}`}
                 onChange={this.handleOther}
               />{" "}
               Other
@@ -162,7 +162,7 @@ class SelectBox extends React.Component {
                     <div className="row container">
                       {other}
                       <button
-                        onClick={e => this.handleAdditions(e, "other_id")}
+                        onClick={e => this.handleAdditions(e, this.props.text_id)}
                         style={{ color: "#34CACA" }}
                         className="btn"
                       >

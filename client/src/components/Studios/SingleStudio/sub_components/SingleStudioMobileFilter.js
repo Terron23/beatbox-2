@@ -25,7 +25,12 @@ class MobileBook extends Component {
               X
             </a>
           </Modal.Header>
-          <Modal.Body>{children}</Modal.Body>
+          <Modal.Body>
+
+
+          {children}
+          
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary modal-close-button" onClick={handleClose}>
               Close

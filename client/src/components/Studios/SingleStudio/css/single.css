@@ -25,11 +25,21 @@
 
 .select-book-time{
     font-size: .8em;
+    border: solid 1px #0e2737;
+  
+}
+
+.select-book-time-group{
+    padding-bottom:25px;
 }
 
 .add-time:hover{
    cursor: pointer;
 }
+
+.add-time{
+   padding-bottom:25px;
+ }
    
 @media only screen and (max-width: 1000px) {
     .single-studio-gallery{

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import './css/time.css'
 
-const TimeDropDown = ({ required , label, name, id}) => (
+const TimeDropDown = ({ required , label, name, id, handleChange}) => (
   <div className="time-drop-down">
     <label htmlFor={label}>{label}</label>
-    <select className="form-control"  name={name} id={id} required={required?"true":"false"}>
+    <select className="form-control"  name={name} id={id} required={required?"true":"false"}
+    onChange={handleChange}>
       <option value="">Please Choose</option>
       <option value="5:00 AM">5:00 AM</option>
       <option value="5:15 AM">5:15 AM</option>

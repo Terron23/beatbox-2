@@ -195,28 +195,28 @@ class ListStudio extends Component {
                 type="text"
                 label="Contact Name"
                 placeholder="Enter Full Name Here"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="studioName"
                 label="Studio Name"
                 type="text"
                 placeholder="Enter the Name of Your Studio"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="price"
                 label="Price Per Hour"
                 type="number"
                 placeholder="Enter your prices"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <DropDown
                 options={this.handleStudioTypes}
                 name="studioType"
                 label="Studio Type"
                 placeholder="Enter Studio Type"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <DropDown
                 options={this.handleVenue}
@@ -224,7 +224,7 @@ class ListStudio extends Component {
                 type="text"
                 label="Venue"
                 placeholder="Enter Venue"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
 
               <Input
@@ -232,35 +232,35 @@ class ListStudio extends Component {
                 type="email"
                 label="Bussiness Email"
                 placeholder="Email"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="phone"
                 type="phone"
                 label="Bussiness Phone Number"
                 placeholder="Enter Phone Number"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="address1"
                 type="text"
                 label="Address1"
                 placeholder="Enter Street Address"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="address2"
                 type="text"
                 label="Address2"
                 placeholder="Enter Street Address"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="city"
                 type="text"
                 label="City"
                 placeholder="Enter Street City"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <DropDown
                 options={this.handleRegion}
@@ -268,14 +268,14 @@ class ListStudio extends Component {
                 type="text"
                 label="State"
                 placeholder="Enter State"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
               <Input
                 name="postalCode"
                 type="text"
                 label="Zip Code"
                 placeholder="Enter Zip Code"
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
 
               <Input
@@ -286,7 +286,7 @@ class ListStudio extends Component {
                 handleChange={this.handleFiles}
                 multiple={true}
                 required
-                classProp="form-style-8"
+                classProp="form-style-1"
               />
 
               {this.state.formControl}

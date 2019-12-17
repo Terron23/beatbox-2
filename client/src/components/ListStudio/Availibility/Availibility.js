@@ -34,12 +34,12 @@ let days = this.state.days;
        <TimeDropDown id={`${days[i]}_starttime`} 
        name={`${days[i]}_starttime`} 
        label={<b style={{"color":"#34CACA"}}>{days[i]} - Start Time </b>} 
-       classProp="form-style-8 time_slot" required={true}/>
+       classProp="form-style-1 time_slot" required={true}/>
 
         <TimeDropDown id={`${days[i]}_endtime`}
          name={`${days[i]}_endtime`} 
          label={<b style={{"color":"#34CACA"}}>{days[i]} - End Time </b>} 
-         classProp="form-style-8 time_slot"  required={true}/>
+         classProp="form-style-1 time_slot"  required={true}/>
         </div>
        )
   }

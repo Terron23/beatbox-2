@@ -5,6 +5,7 @@ import Wrapper from "./sub_components/Wrapper";
 import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
 import Ameneties from "./sub_components/Ameneties";
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Reviews from "./sub_components/Reviews";
 import BreadCrumb from "./sub_components/BreadCrumb";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
@@ -29,7 +30,9 @@ const Studios = ({
   width,
   handleClose,
   handleShow,
-  setShow
+  setShow,
+  studioForm,
+  addForm
 }) => {
   return (
     <Wrapper>
@@ -46,28 +49,33 @@ const Studios = ({
           <Ameneties services={services} contact={auth} />
           {/* <Reviews /> */}
         </div>
-        <SingleStudioSideFilter history={this.props} id={id} handleClose={handleClose} hide="web-search"/>
-
+        <div className="col-12 col-lg-4 web-search">
+      
+        <SingleStudioSideFilter  id={id}  />
+        </div>
         <div className="col-lg-12 col-md-12 col-sm-8 mobile-search">
-          <MobileBook price={price} studioName={studioName} 
-          setShow={setShow} 
-          handleClose={handleClose}
-          handleShow={handleShow}
-          >
-            <SingleStudioSideFilter id={id} handleClose={handleClose} />
+          <MobileBook price={price} studioName={studioName}
+            setShow={setShow}
+            handleClose={handleClose}
+            handleShow={handleShow}
+            studioForm={studioForm}
+          >         
+        <div className="col-12 col-lg-4">
+       
+     
+        <SingleStudioSideFilter  id={id} handleClose={handleClose} />
+        </div>
           </MobileBook>
         </div>
-         
-      
       </div>
     </Wrapper>
   );
 };
 
 class SingleStudio extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       setShow: false,
     }
   }
@@ -77,20 +85,25 @@ class SingleStudio extends Component {
   }
 
   handleClose = (e) => {
- e.preventDefault()
-    this.setState({setShow:false});
-}
-handleShow = (e) => {
-  e.preventDefault();
-    this.setState({setShow:true});
-};
+    e.preventDefault()
+    this.setState({ setShow: false });
+  }
+  handleShow = (e) => {
+    e.preventDefault();
+    this.setState({ setShow: true });
+  };
+
+
+
+
+
   render() {
     if (!this.props.studio || !this.props.auth) {
       return "";
     }
 
     const { studio, auth, width } = this.props;
-    const {setShow} = this.state
+    const { setShow } = this.state
     return (
       <div>
         {studio.map(studio => {
@@ -130,6 +143,7 @@ handleShow = (e) => {
                     setShow={setShow}
                     handleClose={this.handleClose}
                     handleShow={this.handleShow}
+                  
                   />
                 );
               } else {

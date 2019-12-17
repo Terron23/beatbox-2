@@ -12,7 +12,7 @@ class ViewStudio extends Component {
         
         style={{"padding":"5%"}}
       >
-        <h2>Thank You for Signing Up with Us</h2>
+        <h2>Thank You for Listing Your Studio With Us</h2>
         <Link className="btn roberto-btn w-100 col-6" 
         to={`/single-studio/${this.props.match.params.id}`}
         >
