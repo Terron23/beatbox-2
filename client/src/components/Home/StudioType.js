@@ -3,7 +3,7 @@ import Heading from "./sub_components/heading";
 import dance from "./images/60.png";
 import art from "./images/07.jpg";
 import photo from "./images/63.jpg";
-import viewAll from './images/sh_logo.png'
+import viewAll from './images/studio_hunt_collage.jpg'
 import { Link } from "react-router-dom";
 
 const CarouselItems = ({

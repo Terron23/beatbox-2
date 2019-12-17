@@ -49,7 +49,7 @@ addField
         autoComplete="off"
         selectRange={false} 
        calendarClass={"startDate"} 
-       required={true}
+       required={false}
        stateText={startDate}
        handleChangeStartProps={handleChangeStartProps}
        revealProps={revealProps}
@@ -61,12 +61,12 @@ addField
    <div className="row">
 <div className="col-6">
    <FormAttr label="Time In" >
-     <TimeDropDown  name="timeIn" id='timein' required={true} handleChange={(e)=>handleTime(e, 'timein')} />
+     <TimeDropDown  name="timeIn" id='timein' required={false} handleChange={(e)=>handleTime(e, 'timein')} />
    </FormAttr>
    </div>
    <div className="col-6">
    <FormAttr label="Time Out" >
-     <TimeDropDown  name="timeOut" id='timeout' required={true} handleChange={(e)=>handleTime(e, 'timeout')} />
+     <TimeDropDown  name="timeOut" id='timeout' required={false} handleChange={(e)=>handleTime(e, 'timeout')} />
    </FormAttr>
    <p className="add-time" onClick={addForm}>+{addField}</p>
    </div>
@@ -96,7 +96,7 @@ class SingleStudioSideFilter extends Component {
    let form= this.state.studioForm;
    form.splice(id, 1);
 
-   this.setState({studioForm:form})
+   this.setState({studioForm:form, addField: form.length < 1 ? 'Add Date & Time' : this.state.addField})
   }
 
   addForm = (e) => {
@@ -112,12 +112,12 @@ class SingleStudioSideFilter extends Component {
     let values = [obj]
     
     let form = [...this.state.studioForm, ...values];
+
   let error = Object.values(obj)
   for(let i=0; i<error.length; i++){
     if(error[i]===""){
       alert("Please Fill In All Values")
-     
-      return;
+
     }
   }
 
@@ -167,8 +167,10 @@ else{
    studioForm.map(q=>{
      queryString+="timeIn="+q.timeIn+"?timeout="+q.timeOut+"?singleDatePicker="+q.singleDatePicker+"?";
    })
-  this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);
+  
 
+  this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);
+   
   }
 
 
