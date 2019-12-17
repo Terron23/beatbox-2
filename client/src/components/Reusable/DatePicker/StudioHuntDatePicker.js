@@ -74,7 +74,7 @@ class StudioHuntDatePicker extends Component {
   
           <Calendar selectRange={selectRange} 
           onChange={handleChangeStartProps ? handleChangeStartProps:this.handleChangeStart} 
-          className={`${revealProps ? calendarClass: "d-none" } ${move ? "studiohunt-datepicker-calendar-class" : ""}`} 
+          className={`${revealProps ? revealProps: reveal ? calendarClass: "d-none" } ${move ? "studiohunt-datepicker-calendar-class" : ""}`} 
           /> 
        </div>
          

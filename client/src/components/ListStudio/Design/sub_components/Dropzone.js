@@ -34,7 +34,7 @@ const StudioDropZone = ({studioid, studioname, history, classProp}) => {
             .then(res => {
               
               if(i === files.length-1){
-               history.push(`/availibility/${studioname}/${studioid}`);
+               history.push(`/details/${studioname}/${studioid}`);
               }
               
               

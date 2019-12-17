@@ -36,6 +36,7 @@ class Details extends Component {
     let include = event.target.include.value;
     let studioname= this.props.match.params.studioName;
     let studioid= this.props.match.params.id;
+    let dates = event.target.days.value;
 
 
  
@@ -47,7 +48,8 @@ class Details extends Component {
             description,
             studioname,
             include,
-            studioid
+            studioid,
+            dates,
           })
           .then(res => {
             this.props.history.push(`/view-studio/${studioid}`);
@@ -80,6 +82,18 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
             onSubmit={this.handleSubmit}
           >
             <fieldset>
+
+            <MultiSelect
+              options={['Sunday', 'Monday', 'Tuesday', "Wednesday", "Thursday", "Friday", "Saturday"]}
+              label={'Availibility'}
+              id={'days'}
+              placeholder="Add Days Studio is Open"
+              custom={false}
+              other_id="na"
+              text_id="na_select"
+              
+                            />
+
             <TextArea
                 name="description"
                 type="textarea"
@@ -123,6 +137,7 @@ return ['Audio', 'Engineering', 'Production', 'Coaching', 'Free Wifi', 'Drinks',
               other_id="incl"
               text_id="incl_select"
                             />
+
             
               <hr />
 

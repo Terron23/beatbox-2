@@ -101,8 +101,8 @@ class SingleStudioSideFilter extends Component {
 
   addForm = (e) => {
 
-    let timeIn = this.state.timein;
-    let timeOut = this.state.timeout;
+    let timeIn = this.state.timeIn;
+    let timeOut = this.state.timeOut;
     let startDate = this.state.startDate
     let obj =    {
       "timeIn": timeIn,
@@ -116,6 +116,7 @@ class SingleStudioSideFilter extends Component {
   for(let i=0; i<error.length; i++){
     if(error[i]===""){
       alert("Please Fill In All Values")
+     
       return;
     }
   }
@@ -139,10 +140,10 @@ class SingleStudioSideFilter extends Component {
 
 handleTime =(e, id)=>{
 if(id==='timein'){
-  this.setState({timein:e.target.value})
+  this.setState({timeIn:e.target.value})
 }
 else{
-  this.setState({timeout:e.target.value})
+  this.setState({timeOut:e.target.value})
 }
   }
 

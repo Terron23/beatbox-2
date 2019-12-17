@@ -27,7 +27,7 @@ studioSchema = new Schema({
   rating: Array,
   timeIn: String,
   timeOut: String,
-  date: String,
+  dates: String,
   studioImageSecondary: Array,
   capacity: String,
   equipment: String,

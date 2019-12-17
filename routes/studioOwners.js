@@ -75,7 +75,9 @@ module.exports = app => {
       studioname,
       studioid,
       include,
+      dates,
     } = req.body;
+    console.log(req.body)
     let studioName = studioname;
     try {
       const studioUpdate = await Studio.update(
@@ -84,7 +86,8 @@ module.exports = app => {
           equipment: equipment,
           services:services,
           includes: include,
-          description:description},
+          description:description,
+        dates:dates},
           {upsert:true}
 
       );
@@ -114,7 +117,6 @@ module.exports = app => {
       hoursOfOperation,
       timeOut,
       timeIn,
-      date,
       studioImageSecondary,
       studioid,
     } = req.body;
@@ -151,7 +153,7 @@ module.exports = app => {
           studioImage,
           timeOut,
           timeIn,
-          date,
+          dates,
         },
         { $push: {studioImageSecondary: 95 } },
         { upsert: true },
@@ -185,7 +187,7 @@ module.exports = app => {
         studioImage,
         timeOut,
         timeIn,
-        date,
+        dates,
         studioImageSecondary,
       }).save((err, inserted) => {
         console.log(inserted._id);
