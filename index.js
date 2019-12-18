@@ -5,6 +5,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const studioOwners = require("./routes/studioOwners");
+const studios = require("./routes/studioRoutes");
 const keys = require("./config/keys");
 const path = require("path");
 require("./models/User.js");
@@ -30,6 +31,7 @@ app.use(bodyParser.json());
 
 authRoutes(app);
 studioOwners(app);
+studios(app);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
