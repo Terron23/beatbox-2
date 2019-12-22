@@ -32,15 +32,16 @@ const Studios = ({
   handleShow,
   setShow,
   studioForm,
-  addForm
+  addForm,
+
 }) => {
   return (
     <Wrapper>
       <div className="row">
         <div className="col-lg-8 col-md-12 col-sm-8">
-          <Carousel img={image} thumbnails={thumbnails} width={width} />
+          { <Carousel  img={image} thumbnails={thumbnails} width={width} /> }
           <Features
-            capacity={capacity}
+            capacity={guest}
             description={description}
             equipment={equipment}
             services={services}
@@ -102,18 +103,19 @@ class SingleStudio extends Component {
       return "";
     }
 
-    const { studio, auth, width } = this.props;
+    const { studio, auth } = this.props;
     const { setShow } = this.state
+    console.log(studio)
     return (
       <div>
         {studio.map(studio => {
-          if (this.props.match.params.id === studio._id) {
+          if (this.props.match.params.id == studio._id) {
             return (
               <BreadCrumb
-                studioName={studio.studioName}
-                price={studio.price}
-                image={studio.studioImage}
-                studiotype={studio.studioType}
+                studioName={studio.studio_name}
+                price={studio.studio_price}
+                image={studio.main_image}
+                studiotype={studio.studio_type}
               />
             );
           }
@@ -122,24 +124,22 @@ class SingleStudio extends Component {
         <div className="container">
           <div className="row">
             {studio.map(studio => {
-              if (this.props.match.params.id === studio._id) {
+              if (this.props.match.params.id == studio._id) {
                 return (
                   <Studios
-                    studioName={studio.studioName}
-                    price={studio.price}
+                    studioName={studio.studio_name}
+                    price={studio.studio_price}
                     rules={studio.rules}
-                    guest={studio.guest}
+                    guest={studio.guest_allowed}
                     id={studio._id}
-                    image={studio.studioImage}
-                    availibility={studio.availibility}
-                    thumbnails={studio.studioImageSecondary}
-                    capacity={studio.capacity}
+                    image={studio.main_image}
+                 
+                    thumbnails={Object.values(studio.studio_secondary_images)}
                     equipment={studio.equipment}
                     description={studio.description}
                     services={studio.services}
                     includes={studio.includes}
-                    auth={auth.name + " " + auth.email3}
-                    width={width}
+                    auth={auth.name + " " + auth.email}
                     setShow={setShow}
                     handleClose={this.handleClose}
                     handleShow={this.handleShow}

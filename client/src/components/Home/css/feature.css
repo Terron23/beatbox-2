@@ -1,11 +1,4 @@
-.feature-section{
-  padding-top: 100px;
-}
 
-.feature-gallery{
-  padding:20px;
-  margin: 0;
-}
 
 .hovereffect {
   width:100%;
@@ -34,7 +27,7 @@
   display:block;
   position:relative;
   height: 330px;
-  width: 100%;
+  width: 450px !important;
   -webkit-transition:all .4s linear;
   transition:all .4s linear;
   }
@@ -65,11 +58,9 @@
   filter:alpha(opacity=0);
   -webkit-transition:all .2s ease-in-out;
   transition:all .2s ease-in-out;
-  margin:50% 0 0;
+  margin:30% 0 0;
   padding:7px 14px;
-
-
-  }
+}
   
   .hovereffect a.info:hover {
   /* box-shadow:0 0 5px #fff; */
@@ -105,23 +96,7 @@
     color: lightgray;
     }
     
-    
   
-      
- 
-      
-      .feature-images {
-        padding:10px;
-        position: relative;
-        width: 50%;
-      }
-      
-      .feature-images img{
-        height: 320px;
-        width:100%;
-      }
-      
-      
       h3.feature-name{
         font-weight: bold;
         font-size:1.2em;
@@ -133,7 +108,19 @@
           font-size:1.2em;
           display:inline;
         }
-      
+        .feature-section{
+          padding-top: 100px;
+        }
+        
+        .feature-gallery{
+          padding:20px;
+          margin: 0;
+        }
+.container-fluid-feature{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+        
       
       
       

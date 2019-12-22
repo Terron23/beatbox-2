@@ -28,14 +28,15 @@ const pool = new Pool({
 
 
 passport.serializeUser((user, done) => {
-  console.log(user)
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-  pool.query(`SELECT _id, username FROM users WHERE _id = ${id}`,  (err, results) => {
+
+  pool.query(`SELECT * FROM users WHERE _id = ${id}`,  (err, results) => {
     if(err) {
     }
+   
     done(null, results.rows[0])
   })
 });
@@ -54,7 +55,9 @@ passport.use(
 
     async (accessToken, refreshToken, profile, done) => {
     
-     const existingUser= await pool.query(`SELECT _id, social_id, username FROM users WHERE social_id = '${profile.id}'`,  (err, results) => {
+     const existingUser= 
+     await pool.query(`SELECT * FROM users WHERE social_id = '${profile.id}'`,  
+     (err, results) => {
         if(err) {
           
           return done(err)
@@ -73,7 +76,7 @@ passport.use(
               return done(err)
             }
           else{
-            pool.query(`SELECT _id, social_id, username FROM users WHERE social_id = '${profile.id}'`,  (err, results) => {
+            pool.query(`SELECT * FROM users WHERE social_id = '${profile.id}'`,  (err, results) => {
               if(err) {
                 
                 return done(err)
@@ -105,7 +108,7 @@ passport.use(
       console.log(accessToken, refreshToken, profile);
       const existingUser = await User.findOne({ FACEBOOK_APP_ID: profile.id });
       if (existingUser) {
-        console.log(profile);
+        
         done(null, existingUser);
       }
       const user = await new User({

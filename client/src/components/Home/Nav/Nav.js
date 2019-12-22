@@ -16,16 +16,7 @@ class NavBar extends Component {
     };
   }
 
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
-  }
 
-
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-    console.log(this.state.width);
-  };
   
   renderContent() {
     switch (this.props.auth) {
@@ -46,7 +37,7 @@ class NavBar extends Component {
             <i className="fa fa-plus"></i> Add Your Studio
           </Link>,
 
-          <Link to="/userprofile">{this.props.auth.name}'s' Profile</Link>,
+          <Link to="/userprofile">{this.props.auth.contact_name}'s' Profile</Link>,
           <a href="/api/logout">Logout</a>
         ].map((value, i) => {
           return <Nav.Link key={i}>{value}</Nav.Link>;

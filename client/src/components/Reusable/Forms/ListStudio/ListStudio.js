@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { fetchUser, fetchStudioType } from "../../../actions";
+import { fetchUser } from "../../../actions";
 import Title from "../../assets/Title"
 import DropDown from "../../assets/DropDown";
-import SearchCriteria from "./sub_component/SearchCriteria";
-import Input from "../../assets/Input";
+import SearchCriteria from '../../../Reusable/SearchCriteria/SearchCriteria'
+import Input from "../../FormElements/Input/Input";
+import Button from "../../FormElements/Button/Button"
 import './css/style.css';
 
 class ListStudio extends Component {
@@ -13,11 +14,6 @@ class ListStudio extends Component {
     super(props);
     this.state = {
       files: null,
-      url: null,
-      alert: "d-none",
-      from: [],
-      formControl: null,
-      studioName: "",
       region: [
         "Alabama",
         "Alaska",
@@ -86,13 +82,10 @@ class ListStudio extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
-    this.props.fetchStudioType()
   }
 
   handleFiles = event => {
- 
-
-    this.setState({ files: event.target.files[0] });
+   this.setState({ files: event.target.files[0] });
   };
 
   handleSubmit = event => {
@@ -149,22 +142,12 @@ class ListStudio extends Component {
       .catch(err => console.log(err));
   };
 
-  handleStudioTypes = () =>
-    this.props.studiotype.map(types => <option key={types._id} value={types._id}>{types.studio_type}</option>);
+
 
   handleVenue = () =>
     this.state.venue.map((types, i) => <option key={i}>{types}</option>);
 
   
-
-  handleClick = e => {
-    e.preventDefault();
-    if (this.state.alert === "d-none") {
-      this.setState({ alert: "alert alert-success" });
-    } else {
-      this.setState({ alert: "d-none" });
-    }
-  };
 
   handleRegion = () => {
     return this.state.region.map((zip, i) => {
@@ -183,7 +166,6 @@ class ListStudio extends Component {
             <div className="row">
           <div
             className="col-md-2"
-            onSubmit={this.handleSubmit}
           ></div>
           <form
             id="myForm"
@@ -192,11 +174,14 @@ class ListStudio extends Component {
           >
             <fieldset>
               <Input
-                name="name1"
+                name="name"
+                id="name"
                 type="text"
                 label="Contact Name"
                 placeholder="Enter Full Name Here"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
               <Input
                 name="studioName"
@@ -204,21 +189,27 @@ class ListStudio extends Component {
                 type="text"
                 placeholder="Enter the Name of Your Studio"
                 classProp="form-style-1"
+                value=""
+                id="studioName"
+                required={true}
               />
               <Input
                 name="price"
+                id="price"
                 label="Price Per Hour"
                 type="number"
-                placeholder="Enter your prices"
+                placeholder="Enter your price"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
-              <DropDown
-                options={this.handleStudioTypes}
+              <SearchCriteria
                 name="studioType"
-                label="Studio Type"
+                title="Studio Type"
                 placeholder="Enter Studio Type"
-                classProp="form-style-1"
+                col="form-style-1"
               />
+
               <DropDown
                 options={this.handleVenue}
                 name="venue"
@@ -230,38 +221,53 @@ class ListStudio extends Component {
 
               <Input
                 name="email"
+                id="email"
                 type="email"
                 label="Bussiness Email"
                 placeholder="Email"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
+
               <Input
                 name="phone"
                 type="phone"
+                id="phone"
                 label="Bussiness Phone Number"
                 placeholder="Enter Phone Number"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
               <Input
                 name="address1"
+                id="address1"
                 type="text"
                 label="Address1"
                 placeholder="Enter Street Address"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
               <Input
                 name="address2"
+                id="address2"
                 type="text"
                 label="Address2"
                 placeholder="Enter Street Address"
                 classProp="form-style-1"
+                value="N/A"
               />
               <Input
                 name="city"
+                id="city"
                 type="text"
                 label="City"
                 placeholder="Enter Street City"
                 classProp="form-style-1"
+                value=""
+                required={true}
               />
               <DropDown
                 options={this.handleRegion}
@@ -277,27 +283,22 @@ class ListStudio extends Component {
                 label="Zip Code"
                 placeholder="Enter Zip Code"
                 classProp="form-style-1"
+                required={true}
               />
 
               <Input
                 name="file"
                 type="file"
+                id="file"
                 label="Add Main Studio Image"
                 placeholder="Upload Photo"
                 handleChange={this.handleFiles}
-                multiple={true}
-                required
+                required={true}
                 classProp="form-style-1"
               />
-
-              {this.state.formControl}
               <hr />
+              <Button divClass="form-group" buttonClass="btn roberto-btn w-100" type="submit" text="Save & Continue"/>
 
-              <div className="form-group row">
-                <button className="btn roberto-btn w-100" type="submit">
-                  Save & Continue
-                </button>
-              </div>
             </fieldset>
           </form>
 

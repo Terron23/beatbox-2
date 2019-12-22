@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import StudioHuntDatePicker from "../Reusable/DatePicker/StudioHuntDatePicker";
 import "../Reusable/DatePicker/css/datepick.css";
-import SearchCriteria from "./sub_components/SearchCriteria";
+import SearchCriteria from "../Reusable/SearchCriteria/SearchCriteria";
 
 class Schedule extends Component {
   constructor(props) {
@@ -87,7 +87,7 @@ class Schedule extends Component {
                     />
                   </div>
 
-                  <SearchCriteria title="studio" />
+                  <SearchCriteria title="studio" col="col-6 col-md-2 col-lg-3"/>
 
                   <div className="col-8 col-md-3">
                     <button

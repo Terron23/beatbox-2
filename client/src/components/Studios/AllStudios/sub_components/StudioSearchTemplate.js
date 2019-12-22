@@ -6,17 +6,14 @@ const StudioSearchTemplate = ({
   _id,
   studioImage,
   price,
-  guest,
   studioType,
   city,
   availibility
 }) => (
-  <div
-    className="single-room-area d-flex align-items-center mb-50"
-  >
+  <div className="single-room-area d-flex align-items-center mb-50">
     <div className="room-thumbnail">
-    <Link to={`/single-studio/${_id}`} >
-      <img src={studioImage} alt={studioName} className="search-img"/>
+      <Link to={`/single-studio/${_id}`}>
+        <img src={studioImage} alt={studioName} className="search-img" />
       </Link>
     </div>
 
@@ -30,18 +27,12 @@ const StudioSearchTemplate = ({
           Studio Type: <span>{studioType}</span>
         </h6>
         <h6>
-          Hours of Operation:{" "}
-          {availibility.map(hours => (
-            <li>
-              <span>
-                {hours.day} :{hours.starttime} - {hours.endtime}
-                {}
-              </span>
-            </li>
-          ))}
+          Location: <span>{city}</span>
         </h6>
         <h6>
-          Location: <span>{city}</span>
+          Hours of Operation: {availibility.map((a, i)=>{
+          return <span key={i}> {a} </span>
+          })}
         </h6>
       </div>
       <Link to={`/single-studio/${_id}`} className="btn view-detail-btn">

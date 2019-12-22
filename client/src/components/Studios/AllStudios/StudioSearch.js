@@ -71,37 +71,35 @@ class StudioSearch extends Component {
           : studio.city
               .toLowerCase()
               .match(this.state.location.toLowerCase()) ||
-            studio.postalCode.toLowerCase() ===
+            studio.postal_code.toLowerCase() ===
               this.state.location.toLowerCase()
       )
       .filter(studio =>
         this.state.studioType === ""
-          ? studio.studioType
-          : studio.studioType === this.state.studioType
+          ? studio.studio_type_fk
+          : studio.studio_type_fk == this.state.studioType
       )
       .filter(studio =>
         this.state.applyDate === ""
-          ? studio.availibility
-          : studio.availibility.filter(
-              studio =>
-                studio.day === days[new Date(this.state.applyDate).getDay()]
+          ? Object.values(studio.availibility)
+          : Object.values(studio.availibility).filter(
+              day =>
+                day.toLowerCase() === days[new Date(this.state.applyDate).getDay()].toLowerCase()
             ) != ""
       )
       .map(studio => {
         return (
           <StudioSearchTemplate
             key={studio._id}
-            studioImage={studio.studioImage}
-            studioName={studio.studioName}
-            price={studio.price}
+            studioImage={studio.main_image}
+            studioName={studio.studio_name}
+            price={studio.studio_price}
             _id={studio._id}
-            studioType={studio.studioType}
+            studioType={studio.studio_type}
             city={studio.city}
-            studioType={studio.studioType}
-            availibility={studio.availibility}
-           
-         
-          />
+            availibility={Object.values(studio.availibility)}
+            
+            />
         );
       });
 
@@ -128,25 +126,13 @@ class StudioSearch extends Component {
     return price;
   };
 
-  handleDropDown = options => {
-    let filterArr = [...this.props.studio];
-    let data = [];
-    if (options === "studioType") {
-      let studioType = filterArr.map(studio => {
-        return data.push(studio.studioType);
-      });
+  
 
-      return [...new Set(data)];
-    }
-    let group = filterArr.map(studio => {
-      return data.push(studio.guest);
-    });
-    return [...new Set(group)];
-  };
   handleClose = e => {
     e.preventDefault();
     this.setState({ setShow: false });
   };
+
   handleShow = e => {
     e.preventDefault();
     if (!this.state.setShow) {
@@ -157,8 +143,6 @@ class StudioSearch extends Component {
   };
 
   handleReveal =()=>{
-
-
 if(this.state.reveal){
   this.setState({reveal:false})
 }
@@ -191,9 +175,7 @@ else{
               priceLow={this.handlePrice()[0]}
               priceHigh={this.handlePrice().pop()}
               search={studioType}
-              group={this.handleDropDown()}
-          
-            />
+             />
           </StudioMobileFilter>
         </div>
         <div className="roberto-rooms-area section-padding-100-0">
@@ -207,7 +189,7 @@ else{
                 priceLow={this.handlePrice()[0]}
                 priceHigh={this.handlePrice().pop()}
                 search={studioType}
-                group={this.handleDropDown()}
+                
                 startDate={startDate}
                 handleChangeStart={this.handleChangeStart}
                 width={this.props.width}

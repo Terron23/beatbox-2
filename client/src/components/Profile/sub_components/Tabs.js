@@ -47,7 +47,7 @@ class Tabs extends Component {
 
   render() {
     let { view1, view2, view3, view4 } = this.state;
-    let { studioListed, userForm, booked } = this.props;
+    let { studios, userForm, booked } = this.props;
     return (
       <div>
         <div className="row">
@@ -90,20 +90,20 @@ class Tabs extends Component {
           </div>
         </div>
         <hr />
-        <div className={view1}>{studioListed}</div>
+        <div className={view1}>{studios}</div>
+
+        
         <div className={view2}>
-          {booked.map(booked => {
-            return (
-              <div>
-                <p> Studio Name: {booked.studioName}</p>
-                <p> Date Visited: {booked.dateBooked}</p>
-                <p> Payment: {booked.payment}</p>
-              </div>
-            );
-          })}
+      
         </div>
-        <div className={view3}>{userForm}</div>
-        <div className={view4}>test4</div>
+        <div className={view3}>
+          {userForm}
+        </div>
+
+        <div className={view4}>
+
+
+        </div>
       </div>
     );
   }

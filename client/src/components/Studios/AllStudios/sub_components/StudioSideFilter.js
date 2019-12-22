@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchCriteria from "./SearchCriteria";
+import SearchCriteria from "../../../Reusable/SearchCriteria/SearchCriteria";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker'
 
@@ -39,7 +39,7 @@ class StudioSideFilter extends Component {
                 title="Studio Type"
                 search={search}
                 name="studioType"
-                col="12"
+                col="col-12"
               />
             </FormAttr>
             <FormAttr label="Check In Date">

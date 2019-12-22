@@ -9,12 +9,12 @@ import {
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get("/api/current_user");
+  const res = await axios.get("/api/v2/current_user");
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const fetchStudio = () => async dispatch => {
-  const res = await axios.get("/api/studio-listing");
+  const res = await axios.get("/api/v2/studio-listing");
   dispatch({ type: FETCH_STUDIO, payload: res.data });
 };
 
@@ -34,7 +34,7 @@ export const fetchLocation = () => async dispatch => {
 };
 
 export const fetchStudioType = () => async dispatch => {
-  const res = await axios.get("/api/studio-type");
+  const res = await axios.get("/api/v2/studio-type");
   dispatch({ type: FETCH_STUDIOTYPES, payload: res.data });
 };
 

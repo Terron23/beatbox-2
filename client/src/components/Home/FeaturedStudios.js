@@ -50,7 +50,7 @@ class FeaturedStudios extends Component {
   showStudio = () => {
     return this.props.studio
       .sort((s1, s2) => {
-        return s2["price"] - s1["price"];
+        return s2["studio_price"] - s1["studio_price"];
       })
       .filter((curr, i, arr) => {
         return i <= 5;
@@ -59,13 +59,11 @@ class FeaturedStudios extends Component {
         return (
           <SingleFeaturedStudio
             key={s._id}
-            bg={s.studioImage}
-            studiotype={s.studioType}
-            price={s.price}
-            studioName={s.studioName}
-            rating={s.rating.map(star => (
-              <i className="icon_star"></i>
-            ))}
+            bg={s.main_image}
+            studiotype={s.studio_type}
+            price={s.studio_price}
+            studioName={s.studio_name}
+            rating=""
             group={s.guest}
             id={s._id}
             amenities={s.services}
@@ -84,7 +82,7 @@ class FeaturedStudios extends Component {
           color="black"
           subtitle="View Our Top Rated Studios"
         />
-     <div className="container">
+     <div className="container-fluid container-fluid-feature">
      <div className="row ">
           
             {this.showStudio()}

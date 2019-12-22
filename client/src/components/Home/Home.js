@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import FeaturedStudios from "./FeaturedStudios";
+// import FeaturedStudios from "./FeaturedStudios";
 import { connect } from "react-redux";
 import { fetchLocation, fetchStudio } from "../.././actions";
 import About from "./About";
 import StudioType from "./StudioType";
+import FeaturedStudios from "./FeaturedStudios"
 import City from "./City";
 import PostStudio from "./PostStudio";
 import Hero from "./Hero/Hero";
@@ -37,7 +38,7 @@ class Home extends Component {
           locate={locate.city}
           history={history}
           handleSubmit={this.handleSubmit}/>
-        <FeaturedStudios />
+         <FeaturedStudios /> 
         <PostStudio />
         <StudioType width={width}/>
         <About />

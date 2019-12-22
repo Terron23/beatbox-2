@@ -37,11 +37,16 @@ class Details extends Component {
     let studioname= this.props.match.params.studioName;
     let studioid= this.props.match.params.id;
     let dates = event.target.days.value;
-
+  
+    let obj = {}
+    dates.split(",").map((d, i)=>{
+        
+        obj[i] = d.replace(/ /g,'')
+    })
 
  
         axios
-          .put("/api/post-details", {
+          .put("/api/v2/post-details", {
             capacity,
             equipment,
             services,
@@ -49,7 +54,7 @@ class Details extends Component {
             studioname,
             include,
             studioid,
-            dates,
+            dates: obj,
           })
           .then(res => {
             this.props.history.push(`/view-studio/${studioid}`);
