@@ -52,11 +52,7 @@ class Profile extends Component {
   };
 
   handleUploads = () => {
-    // let {title, handleSubmit, contactVal, studioNameVal,
-    //   priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal,
-    //   postalVal, buttonText, handleFiles, classProp} = this.props
- 
-    return (
+  return (
       <div className="row">
         {this.props.studio.map(studio => {
           if (studio.user_fk == this.props.auth._id) {

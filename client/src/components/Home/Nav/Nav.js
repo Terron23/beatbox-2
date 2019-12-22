@@ -24,23 +24,24 @@ class NavBar extends Component {
         return;
       case false:
         return [
-          <Link to="/post-studio">
+          <Nav.Link key="post-studio" href="/post-studio">
             <i className="fa fa-plus"></i>Add Your Studio
-          </Link>,
-          <Link to="/sign-up">Sign Up/Login</Link>
+          </Nav.Link>,
+          <Nav.Link key="sign-up" href="/sign-up">Sign Up/Login</Nav.Link>
         ].map((value, i) => {
-          return <li key={i}>{value}</li>;
+          return value;
         });
       default:
         return [
-          <Link to="/post-studio">
+          <Nav.Link key="post-studio" href="/post-studio">
             <i className="fa fa-plus"></i> Add Your Studio
-          </Link>,
+          </Nav.Link>,
 
-          <Link to="/userprofile">{this.props.auth.contact_name}'s' Profile</Link>,
-          <a href="/api/logout">Logout</a>
+          <Nav.Link key="userprofile" href="/userprofile">{this.props.auth.contact_name}'s' Profile</Nav.Link>,
+
+          <Nav.Link key="logout" href="/api/logout">Logout</Nav.Link>
         ].map((value, i) => {
-          return <Nav.Link key={i}>{value}</Nav.Link>;
+          return value;
         });
     }
   }
@@ -73,12 +74,12 @@ else{
               <Nav.Link>
                 <i className="fa fa-search" onClick={revealSearch}></i>
               </Nav.Link>
-              <Nav.Link>
-                <Link className="navFade"  to="/search-studio">
+              <Nav.Link className="navFade"  href="/search-studio">
+               
                   Book Now{" "}
                   <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-                </Link>
-              </Nav.Link>
+                </Nav.Link >
+              
             </Navbar.Collapse>
           </Navbar>
         </div>

@@ -238,6 +238,9 @@
         height: 80px;
         padding: 0;
       }
+      .studio-nav a:hover{
+        color:#1cc3b2 !important;
+      }
     @media only screen and (max-width: 767px) {
         .studio-nav{
           height: auto;
@@ -245,18 +248,18 @@
         }
         }
         .navFade{
-          padding: 0 30px;
-          background-color: #1cc3b2;
-          height: 80px;
-          line-height: 80px;
-          text-align: center;
-          color: #ffffff;
-          font-size: 16px;
-          padding: 30px;
+          padding: 0 30px !important;
+          background-color: #1cc3b2 !important;
+          height: 80px !important;
+          line-height: 80px !important;
+          text-align: center !important;
+          color: #ffffff !important;
+          font-size: 16px !important;
+          
         }
 
         .navFade:hover{
-          background-color: #2a303b;
+          background-color: #2a303b !important;
           color: white;
           height: inherit;
           line-height: 80px;

@@ -1,46 +1,69 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm from "./sub_components/CheckoutForm";
 import { connect } from "react-redux";
 import { fetchUser, fetchStudio } from "../../actions";
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import './css/payment.css'
 
 class Payment extends Component {
+
+
   componentDidMount() {
     this.props.fetchUser();
     this.props.fetchStudio();
   }
 
   checkoutDetails = () => {
+    const search = this.props.location.search;
+    let params=[]
     return this.props.studio
       .filter(studio => {
-        return studio._id === this.props.match.params.studioid;
+        return studio._id === Number(this.props.match.params.studioid);
       })
       .map(studio => {
         return (
           <div>
-            <label>Studio Details</label>
-            <table className="table table-striped">
-              <tbody>
-                <tr>
-                  <th>Studio Name</th>
-                  <td>{studio.studioName}</td>
-                  <div></div>
-                </tr>
-                <tr>
-                  <th>Contact Name</th>
-                  <td>{studio.name}</td>
-                </tr>
-                <tr>
-                  <th>Price</th>
-                  <td>${studio.price}.00</td>
-                </tr>
+           <ListGroup>
+                  <ListGroupItem>
+                  <span className="checkout-details">StudioName:</span><br /> {studio.studio_name}
+                  </ListGroupItem>
+                  <ListGroupItem>
+                  <span className="checkout-details">Contact Info:</span> <br />{studio.contact_name}<br />
+                  </ListGroupItem>
+                  <ListGroupItem>
+                  <span className="checkout-details">Studio Price:</span><br /> {studio.studio_price}.00
+                  </ListGroupItem>
+                  <ListGroupItem>
+                 <span className="checkout-details">Venue:</span> <br />{studio.studio_venue}
+                 </ListGroupItem>
+               <ListGroupItem>
+               <span className="checkout-details">Reserved Date & Time</span><br />
+                  {search
+                    .replace(/%20/g, " ")
+                    .replace(/=/g, ": ")
+                    .split("?")
+                    .map((param, i) => {
+                      let num = i+1
+                      params.push(param)
+                     
+                      if(params[0]===""){
+                        params.shift()
+                      }
+                     
+                      if(params.length === 3){
 
-                <tr>
-                  <th>Venue</th>
-                  <td>{studio.venue}</td>
-                </tr>
-              </tbody>
-            </table>
+                        let timein = params[0]
+                        let timeout = params[1]
+                        let  date = params[2]
+                       
+                        params=[]
+                       
+                      return (<span>  {timein} <br/> {timeout} <br/> {date} <hr /></span>)
+                      }
+                    })}
+               </ListGroupItem>
+                </ListGroup>
           </div>
         );
       });

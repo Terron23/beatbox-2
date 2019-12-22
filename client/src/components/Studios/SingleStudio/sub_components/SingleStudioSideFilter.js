@@ -169,7 +169,7 @@ else{
     let {studioForm}=this.state;
     let queryString =""   
    studioForm.map(q=>{
-     queryString+="timeIn="+q.timeIn+"?timeout="+q.timeOut+"?singleDatePicker="+q.singleDatePicker+"?";
+     queryString+="Time In="+q.timeIn+"?Time Out="+q.timeOut+"?Date="+q.singleDatePicker+"?";
    })
   
 

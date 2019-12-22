@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { CardElement, injectStripe } from "react-stripe-elements";
-import { connect } from "react-redux";
-import { fetchUser, fetchStudio } from "../../actions";
-import Title from "../assets/Title";
+import Title from "../../assets/Title";
 
 class CheckoutForm extends Component {
   handleSubmit = async e => {
@@ -96,13 +94,13 @@ class CheckoutForm extends Component {
                 <label>Card Information</label>
                 <CardElement className="form-control" />
               </div>
-              <button className="btn btn-primary" type="submit">
-                Purchase
+              <button className="btn roberto-btn w-100" type="submit">
+                Reserve
               </button>
             </form>
           </div>
 
-          <div className="col-md-6">{checkoutDetails()}</div>
+          <div className="col-md-4">{checkoutDetails()}</div>
         </div>
       </div>
     );
