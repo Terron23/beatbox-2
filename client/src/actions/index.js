@@ -15,6 +15,7 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchStudio = () => async dispatch => {
   const res = await axios.get("/api/v2/studio-listing");
+  console.log("test", res.data)
   dispatch({ type: FETCH_STUDIO, payload: res.data });
 };
 

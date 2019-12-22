@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import Tabs from "./sub_components/Tabs";
 import { fetchStudio, fetchUser } from "../../actions";
 import axios from "axios";
-import StudioProfile from "./sub_components/StudioProfile";
-
+import ListStudioForm from "../Reusable/Forms/ListStudio/ListStudio";
+import "./css/profile.css";
 
 class Profile extends Component {
   constructor(props) {
@@ -13,39 +13,64 @@ class Profile extends Component {
       name: "",
       email: "",
       social: "",
-      view: "d-none",
+      view: "d-none"
     };
   }
 
-
+  componentDidMount() {
+    this.props.fetchStudio();
+  }
 
   handleStudioListed = () => {
-    let { studio } = this.props;
-    return studio.map(studio => {
-      return (
-        <div>
-          <StudioProfile
-            name={studio.contact_name}
-            phone={studio.phone}
-            venue={studio.venue}
-            address1={studio.address1}
-            address2={studio.address2}
-            postalcode={studio.postal_code}
-            region={studio.region}
-            city={studio.city}
-            email={studio.email}
-            isListed={studio.isListed}
-            studioName={studio.studio_name}
-            guest={studio.guest}
-            price={studio.studio_price}
-            rules={studio.rules}
-            studioType={studio.studio_type}
-            studioid={studio._id}
+    // let {title, handleSubmit, contactVal, studioNameVal,
+    //   priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal,
+    //   postalVal, buttonText, handleFiles, classProp} = this.props
+    return this.props.studio.map(studio => {
+      if (studio.user_fk == this.props.auth._id) {
+        return (
+          <ListStudioForm
+            contactVal={studio.contact_name}
+            phoneVal={studio.contact_phone}
+            venueVal={studio.venue}
+            ad1Val={studio.address1}
+            ad2Val={studio.address2}
+            postalVal={studio.postal_code}
+            regionVal={studio.state}
+            cityVal={studio.city}
+            emailVal={studio.contact_email}
+            studioNameVal={studio.studio_name}
+            priceVal={studio.studio_price}
+            search={studio.studio_type_fk}
+            idVal={studio._id}
+            buttonText="Edit & Save"
+            title={`Edit ${studio.studio_name}`}
+            handleSubmit={e => this.handleSubmit(e, "studios")}
           />
-          <hr />
-        </div>
-      );
+        );
+      }
     });
+  };
+
+  handleUploads = () => {
+    // let {title, handleSubmit, contactVal, studioNameVal,
+    //   priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal,
+    //   postalVal, buttonText, handleFiles, classProp} = this.props
+    alert("uploads")
+    return (
+      <div className="row">
+        {this.props.studio.map(studio => {
+          if (studio.user_fk == this.props.auth._id) {
+            return Object.values(studio.studio_images).map(img => {
+              return (
+                <div className="col-md-4">
+                  <img src={img} className="img-fluid"/>
+                </div>
+              );
+            });
+          }
+        })}
+      </div>
+    );
   };
 
   handleSubmit = async (e, form) => {
@@ -55,8 +80,6 @@ class Profile extends Component {
     let twitter;
     let instagram;
     let facebook;
-
-  
 
     try {
       if (form === "users") {
@@ -80,12 +103,38 @@ class Profile extends Component {
       }
 
       if (form === "studios") {
-        const res = axios.post("/api/update_user", {
-          username,
+        let name = e.target.name.value;
+        let address1 = e.target.address1.value;
+        let address2 = e.target.address2.value;
+        let postalCode = e.target.postalCode.value;
+        let city = e.target.city.value;
+        let region = e.target.region.value;
+        let email = e.target.email.value;
+        let phone = e.target.phone.value;
+        let venue = e.target.venue.value;
+        let studioName = e.target.studioName.value;
+        let price = Number(e.target.price.value);
+        let rules = "";
+        let guest = 0;
+        let studioType = e.target.studioType.value;
+        let studioid = Number(e.target.studioid.value);
+
+        const res = axios.put("/api/v2/put-studio-info", {
+          name,
           email,
-          twitter,
-          instagram,
-          facebook
+          phone,
+          venue,
+          address1,
+          address2,
+          postalCode,
+          city,
+          region,
+          studioName,
+          price,
+          rules,
+          guest,
+          studioType,
+          studioid
         });
         if (res.ok) {
           console.log("It Works");
@@ -96,17 +145,13 @@ class Profile extends Component {
     }
   };
 
- 
-
   render() {
     if (!this.props.studio || !this.props.auth) {
       return "";
     }
-    let { studio, auth } = this.props;
-    let { view} = this.state;
     return (
       <div className="container" style={{ marginTop: "150px" }}>
-    <Tabs studios={this.handleStudioListed} />
+        <Tabs showStudioForm={this.handleStudioListed()} showUploads={this.handleUploads()}/>
       </div>
     );
   }

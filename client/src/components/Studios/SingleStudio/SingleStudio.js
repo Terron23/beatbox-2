@@ -132,9 +132,9 @@ class SingleStudio extends Component {
                     rules={studio.rules}
                     guest={studio.guest_allowed}
                     id={studio._id}
-                    image={studio.main_image}
+                    
                  
-                    thumbnails={Object.values(studio.studio_secondary_images)}
+                    thumbnails={Object.values(studio.studio_images)}
                     equipment={studio.equipment}
                     description={studio.description}
                     services={studio.services}

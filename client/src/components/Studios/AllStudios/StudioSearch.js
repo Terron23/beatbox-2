@@ -91,7 +91,7 @@ class StudioSearch extends Component {
         return (
           <StudioSearchTemplate
             key={studio._id}
-            studioImage={studio.main_image}
+            studioImage={Object.values(studio.studio_images)[0]}
             studioName={studio.studio_name}
             price={studio.studio_price}
             _id={studio._id}

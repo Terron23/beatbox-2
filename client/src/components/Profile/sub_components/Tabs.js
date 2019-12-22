@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+
 class Tabs extends Component {
   constructor(props) {
     super(props);
@@ -47,14 +48,14 @@ class Tabs extends Component {
 
   render() {
     let { view1, view2, view3, view4 } = this.state;
-    let { studios, userForm, booked } = this.props;
+  let {showStudioForm, showUploads}=this.props
     return (
       <div>
-        <div className="row">
+        <div className="row text-center">
           <div className="col-md-3">
             <a
-              href=""
-              className="is-active"
+              
+              className="is-active" id={view1}
               onClick={e => this.handleView(e, "studios")}
             >
               Your Studios
@@ -62,8 +63,8 @@ class Tabs extends Component {
           </div>
           <div className="col-md-3">
             <a
-              href=""
-              className="is-active"
+             
+              className="is-active" id={view2}
               onClick={e => this.handleView(e, "visited")}
             >
               Studios You Visited
@@ -71,8 +72,8 @@ class Tabs extends Component {
           </div>
           <div className="col-md-3">
             <a
-              href=""
-              className="is-active"
+              
+              className="is-active" id={view3}
               onClick={e => this.handleView(e, "profile")}
             >
               Profile
@@ -81,29 +82,29 @@ class Tabs extends Component {
 
           <div className="col-md-3">
             <a
-              href=""
-              className="is-active"
+             
+              className="is-active" id={view4}
               onClick={e => this.handleView(e, "uploads")}
             >
               Uploads
             </a>
           </div>
         </div>
-        <hr />
-        <div className={view1}>{studios}</div>
+        <hr className="tab-nav-border"/>
+        <div className="tab-data">
 
-        
-        <div className={view2}>
-      
-        </div>
-        <div className={view3}>
-          {userForm}
-        </div>
+  <div className={view1}>
+   {showStudioForm}
+    </div>
+
+        <div className={view2}></div>
+        <div className={view3}>{}</div>
 
         <div className={view4}>
 
-
+          {showUploads}
         </div>
+      </div>
       </div>
     );
   }

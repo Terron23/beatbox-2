@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button =({id,  divClass, buttonClass, type, text} )=>  {
+const FormButton =({id,  divClass, buttonClass, type, text} )=>  {
 
     return (
         <div className={divClass}>
@@ -13,4 +13,4 @@ const Button =({id,  divClass, buttonClass, type, text} )=>  {
   }
 
 
-export default Button;
+export default FormButton;

@@ -73,19 +73,7 @@ const postListing = (req, res) => {
   );
 };
 
-const putImages = (req, res) => {
-  const { studioid, studioname, studioImageSecondary } = req.body;
-  pool.query(
-    "Update studios set studio_secondary_images = $3 where user_fk =$1 and _id=$2 ",
-    [req.user._id, studioid, studioImageSecondary],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(200).json("Image Inserted Successfully");
-    }
-  );
-};
+
 
 //Get Requests
 const getStudioType = (request, response) => {
@@ -144,6 +132,79 @@ const putStudioDetails = (req, res) => {
   );
 };
 
+
+const putStudioInfo = (req, res) => {
+  const {
+    name,
+    phone,
+    venue,
+    address1,
+    address2,
+    postalCode,
+    region,
+    city,
+    email,
+    price,
+    guest,
+    studioName,
+    studioImage,
+    studioType, 
+    studioid
+  } = req.body;
+  console.log(req.body)
+  pool.query(
+    "Update studios set contact_name =$2, contact_phone=$3, studio_venue=$4, address1=$5, address2=$6, postal_code=$7, city=$8, contact_email=$9, studio_name=$10, guest_allowed=$11, studio_price=$12, studio_type_fk=$13, main_image=$14, state=$15 where _id=$16 and user_fk=$1" ,
+    [
+      req.user._id,
+      name,
+      phone,
+      venue,
+      address1,
+      address2,
+      postalCode,
+      city,
+      email,
+      studioName,
+      guest,
+      price,
+      studioType,
+      studioImage,
+      region,
+      studioid
+    ],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      pool.query(
+        "Select _id from studios where user_fk = $1 and studio_venue=$2 and address1=$3 and studio_name=$4 and studio_type_fk = $5 and main_image=$6",
+        [req.user._id, venue, address1, studioName, studioType, studioImage],
+        (error, results) => {
+          if (error) {
+            throw error;
+          }
+          res.status(200).json(results.rows);
+        }
+      );
+    }
+  );
+};
+
+const putImages = (req, res) => {
+  const { studioid, studioname, studioImageSecondary } = req.body;
+  pool.query(
+    "Update studios set studio_images = $3 where user_fk =$1 and _id=$2 ",
+    [req.user._id, studioid, studioImageSecondary],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json("Image Inserted Successfully");
+    }
+  );
+};
+
 //   app.post("/api/v2/update_user", (req, res) => {
 //     let { username: name, email, instagram, twitter, facebook } = req.body;
 
@@ -167,11 +228,11 @@ const putStudioDetails = (req, res) => {
 module.exports = {
   //post
   postListing,
-
   //get
   getStudioType,
   getStudios,
   //put
   putImages,
-  putStudioDetails
+  putStudioDetails,
+  putStudioInfo,
 };

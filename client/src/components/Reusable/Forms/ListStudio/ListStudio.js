@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { fetchUser } from "../../../actions";
-import Title from "../../assets/Title"
-import DropDown from "../../assets/DropDown";
+import { fetchUser } from "../../../../actions";
+import Title from "../../../assets/Title"
+import DropDown from "../../FormElements/DropDown/DropDown";
 import SearchCriteria from '../../../Reusable/SearchCriteria/SearchCriteria'
 import Input from "../../FormElements/Input/Input";
-import Button from "../../FormElements/Button/Button"
-import './css/style.css';
+import FormButton from "../../FormElements/Button/Button"
 
-class ListStudio extends Component {
+
+class ListStudioForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,74 +79,7 @@ class ListStudio extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-
-  handleFiles = event => {
-   this.setState({ files: event.target.files[0] });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    let name = event.target.name1.value;
-    let address1 = event.target.address1.value;
-    let address2 = event.target.address2.value;
-    let postalCode = event.target.postalCode.value;
-    let city = event.target.city.value;
-    let region = event.target.region.value;
-    let email = event.target.email.value;
-    let phone = event.target.phone.value;
-    let venue = event.target.venue.value;
-    let studioName = event.target.studioName.value;
-    let price = event.target.price.value;
-    let rules = "";
-    let guest = 0;
-    let studioType = event.target.studioType.value;
-    let files = this.state.files;
-
-    const formData = new FormData();
-    formData.append("file", files);
-    formData.append("upload_preset", "nyv0ihyq");
-  
-
-    axios
-      .post(`https://api.cloudinary.com/v1_1/etlt/image/upload`, formData)
-      .then(cloudResponse => {
-        let studioImage = cloudResponse.data.url;
-        axios
-          .post("/api/v2/post-listing", {
-            studioName,
-            price,
-            rules,
-            name,
-            email,
-            address1,
-            address2,
-            postalCode,
-            city,
-            region,
-            phone,
-            venue,
-            studioImage,
-            guest,
-            studioType
-          })
-          .then(res => {
-           
-            this.props.history.push(`/design/${studioName}/${res.data[0]._id}`);
-          });
-      })
-      .catch(err => console.log(err));
-  };
-
-
-
-  handleVenue = () =>
-    this.state.venue.map((types, i) => <option key={i}>{types}</option>);
-
-  
+ 
 
   handleRegion = () => {
     return this.state.region.map((zip, i) => {
@@ -155,32 +87,46 @@ class ListStudio extends Component {
     });
   };
 
+
+  handleVenue = () => {
+    return this.state.venue.map((v, i) => {
+      return <option key={i}>{v}</option>;
+    });
+  };
+
   render() {
-    if (!this.props.auth || !this.props.studiotype) {
-      return "Loading";
+   
+    if (!this.props.auth) {
+      return "Loading..."
     }
+
+    let {title, handleSubmit, contactVal, studioNameVal, 
+      priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal, 
+      postalVal, buttonText, handleFiles, classProp, idVal} = this.props
     return (
       <div className="container-fluid site-section">
         <div className="container">
-          <Title header="Add Your Studio" />
+          <Title header={title} />
             <div className="row">
           <div
             className="col-md-2"
           ></div>
+        
           <form
             id="myForm"
             className="form-horizontal col-md-8 "
-            onSubmit={this.handleSubmit}
+            onSubmit={handleSubmit}
           >
             <fieldset>
+            <input type="password" value={idVal} className="d-none" name="studioid"/>
               <Input
                 name="name"
                 id="name"
                 type="text"
                 label="Contact Name"
                 placeholder="Enter Full Name Here"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={contactVal}
                 required={true}
               />
               <Input
@@ -188,8 +134,8 @@ class ListStudio extends Component {
                 label="Studio Name"
                 type="text"
                 placeholder="Enter the Name of Your Studio"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={studioNameVal}
                 id="studioName"
                 required={true}
               />
@@ -199,15 +145,15 @@ class ListStudio extends Component {
                 label="Price Per Hour"
                 type="number"
                 placeholder="Enter your price"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={priceVal}
                 required={true}
               />
               <SearchCriteria
                 name="studioType"
                 title="Studio Type"
                 placeholder="Enter Studio Type"
-                col="form-style-1"
+                col={classProp}
               />
 
               <DropDown
@@ -216,7 +162,8 @@ class ListStudio extends Component {
                 type="text"
                 label="Venue"
                 placeholder="Enter Venue"
-                classProp="form-style-1"
+                classProp={classProp}
+                value={venueVal}
               />
 
               <Input
@@ -225,8 +172,8 @@ class ListStudio extends Component {
                 type="email"
                 label="Bussiness Email"
                 placeholder="Email"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={emailVal}
                 required={true}
               />
 
@@ -236,8 +183,8 @@ class ListStudio extends Component {
                 id="phone"
                 label="Bussiness Phone Number"
                 placeholder="Enter Phone Number"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={phoneVal}
                 required={true}
               />
               <Input
@@ -246,8 +193,8 @@ class ListStudio extends Component {
                 type="text"
                 label="Address1"
                 placeholder="Enter Street Address"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={ad1Val}
                 required={true}
               />
               <Input
@@ -256,8 +203,8 @@ class ListStudio extends Component {
                 type="text"
                 label="Address2"
                 placeholder="Enter Street Address"
-                classProp="form-style-1"
-                value="N/A"
+                classProp={classProp}
+                value={ad2Val}
               />
               <Input
                 name="city"
@@ -265,8 +212,8 @@ class ListStudio extends Component {
                 type="text"
                 label="City"
                 placeholder="Enter Street City"
-                classProp="form-style-1"
-                value=""
+                classProp={classProp}
+                value={cityVal}
                 required={true}
               />
               <DropDown
@@ -275,29 +222,33 @@ class ListStudio extends Component {
                 type="text"
                 label="State"
                 placeholder="Enter State"
-                classProp="form-style-1"
+                classProp={classProp}
+                value={regionVal}
               />
               <Input
                 name="postalCode"
                 type="text"
                 label="Zip Code"
                 placeholder="Enter Zip Code"
-                classProp="form-style-1"
+                classProp={classProp}
                 required={true}
+                value={postalVal}
               />
 
-              <Input
+              {/* <Input
                 name="file"
                 type="file"
                 id="file"
                 label="Add Main Studio Image"
                 placeholder="Upload Photo"
-                handleChange={this.handleFiles}
+                handleChange={handleFiles}
                 required={true}
-                classProp="form-style-1"
-              />
+                classProp={classProp}
+               multiple="true"
+              /> */}
               <hr />
-              <Button divClass="form-group" buttonClass="btn roberto-btn w-100" type="submit" text="Save & Continue"/>
+              <FormButton divClass="form-group" buttonClass="btn roberto-btn w-100" 
+              type="submit" text={buttonText}/>
 
             </fieldset>
           </form>
@@ -315,8 +266,8 @@ class ListStudio extends Component {
   }
 }
 
-function mapStateToProps({ studiotype, auth }) {
-  return { studiotype, auth };
+function mapStateToProps({auth}) {
+  return {auth };
 }
 
-export default connect(mapStateToProps, { fetchUser, fetchStudioType })(ListStudio);
+export default connect(mapStateToProps, {fetchUser})(ListStudioForm);

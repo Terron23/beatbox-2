@@ -49,5 +49,6 @@ app.get(
   app.post("/api/v2/post-listing", db.postListing);
   app.put("/api/v2/post-images", db.putImages);
   app.put("/api/v2/post-details", db.putStudioDetails);
+  app.put("/api/v2/put-studio-info", db.putStudioInfo);
 
 }

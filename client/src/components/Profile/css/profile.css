@@ -1,0 +1,11 @@
+.tab-nav-border{
+    border: solid 5px #0e2737;
+}
+
+#active{
+  color:#34CACA;
+}
+
+.is-active{
+  cursor: pointer;
+}

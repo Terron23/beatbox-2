@@ -11,7 +11,7 @@ export default class Carousel extends Component {
   }
   componentDidMount() {
 
-    let images = [{ original: this.props.img, thumbnail: this.props.img }];
+    let images = [];
 
     let arr = this.props.thumbnails.forEach(img => {
       images.push({ original: img, thumbnail: img });

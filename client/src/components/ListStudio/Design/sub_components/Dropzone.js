@@ -21,7 +21,7 @@ const StudioDropZone = ({ studioid, studioname, history, classProp }) => {
       let formData = new FormData();
       formData.append("file", file.file);
       formData.append("upload_preset", "nyv0ihyq");
-      formData.append("folder", studioname + "_" + studioid);
+      formData.append("folder", `${studioname}_${i===0?"main_":""}${studioid}`);
       formData.append(
         "public_id",
         file.file.name.split(".")[0] + "_" + studioname + "_" + studioid
@@ -59,7 +59,7 @@ const StudioDropZone = ({ studioid, studioname, history, classProp }) => {
         submitButtonContent="Save & Continue"
         onChangeStatus={handleChangeStatus}
         onSubmit={handleSubmit}
-        accept="image/*,audio/*,video/*"
+        accept="image/*,video/*"
         styles={styles}
         inputContent={`Upload images for ${studioname}`}
         inputWithFilesContent="Add More Files"

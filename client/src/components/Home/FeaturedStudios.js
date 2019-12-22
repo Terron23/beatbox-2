@@ -59,7 +59,7 @@ class FeaturedStudios extends Component {
         return (
           <SingleFeaturedStudio
             key={s._id}
-            bg={s.main_image}
+            bg={Object.values(s.studio_images)[0]}
             studiotype={s.studio_type}
             price={s.studio_price}
             studioName={s.studio_name}
