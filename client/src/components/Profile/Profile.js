@@ -55,7 +55,28 @@ class Profile extends Component {
     // let {title, handleSubmit, contactVal, studioNameVal,
     //   priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal,
     //   postalVal, buttonText, handleFiles, classProp} = this.props
-    alert("uploads")
+ 
+    return (
+      <div className="row">
+        {this.props.studio.map(studio => {
+          if (studio.user_fk == this.props.auth._id) {
+            return Object.values(studio.studio_images).map(img => {
+              return (
+                <div className="col-md-4">
+                  <img src={img} className="img-fluid"/>
+                </div>
+              );
+            });
+          }
+        })}
+      </div>
+    );
+  };
+
+
+
+  handleProfile = () => {
+  
     return (
       <div className="row">
         {this.props.studio.map(studio => {

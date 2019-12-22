@@ -1,4 +1,5 @@
 import React from "react";
+import Input from '../../Reusable/Forms/ListStudio/ListStudio'
 
 const StudioProfile = ({
   handleSubmit,
@@ -23,9 +24,7 @@ const StudioProfile = ({
   return (
   
       <div>
-        <form onSubmit={e => handleSubmit(e, "studio")}>
-          test
-      </form>
+       
     </div>
   );
 };

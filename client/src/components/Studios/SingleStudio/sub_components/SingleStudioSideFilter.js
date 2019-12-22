@@ -4,7 +4,6 @@ import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker';
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { withRouter } from 'react-router';
-import { object } from "prop-types";
 
 
 
@@ -13,8 +12,8 @@ const StudioTemplate =({addForm, studioForm,
   revealProps, 
   closeSelectBtn,
   handleRevealProp,
-handleTime,
-addField
+  handleTime,
+  addField
 })=>{
  return (
  <div>
@@ -22,7 +21,7 @@ addField
             <p>Selected Schedule:</p>
             {studioForm.length < 1 ? 
             <ListGroupItem className="text-muted select-book-time"> 
-            Please Choose Date And Time you would like to book. 
+            Please Choose Date And Time you will like to reserve. 
             </ListGroupItem>
               :
               studioForm.map((sched, i) => {
@@ -61,12 +60,12 @@ addField
    <div className="row">
 <div className="col-6">
    <FormAttr label="Time In" >
-     <TimeDropDown  name="timeIn" id='timein' required={false} handleChange={(e)=>handleTime(e, 'timein')} />
+     <TimeDropDown  name="timeIn" id='timein'  handleChange={(e)=>handleTime(e, 'timein')} />
    </FormAttr>
    </div>
    <div className="col-6">
    <FormAttr label="Time Out" >
-     <TimeDropDown  name="timeOut" id='timeout' required={false} handleChange={(e)=>handleTime(e, 'timeout')} />
+     <TimeDropDown  name="timeOut" id='timeout'  handleChange={(e)=>handleTime(e, 'timeout')} />
    </FormAttr>
    <p className="add-time" onClick={addForm}>+{addField}</p>
    </div>
@@ -113,21 +112,26 @@ class SingleStudioSideFilter extends Component {
     
     let form = [...this.state.studioForm, ...values];
 
-  let error = Object.values(obj)
+  let error = Object.values(obj);
+  let noError = 0;
   for(let i=0; i<error.length; i++){
     if(error[i]===""){
-      alert("Please Fill In All Values")
-
+      noError=1;
+      alert("Please Fill In All Values");
+      break;
     }
   }
-
+if(noError < 1){
     this.setState({ studioForm: form , 
     startDate:"", 
     timeIn:"", 
     timeOut:"",
      addField: "Add More Date & Times"})
     this.myFormRef.reset();
-  
+    }
+  else{
+    noError=0;
+  }
   }
 
   handleChangeStartProps = date => {
@@ -182,7 +186,9 @@ else{
         <div className="hotel-reservation--area mb-100">
         <form onSubmit={this.handleSubmit} ref={(el) => this.myFormRef = el}>
 
-        <StudioTemplate addForm={this.addForm} handleSubmit={this.handleSubmit} 
+        <StudioTemplate 
+        addForm={this.addForm} 
+        handleSubmit={this.handleSubmit} 
         addForm={this.addForm} studioForm={studioForm} 
         startDate={startDate}
         handleChangeStartProps={this.handleChangeStartProps}

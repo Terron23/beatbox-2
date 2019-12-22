@@ -1,9 +1,12 @@
 import React from "react";
 import artImg from '../img/art.jpg'
-import photoImg from '../img/photo.jpg'
-import studioImg from '../img/studio.jpg'
+import photoImg from '../img/06.jpg'
+import recStudioImg from '../img/08.jpg'
+import yogaImg from '../img/03.jpg'
+import podImg from '../img/studio.jpg'
+import danceImg from '../img/04.jpg'
 
-const BreadCrumb = ({ studioName, price, image, studiotype }) => {
+const BreadCrumb = ({ studioName, price, studiotype }) => {
   return (
     <div
       className="breadcrumb-area bg-img bg-overlay jarallax"
@@ -14,9 +17,26 @@ const BreadCrumb = ({ studioName, price, image, studiotype }) => {
       : 
       studiotype.toLowerCase()==="recording - music"
       ?
+      styles.podStyle
+      :
+      studiotype.toLowerCase()==="recording - podcast"
+      ?
+      styles.podStyle
+      :
+      studiotype.toLowerCase()==="dance"
+      ?
+      styles.danceStyle
+      :
+      studiotype.toLowerCase()==="yoga"
+      ?
+      styles.yogaStyle
+      :
+      studiotype.toLowerCase()==="photography"
+      ?
       styles.studioStyle
       :
-      {backgroundImage:"url(" + image  + ")" }}
+      styles.studioStyle
+    }
       >
       <div className="container h-100">
         <div className="row h-100 align-items-end">
@@ -45,9 +65,17 @@ const styles={
     backgroundImage: "url(" + photoImg  + ")" 
   },
   studioStyle:{
-    backgroundImage: "url(" + studioImg  + ")" 
+    backgroundImage: "url(" + recStudioImg  + ")" 
   },
-
+  yogaStyle:{
+    backgroundImage: "url(" + yogaImg  + ")" 
+  },
+  podStyle:{
+    backgroundImage: "url(" + podImg  + ")" 
+  },
+  danceStyle:{
+    backgroundImage: "url(" + danceImg  + ")" 
+  },
 }
 
 export default BreadCrumb;

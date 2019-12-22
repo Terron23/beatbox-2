@@ -4,7 +4,7 @@ import './css/time.css'
 const TimeDropDown = ({ required , label, name, id, handleChange}) => (
   <div className="time-drop-down">
     <label htmlFor={label}>{label}</label>
-    <select className="form-control"  name={name} id={id} required={required?"true":"false"}
+    <select className="form-control"  name={name} id={id}
     onChange={handleChange}>
       <option value="">Please Choose</option>
       <option value="5:00 AM">5:00 AM</option>
