@@ -167,6 +167,11 @@ else{
     e.preventDefault();
     let {id}=this.props;
     let {studioForm}=this.state;
+
+    if(studioForm.length < 1){
+      alert("Please fill out the form.")
+    }
+    else{
     let queryString =""   
    studioForm.map(q=>{
      queryString+="Time In="+q.timeIn+"?Time Out="+q.timeOut+"?Date="+q.singleDatePicker+"?";
@@ -174,6 +179,7 @@ else{
   
 
   this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);
+    }
    
   }
 

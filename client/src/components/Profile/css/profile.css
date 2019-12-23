@@ -9,3 +9,12 @@
 .is-active{
   cursor: pointer;
 }
+
+.img-uploads{
+  width:450px;
+  height:320px;
+}
+
+.active{
+  transition: all .75s ease;
+}

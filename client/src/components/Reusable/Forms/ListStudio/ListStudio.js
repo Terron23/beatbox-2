@@ -8,6 +8,7 @@ import Input from "../../FormElements/Input/Input";
 import FormButton from "../../FormElements/Button/Button"
 
 
+
 class ListStudioForm extends Component {
   constructor(props) {
     super(props);
@@ -102,7 +103,7 @@ class ListStudioForm extends Component {
 
     let {title, handleSubmit, contactVal, studioNameVal, 
       priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal, 
-      postalVal, buttonText, handleFiles, classProp, idVal} = this.props
+      postalVal, buttonText,  classProp, idVal} = this.props
     return (
       <div className="container-fluid site-section">
         <div className="container">
@@ -235,17 +236,6 @@ class ListStudioForm extends Component {
                 value={postalVal}
               />
 
-              {/* <Input
-                name="file"
-                type="file"
-                id="file"
-                label="Add Main Studio Image"
-                placeholder="Upload Photo"
-                handleChange={handleFiles}
-                required={true}
-                classProp={classProp}
-               multiple="true"
-              /> */}
               <hr />
               <FormButton divClass="form-group" buttonClass="btn roberto-btn w-100" 
               type="submit" text={buttonText}/>

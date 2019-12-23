@@ -50,5 +50,6 @@ app.get(
   app.put("/api/v2/post-images", db.putImages);
   app.put("/api/v2/post-details", db.putStudioDetails);
   app.put("/api/v2/put-studio-info", db.putStudioInfo);
+  app.put("/api/v2/update-user", db.updateUser);
 
 }

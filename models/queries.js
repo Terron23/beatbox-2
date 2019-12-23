@@ -205,25 +205,38 @@ const putImages = (req, res) => {
   );
 };
 
-//   app.post("/api/v2/update_user", (req, res) => {
-//     let { username: name, email, instagram, twitter, facebook } = req.body;
+const updateUser = (req, res) => {
+  const {username, email, social, userid } = req.body;
+  console.log(userid, social)
+  pool.query(
+    "Update users set social = $2 where _id=$1",
+    [userid, social,],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+     
+      res.status(200).json("User Info Updated");
+    }
+  );
+};
 
-//     Users.update(
-//       { _id: req.user.id },
-//       {
-//         email,
-//         name,
-//         social: [instagram, twitter, facebook]
-//       },
-//       { upsert: true },
-//       (err, data) => {
-//         if (err) {
-//           console.log(err);
-//         } else {
-//           console.log("update succeded");
-//         }
-//       });
-//   });
+
+//delete
+const putRemoveImages = (req, res) => {
+  const { studioid,  studioImageSecondary } = req.body;
+  pool.query(
+    "Update studios set studio_images = $3 where user_fk =$1 and _id=$2 ",
+    [req.user._id, studioid, studioImageSecondary],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json("Image Removed Successfully");
+    }
+  );
+};
+
 
 module.exports = {
   //post
@@ -235,4 +248,8 @@ module.exports = {
   putImages,
   putStudioDetails,
   putStudioInfo,
+  putRemoveImages,
+  updateUser,
+  //delete
+
 };
