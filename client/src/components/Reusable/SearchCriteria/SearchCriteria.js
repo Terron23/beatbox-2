@@ -12,10 +12,10 @@ class SearchCriteria extends Component {
       return "Loading";
     }
 
-    let { col, title, name, studiotype, search } = this.props;
+    let { col, title, name, studiotype, search="", label="Studio Types"} = this.props;
     return (
       <div className={`${col}`}>
-        <label htmlFor="Studio Types">Studio Types</label>
+        <label htmlFor={label}>Studio Types</label>
         <select name={name} id={title} className="form-control">
           <option value="">All</option>
           {studiotype.map(m => {
@@ -24,7 +24,8 @@ class SearchCriteria extends Component {
                 {m.studio_type}
               </option>
             );
-            if (m._id === search) {
+            if (m._id == search) {
+             
               option = (
                 <option key={m._id} selected value={m._id}>
                   {m.studio_type}

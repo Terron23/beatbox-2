@@ -83,14 +83,22 @@ class ListStudioForm extends Component {
  
 
   handleRegion = () => {
+    let {regionVal}=this.props;
     return this.state.region.map((zip, i) => {
+      if(regionVal==zip){
+        return <option key={i} selected>{zip}</option>
+      }
       return <option key={i}>{zip}</option>;
     });
   };
 
 
   handleVenue = () => {
+    let {venueVal}=this.props;
     return this.state.venue.map((v, i) => {
+        if(venueVal==v){
+          return <option key={i} selected>{v}</option>
+        }
       return <option key={i}>{v}</option>;
     });
   };
@@ -103,11 +111,11 @@ class ListStudioForm extends Component {
 
     let {title, handleSubmit, contactVal, studioNameVal, 
       priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal, 
-      postalVal, buttonText,  classProp, idVal} = this.props
+      postalVal, buttonText,  classProp, idVal, showTitle, search=""} = this.props
     return (
       <div className="container-fluid site-section">
         <div className="container">
-          <Title header={title} />
+         {showTitle? <Title header={title} /> : ""}
             <div className="row">
           <div
             className="col-md-2"
@@ -155,6 +163,7 @@ class ListStudioForm extends Component {
                 title="Studio Type"
                 placeholder="Enter Studio Type"
                 col={classProp}
+                search={search}
               />
 
               <DropDown

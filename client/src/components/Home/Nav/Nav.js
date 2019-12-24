@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
+import NavMobile from "./sub_components/NavMobile"
 import './css/nav.css'
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class NavBar extends Component {
       width: "",
       height: "",
       fade: false,
+      showResponsivenavbar: false,
     };
   }
 
@@ -46,18 +49,19 @@ class NavBar extends Component {
     }
   }
 
-handleFade =()=>{
-if(this.state.fade){
-  this.setState({fade:false})
-}
-else{
-  this.setState({fade:true})
-}
+
+
+toggleNavigation =()=> {
+  if (this.state.showResponsivenavbar) {
+    this.setState({showResponsivenavbar:false});
+  } else {
+    this.setState({showResponsivenavbar:true});
+  }
 }
 
   render() {
-    let { revealSearch } = this.props;
-    let { width, fade } = this.state;
+    let { revealSearch, auth } = this.props;
+    let { fade, showResponsivenavbar } = this.state;
     return (
       <div className={`main-header-area`}>
         <div className="container">
@@ -68,8 +72,8 @@ else{
             <Navbar.Brand>
               <Link to="/">StudioHunt</Link>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+         
+            <Navbar.Collapse id="basic-navbar-nav" className="web-nav">
               <Nav className="ml-auto">{this.renderContent()}</Nav>
               <Nav.Link>
                 <i className="fa fa-search" onClick={revealSearch}></i>
@@ -81,8 +85,14 @@ else{
                 </Nav.Link >
               
             </Navbar.Collapse>
+
+            <NavMobile renderContent={this.renderContent()} toggleNavigation={this.toggleNavigation}
+        showResponsivenavbar={showResponsivenavbar} revealSearch={revealSearch}
+        auth={auth}
+        />
           </Navbar>
         </div>
+       
       </div>
     );
   }

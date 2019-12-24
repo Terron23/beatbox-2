@@ -67,8 +67,8 @@ class StudioSearch extends Component {
     let search = filterArr
       .filter(studio =>
         this.state.location === ""
-          ? studio.city
-          : studio.city
+          ? studio.state
+          : studio.state
               .toLowerCase()
               .match(this.state.location.toLowerCase()) ||
             studio.postal_code.toLowerCase() ===
@@ -77,7 +77,7 @@ class StudioSearch extends Component {
       .filter(studio =>
         this.state.studioType === ""
           ? studio.studio_type_fk
-          : studio.studio_type_fk == this.state.studioType
+          : studio.studio_type_fk === Number(this.state.studioType)
       )
       .filter(studio =>
         this.state.applyDate === ""

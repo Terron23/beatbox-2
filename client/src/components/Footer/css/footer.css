@@ -1,8 +1,10 @@
 /* :: 9.0 Footer Area CSS */
 .footer-area {
-    position: relative;
-    z-index: 1;
-    background-color: #0e2737; }
+   
+    margin-top:20px;
+    background-color: #0e2737; 
+  height: 100vh;
+  }
   
   .single-footer-widget {
     position: relative;

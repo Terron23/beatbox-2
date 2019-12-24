@@ -23,9 +23,9 @@
           max-width: 100%;
           width: 100%;
           margin-bottom: 30px; } }
-      .single-room-area .room-thumbnail img {
-        width:100%;
-        height:400px;
+      .single-room-area .room-thumbnail img.search-img {
+        width:403px;
+        height:330px;
         border-radius: 4px; }
     .single-room-area .room-content {
       position: relative;

@@ -46,7 +46,6 @@ const CarouselItems = ({
 
 export default class StudioType extends Component {
   render() {
-    let {width} =this.props
     return (
       <section
         className="roberto-project-area"
@@ -64,20 +63,20 @@ export default class StudioType extends Component {
             title="Dance"
             description="Practice your moves."
             img={dance}
-            link={'Dance'}
+            link={'6'}
           />
 
           <CarouselItems
             title="Photography"
             description="Hold photo shoots like a boss."
             img={photo}
-            link={'Photography'}
+            link={'5'}
           />
           <CarouselItems
             title="Art"
             description="Paint, sketch and embrace your artistic side."
             img={art}
-            link={'Art'}
+            link={'4'}
           />
 
             <CarouselItems

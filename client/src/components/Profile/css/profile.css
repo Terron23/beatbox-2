@@ -11,10 +11,11 @@
 }
 
 .img-uploads{
-  width:450px;
-  height:320px;
+  width:250px;
+  height:120px;
 }
 
 .active{
   transition: all .75s ease;
 }
+

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// import FeaturedStudios from "./FeaturedStudios";
 import { connect } from "react-redux";
 import { fetchLocation, fetchStudio } from "../.././actions";
 import About from "./About";
 import StudioType from "./StudioType";
 import FeaturedStudios from "./FeaturedStudios"
-import City from "./City";
 import PostStudio from "./PostStudio";
 import Hero from "./Hero/Hero";
 import Schedule from "./Schedule";
@@ -30,17 +28,17 @@ class Home extends Component {
       return "";
     }
 
-    let { locate, history, width } = this.props;
+    let { locate, history, } = this.props;
     return (
       <div>
         <Hero />
         <Schedule
-          locate={locate.city}
+          locate={locate.region}
           history={history}
           handleSubmit={this.handleSubmit}/>
          <FeaturedStudios /> 
         <PostStudio />
-        <StudioType width={width}/>
+        <StudioType />
         <About />
       </div>
     );

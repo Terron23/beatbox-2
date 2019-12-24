@@ -27,7 +27,6 @@ class ListStudio extends Component {
     let rules = "";
     let guest = 0;
     let studioType = event.target.studioType.value;
-    let files = this.state.files;
     let studioImage=""
         axios
           .post("/api/v2/post-listing", {
@@ -65,6 +64,7 @@ class ListStudio extends Component {
      ad2Val="N/A" buttonText="Save & Continue"
      handleFiles={this.handleFiles}
      classProp="form-style-1"
+     showTitle={true}
      />
     );
   }

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
-class DropDown extends Component {
-  render() {
+const DropDown =({options, label, classProp, value, name})=> {
+
     return (
-      <div className={`form-group ${this.props.classProp}`}>
-        <label htmlFor={this.props.label}>{this.props.label}</label>
-        <select className={`form-control`} name={this.props.name}>
+      <div className={`form-group ${classProp}`}>
+        <label htmlFor={label}>{label}</label>
+        <select className={`form-control`} name={name}>
           <option value="">Please Choose</option>
-          {this.props.options()}
+          {options()}
         </select>
       </div>
     );
-  }
+  
 }
 
 export default DropDown;

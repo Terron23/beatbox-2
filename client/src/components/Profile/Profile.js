@@ -5,7 +5,8 @@ import { fetchStudio, fetchUser } from "../../actions";
 import axios from "axios";
 import ListStudioForm from "../Reusable/Forms/ListStudio/ListStudio";
 import Input from '../Reusable/FormElements/Input/Input'
-import {Accordion, Button, Figure} from "react-bootstrap"
+import AlertMessage from '../Reusable/Alert/Alert'
+import {Accordion, Button, Card} from "react-bootstrap"
 import "./css/profile.css";
 
 class Profile extends Component {
@@ -15,7 +16,10 @@ class Profile extends Component {
       name: "",
       email: "",
       social: "",
-      view: "d-none"
+      view: "d-none",
+      variant: "success",
+      alertClass:"d-none",
+     alertText:""
     };
   }
 
@@ -30,16 +34,19 @@ class Profile extends Component {
     return this.props.studio.map((studio, i) => {
       if (studio.user_fk == this.props.auth._id) {
         return (<Accordion>
+          <Card>
+    <Card.Header>
      <Accordion.Toggle as={Button} className="col-md-4 offset-md-4" variant="link" eventKey={i}>
 
         {studio.studio_name}
       </Accordion.Toggle>
-      
+      </Card.Header>
+      </Card>
       <Accordion.Collapse eventKey={i}>
           <ListStudioForm
             contactVal={studio.contact_name}
             phoneVal={studio.contact_phone}
-            venueVal={studio.venue}
+            venueVal={studio.studio_venue}
             ad1Val={studio.address1}
             ad2Val={studio.address2}
             postalVal={studio.postal_code}
@@ -52,6 +59,7 @@ class Profile extends Component {
             idVal={studio._id}
             buttonText="Edit & Save"
             title={`Edit ${studio.studio_name}`}
+            showTitle={false}
             handleSubmit={e => this.handleSubmit(e, "studios")}
           />
           </Accordion.Collapse>
@@ -82,7 +90,9 @@ class Profile extends Component {
   };
 
 
-
+handleClose=() =>{
+this.setState({alertClass:"d-none"})
+}
   handleProfile = () => {
     let auth = this.props.auth
     // {name, placeholder, id, value,  label, classProp, type,  autoComplete, 
@@ -165,18 +175,20 @@ class Profile extends Component {
         let instagram = e.target.instagram.value;
         let facebook = e.target.facebook.value;
         let userid = this.props.auth._id
-        console.log(this.props.auth)
         let socialObj = {twitter:twitter, instagram:instagram, facebook: facebook}
         const res = axios.put("/api/v2/update-user", {
           username,
           email,
           social: socialObj,
           userid
-        });
-
-        if (res.ok) {
-          console.log("It Works");
-        }
+        }).then(res=>{
+         
+          this.setState({variant:"success", alertClass:"", 
+          alertText:'User Profile Updated Successfully'})
+        }).catch(err=>{
+          this.setState({variant:"danger", alertClass:"col-md-4 offset-md-3", 
+          alertText:'Something went wrong. Please try again.'})
+        })
       }
 
       if (form === "studios") {
@@ -214,10 +226,11 @@ class Profile extends Component {
           studioid
         });
         if (res.ok) {
-          console.log("It Works");
+          this.setState({variant:"success", alertClass:""})
         }
       }
     } catch (err) {
+      this.setState({variant:"danger", alertClass:""})
       throw err;
     }
   };
@@ -226,8 +239,12 @@ class Profile extends Component {
     if (!this.props.studio || !this.props.auth) {
       return "";
     }
+    let  {variant, alertClass, alertText, showAlert} = this.state
     return (
       <div className="container" style={{ marginTop: "50px" }}>
+     <AlertMessage variant={variant} alertText={alertText} hide={alertClass} 
+     showAlert={showAlert} handleClose={this.handleClose}/>
+
         <Tabs showStudioForm={this.handleStudioListed()} showUploads={this.handleUploads()} 
         showProfile={this.handleProfile()}/>
       </div>

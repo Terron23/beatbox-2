@@ -241,28 +241,68 @@
       .studio-nav a:hover{
         color:#1cc3b2 !important;
       }
-    @media only screen and (max-width: 767px) {
-        .studio-nav{
-          height: auto;
-          padding: 20px !important;
-        }
-        }
-        .navFade{
-          padding: 0 30px !important;
-          background-color: #1cc3b2 !important;
-          height: 80px !important;
-          line-height: 80px !important;
-          text-align: center !important;
-          color: #ffffff !important;
-          font-size: 16px !important;
-          
-        }
 
-        .navFade:hover{
-          background-color: #2a303b !important;
-          color: white;
-          height: inherit;
-          line-height: 80px;
-          padding: 30px;
+      .navFade{
+        padding: 0 30px !important;
+        background-color: #1cc3b2 !important;
+        height: 80px !important;
+        line-height: 80px !important;
+        text-align: center !important;
+        color: #ffffff !important;
+        font-size: 16px !important;
+        
+      }
+
+      .navFade:hover{
+        background-color: #2a303b !important;
+        color: white;
+        height: inherit;
+        line-height: 80px;
+        padding: 30px;
+      }
+
+.mobile-nav{
+  display:none;
+}
+
+/* mobil nav */
+    @media only screen and (max-width: 990px) {
+       .web-nav{
+         display: none;
+       }
+       .mobile-nav{
+        display:block;
+      
+      }
+        .studio-hunt-navbar-nav{
+          position:fixed;
+          top:.1% ;
+          left: -350px !important;
+          width:300px !important;
+          -moz-transition:all 300ms ease-in !important;
+          -webkit-transition:all 300ms ease-in !important;
+          -o-transition:all 300ms ease-in !important;
+          transition:all 300ms ease-in !important;
+          height: 100vh !important;
+          background-color: #0e2737;
+          padding:30px; 
+         
+      }
+
+      .nav-link{
+       padding: 10px;
+        color:rgba(255, 255, 255, .7) !important;
+       
+      }
+      .studio-hunt-navbar-nav li{
+       
+      }
+
+      
+     .open  .studio-hunt-navbar-nav{
+      left: 0 !important;
+     }
+
         }
+     
   
