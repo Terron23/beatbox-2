@@ -7,13 +7,17 @@ class SelectBox extends React.Component {
     this.state = {
       hide: true,
       text: "",
-      arr: this.props.options,
+      arr: [],
       newOptions: "",
       newText: [],
       otherText: [],
       check: true,
   
     };
+  }
+
+  componentDidMount(){
+    this.setState({arr: this.props.options})
   }
 
   handleReveal = e => {
@@ -26,7 +30,7 @@ class SelectBox extends React.Component {
   };
 
   addText = (e, id = null) => {
-    let {newText}=this.state;
+    let newText =this.state.newText;
 
     let check = document.getElementById(`${id}`);
 
@@ -35,12 +39,14 @@ class SelectBox extends React.Component {
       let x = this.state.text;
       x.split(", ").map(val => {
         newText.concat(val);
+        console.log(newText)
       });
     }
     let arr = newText;
     if (check.checked) {
       arr.push(check.value);
       this.setState({ text: arr.join(", ") });
+      console.log(arr, this.state.newText)
     } else {
       arr = arr.filter(x => x !== check.value)
       this.setState({ 
@@ -65,10 +71,10 @@ class SelectBox extends React.Component {
        return <li key={i}>
           <input
             type="checkbox"
-            name={opLow}
+            name={`${opLow}_${this.props.text_id}`}
             value={op}
-            onChange={(e) => this.addText(e, opLow)}
-            id={opLow}
+            onChange={(e) => this.addText(e, `${opLow}_${this.props.text_id}`)}
+            id={`${opLow}_${this.props.text_id}`}
             width="50%"
            defaultChecked={true}
           />{" "}
@@ -80,10 +86,10 @@ class SelectBox extends React.Component {
         <li key={i}>
           <input
             type="checkbox"
-            name={opLow}
+            name={`${opLow}_${this.props.text_id}`}
             value={op}
-            onChange={(e) => this.addText(e, opLow)}
-            id={opLow}
+            onChange={(e) => this.addText(e, `${opLow}_${this.props.text_id}`)}
+            id={`${opLow}_${this.props.text_id}`}
             width="50%"
           />{" "}
           {op}
@@ -99,13 +105,14 @@ class SelectBox extends React.Component {
       <input
         type="text"
         id={`${this.props.text_id}`}
+        name={`${this.props.text_id}`}
         className="col-md-4"
         defaultValue=""
         placeholder="Add Custom"
         width="70%"
       />
     );
-
+//clear Input field
     if (this.state.otherText.length > 1) {
       otherText = [];
     }
@@ -114,13 +121,19 @@ class SelectBox extends React.Component {
 
   handleAdditions = (e, id = null) => {
     e.preventDefault();
-    let {newText}=this.state;
+    let newTextArr =this.state.newText;
     let value = document.getElementById(`${id}`).value;
     if (value.length > 0) {
-      let arr = this.state.arr.concat(value);
-      this.setState({ arr, text: newText.concat(value).join(", ") });
-      document.getElementById(`${id}`).value = "";
+      let arr = this.state.arr;
+      arr.push(value)
+      newTextArr.push(value)
+   
+       this.setState({text: newTextArr.join(" ,"), arr:arr})
+
+      console.log(this.state.arr, value, "text", this.state.text, )
+      document.getElementById(`${id}`).value=""
     }
+    
   };
   render() {
     let { hide, text } = this.state;
@@ -145,7 +158,7 @@ class SelectBox extends React.Component {
             <li>
               <input
                 type="checkbox"
-                name="other"
+                name={`${this.props.other_id}`}
                 value="Other"
                 id={`${this.props.other_id}`}
                 onChange={this.handleOther}
@@ -163,6 +176,7 @@ class SelectBox extends React.Component {
                       {other}
                       <button
                         onClick={e => this.handleAdditions(e, this.props.text_id)}
+                        onKeyPress={e => this.handleAdditions(e, this.props.text_id)}
                         style={{ color: "#34CACA" }}
                         className="btn"
                       >
