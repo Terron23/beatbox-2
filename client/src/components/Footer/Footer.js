@@ -55,9 +55,9 @@ export default class Footer extends Component {
 
               <div className="col-12 col-sm-8 col-lg-4">
                 <div className="single-footer-widget mb-80">
-                  <h5 className="widget-title">Subscribe Newsletter</h5>
+                  <h5 className="widget-title">Subscribe to Our Newsletter</h5>
                   <span>
-                    Subscribe our newsletter gor get notification about new
+                    Subscribe to our newsletter and recieveve notifications about new
                     updates.
                   </span>
 

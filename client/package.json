@@ -45,6 +45,7 @@
     "react-select": "^2.4.4",
     "react-sidebar": "^3.0.2",
     "react-sliding-pane": "^3.1.0",
+    "react-spinners": "^0.7.2",
     "react-stripe-elements": "^2.0.3",
     "react-typist": "^2.0.5",
     "react-week-calendar": "^0.1.3",

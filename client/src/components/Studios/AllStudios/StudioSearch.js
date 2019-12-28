@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchLocation, fetchStudio, fetchStudioType } from "../../../actions";
+import { Link } from "react-router-dom";
 import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";
 import StudioMobileFilter from "./sub_components/StudioMobileFilter";
+import Loading from "../../Reusable/Loading/Loading"
 import "./css/studio.css";
 
 class StudioSearch extends Component {
@@ -103,6 +105,11 @@ class StudioSearch extends Component {
         );
       });
 
+    if(search.length < 1){
+      return <div>
+        <h3 >Could Not Find Any Listings.</h3>
+      </div>
+    } 
     return search;
   };
 
@@ -153,7 +160,7 @@ else{
 
   render() {
     if (!this.props.studio || !this.props.locate) {
-      return "Loading...";
+      return <Loading />;
     }
     let { location, startDate, studioType, setShow, reveal } = this.state;
 

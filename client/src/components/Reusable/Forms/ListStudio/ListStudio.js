@@ -6,6 +6,8 @@ import DropDown from "../../FormElements/DropDown/DropDown";
 import SearchCriteria from '../../../Reusable/SearchCriteria/SearchCriteria'
 import Input from "../../FormElements/Input/Input";
 import FormButton from "../../FormElements/Button/Button"
+import SignUp from "../../../SignUp/SignUp";
+import Loading from "../../../Reusable/Loading/Loading"
 
 
 
@@ -104,10 +106,15 @@ class ListStudioForm extends Component {
   };
 
   render() {
-   
-    if (!this.props.auth) {
-      return "Loading..."
+
+  if (this.props.auth == null) {
+      
+      return <Loading />
     }
+    else if(!this.props.auth){
+      return <SignUp />
+    }
+    
 
     let {title, handleSubmit, contactVal, studioNameVal, 
       priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal, 
@@ -164,6 +171,7 @@ class ListStudioForm extends Component {
                 placeholder="Enter Studio Type"
                 col={classProp}
                 search={search}
+                required={true}
               />
 
               <DropDown
@@ -174,6 +182,7 @@ class ListStudioForm extends Component {
                 placeholder="Enter Venue"
                 classProp={classProp}
                 value={venueVal}
+                required={true}
               />
 
               <Input
@@ -234,6 +243,7 @@ class ListStudioForm extends Component {
                 placeholder="Enter State"
                 classProp={classProp}
                 value={regionVal}
+                required={true}
               />
               <Input
                 name="postalCode"

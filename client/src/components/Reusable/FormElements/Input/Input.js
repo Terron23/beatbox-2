@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input =({name, placeholder, id, value,  label, classProp, type,  autoComplete, 
-  required, multiple, handleChange} )=> {
+  required=false, multiple, handleChange} )=> {
 return (
       <div className={`form-group ${classProp} `}>
           <label htmlFor={label}>{label}</label>
@@ -14,7 +14,7 @@ return (
           placeholder={placeholder}
           defaultValue={value}
           autoComplete={autoComplete}
-         required={required ? "true" : "false"}
+         required={required}
          multiple={multiple ? "true": "false"}
          onChange={handleChange}
         />

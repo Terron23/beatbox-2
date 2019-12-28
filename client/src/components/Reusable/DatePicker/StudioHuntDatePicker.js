@@ -51,7 +51,7 @@ class StudioHuntDatePicker extends Component {
    selectRange,
    calendarClass,
   move,
-  required,
+  required=false,
   stateText,
   handleChangeStartProps,
   revealProps,
@@ -69,7 +69,7 @@ class StudioHuntDatePicker extends Component {
                 placeholder={placeholder}
                 autoComplete={autoComplete}
                 onClick={handleRevealProp ? handleRevealProp: this.handleReveal}
-                required={required ? "true" : false}
+                required={required}
               />
   
           <Calendar selectRange={selectRange} 

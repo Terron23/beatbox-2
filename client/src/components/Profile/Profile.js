@@ -165,9 +165,7 @@ this.setState({alertClass:"d-none"})
   handleSubmit = async (e, form) => {
     e.preventDefault();
   
-  
 
-    try {
       if (form === "profile") {
         let username = e.target.username.value;
         let email = e.target.email.value;
@@ -224,16 +222,18 @@ this.setState({alertClass:"d-none"})
           guest,
           studioType,
           studioid
-        });
-        if (res.ok) {
-          this.setState({variant:"success", alertClass:""})
-        }
+        }).then(res=>{
+         
+          this.setState({variant:"success", alertClass:"", 
+          alertText:'Studio Info Updated Successfully'})
+        }).catch(err=>{
+          this.setState({variant:"danger", alertClass:"col-md-4 offset-md-3", 
+          alertText:'Something went wrong. Please try again.'})
+        })
+
       }
-    } catch (err) {
-      this.setState({variant:"danger", alertClass:""})
-      throw err;
-    }
-  };
+    
+  }
 
   render() {
     if (!this.props.studio || !this.props.auth) {

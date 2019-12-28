@@ -12,11 +12,11 @@ class SearchCriteria extends Component {
       return "Loading";
     }
 
-    let { col, title, name, studiotype, search="", label="Studio Types"} = this.props;
+    let { col, title, name, studiotype, search="", label="Studio Types", required=false} = this.props;
     return (
       <div className={`${col}`}>
         <label htmlFor={label}>Studio Types</label>
-        <select name={name} id={title} className="form-control">
+        <select name={name} id={title} className="form-control" required={required}>
           <option value="">All</option>
           {studiotype.map(m => {
             let option = (

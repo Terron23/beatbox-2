@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from '../../../Reusable/DatePicker/StudioHuntDatePicker';
+import AlertMessage from '../../../Reusable/Alert/Alert'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { withRouter } from 'react-router';
 
@@ -87,7 +88,8 @@ class SingleStudioSideFilter extends Component {
       reveal: false,
       timeIn: "",
       timeOut: "",
-      addField: "Add Date & Time"
+      addField: "Add Date & Time",
+      hide: "d-none",
     };
   }
 
@@ -98,16 +100,30 @@ class SingleStudioSideFilter extends Component {
    this.setState({studioForm:form, addField: form.length < 1 ? 'Add Date & Time' : this.state.addField})
   }
 
+  handleTimeDifference =(timeIn, timeOut)=>{
+    console.log(timeIn.slice(-2), timeOut.slice(-2), timeIn[0], timeOut[0]);
+    let timeInMath = timeIn.substring(0, timeIn.length - 2).replace(/" "/g, "").replace(":", "")
+    let timeOutMath = timeOut.substring(0, timeOut.length - 2).replace(/" "/g, "").replace(":", "")
+
+    console.log(timeOutMath , timeInMath)
+    let price = timeOutMath - timeInMath;
+    if(price < 100 || timeIn.slice(-2) === 'PM' && timeOut.slice(-2)==='AM') {
+
+      alert("Time Out Should Be at Least 1 Hour greater than Time In")
+      return;
+    }
+  }
   addForm = (e) => {
 
     let timeIn = this.state.timeIn;
     let timeOut = this.state.timeOut;
-    let startDate = this.state.startDate
+    let startDate = this.state.startDate;
     let obj =    {
       "timeIn": timeIn,
       "timeOut": timeOut,
       "singleDatePicker": startDate.toString().substring(0, 15)
     }
+    this.handleTimeDifference(timeIn, timeOut);
     let values = [obj]
     
     let form = [...this.state.studioForm, ...values];
@@ -117,7 +133,7 @@ class SingleStudioSideFilter extends Component {
   for(let i=0; i<error.length; i++){
     if(error[i]===""){
       noError=1;
-      alert("Please Fill In All Values");
+     alert("Please Fill in All Values")
       break;
     }
   }
@@ -183,13 +199,21 @@ else{
    
   }
 
-
+handleClose =(e)=>{
+e.preventDefault();
+this.setState({hide:"d-none"})
+}
 
 
   render() {
-    let { studioForm,startDate, reveal, addField } = this.state;
+    let { studioForm,startDate, reveal, addField, hide } = this.state;
     return (
         <div className="hotel-reservation--area mb-100">
+          <AlertMessage variant="danger" 
+          hide={hide} 
+          handleClose={this.handleClose} 
+          alertText="Please fill out all values"
+          />
         <form onSubmit={this.handleSubmit} ref={(el) => this.myFormRef = el}>
 
         <StudioTemplate 

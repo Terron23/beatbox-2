@@ -4,6 +4,8 @@ import CheckoutForm from "./sub_components/CheckoutForm";
 import { connect } from "react-redux";
 import { fetchUser, fetchStudio } from "../../actions";
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import SignUp from "../SignUp/SignUp"
+import Loading from "../Reusable/Loading/Loading"
 import './css/payment.css'
 
 class Payment extends Component {
@@ -74,9 +76,13 @@ class Payment extends Component {
   };
 
   render() {
-    if (!this.props.auth || !this.props.studio) {
-      return "Loading...";
+    
+    if (!this.props.auth ) {
+      return <SignUp />;
     }
+  else if(!this.props.studio || this.props.auth == null){
+    return <Loading />
+  }
     return (
       <div className="container">
         <StripeProvider apiKey="pk_test_si8mdcnBScBgROVlk6i3lc7b">
@@ -100,7 +106,6 @@ class Payment extends Component {
 }
 
 function mapStateToProps({ auth, studio }) {
-  //State from reducers/index.js file  gets passed to header component as props
   return { auth, studio };
 }
 

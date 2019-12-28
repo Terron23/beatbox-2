@@ -12,19 +12,26 @@ const Users = mongoose.model("users");
 // Get the payment token ID submitted by the form:
 
 module.exports = app => {
-  app.get(
-    "/auth/google",
-    passport.authenticate("google", {
-      scope: ["profile", "email"]
-    })
-  );
+  // app.get(
+  //   "/auth/google",
+  //   passport.authenticate("google", {
+  //     scope: ["profile", "email"]
+  //   })
+  // );
 
-  app.get(
+  app.get(`/auth/google`, (req, res, next) => {
+    const authenticator = passport.authenticate("google", {scope: ["profile", "email"]})
+    req.app.locals.url = req.query;
+    console.log(req.app.locals.url)
+    authenticator(req, res, next)
+})
+
+ app.get(
     "/auth/google/callback",
-    passport.authenticate("google"),
+    passport.authenticate("google", {failureRedirect: '/sign-up'}),
 
     (req, res) => {
-      res.redirect("/");
+      res.redirect(req.app.locals.url.path);
     }
   );
 

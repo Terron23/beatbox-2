@@ -5,11 +5,11 @@ import Wrapper from "./sub_components/Wrapper";
 import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
 import Ameneties from "./sub_components/Ameneties";
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Reviews from "./sub_components/Reviews";
 import BreadCrumb from "./sub_components/BreadCrumb";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
 import MobileBook from "./sub_components/SingleStudioMobileFilter";
+import Loading from "../../Reusable/Loading/Loading";
 import "./css/single.css";
 
 const Studios = ({
@@ -99,8 +99,8 @@ class SingleStudio extends Component {
 
 
   render() {
-    if (!this.props.studio || !this.props.auth) {
-      return "";
+    if (!this.props.studio) {
+      return <Loading />;
     }
 
     const { studio, auth } = this.props;

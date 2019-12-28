@@ -7,9 +7,10 @@ import FeaturedStudios from "./FeaturedStudios"
 import PostStudio from "./PostStudio";
 import Hero from "./Hero/Hero";
 import Schedule from "./Schedule";
-
+import Loading from "../Reusable/Loading/Loading"
 
 class Home extends Component {
+
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
@@ -25,7 +26,7 @@ class Home extends Component {
 
   render() {
     if (!this.props.locate || !this.props.studio) {
-      return "";
+      return <Loading />;
     }
 
     let { locate, history, } = this.props;

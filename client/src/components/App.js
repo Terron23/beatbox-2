@@ -4,7 +4,7 @@ import Header from "./Home/Header";
 import Home from "./Home/Home";
 import ListStudio from "./ListStudio/AddStudioForm/ListStudio";
 import Availibility from "./ListStudio/Availibility/Availibility";
-import SignUp from "./SignUp";
+import SignUp from "./SignUp/SignUp";
 import StudioSearch from "./Studios/AllStudios/StudioSearch";
 import SingleStudio from "./Studios/SingleStudio/SingleStudio";
 import Profile from "./Profile/Profile";
@@ -16,22 +16,31 @@ import * as actions from "../actions";
 import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
 import Details from "./ListStudio/Details/Details";
-import ViewStudio from './ListStudio/ViewStudio/ViewStudio'
-import ScrollTop from './assets/ScrollTop'
+import ViewStudio from './ListStudio/ViewStudio/ViewStudio';
+import ScrollTop from './assets/ScrollTop';
+import Loading from './Reusable/Loading/Loading';
 
 class App extends Component {
   constructor(props){
 super(props);
-
+this.state ={
+  isLoading:true,
+}
   }
 
   componentDidMount() {
     this.props.fetchUser();
+    this.setState({isLoading:false})
   }
 
 
 
   render() {
+    const {isLoading}=this.state;
+
+    if(isLoading){
+      return <Loading />
+    }
     return (
       <div>
      
@@ -45,7 +54,8 @@ super(props);
               component={Home}
             />
             <Route path="/sign-up" component={SignUp} />
-            <Route path="/post-studio" component={ListStudio} />
+            <Route path="/post-studio" 
+            component={ ListStudio} />
             <Route
               path="/search-studio/:search?/:location?/:startdate?"
               component={StudioSearch}
