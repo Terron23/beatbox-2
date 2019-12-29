@@ -75,9 +75,9 @@ toggleNavigation =()=> {
          
             <Navbar.Collapse id="basic-navbar-nav" className="web-nav">
               <Nav className="ml-auto">{this.renderContent()}</Nav>
-              <Nav.Link>
+              {/* <Nav.Link>
                 <i className="fa fa-search" onClick={revealSearch}></i>
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link className="navFade"  href="/search-studio">
                
                   Book Now{" "}

@@ -33,9 +33,9 @@ const NavMobile =({toggleNavigation, renderContent, showResponsivenavbar, reveal
       </Nav>
       
       <li>
-          <Nav.Link>
+          {/* <Nav.Link>
         <i className="fa fa-search" onClick={revealSearch}></i>
-      </Nav.Link>
+      </Nav.Link> */}
       </li>
 
       <li>

@@ -33,7 +33,7 @@ class StudioSearch extends Component {
       guest: 0,
       startDate: !this.props.match.params.startdate
         ? ""
-        : new Date(this.props.match.params.startdate || "11/23/2045"),
+        : this.props.match.params.startdate || "",
       applyDate: "",
       startTime: "",
       setShow: false,
@@ -44,16 +44,10 @@ class StudioSearch extends Component {
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
+   
   }
 
-  handleChangeStart = date => {
-    document.getElementById("startDate").focus();
-    this.setState({
-      startDate: date,
-      reveal: false
-    });
-   
-  };
+ 
 
   featureType = () => {
     let days = [
@@ -82,11 +76,11 @@ class StudioSearch extends Component {
           : studio.studio_type_fk === Number(this.state.studioType)
       )
       .filter(studio =>
-        this.state.applyDate === ""
+        this.state.startDate === ""
           ? Object.values(studio.availibility)
           : Object.values(studio.availibility).filter(
               day =>
-                day.toLowerCase() === days[new Date(this.state.applyDate).getDay()].toLowerCase()
+                day.toLowerCase() === days[new Date(this.state.startDate).getDay()].toLowerCase()
             ) != ""
       )
       .map(studio => {
@@ -117,8 +111,8 @@ class StudioSearch extends Component {
     e.preventDefault();
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
-    let applyDate = e.target.startDate.value;
-    this.setState({ location, studioType, applyDate });
+    let startDate = e.target.startDate.value;
+    this.setState({ location, studioType, startDate });
     this.handleClose(e);
   };
 
@@ -158,6 +152,14 @@ else{
 }
   }
 
+  handleChangeStart = date => {
+    document.getElementById("search-id").focus();
+    this.setState({
+      startDate: date,
+      reveal: false
+    });
+  };
+
   render() {
     if (!this.props.studio || !this.props.locate) {
       return <Loading />;
@@ -182,6 +184,10 @@ else{
               priceLow={this.handlePrice()[0]}
               priceHigh={this.handlePrice().pop()}
               search={studioType}
+              stateText={startDate}
+              handleChangeStartProps={this.handleChangeStart}
+              handleRevealProp={this.handleReveal}
+              revealCal={reveal}
              />
           </StudioMobileFilter>
         </div>
@@ -196,13 +202,12 @@ else{
                 priceLow={this.handlePrice()[0]}
                 priceHigh={this.handlePrice().pop()}
                 search={studioType}
-                
+                stateText={startDate}
                 startDate={startDate}
-                handleChangeStart={this.handleChangeStart}
-                width={this.props.width}
-                hide="web-search"
+                handleChangeStartProps={this.handleChangeStart}
+                handleRevealProp={this.handleReveal}
                 revealCal={reveal}
-                handleReveal={this.handleReveal}
+                hide="web-search"
               />
             </div>
           </div>

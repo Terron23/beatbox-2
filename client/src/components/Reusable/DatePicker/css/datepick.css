@@ -13,6 +13,12 @@ div.studiohunt-datepicker-tag {
     
 }
 
+.calendar-class{
+    width:100%;
+}
+
+
+
 @media only screen and (max-width: 767px) {
     .studiohunt-datepicker-calendar-class{
         position:fixed;

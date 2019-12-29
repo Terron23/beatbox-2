@@ -16,6 +16,7 @@ import * as actions from "../actions";
 import "./assets/css/App.css";
 import Design from "./ListStudio/Design/Design";
 import Details from "./ListStudio/Details/Details";
+import Faq from './FAQ/Faq';
 import ViewStudio from './ListStudio/ViewStudio/ViewStudio';
 import ScrollTop from './assets/ScrollTop';
 import Loading from './Reusable/Loading/Loading';
@@ -77,6 +78,7 @@ this.state ={
             <Route path="/details/:studioName?/:id?" component={Details} />
             <Route path="/post-studio/:studioname/:id" component={ListStudio} />
             <Route path="/confirmation" component={Confirmation} />
+            <Route path="/faqs" component={Faq} />
             <Footer />
        
             </ScrollTop>

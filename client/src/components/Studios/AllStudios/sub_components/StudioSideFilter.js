@@ -15,6 +15,9 @@ class StudioSideFilter extends Component {
       search,
       hide,
       revealCal,
+      stateText,
+      handleChangeStartProps,
+      handleRevealProp
     } = this.props;
   
     return (
@@ -51,10 +54,12 @@ class StudioSideFilter extends Component {
               name="startDate"
               placeholder="All Available Dates"
               autoComplete="off"
-            
+            stateText={stateText}
           selectRange={false} 
-          revealCal={revealCal}
+          revealProps={revealCal}
           calendarClass={"startDate"} 
+          handleRevealProp={handleRevealProp}
+          handleChangeStartProps={handleChangeStartProps}
               />
         
          
