@@ -49,6 +49,12 @@ export default class Footer extends Component {
                         FAQs
                       </Link>
                     </li>
+                    <li>
+                      <Link to="/policy">
+                        <i className="fa fa-caret-right" ></i>{" "}
+                        Privacy Policy
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>

@@ -77,7 +77,7 @@ class Payment extends Component {
 
   render() {
     
-    if (!this.props.auth ) {
+    if (this.props.auth === false ) {
       return <SignUp />;
     }
   else if(!this.props.studio || this.props.auth == null){
@@ -91,7 +91,7 @@ class Payment extends Component {
               studioid={this.props.match.params.studioid}
               studio={this.props.studio}
               email={this.props.auth.email}
-              name={this.props.auth.name}
+              name={this.props.auth.contact_name}
               checkoutDetails={this.checkoutDetails}
               handleSubmit={this.handleSubmit}
               studioData={this.studioData}

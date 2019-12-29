@@ -4,6 +4,8 @@ import { CardElement, injectStripe } from "react-stripe-elements";
 import Title from "../../assets/Title";
 
 class CheckoutForm extends Component {
+
+  
   handleSubmit = async e => {
     e.preventDefault();
     let { auth, studio } = this.props;
@@ -55,20 +57,7 @@ class CheckoutForm extends Component {
           <Title header="Book Your Session" subtitle="This is only a test" />
           <div className="checkout col-md-6">
             <form onSubmit={this.handleSubmit}>
-              {studio
-                .filter(studioProp => studioProp._id === studioid)
-                .map(studioProp => {
-                  return (
-                    <div className="d-none">
-                      <input
-                        defaultValue={studioProp.studioName}
-                        name="studioname"
-                      />
-                      <input defaultValue={studioProp.name} name="name" />
-                      <input defaultValue={studioProp.price} name="price" />
-                    </div>
-                  );
-                })}
+            
 
               <div className="form-group">
                 <label for="email">Email</label>
