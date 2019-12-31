@@ -1,8 +1,3 @@
-
-import React from "react";
-import queryString from "query-string";
-
-
 //function converts standard time to military time and calculates time difference
 export function handleHoursMin(starttime, endtime, justStart=false, justEnd=false) {
   let start = starttime.split(":");
@@ -75,13 +70,13 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
 //function to parse query parameters
 //Adds all values to an array for consistent access
 export function handleQueryString(query){
-    let queryObj = queryString.parse(query);
-    let entry = Object.entries(queryObj);
-    for (let i = 0; i < entry.length; i++) {
-      if (!Array.isArray(entry[i][1])) {
-        queryObj[entry[i][0]] = [].concat(entry[i][1]);
-      }
-    }
+  query = query.replace(/%20/g, " ").replace("?", "")
+    let queryObj = {}
+   query = query.split("&").map(q=>{
+     let arr = q.split("=")
+       queryObj[arr[0]] = [].concat(arr[1])
+   });
+   
 
     return queryObj;
   };
