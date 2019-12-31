@@ -20,15 +20,19 @@ class CheckoutForm extends Component {
     let name = e.target.name.value;
     let studioName=studio.studio_name;
     let payment = this.props.charge;
-    let studioId = studio._id;
+    let studioId = ""
+    
+    studio.map(s=>{
+      studioId=s._id
+    });
+    console.log(studioId)
     try {
       let { token } = await this.props.stripe.createToken({ name: "test" });
       let response = await axios.post("/api/v2/payment", {
         token: token.id,
         studioName,
         payment,
-        studioId: studioId,
-        contactName: name,
+        studioid: studioId,
         cardInfo: ""
       });
       this.props.push();

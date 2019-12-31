@@ -5,6 +5,7 @@ const host = keys.postgresHost;
 const password = keys.postgresPassword;
 const user = keys.postgresUser;
 const uri = keys.postgresConnectionString;
+const stripe = require("stripe")(keys.stripeApi);
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -69,6 +70,28 @@ const postListing = (req, res) => {
           res.status(200).json(results.rows);
         }
       );
+    }
+  );
+};
+
+const postPayment = async (req, res) => {
+  
+  const {studioid, payment, token} = req.body;
+console.log(parseFloat(payment))
+  let { status } = await stripe.charges.create({
+    amount: payment * 100,
+    currency: "usd",
+    description: "",
+    source: token
+  });
+  pool.query(
+    "Insert into orders (user_fk, studio_fk, payment, date_booked, time_stamp) values($1, $2 , $3, $4, now())",
+    [req.user._id, studioid, payment, new Date()],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(status);
     }
   );
 };
@@ -243,6 +266,7 @@ const putRemoveImages = (req, res) => {
 module.exports = {
   //post
   postListing,
+  postPayment,
   //get
   getStudioType,
   getStudios,

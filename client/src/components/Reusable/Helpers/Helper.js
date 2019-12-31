@@ -74,7 +74,13 @@ export function handleQueryString(query){
     let queryObj = {}
    query = query.split("?").map(q=>{
      let arr = q.split("=")
-       queryObj[arr[0]] = [].concat(arr[1])
+      if(queryObj[arr[0]]){
+        queryObj[arr[0]] = queryObj[arr[0]].concat(arr[1])
+      }
+      else{
+        queryObj[arr[0]] = [].concat(arr[1])
+      }
+      
    });
    
 

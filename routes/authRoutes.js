@@ -21,8 +21,7 @@ module.exports = app => {
 
   app.get(`/auth/google`, (req, res, next) => {
     const authenticator = passport.authenticate("google", {scope: ["profile", "email"]})
-    req.app.locals.url = req.query;
-    console.log(req.app.locals.url)
+    req.app.locals.urlGoogle = req.query;
     authenticator(req, res, next)
 })
 
@@ -31,17 +30,21 @@ module.exports = app => {
     passport.authenticate("google", {failureRedirect: '/sign-up'}),
 
     (req, res) => {
-      res.redirect(req.app.locals.url.path);
+      res.redirect(req.app.locals.urlGoogle.path);
     }
   );
 
-  app.get("/auth/facebook", passport.authenticate("facebook"));
+  app.get("/auth/facebook", (req, res, next) => {
+    const authenticator = passport.authenticate("facebook")
+    req.app.locals.urlFB = req.query;
+    authenticator(req, res, next)
+  });
 
   app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.redirect("/");
+      res.redirect(req.app.locals.urlFB);
     }
   );
 
@@ -53,62 +56,5 @@ module.exports = app => {
   app.get("/api/current_user", (req, res) => {
     res.send(req.user);
   });
-
-  app.post("/api/update_user", (req, res) => {
-    let { username: name, email, instagram, twitter, facebook } = req.body;
-    console.log(req.body);
-    Users.update(
-      { _id: req.user.id },
-      {
-        email,
-        name,
-        social: [instagram, twitter, facebook]
-      },
-      { upsert: true },
-      (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("update succeded");
-        }
-      }
-    );
-  });
-
-  app.post("/api/payment", async (req, res) => {
-    //const token = req.body.stripeToken; // Using Express
-    console.log(req.body);
-    let {
-      studioOwner,
-      studioName,
-      studioId,
-      dateBooked,
-      payment,
-      cardInfo
-    } = req.body;
-    try {
-      let { status } = await stripe.charges.create({
-        amount: payment * 100,
-        currency: "usd",
-        description: "",
-        source: req.body.token
-      });
-
-      let studio = new StudioBooked({
-        _user: req.user.id,
-        studioOwner,
-        studioName,
-        studioId,
-        dateBooked,
-        payment,
-        cardInfo
-      }).save();
-
-      res.json({ status });
-    } catch (err) {
-      // res.status(500).end();
-      console.log(err);
-      console.log("Error");
-    }
-  });
+  
 };
