@@ -73,8 +73,6 @@ const postListing = (req, res) => {
   );
 };
 
-
-
 //Get Requests
 const getStudioType = (request, response) => {
   pool.query("Select * from studiotypes", (error, results) => {
@@ -98,8 +96,18 @@ const getStudios = (request, response) => {
   );
 };
 
+const getSingleStudios = (req, res) => {
+  pool.query(
+    `Select s.*, studio_type from studios s join studiotypes st on st._id = s.studio_type_fk where s._id = ${req.params.id}`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
 
-
+      res.status(200).json(results.rows);
+    }
+  );
+};
 
 //put requests
 const putStudioDetails = (req, res) => {
@@ -121,17 +129,14 @@ const putStudioDetails = (req, res) => {
       if (error) {
         throw error;
       }
-     
-      if(dates){
 
+      if (dates) {
       }
-     
+
       res.status(200).json("Details Added Successfully");
     }
-    
   );
 };
-
 
 const putStudioInfo = (req, res) => {
   const {
@@ -148,12 +153,11 @@ const putStudioInfo = (req, res) => {
     guest,
     studioName,
     studioImage,
-    studioType, 
+    studioType,
     studioid
   } = req.body;
-  console.log(req.body)
   pool.query(
-    "Update studios set contact_name =$2, contact_phone=$3, studio_venue=$4, address1=$5, address2=$6, postal_code=$7, city=$8, contact_email=$9, studio_name=$10, guest_allowed=$11, studio_price=$12, studio_type_fk=$13, main_image=$14, state=$15 where _id=$16 and user_fk=$1" ,
+    "Update studios set contact_name =$2, contact_phone=$3, studio_venue=$4, address1=$5, address2=$6, postal_code=$7, city=$8, contact_email=$9, studio_name=$10, guest_allowed=$11, studio_price=$12, studio_type_fk=$13, main_image=$14, state=$15 where _id=$16 and user_fk=$1",
     [
       req.user._id,
       name,
@@ -206,25 +210,24 @@ const putImages = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  const {username, email, social, userid } = req.body;
-  console.log(userid, social)
+  const { username, email, social, userid } = req.body;
+  console.log(userid, social);
   pool.query(
     "Update users set social = $2 where _id=$1",
-    [userid, social,],
+    [userid, social],
     (error, results) => {
       if (error) {
         throw error;
       }
-     
+
       res.status(200).json("User Info Updated");
     }
   );
 };
 
-
 //delete
 const putRemoveImages = (req, res) => {
-  const { studioid,  studioImageSecondary } = req.body;
+  const { studioid, studioImageSecondary } = req.body;
   pool.query(
     "Update studios set studio_images = $3 where user_fk =$1 and _id=$2 ",
     [req.user._id, studioid, studioImageSecondary],
@@ -237,19 +240,18 @@ const putRemoveImages = (req, res) => {
   );
 };
 
-
 module.exports = {
   //post
   postListing,
   //get
   getStudioType,
   getStudios,
+  getSingleStudios,
   //put
   putImages,
   putStudioDetails,
   putStudioInfo,
   putRemoveImages,
-  updateUser,
+  updateUser
   //delete
-
 };

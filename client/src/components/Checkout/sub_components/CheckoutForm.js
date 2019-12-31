@@ -1,71 +1,70 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { CardElement, injectStripe } from "react-stripe-elements";
-import Title from "../../assets/Title";
+import {Container, Row, Col} from 'react-bootstrap'
+import Title from "../../Reusable/Title/Title";
+import Loading from "../../Reusable/Loading/Loading";
 
 class CheckoutForm extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      alert: false,
+      error: ""
+    }
+  }
 
-  
   handleSubmit = async e => {
     e.preventDefault();
     let { auth, studio } = this.props;
-    let date = new Date();
-    let month = date.getMonth() + 1;
-    let studioName = e.target.studioname.value;
     let name = e.target.name.value;
-    let payment = e.target.price.value;
-    let studioId = this.props.studioid;
-    let dateBooked =
-      month.toString() +
-      "/" +
-      date.getDate().toString() +
-      "/" +
-      date.getFullYear().toString();
-    console.log(studioId);
+    let studioName=studio.studio_name;
+    let payment = this.props.charge;
+    let studioId = studio._id;
     try {
       let { token } = await this.props.stripe.createToken({ name: "test" });
-      let response = await axios.post("/api/payment", {
+      let response = await axios.post("/api/v2/payment", {
         token: token.id,
         studioName,
         payment,
         studioId: studioId,
-        dateBooked,
-        studioOwner: name,
+        contactName: name,
         cardInfo: ""
       });
       this.props.push();
     } catch (e) {
+      this.setState({error:e,})
       console.log(e); // undefined
-
-      console.log("Purchase Complete!");
     }
   };
 
   render() {
-    let {
-      email,
-      studio,
-      studioid,
-      studioData,
-      checkoutDetails,
-      name
-    } = this.props;
-    console.log(studio);
-    return (
-      <div className="container">
-        <div className="row">
-          <Title header="Book Your Session" subtitle="This is only a test" />
-          <div className="checkout col-md-6">
-            <form onSubmit={this.handleSubmit}>
-            
 
+    let {
+      auth,
+      studio,
+      checkoutDetails,
+      charge,
+    } = this.props;
+
+    if(studio.length < 1){
+      return <Loading />
+    }
+    return (
+     <Container>
+       
+       <Row>
+          <Title headerTitle="Book Your Session" />
+          <div className="checkout col-md-8">
+           
+            <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label for="email">Email</label>
                 <input
                   type="email"
                   className="form-control"
                   name="email"
-                  defaultValue={email}
+                  defaultValue={auth.email}
                 />
               </div>
 
@@ -74,8 +73,8 @@ class CheckoutForm extends Component {
                 <input
                   type="text"
                   name="name"
-                  class="form-control"
-                  defaultValue={name}
+                  className="form-control"
+                  defaultValue={auth.contact_name}
                 />
               </div>
 
@@ -90,8 +89,8 @@ class CheckoutForm extends Component {
           </div>
 
           <div className="col-md-4">{checkoutDetails()}</div>
-        </div>
-      </div>
+        </Row>
+        </Container>
     );
   }
 }

@@ -46,6 +46,7 @@ app.get(
   
   app.get("/api/v2/studio-listing", db.getStudios);
   app.get("/api/v2/studio-type", db.getStudioType);
+  app.get("/api/v2/single-studio-listing/:id", db.getSingleStudios);
   app.post("/api/v2/post-listing", db.postListing);
   app.put("/api/v2/post-images", db.putImages);
   app.put("/api/v2/post-details", db.putStudioDetails);

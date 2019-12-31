@@ -2,101 +2,131 @@ import React, { Component, Fragment } from "react";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import CheckoutForm from "./sub_components/CheckoutForm";
 import { connect } from "react-redux";
-import { fetchUser, fetchStudio } from "../../actions";
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import SignUp from "../SignUp/SignUp"
-import Loading from "../Reusable/Loading/Loading"
-import './css/payment.css'
+import { fetchUser, fetchSingleStudio } from "../../actions";
+import { ListGroup, ListGroupItem , Badge} from "react-bootstrap";
+import SignUp from "../SignUp/SignUp";
+import Loading from "../Reusable/Loading/Loading";
+import {handleHoursMin, handleQueryString} from "../Reusable/Helpers/Helper"
+import "./css/payment.css";
+
+const SHListGroupItem = ({ detailTitle, detail, detailRight, children }) => {
+  return (
+    <ListGroupItem>
+      <span className="checkout-details">{detailTitle}</span>
+      <span className="pull-right">{detail}</span>
+      <span className="pull-right">{detailRight}</span><br />
+      {children}
+    </ListGroupItem>
+  );
+};
 
 class Payment extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      charge: 0
+    };
+  }
 
   componentDidMount() {
     this.props.fetchUser();
-    this.props.fetchStudio();
+    this.props.fetchSingleStudio(this.props.match.params.studioid);
+    
   }
 
-  checkoutDetails = () => {
-    const search = this.props.location.search;
-    let params=[]
-    return this.props.studio
-      .filter(studio => {
-        return studio._id === Number(this.props.match.params.studioid);
-      })
-      .map(studio => {
-        return (
-          <div>
-           <ListGroup>
-                  <ListGroupItem>
-                  <span className="checkout-details">StudioName:</span><br /> {studio.studio_name}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                  <span className="checkout-details">Contact Info:</span> <br />{studio.contact_name}<br />
-                  </ListGroupItem>
-                  <ListGroupItem>
-                  <span className="checkout-details">Studio Price:</span><br /> {studio.studio_price}.00
-                  </ListGroupItem>
-                  <ListGroupItem>
-                 <span className="checkout-details">Venue:</span> <br />{studio.studio_venue}
-                 </ListGroupItem>
-               <ListGroupItem>
-               <span className="checkout-details">Reserved Date & Time</span><br />
-                  {search
-                    .replace(/%20/g, " ")
-                    .replace(/=/g, ": ")
-                    .split("?")
-                    .map((param, i) => {
-                      let num = i+1
-                      params.push(param)
-                     
-                      if(params[0]===""){
-                        params.shift()
-                      }
-                     
-                      if(params.length === 3){
+handlePayment =()=>{
+  const search = handleQueryString(this.props.location.search);
+  let total = [];
+  search.Date.map((x, i) =>{
+   let price  = handleHoursMin(
+      search["Time In"][i],
+      search["Time Out"][i]
+    ) * this.props.studio.map(studio=>studio.studio_price);
+    total.push(price);
+  })
+return total.reduce((a,b)=>a+b).toFixed(2)
+}
 
-                        let timein = params[0]
-                        let timeout = params[1]
-                        let  date = params[2]
-                       
-                        params=[]
-                       
-                      return (<span>  {timein} <br/> {timeout} <br/> {date} <hr /></span>)
-                      }
-                    })}
-               </ListGroupItem>
-                </ListGroup>
-          </div>
-        );
-      });
+  checkoutDetails = () => {
+    const search = handleQueryString(this.props.location.search);
+    let total = [];
+    let totalOrder = search.Date.length;
+    return this.props.studio.map(studio => {
+      return (
+        <div>
+          <h4>Your Reservation  
+            {" "}<Badge pill variant="secondary" className="sh-badge">
+    {totalOrder}
+  </Badge></h4>
+          <ListGroup>
+            <SHListGroupItem
+              detailTitle="Studio Name"
+              detail={studio.studio_name}
+            />
+            <SHListGroupItem
+              detailTitle="Studio Price Per Hour"
+              detail={`$${studio.studio_price.toFixed(2)}`}
+            />
+            {search.Date.map((s, i) => {
+              let time = handleHoursMin(
+                search["Time In"][i],
+                search["Time Out"][i]
+              );
+              let price = time * studio.studio_price;
+              total.push(price);
+            
+              return (
+                <SHListGroupItem
+                  detailTitle="Reserved Date & Time"
+                >
+                  <span className="pull-left">
+                  {search["Date"][i]}<br />
+                    <small>
+                      {search["Time In"][i]} - {search["Time Out"][i]}{" "}
+                    </small>
+                  </span>
+                  <span className="pull-right">
+                    ${price.toFixed(2)}
+                    <br />
+                    <small>
+                      {studio.studio_price.toFixed(2)} X {time}/hr
+                    </small>
+                  </span>
+                </SHListGroupItem>
+              );
+            })}
+            <SHListGroupItem detailTitle="Total" detailRight= {`$${total.reduce((a, b) => a + b).toFixed(2)}`} />
+            </ListGroup>
+        </div>
+      );
+    });
   };
+
+
 
   push = () => {
     return this.props.history.push("/confirmation");
   };
 
   render() {
-    
-    if (this.props.auth === false ) {
+    if (this.props.auth === false) {
       return <SignUp />;
+    } else if (!this.props.studio || this.props.auth == null) {
+      return <Loading />;
     }
-  else if(!this.props.studio || this.props.auth == null){
-    return <Loading />
-  }
+
     return (
       <div className="container">
+       
         <StripeProvider apiKey="pk_test_si8mdcnBScBgROVlk6i3lc7b">
           <Elements>
             <CheckoutForm
-              studioid={this.props.match.params.studioid}
               studio={this.props.studio}
-              email={this.props.auth.email}
-              name={this.props.auth.contact_name}
               checkoutDetails={this.checkoutDetails}
               handleSubmit={this.handleSubmit}
-              studioData={this.studioData}
               auth={this.props.auth}
               push={this.push}
+              charge= {this.handlePayment()}
             />
           </Elements>
         </StripeProvider>
@@ -109,4 +139,6 @@ function mapStateToProps({ auth, studio }) {
   return { auth, studio };
 }
 
-export default connect(mapStateToProps, { fetchUser, fetchStudio })(Payment);
+export default connect(mapStateToProps, { fetchUser, fetchSingleStudio })(
+  Payment
+);

@@ -5,7 +5,8 @@ import {
   FETCH_AVAILIBILITY,
   FETCH_BOOKING,
   FETCH_LOCATION,
-  FETCH_STUDIOTYPES
+  FETCH_STUDIOTYPES,
+  FETCH_SINGLE_STUDIOS,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -15,8 +16,12 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchStudio = () => async dispatch => {
   const res = await axios.get("/api/v2/studio-listing");
-  console.log("test", res.data)
   dispatch({ type: FETCH_STUDIO, payload: res.data });
+};
+
+export const fetchSingleStudio = (id) => async dispatch => {
+  const res = await axios.get(`/api/v2/single-studio-listing/${id}`);
+  dispatch({ type: FETCH_SINGLE_STUDIOS, payload: res.data });
 };
 
 export const fetchAvailibility = () => async dispatch => {

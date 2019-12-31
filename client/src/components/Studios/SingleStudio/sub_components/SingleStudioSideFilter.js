@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from "../../../Reusable/DatePicker/StudioHuntDatePicker";
-import AlertMessage from "../../../Reusable/Alert/Alert";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { handleHoursMin } from "../../../Reusable/Helpers/Helper";
 import { withRouter } from "react-router";
 
 const StudioTemplate = ({
@@ -17,7 +17,7 @@ const StudioTemplate = ({
   handleTime,
   addField,
   calError,
-  timeOutErr,
+  timeOutErr
 }) => {
   return (
     <div>
@@ -31,7 +31,7 @@ const StudioTemplate = ({
           studioForm.map((sched, i) => {
             return (
               <ListGroupItem
-                key={sched.singleDatePicker}
+                key={i}
                 className="text-muted select-book-time"
                 id={`temp_${i}`}
               >
@@ -49,7 +49,6 @@ const StudioTemplate = ({
         )}
       </ListGroup>
       <FormAttr label="Check In Date">
-        {calError}
         <StudioHuntDatePicker
           type="text"
           classNames="input-small form-control startDate"
@@ -66,6 +65,7 @@ const StudioTemplate = ({
           handleRevealProp={handleRevealProp}
           viewAll={false}
         />
+        <p className="error text-center">{calError}</p>
       </FormAttr>
 
       <div className="row">
@@ -87,26 +87,41 @@ const StudioTemplate = ({
             />
           </FormAttr>
         </div>
-        
       </div>
       <div className="row col-12">
         <p className="error text-center">{timeOutErr}</p>
-        </div>
-      
-        <p className="add-time" onClick={addForm}>
-            +{addField}
-          </p>
+      </div>
 
+      <p className="add-time" onClick={addForm}>
+        +{addField}
+      </p>
     </div>
   );
 };
-const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+const month = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
 ];
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri",
-  "Sat",
-];
-const date = days[new Date().getDay()] +" "+month[new Date().getMonth()] +" "+ String(new Date().getDate()).padStart(2, '0')+" "+new Date().getFullYear();
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const date =
+  days[new Date().getDay()] +
+  " " +
+  month[new Date().getMonth()] +
+  " " +
+  String(new Date().getDate()).padStart(2, "0") +
+  " " +
+  new Date().getFullYear();
+
 class SingleStudioSideFilter extends Component {
   constructor(props) {
     super(props);
@@ -122,8 +137,8 @@ class SingleStudioSideFilter extends Component {
       hide: "d-none",
       charge: "",
       calError: "",
-      timeInErr:"",
-      timeOutErr:"",
+      timeInErr: "",
+      timeOutErr: ""
     };
   }
 
@@ -138,29 +153,15 @@ class SingleStudioSideFilter extends Component {
   };
 
   handleTimeDifference = (timeIn, timeOut, date) => {
-    let timeInMath = timeIn
-      .substring(0, timeIn.length - 2)
-      .replace(/" "/g, "")
-      .replace(":", "");
-    let timeOutMath = timeOut
-      .substring(0, timeOut.length - 2)
-      .replace(/" "/g, "")
-      .replace(":", "");
-    let price = timeOutMath - timeInMath;
-    console.log(date)
-    if(date < Date.now()){
-      this.setState({calError: "Date Should be Greater or Equal to Today!"})
+    let timeDiff = handleHoursMin(timeIn, timeOut);
+
+    if (new Date(date+" "+timeIn) < new Date()) {
+      this.setState({ calError: "Date Should be Greater or Equal to Today!" });
       return false;
     }
-    if (
-      price < 100 ||
-      (timeIn.slice(-2) === "PM" && timeOut.slice(-2) === "AM")
-    ) {
-      this.setState({timeOutErr: "Book Time Minumum 1 Hour"})
+    if (timeDiff < 1) {
+      this.setState({ timeOutErr: "Book Time Minumum 1 Hour" });
       return false;
-    }
-    else{
-      this.setState({charge:price})
     }
   };
 
@@ -173,16 +174,15 @@ class SingleStudioSideFilter extends Component {
       timeOut: timeOut,
       singleDatePicker: startDate.toString().substring(0, 15)
     };
-   
-    const timeDiff =this.handleTimeDifference(timeIn, timeOut, startDate)
-    if(timeDiff===false){
+
+    const timeDiff = this.handleTimeDifference(timeIn, timeOut, startDate);
+    if (timeDiff === false) {
       return;
     }
 
     let values = [obj];
 
     let form = [...this.state.studioForm, ...values];
-
 
     let error = Object.values(obj);
     let noError = 0;
@@ -201,7 +201,7 @@ class SingleStudioSideFilter extends Component {
         timeIn: "",
         timeOut: "",
         addField: "Add More Date & Times",
-        calError:"",
+        calError: "",
         timeOutErr: ""
       });
       this.myFormRef.reset();
@@ -246,11 +246,11 @@ class SingleStudioSideFilter extends Component {
         queryString +=
           "Time In=" +
           q.timeIn +
-          "?Time Out=" +
+          "&Time Out=" +
           q.timeOut +
-          "?Date=" +
+          "&Date=" +
           q.singleDatePicker +
-          "?";
+          "&";
       });
 
       this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);
@@ -263,10 +263,18 @@ class SingleStudioSideFilter extends Component {
   };
 
   render() {
-    let { studioForm, startDate, reveal, addField, hide , timeInErr, timeOutErr, calError} = this.state;
+    let {
+      studioForm,
+      startDate,
+      reveal,
+      addField,
+      hide,
+      timeInErr,
+      timeOutErr,
+      calError
+    } = this.state;
     return (
       <div className="hotel-reservation--area mb-100">
-       
         <form onSubmit={this.handleSubmit} ref={el => (this.myFormRef = el)}>
           <StudioTemplate
             addForm={this.addForm}
