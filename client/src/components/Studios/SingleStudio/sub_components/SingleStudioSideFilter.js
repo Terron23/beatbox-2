@@ -246,11 +246,11 @@ class SingleStudioSideFilter extends Component {
         queryString +=
           "Time In=" +
           q.timeIn +
-          "&Time Out=" +
+          "?Time Out=" +
           q.timeOut +
-          "&Date=" +
+          "?Date=" +
           q.singleDatePicker +
-          "&";
+          "?";
       });
 
       this.props.history.push(`/payment/${id}?${queryString.slice(0, -1)}`);

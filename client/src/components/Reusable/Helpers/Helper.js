@@ -70,9 +70,9 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
 //function to parse query parameters
 //Adds all values to an array for consistent access
 export function handleQueryString(query){
-  query = query.replace(/%20/g, " ").replace("?", "")
+  query = query.replace(/%20/g, " ")
     let queryObj = {}
-   query = query.split("&").map(q=>{
+   query = query.split("?").map(q=>{
      let arr = q.split("=")
        queryObj[arr[0]] = [].concat(arr[1])
    });
