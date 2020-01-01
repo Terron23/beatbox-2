@@ -8,7 +8,8 @@ const StudioSearchTemplate = ({
   price,
   studioType,
   city,
-  availibility
+  availibility,
+  dateQuery
 }) => (
   <div className="single-room-area d-flex align-items-center mb-50">
     <div className="room-thumbnail">
@@ -30,12 +31,14 @@ const StudioSearchTemplate = ({
           Location: <span>{city}</span>
         </h6>
         <h6>
+          <ul className="studio-search-list">
           Hours of Operation: {availibility.map((a, i)=>{
-          return <span key={i}> {a} </span>
+          return <li key={i}> {a} </li>
           })}
+          </ul>
         </h6>
       </div>
-      <Link to={`/single-studio/${_id}`} className="btn view-detail-btn">
+      <Link to={`/single-studio/${_id}?date=${dateQuery}`} className="btn view-detail-btn">
         View Details{" "}
         <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
       </Link>

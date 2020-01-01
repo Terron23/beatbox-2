@@ -3,7 +3,7 @@ import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from "../../../Reusable/DatePicker/StudioHuntDatePicker";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { handleHoursMin } from "../../../Reusable/Helpers/Helper";
+import { handleHoursMin, handleQueryString } from "../../../Reusable/Helpers/Helper";
 import { withRouter } from "react-router";
 
 const StudioTemplate = ({
@@ -127,7 +127,7 @@ class SingleStudioSideFilter extends Component {
     super(props);
     this.state = {
       active: false,
-      startDate: date,
+      startDate: handleQueryString(this.props.location.search).date,
       studioForm: [],
       clearCal: false,
       reveal: false,
@@ -153,10 +153,19 @@ class SingleStudioSideFilter extends Component {
   };
 
   handleTimeDifference = (timeIn, timeOut, date) => {
+    let arg = [timeIn, timeOut, date]
+ 
+
+    for(let i = 0; i< arg.length; i++){
+      if(!arg[i]){
+        this.setState({ calError: "Please Fill Out All Values" });
+        return false;
+      }
+    }
     let timeDiff = handleHoursMin(timeIn, timeOut);
 
     if (new Date(date+" "+timeIn) < new Date()) {
-      this.setState({ calError: "Date Should be Greater or Equal to Today!" });
+      this.setState({ calError: "Date and/or time has passed already!" });
       return false;
     }
     if (timeDiff < 1) {
@@ -169,10 +178,12 @@ class SingleStudioSideFilter extends Component {
     let timeIn = this.state.timeIn;
     let timeOut = this.state.timeOut;
     let startDate = this.state.startDate;
+     startDate = startDate.toString().substring(0, 15)
+
     let obj = {
       timeIn: timeIn,
       timeOut: timeOut,
-      singleDatePicker: startDate.toString().substring(0, 15)
+      singleDatePicker: startDate
     };
 
     const timeDiff = this.handleTimeDifference(timeIn, timeOut, startDate);

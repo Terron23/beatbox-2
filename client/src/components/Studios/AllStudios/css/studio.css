@@ -87,6 +87,10 @@
         .single-room-area .room-content .view-detail-btn:hover, .single-room-area .room-content .view-detail-btn:focus {
           color: #000000; }
 
+ul.studio-search-list li{
+  list-style: none;
+  color:#a1a4aa
+}
 
 
 .mobile-search{

@@ -94,7 +94,7 @@ class StudioSearch extends Component {
             studioType={studio.studio_type}
             city={studio.city}
             availibility={Object.values(studio.availibility)}
-            
+            dateQuery={this.state.startDate}
             />
         );
       });
