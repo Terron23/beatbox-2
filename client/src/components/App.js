@@ -18,7 +18,7 @@ import Design from "./ListStudio/Design/Design";
 import Details from "./ListStudio/Details/Details";
 import Faq from './FAQ/Faq';
 import ViewStudio from './ListStudio/ViewStudio/ViewStudio';
-import ScrollTop from './assets/ScrollTop';
+import ScrollTop from './Reusable/ScrollTop/ScrollTop';
 import Loading from './Reusable/Loading/Loading';
 
 class App extends Component {

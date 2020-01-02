@@ -30,7 +30,8 @@ export const fetchAvailibility = () => async dispatch => {
 };
 
 export const fetchBookings = () => async dispatch => {
-  const res = await axios.get("/api/studioBooked");
+  const res = await axios.get("/api/v2/studios-booked");
+  console.log("hello", res.data)
   dispatch({ type: FETCH_BOOKING, payload: res.data });
 };
 

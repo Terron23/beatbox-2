@@ -160,6 +160,13 @@ else{
     });
   };
 
+  clearCal = () => {
+    this.setState({
+      startDate: "",
+      reveal: false
+    });
+  };
+
   render() {
     if (!this.props.studio || !this.props.locate) {
       return <Loading />;
@@ -188,6 +195,7 @@ else{
               handleChangeStartProps={this.handleChangeStart}
               handleRevealProp={this.handleReveal}
               revealCal={reveal}
+              clearCal={this.clearCal}
              />
           </StudioMobileFilter>
         </div>
@@ -208,6 +216,7 @@ else{
                 handleRevealProp={this.handleReveal}
                 revealCal={reveal}
                 hide="web-search"
+                clearCal={this.clearCal}
               />
             </div>
           </div>

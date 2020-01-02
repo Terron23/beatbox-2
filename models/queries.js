@@ -76,13 +76,13 @@ const postListing = (req, res) => {
 
 const postPayment = async (req, res) => {
   
-  const {studioid, payment, token} = req.body;
-console.log(parseFloat(payment))
+  const {studioid, payment, token, email} = req.body;
   let { status } = await stripe.charges.create({
     amount: payment * 100,
     currency: "usd",
     description: "",
-    source: token
+    source: token,
+    receipt_email: email,
   });
   pool.query(
     "Insert into orders (user_fk, studio_fk, payment, date_booked, time_stamp) values($1, $2 , $3, $4, now())",
@@ -131,6 +131,21 @@ const getSingleStudios = (req, res) => {
     }
   );
 };
+
+const getStudiosBooked = (req, res) => {
+  pool.query(
+    `SELECT * from date_booked where _id =${req.user._id}`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
+
 
 //put requests
 const putStudioDetails = (req, res) => {
@@ -271,6 +286,7 @@ module.exports = {
   getStudioType,
   getStudios,
   getSingleStudios,
+  getStudiosBooked,
   //put
   putImages,
   putStudioDetails,

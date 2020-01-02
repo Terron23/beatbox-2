@@ -158,10 +158,11 @@ class SingleStudioSideFilter extends Component {
 
     for(let i = 0; i< arg.length; i++){
       if(!arg[i]){
-        this.setState({ calError: "Please Fill Out All Values" });
+        this.setState({calError: "Please Fill Out All Values" });
         return false;
       }
     }
+
     let timeDiff = handleHoursMin(timeIn, timeOut);
 
     if (new Date(date+" "+timeIn) < new Date()) {

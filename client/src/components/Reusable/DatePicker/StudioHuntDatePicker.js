@@ -52,10 +52,11 @@ class StudioHuntDatePicker extends Component {
       handleChangeStartProps,
       revealProps,
       handleRevealProp,
-      viewAll = true
+      viewAll = true,
+      clearCal = this.clearCal
     } = this.props;
     let { reveal, startDate } = this.state;
-
+console.log(clearCal)
     return (
       <div className="studiohunt-datepicker-tag">
         <input
@@ -96,7 +97,7 @@ class StudioHuntDatePicker extends Component {
             />
             {viewAll ? (
               <button
-                onClick={this.clearCal}
+                onClick={clearCal}  
                 className="btn btn-block roberto-btn"
               >
                 View All

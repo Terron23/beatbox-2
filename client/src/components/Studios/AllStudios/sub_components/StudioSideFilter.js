@@ -17,7 +17,8 @@ class StudioSideFilter extends Component {
       revealCal,
       stateText,
       handleChangeStartProps,
-      handleRevealProp
+      handleRevealProp,
+      clearCal
     } = this.props;
   
     return (
@@ -60,6 +61,7 @@ class StudioSideFilter extends Component {
           calendarClass={"startDate"} 
           handleRevealProp={handleRevealProp}
           handleChangeStartProps={handleChangeStartProps}
+          clearCal={clearCal}
               />
         
          

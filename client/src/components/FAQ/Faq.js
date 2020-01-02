@@ -37,7 +37,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
-              <Card.Body>Hello! I'm another body</Card.Body>
+              <Card.Body>Just click the book button and search for a studio that aligns with your schedule.</Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -48,7 +48,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="2">
-              <Card.Body>Hello! I'm another body</Card.Body>
+              <Card.Body></Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -60,7 +60,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="3">
-              <Card.Body>Hello! I'm another body</Card.Body>
+              <Card.Body>Tell them go fuck themselves!</Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -72,7 +72,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="4">
-              <Card.Body>Hello! I'm another body</Card.Body>
+              <Card.Body>Yes it is free to list your studio. There is a 25% charge for all free listings. We also offer monthly and annual subscriptions which qualifies you for premium marketing placement and you keep 100% of all revenue gained through Studio Hunt's forum. </Card.Body>
             </Accordion.Collapse>
           </Card>
 

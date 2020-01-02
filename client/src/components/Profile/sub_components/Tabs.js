@@ -47,7 +47,7 @@ class Tabs extends Component {
 
   render() {
     let { view1, view2, view3, view4 } = this.state;
-    let { showStudioForm, showUploads, showProfile } = this.props;
+    let { showStudioForm, showUploads, showProfile, showBookings } = this.props;
     return (
       <div>
         <div className="row text-center">
@@ -93,7 +93,7 @@ class Tabs extends Component {
         <div className="tab-data">
           <div className={view1}>{showStudioForm}</div>
 
-          <div className={view2}></div>
+    <div className={view2}>{showBookings}</div>
           <div className={view3}>{showProfile}</div>
 
           <div className={view4}>{showUploads}</div>

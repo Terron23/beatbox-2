@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Tabs from "./sub_components/Tabs";
-import { fetchStudio, fetchUser } from "../../actions";
+import { fetchStudio, fetchUser, fetchBookings } from "../../actions";
 import axios from "axios";
 import ListStudioForm from "../Reusable/Forms/ListStudio/ListStudio";
 import Input from '../Reusable/FormElements/Input/Input'
 import AlertMessage from '../Reusable/Alert/Alert'
-import {Accordion, Button, Card} from "react-bootstrap"
+import {Accordion, Button, Card, Table} from "react-bootstrap"
+import Loading from '../Reusable/Loading/Loading'
 import "./css/profile.css";
 
 class Profile extends Component {
@@ -24,13 +25,11 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchBookings()
     this.props.fetchStudio();
   }
 
   handleStudioListed = () => {
-    // let {title, handleSubmit, contactVal, studioNameVal,
-    //   priceVal, venueVal, emailVal, phoneVal , ad1Val, ad2Val, regionVal, cityVal,
-    //   postalVal, buttonText, handleFiles, classProp} = this.props
     return this.props.studio.map((studio, i) => {
       if (studio.user_fk == this.props.auth._id) {
         return (<Accordion>
@@ -95,8 +94,6 @@ this.setState({alertClass:"d-none"})
 }
   handleProfile = () => {
     let auth = this.props.auth
-    // {name, placeholder, id, value,  label, classProp, type,  autoComplete, 
-    //   required, multiple, handleChange}
  return (<form className="col-md-6 offset-md-3" onSubmit={(e)=>this.handleSubmit(e, 'profile')}>
     <Input 
     value={auth.contact_name} 
@@ -235,10 +232,36 @@ this.setState({alertClass:"d-none"})
     
   }
 
-  render() {
-    if (!this.props.studio || !this.props.auth) {
-      return "";
+  handleBookings =()=>{
+    let {booked} = this.props;
+    if(booked.length === 0){
+      return <h3 className="text-center">No Studios Reserved!</h3>
     }
+    return <Table striped bordered hover size="sm">
+       <tr>
+      <th>Studio Name</th>
+      <th>Date Reserved</th>
+      <th>Payment</th>
+      <th>Book Again</th>
+    </tr>
+      {this.props.booked.map(book=>{
+      return (   <tr>
+        <td>{book.studio_name}</td>
+        <td>{book.date_booked}</td>
+        <td>{book.payment}</td>
+        <td>{<a href={`/single-studio/${book.studio_id}`} className="btn roberto-btn w-100">Book</a>}</td>
+        </tr>
+      )
+    })
+    }
+    </Table>
+  }
+
+  render() {
+    if (!this.props.studio || !this.props.auth || !this.props.booked) {
+      return <Loading />
+    }
+
     let  {variant, alertClass, alertText, showAlert} = this.state
     return (
       <div className="container" style={{ marginTop: "50px" }}>
@@ -246,15 +269,15 @@ this.setState({alertClass:"d-none"})
      showAlert={showAlert} handleClose={this.handleClose}/>
 
         <Tabs showStudioForm={this.handleStudioListed()} showUploads={this.handleUploads()} 
-        showProfile={this.handleProfile()}/>
+        showProfile={this.handleProfile()} showBookings={this.handleBookings()} />
       </div>
     );
   }
 }
 
-function mapStateToProps({ studio, auth }) {
+function mapStateToProps({ studio, auth, booked }) {
  
-  return { studio, auth };
+  return { studio, auth, booked };
 }
 
-export default connect(mapStateToProps, { fetchStudio, fetchUser })(Profile);
+export default connect(mapStateToProps, { fetchStudio, fetchUser, fetchBookings })(Profile);
