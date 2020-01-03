@@ -1,12 +1,10 @@
 var dotenv = require("dotenv");
 dotenv.load();
 const _ = require("lodash");
-const db = require('../models/queries');
-
+const db = require("../models/queries");
+const request = require('superagent');;
 
 module.exports = app => {
-
-
   app.get("/api/v2/logout", (req, res) => {
     req.logout();
     res.redirect("/");
@@ -22,9 +20,33 @@ module.exports = app => {
   app.get("/api/v2/studios-booked", db.getStudiosBooked);
   app.post("/api/v2/post-listing", db.postListing);
   app.post("/api/v2/payment", db.postPayment);
+
+
+  app.post("/api/v2/subscribe", (req, res) => {
+    request
+    .post('https://' + "us4" + '.api.mailchimp.com/3.0/lists/6b41331243/members')
+    .set('Content-Type', 'application/json;charset=utf-8')
+    .set('Authorization', 'Basic ' + new Buffer('any:' + 'e670080209400d0a1824fed57f9151a7-us4').toString('base64'))
+    .send({
+      'email_address': req.body.email_address,
+      'status': 'subscribed',
+      'merge_fields': {
+        'FNAME': "N/A",
+        'LNAME': "N/A"
+      }
+    })
+        .end(function(err, response) {
+          if (response.status < 300 || (response.status === 400 && response.body.title === "Member Exists")) {
+            res.send('Signed Up!');
+          } else {
+            console.log(err)
+            res.send('Sign Up Failed :(');
+          }
+      });
+  });
+
   app.put("/api/v2/post-images", db.putImages);
   app.put("/api/v2/post-details", db.putStudioDetails);
   app.put("/api/v2/put-studio-info", db.putStudioInfo);
   app.put("/api/v2/update-user", db.updateUser);
-
-}
+};
