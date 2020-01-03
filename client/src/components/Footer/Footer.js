@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import f_logo from './images/sh_logo.png';
-import './css/footer.css'
+import Subcribe from './sub_components/Subscribe'
+import Social from '../Reusable/Social_Links/Social'
+import f_logo from "./images/sh_logo.png";
+import "./css/footer.css";
 
 export default class Footer extends Component {
   render() {
@@ -13,7 +15,7 @@ export default class Footer extends Component {
               <div className="col-12 col-sm-6 col-lg-3">
                 <div className="single-footer-widget mb-80">
                   <Link to="/" className="footer-logo">
-                   <img src={f_logo} width="70%" />
+                    <img src={f_logo} width="70%" />
                   </Link>
 
                   <span>studiohunt@outlook.com.com</span>
@@ -27,58 +29,33 @@ export default class Footer extends Component {
                   <ul className="footer-nav">
                     <li>
                       <Link to="/">
-                        <i className="fa fa-caret-right" ></i>{" "}
-                        Home
+                        <i className="fa fa-caret-right"></i> Home
                       </Link>
                     </li>
                     <li>
                       <Link to="/search-studio">
-                        <i className="fa fa-caret-right" ></i>{" "}
-                        Book Now
+                        <i className="fa fa-caret-right"></i> Book Now
                       </Link>
                     </li>
                     <li>
                       <Link to="/">
-                        <i className="fa fa-caret-right" ></i>{" "}
-                        Career
+                        <i className="fa fa-caret-right"></i> Career
                       </Link>
                     </li>
                     <li>
                       <Link to="/faqs">
-                        <i className="fa fa-caret-right" ></i>{" "}
-                        FAQs
+                        <i className="fa fa-caret-right"></i> FAQs
                       </Link>
                     </li>
                     <li>
                       <Link to="/policy">
-                        <i className="fa fa-caret-right" ></i>{" "}
-                        Privacy Policy
+                        <i className="fa fa-caret-right"></i> Privacy Policy
                       </Link>
                     </li>
                   </ul>
                 </div>
               </div>
-
-              <div className="col-12 col-sm-8 col-lg-4">
-                <div className="single-footer-widget mb-80">
-                  <h5 className="widget-title">Subscribe to Our Newsletter</h5>
-                  <span>
-                    Subscribe to our newsletter and recieveve notifications about new
-                    updates.
-                  </span>
-
-                  <form action="index.html" className="nl-form">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Enter your email..."
-                    />
-                    <button type="submit">
-                      <i className="fa fa-paper-plane" ></i>
-                    </button>
-                  </form>
-                </div>
-              </div>
+<Subcribe />
             </div>
           </div>
         </div>
@@ -91,34 +68,19 @@ export default class Footer extends Component {
               </div>
               <div className="col-12 col-md-4">
                 <div className="social-info">
-                  <a
-                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-facebook" ></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-twitter" ></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-instagram" ></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-linkedin" ></i>
-                  </a>
+                  <Social 
+                  link="https://www.facebook.com/Studio-Hunt-337007926930145/?modal=admin_todo_tour"
+                  icon="facebook"
+                  />
+                   <Social 
+                  link="https://twitter.com/StudioHunt_"
+                  icon="twitter"
+                  />
+                   <Social 
+                  link="https://www.instagram.com/studio.hunt/"
+                  icon="instagram"
+                  />
+               
                 </div>
               </div>
             </div>

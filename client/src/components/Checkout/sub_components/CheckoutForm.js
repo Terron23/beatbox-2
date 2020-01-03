@@ -19,13 +19,14 @@ class CheckoutForm extends Component {
     let { auth, studio } = this.props;
     let name = e.target.name.value;
     let studioName=studio.studio_name;
+    let email = e.target.email.value
     let payment = this.props.charge;
     let studioId = ""
     
     studio.map(s=>{
       studioId=s._id
     });
-    console.log(studioId)
+    console.log(studioId, email)
     try {
       let { token } = await this.props.stripe.createToken({ name: "test" });
       let response = await axios.post("/api/v2/payment", {
@@ -33,12 +34,12 @@ class CheckoutForm extends Component {
         studioName,
         payment,
         studioid: studioId,
-        cardInfo: ""
+        cardInfo: "",
+        email
       });
       this.props.push();
     } catch (e) {
       this.setState({error:e,})
-      console.log(e); // undefined
     }
   };
 

@@ -178,7 +178,7 @@ else{
         <div className={`header-area web-search`}>
           <StudioSearchHeader />
         </div>
-        <div className="mobile-search">
+     <div className="mobile-search">
           <hr />
           <StudioMobileFilter
             handleShow={this.handleShow}
@@ -198,12 +198,12 @@ else{
               clearCal={this.clearCal}
              />
           </StudioMobileFilter>
-        </div>
+        </div> 
         <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
               <div className={`col-12 col-lg-8`}>{this.featureType()}</div>
-
+              {document.documentElement.clientWidth >= 1000 ? 
               <StudioSideFilter
                 location={location}
                 submit={this.handleAvailibility}
@@ -217,7 +217,7 @@ else{
                 revealCal={reveal}
                 hide="web-search"
                 clearCal={this.clearCal}
-              />
+              /> : ""}
             </div>
           </div>
         </div>
