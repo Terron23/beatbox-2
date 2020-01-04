@@ -12,16 +12,14 @@ const Users = mongoose.model("users");
 // Get the payment token ID submitted by the form:
 
 module.exports = app => {
-  // app.get(
-  //   "/auth/google",
-  //   passport.authenticate("google", {
-  //     scope: ["profile", "email"]
-  //   })
-  // );
+
+   function LoginRoutes (param, route){
+    return param !== route ? param : "/"
+  }
 
   app.get(`/auth/google`, (req, res, next) => {
     const authenticator = passport.authenticate("google", {scope: ["profile", "email"]})
-    req.app.locals.urlGoogle = req.query;
+    req.app.locals.urlGoogle = LoginRoutes(req.query.path, '/sign-up');;
     authenticator(req, res, next)
 })
 
@@ -30,13 +28,13 @@ module.exports = app => {
     passport.authenticate("google", {failureRedirect: '/sign-up'}),
 
     (req, res) => {
-      res.redirect(req.app.locals.urlGoogle.path);
+      res.redirect(req.app.locals.urlGoogle);
     }
   );
 
   app.get("/auth/facebook", (req, res, next) => {
     const authenticator = passport.authenticate("facebook")
-    req.app.locals.urlFB = req.query;
+    req.app.locals.urlFB = LoginRoutes(req.query.path, '/sign-up');
     authenticator(req, res, next)
   });
 
@@ -44,7 +42,7 @@ module.exports = app => {
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.redirect(req.app.locals.urlFB.path);
+      res.redirect(req.app.locals.urlFB);
     }
   );
 

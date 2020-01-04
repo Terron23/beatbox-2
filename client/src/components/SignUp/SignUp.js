@@ -4,6 +4,8 @@ import Title from "../assets/Title";
 import axios from "axios";
 import "./css/sign-up.css";
 
+let url = `?path=${window.location.pathname}${window.location.search}`;
+
 const LeftSide = ({}) => {
   return (
     <div className="col-md-4 offset-md-4">
@@ -28,7 +30,7 @@ const LeftSide = ({}) => {
 };
 
 const RightSide = ({}) => {
-  let url = `?path=${window.location.pathname}${window.location.search}`;
+ 
   return (
     <div className="row">
       <div className="col-md-4 offset-md-4">
@@ -55,13 +57,13 @@ class SignUp extends Component {
     e.preventDefault();
   let email = e.target.email.value;
   let password = e.target.password.value
-    axios.post('/auth/local',
+    axios.post(`/auth/local${url}`,
     {
 email,
 password
     }
     )
-    .then(res=>console.log(res.data))
+    .then(res=>window.location = '/')
   };
   render() {
     return (
