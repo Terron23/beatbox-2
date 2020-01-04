@@ -35,7 +35,7 @@ module.exports = app => {
   );
 
   app.get("/auth/facebook", (req, res, next) => {
-    const authenticator = passport.authenticate("facebook", {scope: ["profile", "email"]})
+    const authenticator = passport.authenticate("facebook")
     req.app.locals.urlFB = LoginRoutes(req.query.path, '/sign-up');
     authenticator(req, res, next)
   });
