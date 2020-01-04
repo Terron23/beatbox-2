@@ -18,6 +18,41 @@ const pool = new Pool({
   ssl: true
 });
 
+//Auth Request
+const findInsertUserGoogle = (profile, done) => {
+  const existingUser = pool.query(
+    `SELECT * FROM users WHERE social_id = '${profile.id}'`,
+    (err, results) => {
+      if (err) {
+        return done(err);
+      } else if (results.rows[0]) {
+        return done(null, results.rows[0]);
+      } else {
+        pool.query(
+          `Insert into users(social_id, email, contact_name, username, password) values('${profile.id}', 
+            '${profile.emails[0].value}', '${profile.displayName}', '${profile.emails[0].value}', '${profile.id}')`,
+          (err, results) => {
+            if (err) {
+              return done(err, { message: "Something Went Wrong" });
+            }
+
+            pool.query(
+              `SELECT * FROM users WHERE social_id = '${profile.id}'`,
+              (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+
+                done(null, results.rows[0]);
+              }
+            );
+          }
+        );
+      }
+    }
+  );
+};
+
 //Insert Requests
 const postListing = (req, res) => {
   const {
@@ -75,14 +110,13 @@ const postListing = (req, res) => {
 };
 
 const postPayment = async (req, res) => {
-  
-  const {studioid, payment, token, email} = req.body;
+  const { studioid, payment, token, email } = req.body;
   let { status } = await stripe.charges.create({
     amount: payment * 100,
     currency: "usd",
     description: "",
     source: token,
-    receipt_email: email,
+    receipt_email: email
   });
   pool.query(
     "Insert into orders (user_fk, studio_fk, payment, date_booked, time_stamp) values($1, $2 , $3, $4, now())",
@@ -134,7 +168,8 @@ const getSingleStudios = (req, res) => {
 
 const getStudiosBooked = (req, res) => {
   pool.query(
-    `SELECT * from date_booked where _id =${req.user._id}`,
+    `SELECT * from date_booked where _id = $1`,
+    [req.user._id],
     (error, results) => {
       if (error) {
         throw error;
@@ -144,8 +179,6 @@ const getStudiosBooked = (req, res) => {
     }
   );
 };
-
-
 
 //put requests
 const putStudioDetails = (req, res) => {
@@ -233,6 +266,7 @@ const putStudioInfo = (req, res) => {
   );
 };
 
+//Add Images
 const putImages = (req, res) => {
   const { studioid, studioname, studioImageSecondary } = req.body;
   pool.query(
@@ -247,6 +281,7 @@ const putImages = (req, res) => {
   );
 };
 
+//Update User Info
 const updateUser = (req, res) => {
   const { username, email, social, userid } = req.body;
   console.log(userid, social);
@@ -279,6 +314,8 @@ const putRemoveImages = (req, res) => {
 };
 
 module.exports = {
+  //Auth
+  findInsertUserGoogle,
   //post
   postListing,
   postPayment,

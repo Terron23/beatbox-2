@@ -1,6 +1,9 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
+const AmazonStrategy = require("passport-amazon").Strategy;
+const InstagramStrategy = require("passport-instagram").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const googleClientID = keys.googleClientID;
@@ -13,8 +16,9 @@ const host = keys.postgresHost;
 const password = keys.postgresPassword;
 const user = keys.postgresUser;
 const uri = keys.postgresConnectionString;
+const queries = require("../models/queries");
 
-const Pool = require('pg').Pool
+const Pool = require("pg").Pool;
 const pool = new Pool({
   user: user,
   host: host,
@@ -22,78 +26,81 @@ const pool = new Pool({
   password: password,
   port: 5432,
   connectionString: uri,
-  ssl: true,
-
-})
-
+  ssl: true
+});
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-
-  pool.query(`SELECT * FROM users WHERE _id = ${id}`,  (err, results) => {
-    if(err) {
+  pool.query(`SELECT * FROM users WHERE _id = ${id}`, (err, results) => {
+    if (err) {
     }
-   
-    done(null, results.rows[0])
-  })
+    done(null, results.rows[0]);
+  });
 });
-
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-   
       callbackURL: "/auth/google/callback",
-     
       proxy: true
     },
 
     async (accessToken, refreshToken, profile, done) => {
-    
-     const existingUser= 
-     await pool.query(`SELECT * FROM users WHERE social_id = '${profile.id}'`,  
-     (err, results) => {
-        if(err) {
-          
-          return done(err)
-        }
-        
+      await queries.findInsertUserGoogle(profile, done);
+    }
+  )
+);
 
-         else if(results.rows[0]){
-         done(null, results.rows[0])
-         } 
-         else {
-        pool.query(`Insert into users(social_id, email, contact_name, username, password) values('${profile.id}', 
-          '${profile.emails[0].value}', '${profile.displayName}', '${profile.emails[0].value}', '${profile.id}')`,  
-          (err, results) => {
-            if(err) {
-            
-              return done(err)
-            }
-          else{
-            pool.query(`SELECT * FROM users WHERE social_id = '${profile.id}'`,  (err, results) => {
-              if(err) {
-                
-                return done(err)
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password"
+    },
+    async (username, password, done) => {
+      console.log(username, password);
+      const existingUser = await pool.query(
+        `SELECT * FROM users WHERE email = '${username}' 
+    and username='${username}' 
+    and password='${password}'`,
+        (err, results) => {
+          if (err) {
+            return done(err);
+          } else if (results.rows[0]) {
+            done(null, results.rows[0]);
+          } else {
+            pool.query(
+              `Insert into users(social_id, email, contact_name, username, password) values($1, $2, $3, $4, $5)`,
+              ["", username, username, username, password],
+              (err, results) => {
+                if (err) {
+                  return done(err);
+                } else {
+                  pool.query(
+                    `SELECT * FROM users WHERE email = '${username}' 
+              and username='${username}' 
+              and password='${password}'`,
+                    (err, results) => {
+                      if (err) {
+                        return done(err);
+                      }
+
+                      done(null, results.rows[0]);
+                    }
+                  );
+                }
               }
-              
-              done(null, results.rows[0]);
-            })
-          }})
-         }
-      })
-
-     
- 
-
-    
-    })
-  
+            );
+          }
+        }
+      );
+    }
+  )
 );
 
 passport.use(
@@ -105,17 +112,6 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(accessToken, refreshToken, profile);
-      const existingUser = await User.findOne({ FACEBOOK_APP_ID: profile.id });
-      if (existingUser) {
-        
-        done(null, existingUser);
-      }
-      const user = await new User({
-        facebookID: profile.id,
-        name: profile.displayName
-      }).save();
-      done(null, user);
-    }
-  )
+      queries.findInsertUserGoogle
+    })
 );

@@ -48,6 +48,12 @@ module.exports = app => {
     }
   );
 
+  app.post(`/auth/local`, passport.authenticate("local", {
+  failureRedirect: "/", 
+  successRedirect:"/"}
+  ))
+  
+
   app.get("/api/logout", (req, res) => {
     req.logout();
     res.redirect("/");
