@@ -20,6 +20,7 @@ const pool = new Pool({
 
 //Auth Request
 const findInsertUserGoogle = (profile, done) => {
+  let profileEmail = profile.emails[0].value || ""
   const existingUser = pool.query(
     `SELECT * FROM users WHERE social_id = '${profile.id}'`,
     (err, results) => {
@@ -27,10 +28,11 @@ const findInsertUserGoogle = (profile, done) => {
         return done(err);
       } else if (results.rows[0]) {
         return done(null, results.rows[0]);
-      } else {
+      } 
+      else {
         pool.query(
           `Insert into users(social_id, email, contact_name, username, password) values('${profile.id}', 
-            '${profile.emails[0].value}', '${profile.displayName}', '${profile.emails[0].value}', '${profile.id}')`,
+            '${profileEmail}', '${profile.displayName}', '${profileEmail}', '${profile.id}')`,
           (err, results) => {
             if (err) {
               return done(err, { message: "Something Went Wrong" });
