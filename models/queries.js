@@ -18,17 +18,25 @@ const pool = new Pool({
   ssl: true
 });
 
+//deserialize User
+const Deserialize = (id, done) => {
+  pool.query(`SELECT * FROM users WHERE _id = ${id}`, (err, results) => {
+    if (err) {
+    }
+    done(null, results.rows[0]);
+  });
+};
+
 //Auth Request
-const findInsertUserGoogle = (profile, done) => {
-  let profileEmail = "" 
-try{
-  if(!profile.emails[0].value){
-    let profileEmail = profile.emails[0].value 
+const SocialOAUth = (profile, done) => {
+  let profileEmail = "";
+  try {
+    if (!profile.emails[0].value) {
+      let profileEmail = profile.emails[0].value;
+    }
+  } catch (err) {
+    console.log(err);
   }
-}
-catch(err){
-  console.log(err);
-}
 
   const existingUser = pool.query(
     `SELECT * FROM users WHERE social_id = '${profile.id}'`,
@@ -37,8 +45,7 @@ catch(err){
         return done(err);
       } else if (results.rows[0]) {
         return done(null, results.rows[0]);
-      } 
-      else {
+      } else {
         pool.query(
           `Insert into users(social_id, email, contact_name, username, password) values('${profile.id}', 
             '${profileEmail}', '${profile.displayName}', '${profileEmail}', '')`,
@@ -63,6 +70,46 @@ catch(err){
     }
   );
 };
+
+const LocalOAuth = (username, password, done)=>{
+const existingUser =  pool.query(
+  `SELECT * FROM users WHERE email = '${username}' 
+and username='${username}' 
+and password='${password}'`,
+  (err, results) => {
+    if (err) {
+      return done(err);
+    } else if (results.rows[0]) {
+      done(null, results.rows[0]);
+    } else {
+      pool.query(
+        `Insert into users(social_id, email, contact_name, username, password) values($1, $2, $3, $4, $5)`,
+        ["", username, username, username, password],
+        (err, results) => {
+          if (err) {
+            return done(err);
+          } else {
+            pool.query(
+              `SELECT * FROM users WHERE email = '${username}' 
+        and username='${username}' 
+        and password='${password}'`,
+              (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+
+                done(null, results.rows[0]);
+              }
+            );
+          }
+        }
+      );
+    }
+  }
+);
+
+}
+
 
 //Insert Requests
 const postListing = (req, res) => {
@@ -326,7 +373,9 @@ const putRemoveImages = (req, res) => {
 
 module.exports = {
   //Auth
-  findInsertUserGoogle,
+  SocialOAUth,
+  Deserialize,
+  LocalOAuth,
   //post
   postListing,
   postPayment,

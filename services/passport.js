@@ -11,34 +11,15 @@ const googleClientSecret = keys.googleClientSecret;
 const FACEBOOK_APP_ID = keys.FACEBOOK_APP_ID;
 const FACEBOOK_APP_SECRET = keys.FACEBOOK_APP_SECRET;
 
-const db = keys.postgresDB;
-const host = keys.postgresHost;
-const password = keys.postgresPassword;
-const user = keys.postgresUser;
-const uri = keys.postgresConnectionString;
 const queries = require("../models/queries");
 
-const Pool = require("pg").Pool;
-const pool = new Pool({
-  user: user,
-  host: host,
-  database: db,
-  password: password,
-  port: 5432,
-  connectionString: uri,
-  ssl: true
-});
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-  pool.query(`SELECT * FROM users WHERE _id = ${id}`, (err, results) => {
-    if (err) {
-    }
-    done(null, results.rows[0]);
-  });
+queries.Deserialize(id, done);
 });
 
 passport.use(
@@ -51,7 +32,7 @@ passport.use(
     },
 
     async (accessToken, refreshToken, profile, done) => {
-      await queries.findInsertUserGoogle(profile, done);
+      await queries.SocialOAUth(profile, done);
     }
   )
 );
@@ -63,42 +44,7 @@ passport.use(
       passwordField: "password"
     },
     async (username, password, done) => {
-      console.log(username, password);
-      const existingUser = await pool.query(
-        `SELECT * FROM users WHERE email = '${username}' 
-    and username='${username}' 
-    and password='${password}'`,
-        (err, results) => {
-          if (err) {
-            return done(err);
-          } else if (results.rows[0]) {
-            done(null, results.rows[0]);
-          } else {
-            pool.query(
-              `Insert into users(social_id, email, contact_name, username, password) values($1, $2, $3, $4, $5)`,
-              ["", username, username, username, password],
-              (err, results) => {
-                if (err) {
-                  return done(err);
-                } else {
-                  pool.query(
-                    `SELECT * FROM users WHERE email = '${username}' 
-              and username='${username}' 
-              and password='${password}'`,
-                    (err, results) => {
-                      if (err) {
-                        return done(err);
-                      }
-
-                      done(null, results.rows[0]);
-                    }
-                  );
-                }
-              }
-            );
-          }
-        }
-      );
+    await queries.LocalOAuth(username, password, done)
     }
   )
 );
@@ -112,8 +58,7 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile)
-      queries.findInsertUserGoogle(profile, done)
+      queries.SocialOAUth(profile, done)
       
     })
 );

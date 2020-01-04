@@ -20,20 +20,22 @@ module.exports = app => {
   app.get(`/auth/google`, (req, res, next) => {
     const authenticator = passport.authenticate("google", {scope: ["profile", "email"]})
     req.app.locals.urlGoogle = LoginRoutes(req.query.path, '/sign-up');;
+    console.log(req.app.locals.urlGoogle)
     authenticator(req, res, next)
 })
 
  app.get(
     "/auth/google/callback",
     passport.authenticate("google", {failureRedirect: '/sign-up'}),
-
+   
     (req, res) => {
+      console.log(req.app.locals.urlGoogle)
       res.redirect(req.app.locals.urlGoogle);
     }
   );
 
   app.get("/auth/facebook", (req, res, next) => {
-    const authenticator = passport.authenticate("facebook")
+    const authenticator = passport.authenticate("facebook", {scope: ["profile", "email"]})
     req.app.locals.urlFB = LoginRoutes(req.query.path, '/sign-up');
     authenticator(req, res, next)
   });
