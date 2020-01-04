@@ -112,6 +112,8 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      queries.findInsertUserGoogle
+      console.log(profile)
+      queries.findInsertUserGoogle(profile, done)
+      
     })
 );
