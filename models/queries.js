@@ -20,7 +20,7 @@ const pool = new Pool({
 
 //Auth Request
 const findInsertUserGoogle = (profile, done) => {
-  let profileEmail = profile.emails[0].value || ""
+  let profileEmail = !profile.emails[0].value ? "": profile.emails[0].value 
   const existingUser = pool.query(
     `SELECT * FROM users WHERE social_id = '${profile.id}'`,
     (err, results) => {
