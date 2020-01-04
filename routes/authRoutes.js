@@ -44,7 +44,7 @@ module.exports = app => {
     "/auth/facebook/callback",
     passport.authenticate("facebook"),
     (req, res) => {
-      res.redirect(req.app.locals.urlFB);
+      res.redirect(req.app.locals.urlFB.path);
     }
   );
 
