@@ -41,7 +41,7 @@ catch(err){
       else {
         pool.query(
           `Insert into users(social_id, email, contact_name, username, password) values('${profile.id}', 
-            '${profileEmail}', '${profile.displayName}', '${profileEmail}', '${profile.id}')`,
+            '${profileEmail}', '${profile.displayName}', '${profileEmail}', '')`,
           (err, results) => {
             if (err) {
               return done(err, { message: "Something Went Wrong" });
