@@ -13,20 +13,20 @@ const Users = mongoose.model("users");
 
 module.exports = app => {
 
-   function LoginRoutes (param, route){
-    return param !== route ? param : "/"
+   function LoginRoutes (param){
+    return param ==='/sign-up' || param === '/log-in' ? '/' : param
   }
 
   app.get(`/auth/google`, (req, res, next) => {
     const authenticator = passport.authenticate("google", {scope: ["profile", "email"]})
-    req.app.locals.urlGoogle = LoginRoutes(req.query.path, '/sign-up');;
-    console.log(req.app.locals.urlGoogle)
+    req.app.locals.urlGoogle = LoginRoutes(req.query.path);;
+    console.log("route" , req.query)
     authenticator(req, res, next)
 })
 
  app.get(
     "/auth/google/callback",
-    passport.authenticate("google", {failureRedirect: '/sign-up'}),
+    passport.authenticate("google"),
    
     (req, res) => {
       console.log(req.app.locals.urlGoogle)
@@ -36,7 +36,7 @@ module.exports = app => {
 
   app.get("/auth/facebook", (req, res, next) => {
     const authenticator = passport.authenticate("facebook")
-    req.app.locals.urlFB = LoginRoutes(req.query.path, '/sign-up');
+    req.app.locals.urlFB = LoginRoutes(req.query.path);
     authenticator(req, res, next)
   });
 
@@ -48,10 +48,15 @@ module.exports = app => {
     }
   );
 
-  app.post(`/auth/local`, passport.authenticate("local", {
-  failureRedirect: "/", 
-  successRedirect:"/"}
-  ))
+  app.post(`/auth/local`,  passport.authenticate("local"), (req, res)=>{
+    console.log(req.query)
+    res.json({data: LoginRoutes(req.query.path)})
+    
+  })
+  
+  app.post(`/auth/signup/local`,  passport.authenticate("local"), (req, res)=>{
+    res.json({data: LoginRoutes(req.query.path)})
+  })
   
 
   app.get("/api/logout", (req, res) => {

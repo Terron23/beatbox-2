@@ -6,6 +6,7 @@ const password = keys.postgresPassword;
 const user = keys.postgresUser;
 const uri = keys.postgresConnectionString;
 const stripe = require("stripe")(keys.stripeApi);
+const bcrypt = require("bcrypt");
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -32,7 +33,7 @@ const SocialOAUth = (profile, done) => {
   let profileEmail = "";
   try {
     if (!profile.emails[0].value) {
-      let profileEmail = profile.emails[0].value;
+      profileEmail = profile.emails[0].value;
     }
   } catch (err) {
     console.log(err);
@@ -71,45 +72,77 @@ const SocialOAUth = (profile, done) => {
   );
 };
 
-const LocalOAuth = (username, password, done)=>{
-const existingUser =  pool.query(
-  `SELECT * FROM users WHERE email = '${username}' 
-and username='${username}' 
-and password='${password}'`,
-  (err, results) => {
-    if (err) {
-      return done(err);
-    } else if (results.rows[0]) {
-      done(null, results.rows[0]);
-    } else {
-      pool.query(
-        `Insert into users(social_id, email, contact_name, username, password) values($1, $2, $3, $4, $5)`,
-        ["", username, username, username, password],
-        (err, results) => {
-          if (err) {
-            return done(err);
-          } else {
-            pool.query(
-              `SELECT * FROM users WHERE email = '${username}' 
-        and username='${username}' 
-        and password='${password}'`,
-              (err, results) => {
-                if (err) {
-                  return done(err);
-                }
-
-                done(null, results.rows[0]);
-              }
-            );
-          }
+function getUser(username, password, done) {
+  return new Promise(resolve => {
+    let valid = true;
+    pool.query(
+      `SELECT * FROM users WHERE username = '${username}' 
+     and password='${password}'`,
+      (err, results) => {
+        if (err) {
+          return done(err);
+        } else if (results.rows[0]) {
+          done(null, results.rows[0]);
+        } else {
+          done(null, results.rows[0]);
+          valid = false;
+          resolve(valid);
         }
-      );
-    }
-  }
-);
-
+      }
+    );
+  });
 }
 
+function getUserName( email, signup, username, password, done) {
+  return new Promise(resolve => {
+    let valid = true;
+    console.log("Sign Up",signup)
+    pool.query(
+      `SELECT * FROM users WHERE (username = '${username}' or email= '${email}') and password <> ''`,
+      (err, results) => {
+        if (err) {
+          return done(err);
+        } else if (results.rows[0]) {
+          if(signup){
+            
+            done(null, false);
+            resolve(valid);
+          }
+         else if (results.rows[0].password === password) {
+            done(null, results.rows[0]);
+            resolve(valid);
+          } else if (results.rows[0].password !== password) {
+            done(null, false);
+            resolve(valid);
+          }
+        } else {
+          valid = false;
+         console.log("Email", email)
+          resolve(valid)
+        }
+      }
+    );
+  });
+}
+
+const LocalOAuth = async ( email, signup, username, password, done) => {
+  const user = await getUserName(email, signup, username, password,  done);
+  console.log(user);
+
+  if (!user) {
+    pool.query(
+      `Insert into users(social_id, email, contact_name, username, password) values($1, $2, $3, $4, $5)`,
+      ["", email, "", username, password],
+      async (err, results) => {
+        if (err) {
+          return done(err);
+        } else {
+          getUser(username, password, done);
+        }
+      }
+    );
+  }
+};
 
 //Insert Requests
 const postListing = (req, res) => {

@@ -4,7 +4,8 @@ import Header from "./Home/Header";
 import Home from "./Home/Home";
 import ListStudio from "./ListStudio/AddStudioForm/ListStudio";
 import Availibility from "./ListStudio/Availibility/Availibility";
-import SignUp from "./SignUp/SignUp";
+import SignUp from "./OAuth/SignUp/SignUp";
+import Login from "./OAuth/LogIn/Login"
 import StudioSearch from "./Studios/AllStudios/StudioSearch";
 import SingleStudio from "./Studios/SingleStudio/SingleStudio";
 import Profile from "./Profile/Profile";
@@ -43,9 +44,7 @@ this.state ={
       return <Loading />
     }
     return (
-      <div>
      
-      
         <BrowserRouter>
         <ScrollTop>
             <Header />
@@ -55,6 +54,7 @@ this.state ={
               component={Home}
             />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/log-in" component={Login} />
             <Route path="/post-studio" 
             component={ ListStudio} />
             <Route
@@ -83,7 +83,7 @@ this.state ={
        
             </ScrollTop>
         </BrowserRouter>
-      </div>
+    
     );
   }
 }

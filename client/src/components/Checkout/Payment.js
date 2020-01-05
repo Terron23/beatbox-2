@@ -4,7 +4,7 @@ import CheckoutForm from "./sub_components/CheckoutForm";
 import { connect } from "react-redux";
 import { fetchUser, fetchSingleStudio } from "../../actions";
 import { ListGroup, ListGroupItem, Badge } from "react-bootstrap";
-import SignUp from "../SignUp/SignUp";
+import Login from "../OAuth/LogIn/Login";
 import Loading from "../Reusable/Loading/Loading";
 import { handleHoursMin, handleQueryString } from "../Reusable/Helpers/Helper";
 import "./css/payment.css";
@@ -75,7 +75,6 @@ class Payment extends Component {
     const search = handleQueryString(this.props.location.search);
     let total = [];
     let totalOrder = search.Date.length;
-    console.log(totalOrder, search.Date);
     return this.props.studio.map(studio => {
       return (
         <div>
@@ -111,7 +110,7 @@ class Payment extends Component {
 
   render() {
     if (this.props.auth === false) {
-      return <SignUp />;
+      return <Login />;
     } else if (!this.props.studio || this.props.auth == null) {
       return <Loading />;
     }

@@ -13,13 +13,12 @@ const FACEBOOK_APP_SECRET = keys.FACEBOOK_APP_SECRET;
 
 const queries = require("../models/queries");
 
-
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-queries.Deserialize(id, done);
+  queries.Deserialize(id, done);
 });
 
 passport.use(
@@ -40,11 +39,21 @@ passport.use(
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "email",
-      passwordField: "password"
+      usernameField: "username",
+      passwordField: "password",
+      passReqToCallback: true
     },
-    async (username, password, done) => {
-    await queries.LocalOAuth(username, password, done)
+    async (req, username, password, done) => {
+      let signup;
+      let email;
+       try {
+        email = req.body.email;
+        signup = req.body.signup
+      } catch (err) {
+        email = username;
+        signup = false
+      }
+      await queries.LocalOAuth(email, signup, username, password, done);
     }
   )
 );
@@ -58,7 +67,7 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      queries.SocialOAUth(profile, done)
-      
-    })
+      queries.SocialOAUth(profile, done);
+    }
+  )
 );

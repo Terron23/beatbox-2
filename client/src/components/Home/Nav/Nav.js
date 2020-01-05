@@ -30,7 +30,7 @@ class NavBar extends Component {
           <Nav.Link key="post-studio" href="/post-studio">
             <i className="fa fa-plus"></i>Add Your Studio
           </Nav.Link>,
-          <Nav.Link key="sign-up" href="/sign-up">Sign Up/Login</Nav.Link>
+          <Nav.Link key="sign-up" href="/log-in">Sign Up/Login</Nav.Link>
         ].map((value, i) => {
           return value;
         });

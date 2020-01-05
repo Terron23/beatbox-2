@@ -110,7 +110,8 @@ ul.studio-search-list li{
         }
         .web-search{
             display: none;
-
+            height:0;
+            width:0;
         }
         }
 

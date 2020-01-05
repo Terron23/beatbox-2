@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchLocation, fetchStudio, fetchStudioType } from "../../../actions";
-import { Link } from "react-router-dom";
 import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";

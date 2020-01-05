@@ -6,7 +6,7 @@ import DropDown from "../../FormElements/DropDown/DropDown";
 import SearchCriteria from '../../../Reusable/SearchCriteria/SearchCriteria'
 import Input from "../../FormElements/Input/Input";
 import FormButton from "../../FormElements/Button/Button"
-import SignUp from "../../../SignUp/SignUp";
+import Login from "../../../OAuth/LogIn/Login";
 import Loading from "../../../Reusable/Loading/Loading"
 
 
@@ -112,7 +112,7 @@ class ListStudioForm extends Component {
       return <Loading />
     }
     else if(!this.props.auth){
-      return <SignUp />
+      return <Login />
     }
     
 
