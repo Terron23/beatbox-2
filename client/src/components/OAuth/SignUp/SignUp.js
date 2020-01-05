@@ -112,8 +112,7 @@ class SignUp extends Component {
           signup
         })
         .then(res => {
-          window.location.reload(true)
-          this.props.history.push(`${res.data.data}`);
+          window.location.href=`${res.data.data}`
         })
         .catch(err => {
           if (err.response.status === 401) {

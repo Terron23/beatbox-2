@@ -63,8 +63,8 @@ class Login extends Component {
         username
       })
       .then(res => {
-        window.location.reload(true)
-        this.props.history.push(`${res.data.data}`);
+        window.location.href=`${res.data.data}`
+        
       })
       .catch(err => {
           console.log(err)

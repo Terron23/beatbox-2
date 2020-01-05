@@ -49,7 +49,7 @@ module.exports = app => {
   );
 
   app.post(`/auth/local`,  passport.authenticate("local"), (req, res)=>{
-    console.log(req.query)
+    console.log(req.query.path)
     res.json({data: LoginRoutes(req.query.path)})
     
   })
