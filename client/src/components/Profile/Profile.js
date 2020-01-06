@@ -35,7 +35,7 @@ class Profile extends Component {
         return (<Accordion>
           <Card>
     <Card.Header>
-     <Accordion.Toggle as={Button} className="col-md-4 offset-md-4" variant="link" eventKey={i}>
+     <Accordion.Toggle as={Button}  variant="link" eventKey={i}>
 
         {studio.studio_name}
       </Accordion.Toggle>
@@ -94,7 +94,7 @@ this.setState({alertClass:"d-none"})
 }
   handleProfile = () => {
     let auth = this.props.auth
- return (<form className="col-md-6 offset-md-3" onSubmit={(e)=>this.handleSubmit(e, 'profile')}>
+ return (<form  onSubmit={(e)=>this.handleSubmit(e, 'profile')}>
     <Input 
     value={auth.contact_name} 
     id="user_contact" 
@@ -264,7 +264,7 @@ this.setState({alertClass:"d-none"})
 
     let  {variant, alertClass, alertText, showAlert} = this.state
     return (
-      <div className="container" style={{ marginTop: "50px" }}>
+      <div className="container-fluid" style={{ marginTop: "50px" }}>
      <AlertMessage variant={variant} alertText={alertText} hide={alertClass} 
      showAlert={showAlert} handleClose={this.handleClose}/>
 

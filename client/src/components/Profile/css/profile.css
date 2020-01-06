@@ -19,3 +19,7 @@
   transition: all .75s ease;
 }
 
+.list-group-item.active{
+  background-color: #34CACA !important;
+  border-color: white;
+}
