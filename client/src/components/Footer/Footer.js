@@ -18,7 +18,7 @@ export default class Footer extends Component {
                     <img src={f_logo} width="70%" />
                   </Link>
 
-                  <span>studiohunt@outlook.com.com</span>
+               <a style={{"color":"white"}} href="mailto:studiohunt@outlook.com" target="_blank">studiohunt@outlook.com</a>
                 </div>
               </div>
 
@@ -64,7 +64,12 @@ export default class Footer extends Component {
           <div className="copywrite-content">
             <div className="row align-items-center">
               <div className="col-12 col-md-8">
-                <div className="copywrite-text"></div>
+                <div className="copywrite-text">
+
+                <p>
+Copyright &copy; {new Date().getFullYear()} All rights reserved | TM Madison Designs 
+</p>
+                </div>
               </div>
               <div className="col-12 col-md-4">
                 <div className="social-info">

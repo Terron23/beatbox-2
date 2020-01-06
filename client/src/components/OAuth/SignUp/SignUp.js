@@ -97,7 +97,7 @@ class SignUp extends Component {
     let username = e.target.username.value;
     let passwordValidate = e.target.passwordValidate.value;
     let signup = true;
-    let url = this.props.match.path
+    let url = this.props.location.pathname+this.props.location.search
     if (password.length < 5) {
       this.setState({ error: "Password Should be more than 5 characters" });
       return;
@@ -171,10 +171,11 @@ class SignUp extends Component {
 
   render() {
     let { error, password, validate, } = this.state;
+    console.log(this.props)
     return (
       <div className="container-fluid signup">
         <Title headerTitle="Sign Up" />
-        <SocialAuth url={this.props.match.path}/>
+        <SocialAuth url={this.props.location.pathname+this.props.location.search}/>
         <form onSubmit={this.handleSubmit}>
           <LocalAuthSignUp
             error={error}

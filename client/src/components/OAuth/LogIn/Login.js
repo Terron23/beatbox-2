@@ -56,7 +56,7 @@ class Login extends Component {
 
     let password = e.target.password.value;
     let username = e.target.username.value;
-    let url = this.props.match.path
+    let url = this.props.location.pathname+this.props.location.search
     axios
       .post(`/auth/local?path=${url}`, {
         password,
@@ -81,10 +81,11 @@ render() {
     let {
       error,
     } = this.state;
+    console.log(this.props)
     return (
       <div className="container-fluid signup">
         <Title headerTitle="Sign In"  />
-        <SocialAuth url={this.props.match.path} />
+        <SocialAuth url={this.props.location.pathname+this.props.location.search} />
         <form onSubmit={this.handleSubmit}>
            
      <LocalAuthLogIn  error={error} />

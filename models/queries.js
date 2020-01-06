@@ -116,9 +116,14 @@ function getUserName( email, signup, username, password, done) {
             resolve(valid);
           }
         } else {
+          if(signup){
           valid = false;
          console.log("Email", email)
           resolve(valid)
+          }
+          else{
+            done(null, false);
+          }
         }
       }
     );
