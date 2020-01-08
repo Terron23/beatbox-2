@@ -26,8 +26,8 @@
   .hovereffect img {
   display:block;
   position:relative;
-  height: 330px;
-  width: 450px !important;
+  height: 298px !important;
+  width: 488px !important;
   -webkit-transition:all .4s linear;
   transition:all .4s linear;
   }

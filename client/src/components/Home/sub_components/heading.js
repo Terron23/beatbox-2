@@ -8,7 +8,7 @@ const Heading = ({ title, subtitle, color }) => {
         data-wow-delay="100ms"
       >
         <h6>{title}</h6>
-        <h2 style={{ color: color }}>{subtitle}</h2>
+        <h4 style={{ color: color }}>{subtitle}</h4>
       </div>
     </div>
   );

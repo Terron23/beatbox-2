@@ -53,7 +53,7 @@ class FeaturedStudios extends Component {
         return s2["studio_price"] - s1["studio_price"];
       })
       .filter((curr, i, arr) => {
-        return i <= 5;
+        return i <= 2;
       })
       .map(s => {
         return (
