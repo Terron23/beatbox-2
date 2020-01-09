@@ -17,6 +17,7 @@ module.exports = app => {
   app.get("/api/v2/studio-listing", db.getStudios);
   app.get("/api/v2/studio-type", db.getStudioType);
   app.get("/api/v2/single-studio-listing/:id", db.getSingleStudios);
+  app.get("/api/v2/feature-studios", db.getFeatureStudios);
   app.get("/api/v2/studios-booked", db.getStudiosBooked);
   app.post("/api/v2/post-listing", db.postListing);
   app.post("/api/v2/payment", db.postPayment);

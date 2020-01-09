@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar , Form, Button, FormControl} from "react-bootstrap";
 import NavMobile from "./sub_components/NavMobile"
 import './css/nav.css'
 import logo from './images/logo/sh_logo.png';
@@ -73,7 +73,7 @@ toggleNavigation =()=> {
             <Navbar.Brand className="mr-auto">
               <Link to="/"><img src={logo} width="80px" /></Link>
             </Navbar.Brand>
-         
+        
             <Navbar.Collapse id="basic-navbar-nav" className="web-nav">
               <Nav className="ml-auto">{this.renderContent()}</Nav>
               {/* <Nav.Link>

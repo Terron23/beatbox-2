@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchLocation, fetchStudio } from "../.././actions";
+import { fetchLocation, fetchStudio, fetchFeatureStudios } from "../.././actions";
 import About from "./About";
 import StudioType from "./StudioType";
 import FeaturedStudios from "./FeaturedStudios"
@@ -14,6 +14,7 @@ class Home extends Component {
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
+    this.props.fetchFeatureStudios()
   }
 
   handleSubmit = e => {
@@ -29,7 +30,7 @@ class Home extends Component {
       return <Loading />;
     }
 
-    let { locate, history, } = this.props;
+    let { locate, history, featStudios } = this.props;
     return (
       <div>
         <Hero />
@@ -37,7 +38,7 @@ class Home extends Component {
           locate={locate.region}
           history={history}
           handleSubmit={this.handleSubmit}/>
-         <FeaturedStudios /> 
+         <FeaturedStudios featStudios={featStudios}/> 
         <PostStudio />
         <StudioType />
         <About />
@@ -46,8 +47,8 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({ locate, studio }) {
-  return { locate, studio };
+function mapStateToProps({ locate, studio , featStudios}) {
+  return { locate, studio, featStudios };
 }
 
-export default connect(mapStateToProps, { fetchLocation, fetchStudio })(Home);
+export default connect(mapStateToProps, { fetchLocation, fetchStudio, fetchFeatureStudios })(Home);

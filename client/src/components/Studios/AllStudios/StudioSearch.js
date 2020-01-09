@@ -5,7 +5,8 @@ import StudioSearchTemplate from "./sub_components/StudioSearchTemplate";
 import StudioSearchHeader from "./sub_components/StudioSearchHeader";
 import StudioSideFilter from "./sub_components/StudioSideFilter";
 import StudioMobileFilter from "./sub_components/StudioMobileFilter";
-import Loading from "../../Reusable/Loading/Loading"
+import Loading from "../../Reusable/Loading/Loading";
+import Infinite from "../../Reusable/InfiniteScroll/Infinite";
 import "./css/studio.css";
 
 class StudioSearch extends Component {
@@ -28,7 +29,10 @@ class StudioSearch extends Component {
       reveal: false,
       filterArr: "",
       longLat: [],
-      studioType: this.props.match.params.search === "All" ? "" : this.props.match.params.search || "",
+      studioType:
+        this.props.match.params.search === "All"
+          ? ""
+          : this.props.match.params.search || "",
       guest: 0,
       startDate: !this.props.match.params.startdate
         ? ""
@@ -36,17 +40,16 @@ class StudioSearch extends Component {
       applyDate: "",
       startTime: "",
       setShow: false,
-      search: []
+      search: [],
+      items: Array.from({ length: 3 }),
+      hasMore: true
     };
   }
 
   componentDidMount() {
     this.props.fetchLocation();
     this.props.fetchStudio();
-   
   }
-
- 
 
   featureType = () => {
     let days = [
@@ -58,6 +61,7 @@ class StudioSearch extends Component {
       "Friday",
       "Saturday"
     ];
+    let arr = [];
     let filterArr = [...this.props.studio];
     let search = filterArr
       .filter(studio =>
@@ -79,11 +83,12 @@ class StudioSearch extends Component {
           ? Object.values(studio.availibility)
           : Object.values(studio.availibility).filter(
               day =>
-                day.toLowerCase() === days[new Date(this.state.startDate).getDay()].toLowerCase()
+                day.toLowerCase() ===
+                days[new Date(this.state.startDate).getDay()].toLowerCase()
             ) != ""
       )
       .map(studio => {
-        return (
+        arr.push(
           <StudioSearchTemplate
             key={studio._id}
             studioImage={Object.values(studio.studio_images)[0]}
@@ -94,16 +99,18 @@ class StudioSearch extends Component {
             city={studio.city}
             availibility={Object.values(studio.availibility)}
             dateQuery={this.state.startDate}
-            />
+          />
         );
       });
 
-    if(search.length < 1){
-      return <div>
-        <h3 >Could Not Find Any Listings.</h3>
-      </div>
-    } 
-    return search;
+    if (arr.length < 1) {
+      return arr.push(
+        <div>
+          <h3>Could Not Find Any Listings.</h3>
+        </div>
+      );
+    }
+    return arr;
   };
 
   handleAvailibility = e => {
@@ -126,8 +133,6 @@ class StudioSearch extends Component {
     return price;
   };
 
-  
-
   handleClose = e => {
     e.preventDefault();
     this.setState({ setShow: false });
@@ -142,14 +147,13 @@ class StudioSearch extends Component {
     }
   };
 
-  handleReveal =()=>{
-if(this.state.reveal){
-  this.setState({reveal:false})
-}
-else{
-  this.setState({reveal:true})
-}
-  }
+  handleReveal = () => {
+    if (this.state.reveal) {
+      this.setState({ reveal: false });
+    } else {
+      this.setState({ reveal: true });
+    }
+  };
 
   handleChangeStart = date => {
     document.getElementById("search-id").focus();
@@ -166,6 +170,20 @@ else{
     });
   };
 
+  fetchMoreData = () => {
+    if (this.state.items.length >= this.featureType().length) {
+      this.setState({ hasMore: false });
+      return;
+    }
+    // a fake async api call like which sends
+    // 20 more records in .5 secs
+    setTimeout(() => {
+      this.setState({
+        items: this.state.items.concat(Array.from({ length: 18 }))
+      });
+    }, 500);
+  };
+
   render() {
     if (!this.props.studio || !this.props.locate) {
       return <Loading />;
@@ -174,10 +192,10 @@ else{
 
     return (
       <section>
-        <div className={`header-area web-search`}>
+        {/* <div className={`header-area web-search`}>
           <StudioSearchHeader />
-        </div>
-     <div className="mobile-search">
+        </div> */}
+        <div className="mobile-search">
           <hr />
           <StudioMobileFilter
             handleShow={this.handleShow}
@@ -195,28 +213,41 @@ else{
               handleRevealProp={this.handleReveal}
               revealCal={reveal}
               clearCal={this.clearCal}
-             />
+            />
           </StudioMobileFilter>
-        </div> 
+        </div>
         <div className="roberto-rooms-area section-padding-100-0">
           <div className="container">
             <div className="row">
-              <div className={`col-12 col-lg-8`}>{this.featureType()}</div>
-              {document.documentElement.clientWidth >= 1000 ? 
-              <StudioSideFilter
-                location={location}
-                submit={this.handleAvailibility}
-                priceLow={this.handlePrice()[0]}
-                priceHigh={this.handlePrice().pop()}
-                search={studioType}
-                stateText={startDate}
-                startDate={startDate}
-                handleChangeStartProps={this.handleChangeStart}
-                handleRevealProp={this.handleReveal}
-                revealCal={reveal}
-                hide="web-search"
-                clearCal={this.clearCal}
-              /> : ""}
+              <div className={`col-12 col-lg-8`}>
+                <Infinite
+                  fetchMoreData={this.fetchMoreData}
+                  hasMore={this.state.hasMore}
+                  items={this.state.items}
+                >
+                  {this.state.items.map(
+                    (i, index) => this.featureType()[index]
+                  )}
+                </Infinite>
+              </div>
+              {document.documentElement.clientWidth >= 1000 ? (
+                <StudioSideFilter
+                  location={location}
+                  submit={this.handleAvailibility}
+                  priceLow={this.handlePrice()[0]}
+                  priceHigh={this.handlePrice().pop()}
+                  search={studioType}
+                  stateText={startDate}
+                  startDate={startDate}
+                  handleChangeStartProps={this.handleChangeStart}
+                  handleRevealProp={this.handleReveal}
+                  revealCal={reveal}
+                  hide="web-search"
+                  clearCal={this.clearCal}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

@@ -238,7 +238,7 @@ const getStudioType = (request, response) => {
 
 const getStudios = (request, response) => {
   pool.query(
-    "Select s.*, studio_type from studios s join studiotypes st on st._id = s.studio_type_fk",
+    "Select * from getStudios",
     (error, results) => {
       if (error) {
         throw error;
@@ -251,12 +251,23 @@ const getStudios = (request, response) => {
 
 const getSingleStudios = (req, res) => {
   pool.query(
-    `Select s.*, studio_type from studios s join studiotypes st on st._id = s.studio_type_fk where s._id = ${req.params.id}`,
+    `Select * from getStudios where _id = ${req.params.id}`,
     (error, results) => {
       if (error) {
         throw error;
       }
+      res.status(200).json(results.rows);
+    }
+  );
+};
 
+const getFeatureStudios = (req, res) => {
+  pool.query(
+    `SELECT * from getStudios order by review desc, rating desc limit 3`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
       res.status(200).json(results.rows);
     }
   );
@@ -422,6 +433,7 @@ module.exports = {
   getStudios,
   getSingleStudios,
   getStudiosBooked,
+  getFeatureStudios,
   //put
   putImages,
   putStudioDetails,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudio, fetchUser } from "../../../actions";
+import { fetchSingleStudio, fetchUser } from "../../../actions";
 import Wrapper from "./sub_components/Wrapper";
 import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
@@ -81,7 +81,7 @@ class SingleStudio extends Component {
     }
   }
   componentDidMount() {
-    this.props.fetchStudio();
+    this.props.fetchSingleStudio(this.props.match.params.id);
     this.props.fetchUser();
   }
 
@@ -114,8 +114,9 @@ class SingleStudio extends Component {
               <BreadCrumb
                 studioName={studio.studio_name}
                 price={studio.studio_price}
-                image={studio.main_image}
+                
                 studiotype={studio.studio_type}
+                thumbnails={Object.values(studio.studio_images)}
               />
             );
           }
@@ -161,6 +162,6 @@ function mapStateToProps({ studio, auth }) {
   return { studio, auth };
 }
 
-export default connect(mapStateToProps, { fetchStudio, fetchUser })(
+export default connect(mapStateToProps, { fetchSingleStudio, fetchUser })(
   SingleStudio
 );

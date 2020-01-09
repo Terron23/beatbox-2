@@ -7,6 +7,7 @@ import {
   FETCH_LOCATION,
   FETCH_STUDIOTYPES,
   FETCH_SINGLE_STUDIOS,
+  FETCH_FEATURE_STUDIOS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -45,7 +46,8 @@ export const fetchStudioType = () => async dispatch => {
   dispatch({ type: FETCH_STUDIOTYPES, payload: res.data });
 };
 
-export const fetchFeatureStudioType = () => async dispatch => {
-  const res = await axios.get("/api/feature/studio-listing");
-  dispatch({ type: FETCH_STUDIOTYPES, payload: res.data });
+export const fetchFeatureStudios = () => async dispatch => {
+  const res = await axios.get("/api/v2/feature-studios");
+  console.log("New", res.data)
+  dispatch({ type: FETCH_FEATURE_STUDIOS, payload: res.data });
 };

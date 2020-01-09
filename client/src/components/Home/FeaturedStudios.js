@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchStudio } from "../.././actions";
 import Heading from "./sub_components/heading";
 import { Link } from "react-router-dom";
 import './css/feature.css'
@@ -48,13 +46,8 @@ const SingleFeaturedStudio = ({
 
 class FeaturedStudios extends Component {
   showStudio = () => {
-    return this.props.studio
-      .sort((s1, s2) => {
-        return s2["studio_price"] - s1["studio_price"];
-      })
-      .filter((curr, i, arr) => {
-        return i <= 2;
-      })
+    console.log("test", this.props)
+    return this.props.featStudios
       .map(s => {
         return (
           <SingleFeaturedStudio
@@ -93,8 +86,6 @@ class FeaturedStudios extends Component {
   }
 }
 
-function mapStateToProps({ studio }) {
-  return { studio };
-}
 
-export default connect(mapStateToProps, { fetchStudio })(FeaturedStudios);
+
+export default FeaturedStudios;

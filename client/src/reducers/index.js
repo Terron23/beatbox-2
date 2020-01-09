@@ -4,11 +4,13 @@ import studioReducers from "./studioReducers.js";
 import bookReducers from "./bookReducers.js";
 import locationReducers from "./locationReducers.js";
 import studiotypeReducers from "./studiotypeReducers";
+import featStudioReducers from "./featStudioReducers"
 
 export default combineReducers({
   auth: authReducers,
   studio: studioReducers,
   booked: bookReducers,
   locate: locationReducers,
-  studiotype: studiotypeReducers
+  studiotype: studiotypeReducers,
+  featStudios: featStudioReducers,
 });
