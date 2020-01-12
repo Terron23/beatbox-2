@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import phoneImg from './images/iphone.png';
+import logo from './images/sh_logo.png';
 
 
 const ImageGallery = () => {
@@ -12,8 +12,8 @@ const ImageGallery = () => {
           <div className="col-12">
             <div className="single-thumb">
               <img
-                src={`${phoneImg}`}
-                alt="i-phone image"
+                src={`${logo}`}
+                alt="studio-hunt-logo"
                 style={{ width:"100%" }}
               />
             </div>

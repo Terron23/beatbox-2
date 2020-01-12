@@ -15,7 +15,7 @@ export default class Footer extends Component {
               <div className="col-12 col-sm-6 col-lg-3">
                 <div className="single-footer-widget mb-80">
                   <Link to="/" className="footer-logo">
-                    <img src={f_logo} width="70%" />
+                    <img src={f_logo} width="50%" />
                   </Link>
 
                <a style={{"color":"white"}} href="mailto:studiohunt@outlook.com" target="_blank">studiohunt@outlook.com</a>

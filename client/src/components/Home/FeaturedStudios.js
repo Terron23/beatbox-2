@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Heading from "./sub_components/heading";
 import { Link } from "react-router-dom";
-import './css/feature.css'
+import HoverEffect from '../Reusable/HoverEffect/Hover';
+import './css/feature.css';
 
 
 const SingleFeaturedStudio = ({
@@ -19,14 +20,9 @@ const SingleFeaturedStudio = ({
     
        
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div className="hovereffect">
+    <HoverEffect link={`/single-studio/${id}`} linkTitle={"View Details"}>
     <img src={`${bg}`} className="gallery-img"/>
-        <div className="overlay">
-        <Link to={`/single-studio/${id}`} className="info align-self-center">
-          View Details
-        </Link>
-        </div>
-    </div>
+        </HoverEffect>
 </div>
 </Link>
 

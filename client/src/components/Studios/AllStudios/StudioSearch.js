@@ -41,14 +41,17 @@ class StudioSearch extends Component {
       startTime: "",
       setShow: false,
       search: [],
-      items: Array.from({ length: 3 }),
-      hasMore: true
+      items: Array.from({ length: 20 }),
+      hasMore: true,
+      counter: 0
     };
   }
 
   componentDidMount() {
     this.props.fetchLocation();
-    this.props.fetchStudio();
+    this.props.fetchStudio(undefined, undefined, this.state.studioType);
+    window.addEventListener("load", this.featureType);
+   
   }
 
   featureType = () => {
@@ -62,46 +65,21 @@ class StudioSearch extends Component {
       "Saturday"
     ];
     let arr = [];
-    let filterArr = [...this.props.studio];
-    let search = filterArr
-      .filter(studio =>
-        this.state.location === ""
-          ? studio.state
-          : studio.state
-              .toLowerCase()
-              .match(this.state.location.toLowerCase()) ||
-            studio.postal_code.toLowerCase() ===
-              this.state.location.toLowerCase()
-      )
-      .filter(studio =>
-        this.state.studioType === ""
-          ? studio.studio_type_fk
-          : studio.studio_type_fk === Number(this.state.studioType)
-      )
-      .filter(studio =>
-        this.state.startDate === ""
-          ? Object.values(studio.availibility)
-          : Object.values(studio.availibility).filter(
-              day =>
-                day.toLowerCase() ===
-                days[new Date(this.state.startDate).getDay()].toLowerCase()
-            ) != ""
-      )
-      .map(studio => {
-        arr.push(
-          <StudioSearchTemplate
-            key={studio._id}
-            studioImage={Object.values(studio.studio_images)[0]}
-            studioName={studio.studio_name}
-            price={studio.studio_price}
-            _id={studio._id}
-            studioType={studio.studio_type}
-            city={studio.city}
-            availibility={Object.values(studio.availibility)}
-            dateQuery={this.state.startDate}
-          />
-        );
-      });
+    let filterArr = this.props.studio.map(studio => {
+      arr.push(
+        <StudioSearchTemplate
+          key={studio._id}
+          studioImage={Object.values(studio.studio_images)[0]}
+          studioName={studio.studio_name}
+          price={studio.studio_price}
+          _id={studio._id}
+          studioType={studio.studio_type}
+          city={studio.city}
+          availibility={Object.values(studio.availibility)}
+          dateQuery={this.state.startDate}
+        />
+      );
+    });
 
     if (arr.length < 1) {
       return arr.push(
@@ -110,15 +88,27 @@ class StudioSearch extends Component {
         </div>
       );
     }
-    return arr;
+
+    
+    this.setState({ search: this.state.search.concat(arr) });
+    console.log("fetcg" ,arr, this.state.search)
   };
 
-  handleAvailibility = e => {
+  handleParam =(studiotype, date, state)=>{
+   return `&studioType=${studiotype}&location=${date}&state=${state}`
+  }
+  handleAvailibility = async e => {
     e.preventDefault();
     let location = e.target.location.value;
     let studioType = e.target.studioType.value;
     let startDate = e.target.startDate.value;
-    this.setState({ location, studioType, startDate });
+    const getData = await this.props.fetchStudio(
+      undefined,
+      undefined,
+      this.handleParam(studioType, startDate, location )
+    );
+    this.setState({ location, studioType, startDate, search: [] });
+    this.featureType();
     this.handleClose(e);
   };
 
@@ -170,31 +160,40 @@ class StudioSearch extends Component {
     });
   };
 
-  fetchMoreData = () => {
-    if (this.state.items.length >= this.featureType().length) {
-      this.setState({ hasMore: false });
-      return;
-    }
-    // a fake async api call like which sends
-    // 20 more records in .5 secs
-    setTimeout(() => {
-      this.setState({
-        items: this.state.items.concat(Array.from({ length: 18 }))
-      });
-    }, 500);
+  fetchMoreData = async () => {
+    let counter = this.state.counter + 20;
+    this.setState({counter})
+    const getData = await this.props.fetchStudio(
+      counter,
+      20,
+      this.state.studioType
+    );
+this.featureType()
+    console.log("hello", this.props.studio, counter, this.state.search.length, this.state.items.length)
+
+    this.setState({
+      items: this.state.items.concat(Array.from({ length: 20 }))
+    
+    });
   };
 
   render() {
     if (!this.props.studio || !this.props.locate) {
       return <Loading />;
     }
-    let { location, startDate, studioType, setShow, reveal } = this.state;
+    let {
+      location,
+      startDate,
+      studioType,
+      setShow,
+      reveal,
+      search,
+      items,
+      hasMore
+    } = this.state;
 
     return (
       <section>
-        {/* <div className={`header-area web-search`}>
-          <StudioSearchHeader />
-        </div> */}
         <div className="mobile-search">
           <hr />
           <StudioMobileFilter
@@ -222,12 +221,10 @@ class StudioSearch extends Component {
               <div className={`col-12 col-lg-8`}>
                 <Infinite
                   fetchMoreData={this.fetchMoreData}
-                  hasMore={this.state.hasMore}
-                  items={this.state.items}
+                  hasMore={hasMore}
+                  items={items}
                 >
-                  {this.state.items.map(
-                    (i, index) => this.featureType()[index]
-                  )}
+                  {items.map((i, index) => search[index])}
                 </Infinite>
               </div>
               {document.documentElement.clientWidth >= 1000 ? (

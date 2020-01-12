@@ -3,52 +3,39 @@ import Heading from "./sub_components/heading";
 import dance from "./images/60.png";
 import art from "./images/07.jpg";
 import photo from "./images/63.jpg";
-import viewAll from './images/studio_hunt_collage.jpg'
+import film from "./images/06.jpg";
+import music from "./images/08.jpg";
+import yoga from "./images/03.jpg";
+import HoverEffect from '../Reusable/HoverEffect/Hover'
 import { Link } from "react-router-dom";
+import './css/studiotype.css';
 
-const CarouselItems = ({
-  title,
-  subtitle,
-  description,
-  hover,
-  link,
-  img
-}) => {
-  return (
-    <div className="projects-slides">
-      <div
-        className={`single-project-slide active bg-img`}
-        onClick={hover}
-        style={{ backgroundImage: `url(${img})` }}
-      >
-        <div className="project-content">
-          <div className="text">
-            <h6>{title}</h6>
-            <h5> {subtitle}</h5>
-          </div>
-        </div>
 
-        <div className="hover-effects text-center" data-wow-delay="700ms">
-          <div className="text">
-            <h2>{title}</h2>
-            <h5>{subtitle}</h5>
-            <p>{description}</p>
-          </div>
-          <Link to={`/search-studio/${link}`} className="btn project-btn text-center">
-            Discover Now{" "}
-            <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-          </Link>
-        </div>
-      </div>
+const ViewAll =()=>(  
+<div className="row">
+<div className="text-center col-md-12 sh-view-all">
+<Link to={`/search-studio/`} className="btn  text-center ">
+<p >View All <i className="fa fa-long-arrow-right" aria-hidden="true"></i></p> 
+</Link>
+</div>
+</div>)
+
+const Studios =({studioTypeName, img, link})=>(<div className="col-md-4 col-lg-4 col-sm-12 type-img " >
+<HoverEffect link={link}>
+  <img src={img} className="studiohunt-type-img"/>
+  <div className="carousel-caption studio-hunt-hover-effects">
+<h3>{studioTypeName}</h3>
     </div>
-  );
-};
+    </HoverEffect>
+</div> )
+
+
 
 export default class StudioType extends Component {
   render() {
     return (
       <section
-        className="roberto-project-area"
+        
         style={{ backgroundColor: "#0e2737" }}
       >
         <hr />
@@ -58,33 +45,23 @@ export default class StudioType extends Component {
           subtitle="Find the Studio For You"
         />
 
-     
-          <CarouselItems
-            title="Dance"
-            description="Practice your moves."
-            img={dance}
-            link={'6'}
-          />
+<div className="projects-slides ">
+     <div
+        className={`sh-studio-type-slide active  bg-img`}
+      >
+    <div className="studio-type-row row">
+    <Studios studioTypeName="Yoga" img={yoga} link="/search-studio/2"/> 
+    <Studios studioTypeName="Recording - Music" img={music} link="/search-studio/3"/> 
+    <Studios studioTypeName="Dance" img={dance} link="/search-studio/6"/> 
+    <Studios studioTypeName="Film" img={film} link="/search-studio/7"/> 
+    <Studios studioTypeName="Photography" img={photo} link="/search-studio/5"/> 
+    <Studios studioTypeName="Art" img={art} link="/search-studio/4"/>
+        </div>
+      <ViewAll />
+        </div>
+    
+        </div>
 
-          <CarouselItems
-            title="Photography"
-            description="Hold photo shoots like a boss."
-            img={photo}
-            link={'5'}
-          />
-          <CarouselItems
-            title="Art"
-            description="Paint, sketch and embrace your artistic side."
-            img={art}
-            link={'4'}
-          />
-
-            <CarouselItems
-            title="View All"
-            description="View All of Our Studios"
-            img={viewAll}
-            link=""
-          />
    
       </section>
     );

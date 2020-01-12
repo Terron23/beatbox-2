@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import HoverEffect from '../../../Reusable/HoverEffect/Hover'
 
 const StudioSearchTemplate = ({
   studioName,
@@ -13,9 +14,9 @@ const StudioSearchTemplate = ({
 }) => (
   <div className="single-room-area d-flex align-items-center mb-50">
     <div className="room-thumbnail">
-      <Link to={`/single-studio/${_id}`}>
+      <HoverEffect link={`/single-studio/${_id}`}>
         <img src={studioImage} alt={studioName} className="search-img" />
-      </Link>
+      </HoverEffect>
     </div>
 
     <div className="room-content">

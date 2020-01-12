@@ -34,17 +34,17 @@ handleSelect = (selectedIndex, e) => {
     return (
       <Wrapper>
      <Carousel activeIndex={index} direction={direction} onSelect={this.handleSelect} fade={true}
-     pauseOnHover={false} interval={2000} controls={false}
+     pauseOnHover={false} interval={2000} controls={false} indicators={true}
      >
-        <Carousel.Item>
+        <CarouselItem>
      <Herobg bg={bg1} logo={navImg} />
-        </Carousel.Item>
-        <Carousel.Item>
+        </CarouselItem>
+        <CarouselItem>
      <Herobg bg={bg3} logo={navImg} />
-        </Carousel.Item>
-        <Carousel.Item>
+        </CarouselItem>
+        <CarouselItem>
      <Herobg bg={bg6} logo={navImg} />
-        </Carousel.Item>
+        </CarouselItem>
 
         </Carousel>
       </Wrapper>
