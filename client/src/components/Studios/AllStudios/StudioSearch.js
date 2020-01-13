@@ -24,8 +24,8 @@ class StudioSearch extends Component {
       state: "",
       location:
         this.props.match.params.location === "All"
-          ? ""
-          : this.props.match.params.location || "",
+          ? ''
+          : this.props.match.params.location || '',
       reveal: false,
       filterArr: "",
       longLat: [],
@@ -52,22 +52,20 @@ class StudioSearch extends Component {
     this.props.fetchStudio(
       0,
       20,
-      this.handleParam(this.props.match.params.search, "", this.props.match.params.location)
+      this.handleParam(
+        this.state.studioType,
+        "",
+        this.state.location
+      )
     );
-    window.addEventListener("load", this.featureType);
+
+    console.log(this.props.match.params.location)
     this.featureType();
+    window.addEventListener("load", this.featureType);
   }
-//   componentDidUpdate (prevProps) {
-//     if (prevProps.location.key !== this.props.location.key) {
-//       this.featureType();
-//     }
-// }
 
-
-  featureType = () => {
-    if(!this.props.studio){
-      return;
-    }
+  featureType = (event) => {
+  console.log(event)
     let days = [
       "Sunday",
       "Monday",
@@ -77,58 +75,55 @@ class StudioSearch extends Component {
       "Friday",
       "Saturday"
     ];
-    let error = 'Could Not Find Any Listings.'
+    let error = "Could Not Find Any Listings.";
     let arr = [];
     let search = this.props.studio;
     let filterArr = search
-    .filter(studio =>
-      this.state.location === ""
-        ? studio.state
-        : studio.state
-            .toLowerCase()
-            .match(this.state.location.toLowerCase()) ||
-          studio.postal_code.toLowerCase() ===
-            this.state.location.toLowerCase()
-    )
-    .filter(studio =>
-      this.state.studioType === ""
-        ? studio.studio_type_fk
-        : studio.studio_type_fk === Number(this.state.studioType)
-    )
-    .filter(studio =>
-      this.state.startDate === ""
-        ? Object.values(studio.availibility)
-        : Object.values(studio.availibility).filter(
-            day =>
-              day.toLowerCase() === days[new Date(this.state.startDate).getDay()].toLowerCase()
-          ) != ""
-    )
-    .map(studio => {
-      arr.push(
-        <StudioSearchTemplate
-          key={studio._id}
-          studioImage={Object.values(studio.studio_images)[0]}
-          studioName={studio.studio_name}
-          price={studio.studio_price}
-          _id={studio._id}
-          studioType={studio.studio_type}
-          city={studio.city}
-          availibility={Object.values(studio.availibility)}
-          dateQuery={this.state.startDate}
-        />
-      );
-    });
+      .filter(studio =>
+        this.state.location === ""
+          ? studio.state
+          : studio.state
+              .toLowerCase()
+              .match(this.state.location.toLowerCase()) ||
+            studio.postal_code.toLowerCase() ===
+              this.state.location.toLowerCase()
+      )
+      .filter(studio =>
+        this.state.studioType === ""
+          ? studio.studio_type_fk
+          : studio.studio_type_fk === Number(this.state.studioType)
+      )
+      .filter(studio =>
+        this.state.startDate === ""
+          ? Object.values(studio.availibility)
+          : Object.values(studio.availibility).filter(
+              day =>
+                day.toLowerCase() ===
+                days[new Date(this.state.startDate).getDay()].toLowerCase()
+            ) != ""
+      )
+      .map(studio => {
+        arr.push(
+          <StudioSearchTemplate
+            key={studio._id}
+            studioImage={Object.values(studio.studio_images)[0]}
+            studioName={studio.studio_name}
+            price={studio.studio_price}
+            _id={studio._id}
+            studioType={studio.studio_type}
+            city={studio.city}
+            availibility={Object.values(studio.availibility)}
+            dateQuery={this.state.startDate}
+          />
+        );
+      });
 
     if (arr.length < 1) {
-    return  arr.push(
-        error
-      );
-    
+      return arr.push(error);
+    } else {
+      arr = arr.filter(e => e != error);
+      this.setState({ search: this.state.search.concat(arr) });
     }
-else{
-  arr = arr.filter(e=>e != error)
-    this.setState({ search: this.state.search.concat(arr)});
-}
   };
 
   handleParam = (studiotype, date, state) => {
@@ -202,13 +197,14 @@ else{
   };
 
   fetchMoreData = async () => {
-    let {studioType, location, startDate} = this.state;
-    let counter = this.state.counter + 20;
-    this.setState({ counter });
-    if(this.state.items > 5){
-      this.setState({hasMore:false});
+    if (this.state.items.length > 5) {
+      this.setState({ hasMore: false });
       return;
     }
+    let { studioType, location, startDate } = this.state;
+    let counter = this.state.counter + 20;
+    this.setState({ counter });
+   
     const getData = await this.props.fetchStudio(
       counter,
       20,

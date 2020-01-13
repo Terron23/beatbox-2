@@ -14,10 +14,7 @@ const Features = ({capacity, description, equipment, services, includes}) => {
         <h6>
           Equipment: <span>{equipment.length > 0 ? equipment: 'Contact Owner'}</span>
         </h6>
-       
-        <h6>
-        Services: <span><span>{services.length > 0 ? services : 'N/A'}</span></span>
-        </h6>
+      
       </div>
 
       <p>

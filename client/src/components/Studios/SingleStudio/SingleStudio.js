@@ -37,9 +37,15 @@ const Studios = ({
 }) => {
   return (
     <Wrapper>
+    <div className="row">
+   <div className="col-lg-12 col-md-12 col-sm-12">
+   <h2>{studioName}</h2>
+         <h5>${price}/ per Hour</h5>
+         </div>
+         </div>
       <div className="row">
         <div className="col-lg-8 col-md-12 col-sm-8">
-          { <Carousel  img={image} thumbnails={thumbnails} width={width} /> }
+         
           <Features
             capacity={guest}
             description={description}
@@ -47,7 +53,8 @@ const Studios = ({
             services={services}
             includes={includes}
           />
-          <Ameneties services={services} contact={auth} />
+          <Ameneties services={services} contact={auth} title={"Ameneties"}/>
+          <Ameneties services={includes} contact={auth} title={"Included Bonus"}/>
           {/* <Reviews /> */}
         </div>
         <div className="col-12 col-lg-4 web-search">
@@ -108,19 +115,13 @@ class SingleStudio extends Component {
     console.log(studio)
     return (
       <div>
-        {studio.map(studio => {
+      {studio.map(studio => {
           if (this.props.match.params.id == studio._id) {
             return (
-              <BreadCrumb
-                studioName={studio.studio_name}
-                price={studio.studio_price}
-                
-                studiotype={studio.studio_type}
-                thumbnails={Object.values(studio.studio_images)}
-              />
+              <Carousel   thumbnails={Object.values(studio.studio_images)} /> 
             );
           }
-        })}
+        })} 
 
         <div className="container">
           <div className="row">

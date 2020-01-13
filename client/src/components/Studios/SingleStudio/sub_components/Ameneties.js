@@ -1,9 +1,9 @@
 import React from "react";
 
-const Ameneties = ({services, contact}) => {
+const Ameneties = ({services, contact, capacity, description, equipment, includes, title}) => {
   return (
     <div class="room-service mb-50">
-      <h4>Studio Services</h4>
+<h4>{title}</h4>
 
       <ul>
         {services.split(",").map(s=>
@@ -16,7 +16,7 @@ const Ameneties = ({services, contact}) => {
       <div >
      
       </div>
-      <p><a className="btn roberto-btn btn-2 contact-btn">Contact Owner</a></p>
+      {/* <p><a className="btn roberto-btn btn-2 contact-btn">Contact Owner</a></p> */}
     </div>
   );
 };

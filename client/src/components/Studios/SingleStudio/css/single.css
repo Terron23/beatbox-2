@@ -18,7 +18,12 @@
     height:50px !important;
     
 }
-
+.image-gallery-fullscreen-button::before {
+    content: "View More" !important;
+    font-size: 25px;
+    border: solid 3px #1cc3b2;
+    font-family: sans-serif;
+}
 .contact-btn{
     margin:20px;
 }

@@ -21,6 +21,7 @@ const Herobg = ({ bg, logo }) => {
                 <Link to="/search-studio"
                   className="btn roberto-btn btn-2"
                   data-animation="fadeInUp"
+                  
                   data-delay="800ms"
                 >
                   Book Now

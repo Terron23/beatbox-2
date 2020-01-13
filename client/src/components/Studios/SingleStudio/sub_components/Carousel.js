@@ -27,11 +27,13 @@ export default class Carousel extends Component {
       <ImageGallery
         items={images}
         lazyLoad={true}
-        showBullets={false}
-        showFullscreenButton={false}
-        showFullscreenButton={false}
+        showBullets={true}
+        showFullscreenButton={true}
         additionalClass="single-studio-gallery"
         showThumbnails={true}
+        useBrowserFullscreen={true}
+        autoPlay={true}
+        
       />
     );
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import {Carousel, CarouselItem} from 'react-bootstrap'
 import artImg from '../img/art.jpg'
 import photoImg from '../img/06.jpg'
 import recStudioImg from '../img/08.jpg'
@@ -6,38 +7,15 @@ import yogaImg from '../img/03.jpg'
 import podImg from '../img/studio.jpg'
 import danceImg from '../img/04.jpg'
 
-const BreadCrumb = ({ studioName, price, studiotype }) => {
+const BreadCrumb = ({ studioName, price, studiotype, thumbnails }) => {
   return (
     <div
       className="breadcrumb-area bg-img bg-overlay jarallax"
-      style={
-      studiotype.toLowerCase()==="art" 
-      ? 
-      styles.artStyle
-      : 
-      studiotype.toLowerCase()==="recording - music"
-      ?
-      styles.podStyle
-      :
-      studiotype.toLowerCase()==="recording - podcast"
-      ?
-      styles.podStyle
-      :
-      studiotype.toLowerCase()==="dance"
-      ?
-      styles.danceStyle
-      :
-      studiotype.toLowerCase()==="yoga"
-      ?
-      styles.yogaStyle
-      :
-      studiotype.toLowerCase()==="photography"
-      ?
-      styles.studioStyle
-      :
-      styles.studioStyle
-    }
+       style={{
+        backgroundImage: "url(" + thumbnails[0]  + ")" 
+      }}
       >
+
       <div className="container h-100">
         <div className="row h-100 align-items-end">
           <div className="col-12">

@@ -242,10 +242,10 @@ const getStudios = (req, res) => {
   }
 
   let { page, limit, studioType, date, state } = req.query;
-  console.log(date, state, studioType);
-  console.log(`Select * from getStudios where _id = _id  
-  ${getParams(studioType, "studio_type_fk")} ${getParams(state, "state")}  
-  order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`);
+  // console.log(date, state, studioType);
+  // console.log(`Select * from getStudios where _id = _id  
+  // ${getParams(studioType, "studio_type_fk")} ${getParams(state, "state")}  
+  // order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`);
   pool.query(
     `Select * from getStudios where _id = _id  ${getParams(
       studioType,
