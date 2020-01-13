@@ -6,7 +6,7 @@ const Ameneties = ({services, contact}) => {
       <h4>Studio Services</h4>
 
       <ul>
-        {services.split(", ").map(s=>
+        {services.split(",").map(s=>
         <li>
         <i className="fa fa-check"></i> {s}
         </li>)}

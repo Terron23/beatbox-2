@@ -93,22 +93,20 @@ function getUser(username, password, done) {
   });
 }
 
-function getUserName( email, signup, username, password, done) {
+function getUserName(email, signup, username, password, done) {
   return new Promise(resolve => {
     let valid = true;
-    console.log("Sign Up",signup)
+    
     pool.query(
       `SELECT * FROM users WHERE (username = '${username}' or email= '${email}') and password <> ''`,
       (err, results) => {
         if (err) {
           return done(err);
         } else if (results.rows[0]) {
-          if(signup){
-            
+          if (signup) {
             done(null, false);
             resolve(valid);
-          }
-         else if (results.rows[0].password === password) {
+          } else if (results.rows[0].password === password) {
             done(null, results.rows[0]);
             resolve(valid);
           } else if (results.rows[0].password !== password) {
@@ -116,12 +114,11 @@ function getUserName( email, signup, username, password, done) {
             resolve(valid);
           }
         } else {
-          if(signup){
-          valid = false;
-         console.log("Email", email)
-          resolve(valid)
-          }
-          else{
+          if (signup) {
+            valid = false;
+           
+            resolve(valid);
+          } else {
             done(null, false);
           }
         }
@@ -130,9 +127,9 @@ function getUserName( email, signup, username, password, done) {
   });
 }
 
-const LocalOAuth = async ( email, signup, username, password, done) => {
-  const user = await getUserName(email, signup, username, password,  done);
-  console.log(user);
+const LocalOAuth = async (email, signup, username, password, done) => {
+  const user = await getUserName(email, signup, username, password, done);
+ 
 
   if (!user) {
     pool.query(
@@ -215,8 +212,8 @@ const postPayment = async (req, res) => {
     receipt_email: email
   });
   pool.query(
-    "Insert into orders (user_fk, studio_fk, payment, date_booked, time_stamp) values($1, $2 , $3, $4, now())",
-    [req.user._id, studioid, payment, new Date()],
+    "Insert into orders (user_fk, studio_fk, payment,  time_stamp) values($1, $2 , $3,  now())",
+    [req.user._id, studioid, payment],
     (error, results) => {
       if (error) {
         throw error;
@@ -237,22 +234,31 @@ const getStudioType = (request, response) => {
 };
 
 const getStudios = (req, res) => {
-function getParams(param, val){
-  if(val === 'state' && param){
-    return `and lower(${val}) like '%${param.toLowerCase()}%'`
-  }
-return !param ? `and ${val} = ${val}` : `and ${val} = '${param}'`
+  function getParams(param, val) {
+    if (val === "state" && param) {
+      return `and lower(${val}) like '%${param.toLowerCase()}%'`;
+    }
+    return !param ? `and ${val} = ${val}` : `and ${val} = '${param}'`;
   }
 
-  let {page, limit, studioType, date, state} = req.query;
-  console.log(date, state, studioType)
-  console.log(`Select * from getStudios where _id = _id  ${getParams(studioType, 'studio_type_fk')} ${getParams(state, 'state')} order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`)
+  let { page, limit, studioType, date, state } = req.query;
+  console.log(date, state, studioType);
+  console.log(`Select * from getStudios where _id = _id  
+  ${getParams(studioType, "studio_type_fk")} ${getParams(state, "state")}  
+  order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`);
   pool.query(
-    `Select * from getStudios where _id = _id  ${getParams(studioType, 'studio_type_fk')} ${getParams(state, 'state')} order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`,
+    `Select * from getStudios where _id = _id  ${getParams(
+      studioType,
+      "studio_type_fk"
+    )} ${getParams(
+      state,
+      "state"
+    )} order by _id  OFFSET ${page} FETCH FIRST ${limit} ROWS ONLY`,
     (error, results) => {
       if (error) {
         throw error;
       }
+     
       res.status(200).json(results.rows);
     }
   );
@@ -284,7 +290,7 @@ const getFeatureStudios = (req, res) => {
 
 const getStudiosBooked = (req, res) => {
   pool.query(
-    `SELECT * from date_booked where _id = $1`,
+    `SELECT * from datebooked where _id = $1`,
     [req.user._id],
     (error, results) => {
       if (error) {
@@ -400,9 +406,9 @@ const putImages = (req, res) => {
 //Update User Info
 const updateUser = (req, res) => {
   const { username, email, social, userid } = req.body;
-  console.log(userid, social);
+ 
   pool.query(
-    "Update users set social = $2 where _id=$1",
+    "Update studios set social = $2 where _id=$1",
     [userid, social],
     (error, results) => {
       if (error) {

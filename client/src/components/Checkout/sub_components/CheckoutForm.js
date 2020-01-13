@@ -26,7 +26,7 @@ class CheckoutForm extends Component {
     studio.map(s=>{
       studioId=s._id
     });
-    console.log(studioId, email)
+
     try {
       let { token } = await this.props.stripe.createToken({ name: "test" });
       let response = await axios.post("/api/v2/payment", {

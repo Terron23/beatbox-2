@@ -247,7 +247,7 @@ this.setState({alertClass:"d-none"})
       {this.props.booked.map(book=>{
       return (   <tr>
         <td>{book.studio_name}</td>
-        <td>{book.date_booked}</td>
+        <td>{book.time_stamp}</td>
         <td>{book.payment}</td>
         <td>{<a href={`/single-studio/${book.studio_id}`} className="btn roberto-btn w-100">Book</a>}</td>
         </tr>

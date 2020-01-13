@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Herobg = ({ bg, logo }) => {
   return (
@@ -17,14 +18,13 @@ const Herobg = ({ bg, logo }) => {
                   Studio Hunt
                 </h2>
                 <h6 data-animation="fadeInUp" data-delay="200ms">Find, Book, Go!</h6>
-                <a
-                  href="/search-studio"
+                <Link to="/search-studio"
                   className="btn roberto-btn btn-2"
                   data-animation="fadeInUp"
                   data-delay="800ms"
                 >
                   Book Now
-                </a>
+                </Link>
               </div>
             </div>
           </div>

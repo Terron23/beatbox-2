@@ -50,12 +50,12 @@ export default class StudioType extends Component {
         className={`sh-studio-type-slide active  bg-img`}
       >
     <div className="studio-type-row row">
-    <Studios studioTypeName="Yoga" img={yoga} link="/search-studio/2"/> 
-    <Studios studioTypeName="Recording - Music" img={music} link="/search-studio/3"/> 
-    <Studios studioTypeName="Dance" img={dance} link="/search-studio/6"/> 
-    <Studios studioTypeName="Film" img={film} link="/search-studio/7"/> 
-    <Studios studioTypeName="Photography" img={photo} link="/search-studio/5"/> 
-    <Studios studioTypeName="Art" img={art} link="/search-studio/4"/>
+    <Studios studioTypeName="Yoga" img={yoga} link="/search-studio/17"/> 
+    <Studios studioTypeName="Recording - Music" img={music} link="/search-studio/15"/> 
+    <Studios studioTypeName="Dance" img={dance} link="/search-studio/18"/> 
+    <Studios studioTypeName="Film" img={film} link="/search-studio/20"/> 
+    <Studios studioTypeName="Photography" img={photo} link="/search-studio/19"/> 
+    <Studios studioTypeName="Art" img={art} link="/search-studio/21"/>
         </div>
       <ViewAll />
         </div>

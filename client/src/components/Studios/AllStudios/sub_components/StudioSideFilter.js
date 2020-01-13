@@ -27,7 +27,7 @@ class StudioSideFilter extends Component {
           <form onSubmit={submit}>
             <FormAttr label="Location">
               <input
-                type="text"
+                type="search"
                 defaultValue={location}
                 className="input-small form-control"
                 id="location"

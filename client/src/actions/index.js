@@ -15,8 +15,9 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const fetchStudio = (page=0, limit=20, filterParam='&studioType="&location=""&state=""') => async dispatch => {
+export const fetchStudio = (page=0, limit=20, filterParam='&studioType=&date=&state=') => async dispatch => {
   const res = await axios.get(`/api/v2/studio-listing?limit=${limit}&page=${page}${filterParam}`);
+  console.log("data", res.data)
   dispatch({ type: FETCH_STUDIO, payload: res.data });
 };
 
@@ -32,7 +33,6 @@ export const fetchAvailibility = () => async dispatch => {
 
 export const fetchBookings = () => async dispatch => {
   const res = await axios.get("/api/v2/studios-booked");
-  console.log("hello", res.data)
   dispatch({ type: FETCH_BOOKING, payload: res.data });
 };
 
