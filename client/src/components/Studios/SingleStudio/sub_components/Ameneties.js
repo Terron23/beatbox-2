@@ -8,7 +8,7 @@ const Ameneties = ({services, contact, capacity, description, equipment, include
       <ul>
         {services.split(",").map(s=>
         <li>
-        <i className="fa fa-check"></i> {s}
+        <i className="sh-text fa fa-check"></i> {s}
         </li>)}
         
       

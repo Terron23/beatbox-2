@@ -6,7 +6,9 @@ import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
 import Ameneties from "./sub_components/Ameneties";
 import Reviews from "./sub_components/Reviews";
-import BreadCrumb from "./sub_components/BreadCrumb";
+import Bonus from "./sub_components/Bonus";
+import Description from "./sub_components/Description";
+import Equipment from "./sub_components/Equipment";
 import SingleStudioSideFilter from "./sub_components/SingleStudioSideFilter";
 import MobileBook from "./sub_components/SingleStudioMobileFilter";
 import Loading from "../../Reusable/Loading/Loading";
@@ -53,8 +55,10 @@ const Studios = ({
             services={services}
             includes={includes}
           />
-          <Ameneties services={services} contact={auth} title={"Ameneties"}/>
-          <Ameneties services={includes} contact={auth} title={"Included Bonus"}/>
+          <Description  description={description} title={"Description"}/>
+          <Ameneties services={services} title={"Ameneties"}/>
+          <Bonus includes={includes}  title={"Bonus"}/>
+          <Equipment equipment={equipment}  title={"Equipment"} />
           {/* <Reviews /> */}
         </div>
         <div className="col-12 col-lg-4 web-search">

@@ -27,7 +27,9 @@
 .contact-btn{
     margin:20px;
 }
-
+.sh-text{
+    color: #1cc3b2;
+}
 .select-book-time{
     font-size: .8em;
     border: solid 1px #0e2737;
