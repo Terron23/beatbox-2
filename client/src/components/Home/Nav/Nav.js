@@ -41,7 +41,10 @@ class NavBar extends Component {
             <i className="fa fa-plus"></i> Add Your Studio
           </Nav.Link>,
 
-        <Nav.Link key="userprofile" href="/userprofile"><i className="fa fa-user"></i> {this.props.auth.username}'s Account</Nav.Link>,
+        <Nav.Link key="userprofile" href="/userprofile">
+        <i className="fa fa-user"></i>
+         {this.props.auth.username+"'s Account"}
+          </Nav.Link>,
 
           <Nav.Link key="logout" href="/api/logout">Logout</Nav.Link>
         ].map((value, i) => {

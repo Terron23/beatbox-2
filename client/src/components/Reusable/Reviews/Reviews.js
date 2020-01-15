@@ -1,33 +1,11 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import {fetchStudioReviews} from "../../../actions";
+import {handleRating} from "../../Reusable/Helpers/Helper"
 
 
 
-const ReviewContainer =(image, contact_name, username, time_stamp, review, rating )=>{
-  return (<div>
-  <div className="reviwer-thumbnail">
-   {/* {contact_name} */}
-    {/* <img src={image} alt="" /> */}
-  </div>
 
-  <div className="reviwer-content">
-    <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
-      <div className="reviwer-title">
-{/* <span>{time_stamp}</span> */}
-<h6>{username}</h6>
-      </div>
-      <div className="reviwer-rating">
-        {/* {new Array(rating).map(star=><i className="fa fa-star"></i>)}  */}
-        
-      </div>
-    </div>
-    <p>
-     {review}
-    </p>
-  </div>
-  </div>);
-}
 
 class  Reviews extends Component {
 constructor(props){
@@ -40,12 +18,17 @@ constructor(props){
 
   componentDidMount() {
     this.props.fetchStudioReviews(this.props.param);
-    
-  
   }
 
+
+
+
+  handleTimeStamp =(time)=>{
+    return time.getDay()+'/'+time.getMonth()+'/'+time.getYear();
+    }
+
   render(){
-    if(this.props.reviews.length < 1 || !this.props.reviews){
+    if(!this.props.reviews){
       return "Loading..."
     }
     let {
@@ -63,18 +46,17 @@ constructor(props){
    return (
    <div>
     <div className="reviwer-thumbnail">
-   { r.contact_name} 
    { <img src={r.image} alt="" />} 
   </div>
 
   <div className="reviwer-content">
     <div className="reviwer-title-rating d-flex align-items-center justify-content-between">
       <div className="reviwer-title">
-<span>{r.time_stamp}</span> 
+<span>{this.handleTimeStamp(new Date(r.time_stamp))}</span> 
 <h6>{r.username}</h6>
       </div>
       <div className="reviwer-rating">
-        {new Array(r.rating).map(star=><i className="fa fa-star"></i>)} 
+        {handleRating(r.rating)} 
         
       </div>
     </div>

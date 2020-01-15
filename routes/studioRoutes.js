@@ -22,7 +22,7 @@ module.exports = app => {
   app.get("/api/v2/reviews/:id", db.getReviews);
   app.post("/api/v2/post-listing", db.postListing);
   app.post("/api/v2/payment", db.postPayment);
-
+  app.post("/api/v2/reviews", db.postReview);
 
   app.post("/api/v2/subscribe", (req, res) => {
     request

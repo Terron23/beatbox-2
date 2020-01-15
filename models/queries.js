@@ -418,17 +418,32 @@ const putImages = (req, res) => {
 };
 
 //Update User Info
-const updateUser = (req, res) => {
-  const { username, email, social, userid } = req.body;
- 
+//Add Error Handling
+const postReview = (req, res) => {
+  const { review, studioid, rating } = req.body;
   pool.query(
-    "Update studios set social = $2 where _id=$1",
-    [userid, social],
+    "Insert into reviews(review, rating, user_fk, studio_fk) values($1, $2, $3, $4)", 
+    [review, rating, req.user._id, studioid], 
     (error, results) => {
       if (error) {
         throw error;
       }
+      res.status(200).json("User Info Updated");
+    }
+  );
+};
 
+//Update User Info
+//Add Error Handling
+const updateUser = (req, res) => {
+  const { username, email, social, userid } = req.body;
+  pool.query(
+    "Update users set username=$1, email=$2 where _id=$3", 
+    [username, email, req.user._id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
       res.status(200).json("User Info Updated");
     }
   );
@@ -457,6 +472,7 @@ module.exports = {
   //post
   postListing,
   postPayment,
+  postReview,
   //get
   getStudioType,
   getStudios,

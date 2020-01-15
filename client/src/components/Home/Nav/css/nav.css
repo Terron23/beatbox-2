@@ -253,6 +253,10 @@
         
       }
 
+      .nav-notify{
+        color:red;
+      }
+
       .navFade:hover{
         background-color: #2a303b !important;
         color: white;

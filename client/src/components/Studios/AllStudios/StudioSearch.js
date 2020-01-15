@@ -58,8 +58,6 @@ class StudioSearch extends Component {
         this.state.location
       )
     );
-
-    console.log(this.props.match.params.location)
     this.featureType();
     window.addEventListener("load", this.featureType);
   }

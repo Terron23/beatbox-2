@@ -20,6 +20,7 @@ class Profile extends Component {
       view: "d-none",
       variant: "success",
       alertClass:"d-none",
+      studiid: "",
      alertText:""
     };
   }
@@ -98,16 +99,16 @@ this.setState({alertClass:"d-none"})
     <Input 
     value={auth.contact_name} 
     id="user_contact" 
-    name="username" 
-    label="Profile Name"
+    name="name" 
+    label="Your Full Name"
     placeholder="Add /Edit profile name."
     autoComplete="off"
     />
       <Input value={auth.username} 
       id="user_name" 
-      name="name" 
+      name="username" 
       label="Profile User Name"
-      placeholder="Add/Edit user name."
+      placeholder="Add/Edit username."
       autoComplete="off"
       />
       <Input value={auth.email} 
@@ -227,8 +228,27 @@ this.setState({alertClass:"d-none"})
           this.setState({variant:"danger", alertClass:"col-md-4 offset-md-3", 
           alertText:'Something went wrong. Please try again.'})
         })
-
       }
+          if(form === 'review'){
+            let review = e.target.review.value;
+            let rating = e.target.rating.value;
+            let studioid = e.target.studioid.value;
+            alert('review')
+            axios.post('/api/v2/reviews', 
+            {
+              review,
+              studioid,
+              rating
+            }).then(res=>{
+         
+              this.setState({variant:"success", alertClass:"", 
+              alertText:'Studio Info Updated Successfully'})
+            }).catch(err=>{
+              this.setState({variant:"danger", alertClass:"col-md-4 offset-md-3", 
+              alertText:'Something went wrong. Please try again.'})
+            })
+          }
+      
     
   }
 
@@ -243,6 +263,7 @@ this.setState({alertClass:"d-none"})
       <th>Date Reserved</th>
       <th>Payment</th>
       <th>Book Again</th>
+      <th>Review</th>
     </tr>
       {this.props.booked.map(book=>{
       return (   <tr>
@@ -250,6 +271,14 @@ this.setState({alertClass:"d-none"})
         <td>{book.time_stamp}</td>
         <td>{book.payment}</td>
         <td>{<a href={`/single-studio/${book.studio_id}`} className="btn roberto-btn w-100">Book</a>}</td>
+        <td>
+          <form onSubmit={(e)=>this.handleSubmit(e, 'review')}>
+          <input placeholder="Add Review" name="review" type="text" label="Review" defaultValue=""/>
+        <input name="rating" type="number" placeholder="Add Rating" defaultValue=""/>
+        <input  name="studioid" type="text" value={book.studio_id}/>
+        <button type="submit" className="btn roberto-btn w-100">Update/Edit User Info</button>
+        </form>
+        </td>
         </tr>
       )
     })

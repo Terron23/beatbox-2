@@ -1,3 +1,4 @@
+import React from "react";
 //function converts standard time to military time and calculates time difference
 export function handleHoursMin(starttime, endtime, justStart=false, justEnd=false) {
   let start = starttime.split(":");
@@ -46,14 +47,14 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
   ) {
     end[0] = Number(end[0]) - 12;
     endtime = end.join(":");
-    console.log(endtime);
+  
   }
 
   starttime = starttime.slice(starttime, -2).replace(" ", "");
   endtime = endtime.slice(endtime, -2).replace(" ", "");
 
   if(justStart){
-      console.log(starttime)
+    
     return starttime;
 }
 
@@ -87,5 +88,18 @@ export function handleQueryString(query){
     return queryObj;
   };
 
+//Function converts timestamps to date time format
+  export function handleTimeStamp(time, std=1){
+    if(std=1){
+    return time.getDay()+'/'+time.getMonth()+'/'+time.getYear();
+    }
+    }
 
-  
+//Function to show ratings
+export function handleRating(val=0){
+  let arr = []
+for(let i =0; i< val; i++){
+arr.push(i)
+}
+return arr.map(star=><i className="fa fa-star"></i>);
+}
