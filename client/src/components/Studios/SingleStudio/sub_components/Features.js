@@ -1,20 +1,23 @@
 import React from "react";
 import {Row, Col} from 'react-bootstrap'
 
-const Features = ({capacity, description, equipment, services, includes}) => {
+const Features = ({capacity, studioType, price, rating}) => {
   return (
     <div>
       <div className="room-features-area d-flex flex-wrap mb-50 row">
       <h6>
-          Included: <span>{includes.length > 0 ? includes : 'N/A'}</span>
-        </h6>
-        <h6>
           Capacity: <span> { capacity.length > 0 ? `Max person ${capacity}` : 'Contact Owner'}</span>
         </h6>
-        <h6>
-          Equipment: <span>{equipment.length > 0 ? equipment: 'Contact Owner'}</span>
+      <h6>
+          Studio Type: <span>{studioType}</span>
         </h6>
-      
+        
+        <h6>
+          Price Per Hour: <span>${price}.00</span>
+        </h6>
+        <h6>
+          Rating: <span>{!rating ? "Not Rated Yet" : `${rating}/5`}</span>
+        </h6>
       </div>
 
      

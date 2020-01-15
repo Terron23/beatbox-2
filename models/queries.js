@@ -302,6 +302,20 @@ const getStudiosBooked = (req, res) => {
   );
 };
 
+
+const getReviews = (req, res) => {
+  console.log(`Select * from getReviews where studio_fk = ${req.params.id}`)
+  pool.query(
+    `Select * from getReviews where studio_fk = ${req.params.id}`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
 //put requests
 const putStudioDetails = (req, res) => {
   const {
@@ -449,6 +463,7 @@ module.exports = {
   getSingleStudios,
   getStudiosBooked,
   getFeatureStudios,
+  getReviews,
   //put
   putImages,
   putStudioDetails,

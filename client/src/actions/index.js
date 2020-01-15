@@ -7,7 +7,8 @@ import {
   FETCH_LOCATION,
   FETCH_STUDIOTYPES,
   FETCH_SINGLE_STUDIOS,
-  FETCH_FEATURE_STUDIOS
+  FETCH_FEATURE_STUDIOS,
+  FETCH_STUDIO_REVIEWS,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -17,7 +18,6 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchStudio = (page=0, limit=20, filterParam='&studioType=&date=&state=') => async dispatch => {
   const res = await axios.get(`/api/v2/studio-listing?limit=${limit}&page=${page}${filterParam}`);
-  console.log("data", res.data)
   dispatch({ type: FETCH_STUDIO, payload: res.data });
 };
 
@@ -48,6 +48,10 @@ export const fetchStudioType = () => async dispatch => {
 
 export const fetchFeatureStudios = () => async dispatch => {
   const res = await axios.get(`/api/v2/feature-studios`);
-  console.log("New", res.data)
   dispatch({ type: FETCH_FEATURE_STUDIOS, payload: res.data });
+};
+
+export const fetchStudioReviews = (id=0) => async dispatch => {
+  const res = await axios.get(`/api/v2/reviews/${id}`);
+  dispatch({ type: FETCH_STUDIO_REVIEWS, payload: res.data });
 };

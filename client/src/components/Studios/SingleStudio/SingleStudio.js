@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchSingleStudio, fetchUser } from "../../../actions";
+import {
+  fetchSingleStudio,
+  fetchUser,
+} from "../../../actions";
 import Wrapper from "./sub_components/Wrapper";
 import Carousel from "./sub_components/Carousel";
 import Features from "./sub_components/Features";
 import Ameneties from "./sub_components/Ameneties";
-import Reviews from "./sub_components/Reviews";
+import Reviews from "../../Reusable/Reviews/Reviews";
 import Bonus from "./sub_components/Bonus";
 import Description from "./sub_components/Description";
 import Equipment from "./sub_components/Equipment";
@@ -20,63 +23,54 @@ const Studios = ({
   guest,
   rules,
   id,
-  image,
-  availibility,
-  thumbnails,
-  capacity,
+  param,
   equipment,
   description,
   services,
   includes,
-  auth,
-  width,
   handleClose,
   handleShow,
   setShow,
   studioForm,
-  addForm,
-
+  studioType,
+  rating
 }) => {
   return (
     <Wrapper>
-    <div className="row">
-   <div className="col-lg-12 col-md-12 col-sm-12">
-   <h2>{studioName}</h2>
-         <h5>${price}/ per Hour</h5>
-         </div>
-         </div>
+      <div className="row">
+        <div className="col-lg-12 col-md-12 col-sm-12">
+          <h1 className="sh-text">{studioName}</h1>
+        </div>
+      </div>
       <div className="row">
         <div className="col-lg-8 col-md-12 col-sm-8">
-         
           <Features
             capacity={guest}
-            description={description}
-            equipment={equipment}
-            services={services}
-            includes={includes}
+            price={price}
+            studioType={studioType}
+            rating={rating}
           />
-          <Description  description={description} title={"Description"}/>
-          <Ameneties services={services} title={"Ameneties"}/>
-          <Bonus includes={includes}  title={"Bonus"}/>
-          <Equipment equipment={equipment}  title={"Equipment"} />
-          {/* <Reviews /> */}
+          <Description description={description} title={"Description"} />
+          <Ameneties services={services} title={"Ameneties"} />
+          <Bonus includes={includes} title={"Bonus"} />
+          <Equipment equipment={equipment} title={"Equipment"} />
+          <Reviews param={param} />
         </div>
         <div className="col-12 col-lg-4 web-search">
-      
-        <SingleStudioSideFilter  id={id}  />
+          <SingleStudioSideFilter id={id} price={price} />
         </div>
         <div className="col-lg-12 col-md-12 col-sm-8 mobile-search">
-          <MobileBook price={price} studioName={studioName}
+          <MobileBook
+            price={price}
+            studioName={studioName}
             setShow={setShow}
             handleClose={handleClose}
             handleShow={handleShow}
             studioForm={studioForm}
-          >         
-        <div className="col-12 col-lg-4">
-       
-     
-        <SingleStudioSideFilter  id={id} handleClose={handleClose} />
-        </div>
+          >
+            <div className="col-12 col-lg-4">
+              <SingleStudioSideFilter id={id} handleClose={handleClose} />
+            </div>
           </MobileBook>
         </div>
       </div>
@@ -88,26 +82,22 @@ class SingleStudio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      setShow: false,
-    }
+      setShow: false
+    };
   }
   componentDidMount() {
     this.props.fetchSingleStudio(this.props.match.params.id);
     this.props.fetchUser();
   }
 
-  handleClose = (e) => {
-    e.preventDefault()
+  handleClose = e => {
+    e.preventDefault();
     this.setState({ setShow: false });
-  }
-  handleShow = (e) => {
+  };
+  handleShow = e => {
     e.preventDefault();
     this.setState({ setShow: true });
   };
-
-
-
-
 
   render() {
     if (!this.props.studio) {
@@ -115,58 +105,55 @@ class SingleStudio extends Component {
     }
 
     const { studio, auth } = this.props;
-    const { setShow } = this.state
-    console.log(studio)
+    const { setShow } = this.state;
     return (
       <div>
-      {studio.map(studio => {
+        {studio.map(studio => {
           if (this.props.match.params.id == studio._id) {
             return (
-              <Carousel   thumbnails={Object.values(studio.studio_images)} /> 
+              <Carousel thumbnails={Object.values(studio.studio_images)} />
             );
           }
-        })} 
+        })}
 
         <div className="container">
-          <div className="row">
-            {studio.map(studio => {
-              if (this.props.match.params.id == studio._id) {
-                return (
-                  <Studios
-                    studioName={studio.studio_name}
-                    price={studio.studio_price}
-                    rules={studio.rules}
-                    guest={studio.guest_allowed}
-                    id={studio._id}
-                    
-                 
-                    thumbnails={Object.values(studio.studio_images)}
-                    equipment={studio.equipment}
-                    description={studio.description}
-                    services={studio.services}
-                    includes={studio.includes}
-                    auth={auth.name + " " + auth.email}
-                    setShow={setShow}
-                    handleClose={this.handleClose}
-                    handleShow={this.handleShow}
-                  
-                  />
-                );
-              } else {
-                return "";
-              }
-            })}
-          </div>
+          {studio.map(studio => {
+            if (this.props.match.params.id == studio._id) {
+              return (
+                <Studios
+                param = {this.props.match.params.id }
+                  studioName={studio.studio_name}
+                  price={studio.studio_price}
+                  rules={studio.rules}
+                  guest={studio.guest_allowed}
+                  id={studio._id}
+                  studioType={studio.studio_type}
+                  thumbnails={Object.values(studio.studio_images)}
+                  equipment={studio.equipment}
+                  description={studio.description}
+                  services={studio.services}
+                  includes={studio.includes}
+                  auth={auth.name + " " + auth.email}
+                  setShow={setShow}
+                  handleClose={this.handleClose}
+                  handleShow={this.handleShow}
+                />
+              );
+            } else {
+              return "";
+            }
+          })}
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ studio, auth }) {
-  return { studio, auth };
+function mapStateToProps({ studio, auth, }) {
+  return { studio, auth, };
 }
 
-export default connect(mapStateToProps, { fetchSingleStudio, fetchUser })(
-  SingleStudio
-);
+export default connect(mapStateToProps, {
+  fetchSingleStudio,
+  fetchUser,
+})(SingleStudio);

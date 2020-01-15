@@ -46,7 +46,7 @@ class SelectBox extends React.Component {
     if (check.checked) {
       arr.push(check.value);
       this.setState({ text: arr.join(", ") });
-      console.log(arr, this.state.newText)
+   
     } else {
       arr = arr.filter(x => x !== check.value)
       this.setState({ 

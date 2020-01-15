@@ -840,26 +840,7 @@ input:focus {
           font-size: 16px; } }
 
 
-.hotel-reservation--area {
-  position: relative;
-  z-index: 1; }
-  .hotel-reservation--area label,
-  .hotel-reservation--area .range-price {
-    font-size: 18px;
-    display: block;
-    margin-bottom: 15px; }
-  .hotel-reservation--area .form-control {
-    width: 100%;
-    height: 50px;
-    text-align: left !important;
-    font-size: 14px;
-    padding: 0 20px;
-    border-radius: 0 !important; }
-    .hotel-reservation--area .form-control:focus {
-      box-shadow: none;
-      border-bottom-color: #1cc3b2; }
-  .hotel-reservation--area button {
-    border-radius: 30px !important; }
+
 
 .datepicker {
   padding: 15px;
@@ -937,40 +918,6 @@ html .ui-button.ui-state-disabled:active {
       width: 120px;
       height: 70px; }
 
-.room-features-area {
-  position: relative;
-  z-index: 1; }
-  .room-features-area h6 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
-    width: 25%;
-    padding: 30px 15px;
-    border-left: 1px solid #ebebeb;
-    border-top: 1px solid #ebebeb;
-    border-bottom: 1px solid #ebebeb;
-    text-align: center;
-    color: #afb4bf;
-    line-height: 1.5;
-    margin-bottom: 0; }
-    @media only screen and (min-width: 992px) and (max-width: 1199px) {
-      .room-features-area h6 {
-        font-size: 14px; } }
-    @media only screen and (max-width: 767px) {
-      .room-features-area h6 {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 50%;
-        flex: 0 0 50%;
-        max-width: 50%;
-        width: 50%;
-        font-size: 13px;
-        padding: 20px 10px; } }
-    .room-features-area h6 span {
-      display: block;
-      color: #2a303b; }
-    .room-features-area h6:last-child {
-      border-right: 1px solid #ebebeb; }
 
 .single-room-details-area {
   position: relative;

@@ -3,7 +3,10 @@ import TimeDropDown from "../../../Reusable/TimedropDown/TimeDropDown";
 import FormAttr from "./FormAttr";
 import StudioHuntDatePicker from "../../../Reusable/DatePicker/StudioHuntDatePicker";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { handleHoursMin, handleQueryString } from "../../../Reusable/Helpers/Helper";
+import {
+  handleHoursMin,
+  handleQueryString
+} from "../../../Reusable/Helpers/Helper";
 import { withRouter } from "react-router";
 
 const StudioTemplate = ({
@@ -17,37 +20,11 @@ const StudioTemplate = ({
   handleTime,
   addField,
   calError,
-  timeOutErr
+  timeOutErr,
+  price,
 }) => {
   return (
     <div>
-      <ListGroup className="select-book-time-group">
-        <p>Selected Schedule:</p>
-        {studioForm.length < 1 ? (
-          <ListGroupItem className="text-muted select-book-time">
-            Please Choose Date And Time you will like to reserve.
-          </ListGroupItem>
-        ) : (
-          studioForm.map((sched, i) => {
-            return (
-              <ListGroupItem
-                key={i}
-                className="text-muted select-book-time"
-                id={`temp_${i}`}
-              >
-                <span
-                  onClick={() => closeSelectBtn(`close-select-time-btn${i}`)}
-                  className="pull-right add-time"
-                >
-                  x
-                </span>
-                Date: {sched.singleDatePicker} <br />
-                Time In: {sched.timeIn} Time Out: {sched.timeOut}
-              </ListGroupItem>
-            );
-          })
-        )}
-      </ListGroup>
       <FormAttr label="Check In Date">
         <StudioHuntDatePicker
           type="text"
@@ -95,6 +72,30 @@ const StudioTemplate = ({
       <p className="add-time" onClick={addForm}>
         +{addField}
       </p>
+      <ListGroup className="select-book-time-group">
+        {studioForm.map((sched, i) => {
+          return (<div>
+            <ListGroupItem
+              key={i}
+              className="text-muted select-book-time"
+              id={`temp_${i}`}
+            >
+              <span
+                onClick={() => closeSelectBtn(`close-select-time-btn${i}`)}
+                className="pull-right add-time"
+              >
+                x
+              </span>
+              
+              Date: {sched.singleDatePicker} <br />
+              Time In: {sched.timeIn} Time Out: {sched.timeOut}<br />
+              Price: {handleHoursMin(sched.timeIn, sched.timeOut) * price} 
+            </ListGroupItem>
+            Total 
+            </div>
+          );
+        })}
+      </ListGroup>
     </div>
   );
 };
@@ -138,34 +139,37 @@ class SingleStudioSideFilter extends Component {
       charge: "",
       calError: "",
       timeInErr: "",
-      timeOutErr: ""
+      timeOutErr: "",
+      total: 0
     };
   }
 
   closeSelectBtn = id => {
     let form = this.state.studioForm;
     form.splice(id, 1);
-
+    alert(id, form)
     this.setState({
       studioForm: form,
       addField: form.length < 1 ? "Add Date & Time" : this.state.addField
     });
   };
 
-  handleTimeDifference = (timeIn, timeOut, date) => {
-    let arg = [timeIn, timeOut, date]
- 
 
-    for(let i = 0; i< arg.length; i++){
-      if(!arg[i]){
-        this.setState({calError: "Please Fill Out All Values" });
+
+
+  handleTimeDifference = (timeIn, timeOut, date) => {
+    let arg = [timeIn, timeOut, date];
+
+    for (let i = 0; i < arg.length; i++) {
+      if (!arg[i]) {
+        this.setState({ calError: "Please Fill Out All Values" });
         return false;
       }
     }
 
     let timeDiff = handleHoursMin(timeIn, timeOut);
 
-    if (new Date(date+" "+timeIn) < new Date()) {
+    if (new Date(date + " " + timeIn) < new Date()) {
       this.setState({ calError: "Date and/or time has passed already!" });
       return false;
     }
@@ -179,7 +183,7 @@ class SingleStudioSideFilter extends Component {
     let timeIn = this.state.timeIn;
     let timeOut = this.state.timeOut;
     let startDate = this.state.startDate;
-     startDate = startDate.toString().substring(0, 15)
+    startDate = startDate.toString().substring(0, 15);
 
     let obj = {
       timeIn: timeIn,
@@ -303,6 +307,7 @@ class SingleStudioSideFilter extends Component {
             calError={calError}
             timeInErr={timeInErr}
             timeOutErr={timeOutErr}
+            price={this.props.price}
           />
 
           <button type="submit" className="btn roberto-btn w-100">
