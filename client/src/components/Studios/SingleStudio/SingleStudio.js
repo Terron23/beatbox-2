@@ -137,6 +137,7 @@ class SingleStudio extends Component {
                   setShow={setShow}
                   handleClose={this.handleClose}
                   handleShow={this.handleShow}
+                  rating={studio.rating}
                 />
               );
             } else {
