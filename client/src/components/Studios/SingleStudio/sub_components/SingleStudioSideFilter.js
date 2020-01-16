@@ -8,7 +8,7 @@ import {
   handleQueryString
 } from "../../../Reusable/Helpers/Helper";
 import { withRouter } from "react-router";
-
+let arr =[];
 const StudioTemplate = ({
   addForm,
   studioForm,
@@ -22,7 +22,9 @@ const StudioTemplate = ({
   calError,
   timeOutErr,
   price,
+  total
 }) => {
+  let arr = [0];
   return (
     <div>
       <FormAttr label="Check In Date">
@@ -69,15 +71,18 @@ const StudioTemplate = ({
         <p className="error text-center">{timeOutErr}</p>
       </div>
 
-      <p className="add-time" onClick={addForm}>
+      <p className="add-time" onClick={(e)=>addForm(price)}>
         +{addField}
       </p>
       <ListGroup className="select-book-time-group">
+        
         {studioForm.map((sched, i) => {
+        arr.push(handleHoursMin(sched.timeIn, sched.timeOut) * price)
+        
           return (<div>
             <ListGroupItem
               key={i}
-              className="text-muted select-book-time"
+              className="text-muted"
               id={`temp_${i}`}
             >
               <span
@@ -91,10 +96,14 @@ const StudioTemplate = ({
               Time In: {sched.timeIn} Time Out: {sched.timeOut}<br />
               Price: {handleHoursMin(sched.timeIn, sched.timeOut) * price} 
             </ListGroupItem>
-            Total 
+          
             </div>
           );
         })}
+        { arr.reduce((a, b)=>a+b) > 0 ? 
+        <ListGroupItem  className="text-muted">
+          Total: ${arr.reduce((a, b)=>a+b).toFixed(2)}
+          </ListGroupItem> : ""}
       </ListGroup>
     </div>
   );
@@ -140,14 +149,14 @@ class SingleStudioSideFilter extends Component {
       calError: "",
       timeInErr: "",
       timeOutErr: "",
-      total: 0
+      total: 1
     };
   }
 
   closeSelectBtn = id => {
     let form = this.state.studioForm;
     form.splice(id, 1);
-    alert(id, form)
+   
     this.setState({
       studioForm: form,
       addField: form.length < 1 ? "Add Date & Time" : this.state.addField
@@ -179,7 +188,7 @@ class SingleStudioSideFilter extends Component {
     }
   };
 
-  addForm = e => {
+  addForm = (e, total) => {
     let timeIn = this.state.timeIn;
     let timeOut = this.state.timeOut;
     let startDate = this.state.startDate;
@@ -192,6 +201,7 @@ class SingleStudioSideFilter extends Component {
     };
 
     const timeDiff = this.handleTimeDifference(timeIn, timeOut, startDate);
+    let price = handleHoursMin(timeIn, timeOut) * this.state.total;
     if (timeDiff === false) {
       return;
     }
@@ -204,7 +214,7 @@ class SingleStudioSideFilter extends Component {
     let noError = 0;
 
     for (let i = 0; i < error.length; i++) {
-      if (error[i] === "") {
+      if (!error[i]) {
         noError = 1;
         alert("Please Fill in All Values");
         break;
@@ -213,6 +223,7 @@ class SingleStudioSideFilter extends Component {
     if (noError < 1) {
       this.setState({
         studioForm: form,
+        total: this.state.total + price ,
         startDate: "",
         timeIn: "",
         timeOut: "",
@@ -308,6 +319,8 @@ class SingleStudioSideFilter extends Component {
             timeInErr={timeInErr}
             timeOutErr={timeOutErr}
             price={this.props.price}
+            total={this.state.total}
+            
           />
 
           <button type="submit" className="btn roberto-btn w-100">
