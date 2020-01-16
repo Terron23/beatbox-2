@@ -102,7 +102,7 @@ const StudioTemplate = ({
         })}
         { arr.reduce((a, b)=>a+b) > 0 ? 
         <ListGroupItem  className="text-muted">
-          Total: ${arr.reduce((a, b)=>a+b).toFixed(2)}
+          <b>Total</b>: ${arr.reduce((a, b)=>a+b).toFixed(2)}
           </ListGroupItem> : ""}
       </ListGroup>
     </div>

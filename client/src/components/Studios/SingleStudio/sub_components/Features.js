@@ -16,7 +16,7 @@ const Features = ({capacity, studioType, price, rating}) => {
           Price Per Hour: <span>${price}.00</span>
         </h6>
         <h6>
-          Rating: <span>{!rating ? "Not Rated Yet" : `${rating}/5`}</span>
+          Rating: <span>{!rating ? "Not Rated Yet" : `${Number.parseFloat(rating).toFixed(2)}/5`}</span>
         </h6>
       </div>
 
