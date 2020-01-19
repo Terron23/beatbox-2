@@ -288,6 +288,19 @@ const getFeatureStudios = (req, res) => {
   );
 };
 
+const getTopStudios = (req, res) => {
+  pool.query(
+    `SELECT count(*) as Total, city from studios group by city order by total desc limit 3`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
+
 const getStudiosBooked = (req, res) => {
   pool.query(
     `SELECT * from datebooked where _id = $1`,

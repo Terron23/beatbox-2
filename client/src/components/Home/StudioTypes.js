@@ -109,7 +109,7 @@ export default () => {
      }}
      showDots={false}
      sliderClass=""
-     slidesToSlide={2}
+     slidesToSlide={1}
      swipeable
       >
         <StudioType img={yoga} studioTitle="Relax & Let Go" 

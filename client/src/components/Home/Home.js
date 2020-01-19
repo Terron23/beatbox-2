@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchLocation, fetchStudio, fetchFeatureStudios } from "../.././actions";
 import About from "./About";
-import StudioType from "./StudioType";
 import FeaturedStudios from "./FeaturedStudios"
 import PostStudio from "./PostStudio";
-import Testimonial from "./Testimonial"
+import StudioTypes from "./StudioTypes"
 import StudioCards from "./StudioCards"
 import Hero from "./Hero/Hero";
+import City from "./City"
 import Schedule from "./Schedule";
+import Venue from "./Venue"
 import Loading from "../Reusable/Loading/Loading"
 
 class Home extends Component {
@@ -42,7 +43,9 @@ class Home extends Component {
           handleSubmit={this.handleSubmit}/>
          <FeaturedStudios featStudios={featStudios}/> 
          <StudioCards />
-         <Testimonial />
+         <City />
+         <Venue />
+         <StudioTypes />
         {/* <StudioType /> */}
         <About />
         <PostStudio />
