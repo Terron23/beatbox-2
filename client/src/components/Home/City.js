@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Heading from "./sub_components/heading";
+import ViewAll from "../Reusable/ViewAllButton/ViewAll"
 import { Link } from "react-router-dom";
 import './css/city.css';
 
@@ -7,11 +8,10 @@ const CityTemplate = ({ title, img }) => {
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <div
-        className="single-post-area mb-50 wow fadeInUp"
-        data-wow-delay="700ms"
+        className="single-post-area city-img mb-50"
       >
         <Link to={`/search-studio//${title}`}>
-          <img src={img} alt="" className="city-img"/>
+          <img src={img} alt="" />
         </Link>
 
         <div className="post-meta">
@@ -37,8 +37,8 @@ export default class City extends Component {
       <section className="roberto-blog-area">
         <div className="container">
           <Heading
-            title={"Explore"}
-            subtitle="Find & Book Studios At Your Convience"
+            title={"Stay Local"}
+            subtitle="Find & Book Studios Close To You"
           />
 
           <div className="row">
@@ -47,7 +47,9 @@ export default class City extends Component {
             <CityTemplate title="London" img={"http://yourdream.s3.amazonaws.com/media/cache/60/66/6066a0afd389471a1d1fe505e7a14031.jpg"} />
 
             <CityTemplate title="Philadeliphia" img={"https://whyy.org/wp-content/uploads/2018/05/city-hall-profilex1200-768x432.jpg"} />
+            
           </div>
+        
         </div>
       </section>
     );
