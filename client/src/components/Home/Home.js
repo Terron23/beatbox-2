@@ -5,6 +5,8 @@ import About from "./About";
 import StudioType from "./StudioType";
 import FeaturedStudios from "./FeaturedStudios"
 import PostStudio from "./PostStudio";
+import Testimonial from "./Testimonial"
+import StudioCards from "./StudioCards"
 import Hero from "./Hero/Hero";
 import Schedule from "./Schedule";
 import Loading from "../Reusable/Loading/Loading"
@@ -39,9 +41,11 @@ class Home extends Component {
           history={history}
           handleSubmit={this.handleSubmit}/>
          <FeaturedStudios featStudios={featStudios}/> 
-        <PostStudio />
-        <StudioType />
+         <StudioCards />
+         <Testimonial />
+        {/* <StudioType /> */}
         <About />
+        <PostStudio />
       </div>
     );
   }

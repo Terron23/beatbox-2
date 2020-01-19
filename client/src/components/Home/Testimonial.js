@@ -1,82 +1,139 @@
-import React, { Component } from "react";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import dance from "./images/60.png";
+import art from "./images/07.jpg";
+import photo from "./images/63.jpg";
+import film from "./images/06.jpg";
+import music from "./images/08.jpg";
+import yoga from "./images/03.jpg";
+import Heading from "./sub_components/heading";
+import { Link } from "react-router-dom";
 import "./css/testimonial.css";
 
-const Heading = ({ children }) => (
-  <section class="roberto-testimonials-area section-padding-100-0">
-    <div class="container">{children}</div>
-  </section>
-);
+const ViewAll =()=>(  
+ 
+    <div className="text-center col-md-12" style={{paddingTop: 30}}>
+    <Link to={`/search-studio/`} className="btn roberto-btn btn-1">
+    View All Studios <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+    </Link>
+    </div>)
 
-const TestimonialTemplate = ({ img, description, name, title }) => {
+const StudioType = ({
+  img,
+  studioTitle,
+  studioSubTitle,
+  active,
+  description,
+  handleHover,
+  link
+}) => {
   return (
-    <div class="item">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <div class="testimonial-thumbnail  mb-100">
-            <img src={img} alt="" />
-          </div>
+    <div
+      className={`single-project-slide active bg-img`}
+    >
+        <Link className="sh-link" to={link}>
+      <img src={img} style={{ height: 800 }} />
+      </Link>
+      
+
+      <div className="hover-effects">
+        <div className="text text-center">
+          <h6>{studioTitle}</h6>
+          <h5>{studioSubTitle}</h5>
+          <p>{description}</p>
         </div>
 
-        <div class="col-md-6">
-          <div class="section-heading">
-            <h6>Testimonials</h6>
-            <h2>Our Users Love Us</h2>
+        <div className="slide-bg text-center">
+        <Link className="sh-link" to={link}>
+          Discover Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+          </Link>
           </div>
-
-          <div class="testimonial-slides  mb-100">
-            <div class="single-testimonial-slide">
-              <h5>{description}</h5>
-              <div class="rating-title">
-                <div class="rating">
-                  <i class="icon_star"></i>
-                  <i class="icon_star"></i>
-                  <i class="icon_star"></i>
-                  <i class="icon_star"></i>
-                  <i class="icon_star"></i>
-                </div>
-                <h6>
-                  {name}
-                  <span>- {title}</span>
-                </h6>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+      </div>
+
   );
 };
 
-export default class Testimonials extends Component {
-  render() {
-    return (
-      <Heading>
-        <OwlCarousel items="1" className="owl-theme" loop margin={10} nav>
-          <div className="item">
-            <TestimonialTemplate
-              description={
-                "Studio Hunt is awesome! I scheduled a sip & paint class for my best friends party and also use it to shoot some of my best photography work. Hands down this app is second to none."
-              }
-              name="Rebecca Nunce"
-              title="Photographer"
-              img="img/bg-img/10.jpg"
-            />
-          </div>
-          <div className="item">
-            <TestimonialTemplate
-              description={
-                "I just love this app. As a recording artist who travels a lot its so refreshing to be able to find top quality studios in every city I go to."
-              }
-              name="J Got Bars"
-              title="Rapper"
-              img="img/bg-img/11.jpg"
-            />
-          </div>
-        </OwlCarousel>
-      </Heading>
-    );
-  }
-}
+export default () => {
+ 
+
+  return (
+    <section class="roberto-project-area">
+        <Heading
+          title="Indulge Your Passion"
+          color="black"
+          subtitle="Find the Studio For You"
+        />
+      <Carousel
+     additionalTransfrom={0}
+     arrows
+     autoPlaySpeed={3000}
+     centerMode={false}
+     className=""
+     containerClass="projects-slides"
+     dotListClass=""
+     draggable
+     focusOnSelect={false}
+     infinite
+     itemClass=""
+     keyBoardControl
+     minimumTouchDrag={80}
+     renderButtonGroupOutside={false}
+     renderDotsOutside={false}
+     responsive={{
+       desktop: {
+         breakpoint: {
+           max: 3000,
+           min: 1024
+         },
+         items: 3,
+         partialVisibilityGutter: 40
+       },
+       mobile: {
+         breakpoint: {
+           max: 464,
+           min: 0
+         },
+         items: 1,
+         partialVisibilityGutter: 30
+       },
+       tablet: {
+         breakpoint: {
+           max: 1024,
+           min: 464
+         },
+         items: 2,
+         partialVisibilityGutter: 30
+       }
+     }}
+     showDots={false}
+     sliderClass=""
+     slidesToSlide={2}
+     swipeable
+      >
+        <StudioType img={yoga} studioTitle="Relax & Let Go" 
+        studioSubTitle="Yoga Studios" description=""   
+        link={"/search-studio/17"}/>
+        <StudioType img={music} studioTitle="Make Music Not War" 
+        studioSubTitle="Recording - Music" description=""  
+        link={"/search-studio/15"}/>
+        <StudioType img={photo} studioTitle="Conduct Professional Photo Shoots" 
+        studioSubTitle="Photography Studios" description=""  
+        link={"/search-studio/19"} />
+
+        <StudioType img={art} studioTitle="Paint and Sip" 
+        studioSubTitle="Art Studios" description=""  
+        link={"/search-studio/21"}/>
+
+        <StudioType img={dance} studioTitle="Express Yourself" 
+        studioSubTitle="Dance Studios" description="" 
+        link={"/search-studio/18"}/>
+
+        <StudioType img={film} studioSubTitle="Film Studios" studioTitle="Make Your Directorial Debut" description="" 
+        link={"/search-studio/20"}/>
+      </Carousel>
+      <ViewAll />
+    </section>
+  );
+};

@@ -73,7 +73,7 @@ class FeaturedStudios extends Component {
           color="black"
           subtitle="View Our Top Rated Studios"
         />
-     <div className="container-fluid container-fluid-feature">
+     <div className="container">
      <div className="row ">
           
             {this.showStudio()}

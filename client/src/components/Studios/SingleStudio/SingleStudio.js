@@ -133,7 +133,7 @@ class SingleStudio extends Component {
                   description={studio.description}
                   services={studio.services}
                   includes={studio.includes}
-                  auth={auth.name + " " + auth.email}
+                  auth={studio.contact_name}
                   setShow={setShow}
                   handleClose={this.handleClose}
                   handleShow={this.handleShow}
