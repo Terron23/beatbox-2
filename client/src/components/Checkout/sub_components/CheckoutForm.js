@@ -28,7 +28,8 @@ class CheckoutForm extends Component {
     });
 
     try {
-      let { token } = await this.props.stripe.createToken({ name: "test" });
+      let { token } = await this.props.stripe.createToken({ name: new Date().toString() });
+      console.log("token", token)
       let response = await axios.post("/api/v2/payment", {
         token: token.id,
         studioName,
@@ -37,8 +38,8 @@ class CheckoutForm extends Component {
         cardInfo: "",
         email
       });
-      this.props.push();
-    } catch (e) {
+      this.props.push("/");
+    } catch(e) {
       this.setState({error:e,})
     }
   };

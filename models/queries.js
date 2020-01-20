@@ -5,7 +5,7 @@ const host = keys.postgresHost;
 const password = keys.postgresPassword;
 const user = keys.postgresUser;
 const uri = keys.postgresConnectionString;
-const stripe = require("stripe")(keys.stripeApi);
+const stripe = require("stripe")(keys.STRIPE_API_SECRET);
 const bcrypt = require("bcrypt");
 
 const Pool = require("pg").Pool;
