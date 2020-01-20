@@ -23,9 +23,7 @@ const StudioType = ({
   img,
   studioTitle,
   studioSubTitle,
-  active,
   description,
-  handleHover,
   link
 }) => {
   return (

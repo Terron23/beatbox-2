@@ -10,20 +10,20 @@ const CityTemplate = ({ title, img, link }) => {
       <div
         className="single-post-area city-img mb-50"
       >
-        <Link to={`/search-studio//${link}`}>
+        <Link to={`/search-studio/All/${link}`}>
           <img src={img} alt="" />
         </Link>
 
         <div className="post-meta">
-          <Link to={`/search-studio//${link}`} className="post-date">
+          <Link to={`/search-studio/All/${link}`} className="post-date">
             {title}
           </Link>
         </div>
 
-        <Link to={`/search-studio//${link}`} className="post-title">
+        <Link to={`/search-studio/All/${link}`} className="post-title">
           Featured Studios in {title}
         </Link>
-        <Link to={`/search-studio//${link}`} className="btn continue-btn">
+        <Link to={`/search-studio/All/${link}`} className="btn continue-btn">
           <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
         </Link>
       </div>

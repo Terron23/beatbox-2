@@ -48,7 +48,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="2">
-              <Card.Body></Card.Body>
+              <Card.Body>Cancellation Policies are created by our users.</Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -60,7 +60,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="3">
-              <Card.Body>Tell them go fuck themselves!</Card.Body>
+              <Card.Body>Don't send them money and notify us immediately!</Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -72,7 +72,7 @@ export default class Faq extends Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="4">
-              <Card.Body>Yes it is free to list your studio. There is a 25% charge for all free listings. We also offer monthly and annual subscriptions which qualifies you for premium marketing placement and you keep 100% of all revenue gained through Studio Hunt's forum. </Card.Body>
+              <Card.Body>Yes it is free to list your studio. There is a 25% charge for all bookings. We also offer monthly and annual subscriptions which qualifies you for premium marketing placement and you keep 100% of all revenue gained through Studio Hunt's forum. </Card.Body>
             </Accordion.Collapse>
           </Card>
 

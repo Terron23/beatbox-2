@@ -4,6 +4,9 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
   let start = starttime.split(":");
   let end = endtime.split(":");
 
+  if(!start[1] || !end[1]){
+  return;
+}
   if (
     start[1]
       .slice(-2)
@@ -23,7 +26,7 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
   ) {
     end[0] = Number(end[0]) + 12;
     endtime = end.join(":");
-    console.log(endtime, end[0]);
+  
   }
 
   if (
@@ -35,7 +38,7 @@ export function handleHoursMin(starttime, endtime, justStart=false, justEnd=fals
   ) {
     start[0] = Number(start[0]) - 12;
     starttime = start.join(":");
-    console.log(starttime);
+   
   }
 
   if (

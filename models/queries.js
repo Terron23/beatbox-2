@@ -341,13 +341,14 @@ const putStudioDetails = (req, res) => {
     description,
     studioname,
     studioid,
+    rules,
     include,
     dates
   } = req.body;
 
   pool.query(
-    "Update Studios set description=$2, includes=$3, services=$4,  equipment=$5 , guest_allowed=$6, availibility=$7 where _id=$1 ",
-    [studioid, description, include, services, equipment, capacity, dates],
+    "Update Studios set description=$2, includes=$3, services=$4,  equipment=$5 , guest_allowed=$6, availibility=$7, rules=$8, isActive=True where _id=$1 ",
+    [studioid, description, include, services, equipment, capacity, dates, rules],
     (error, results) => {
       if (error) {
         throw error;

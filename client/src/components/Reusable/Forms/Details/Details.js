@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { fetchUser, fetchStudioType } from "../../../actions";
-import Title from "../../assets/Title";
+import Title from "./Reusable/Title/Title";
 import Input from "../../Reusable/FormElements/Input/Input";
 import TextArea from "../../Reusable/FormElements/TextArea/TextArea";
 import MultiSelect from "../../Reusable/MultiSelect/MultiSelect";
@@ -33,7 +33,6 @@ class Details extends Component {
     let studioname = this.props.match.params.studioName;
     let studioid = this.props.match.params.id;
     let dates = event.target.days.value;
-    let rules = event.target.rules.value;
 
     let obj = {};
     dates.split(",").map((d, i) => {
@@ -49,8 +48,7 @@ class Details extends Component {
         studioname,
         include,
         studioid,
-        dates: obj,
-        rules
+        dates: obj
       })
       .then(res => {
         this.props.history.push(`/view-studio/${studioid}`);
@@ -82,7 +80,7 @@ class Details extends Component {
     return (
       <div className="container-fluid site-section">
         <div className="container">
-          <Title header="Add Studio Details" />
+          <Title headerTitle="Add Studio Details" />
           <div className="row">
             <div className="col-md-2"></div>
             <form
@@ -179,15 +177,6 @@ class Details extends Component {
                   text_id="incl_select"
                   required="true"
                 />
-
-                  <TextArea
-                  name="rules"
-                  type="textarea"
-                  label="Rules"
-                  placeholder="Enter Rules for your Studio"
-                  classProp="form-style-1"
-                  required="true"
-                />  
 
                 <hr />
 

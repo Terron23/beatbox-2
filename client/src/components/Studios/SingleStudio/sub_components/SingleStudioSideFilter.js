@@ -192,7 +192,8 @@ class SingleStudioSideFilter extends Component {
     let timeIn = this.state.timeIn;
     let timeOut = this.state.timeOut;
     let startDate = this.state.startDate;
-    startDate = startDate.toString().substring(0, 15);
+
+    startDate = startDate ? startDate.toString().substring(0, 15) : "";
 
     let obj = {
       timeIn: timeIn,

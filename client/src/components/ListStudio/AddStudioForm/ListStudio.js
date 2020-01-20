@@ -61,7 +61,7 @@ class ListStudio extends Component {
     return (
      <ListStudioForm title="Add Studio Form" 
      handleSubmit={this.handleSubmit} 
-     ad2Val="N/A" buttonText="Save & Continue"
+     ad2Val="N/A" buttonText="Next"
      handleFiles={this.handleFiles}
      classProp="form-style-1"
      showTitle={true}

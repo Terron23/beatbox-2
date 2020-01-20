@@ -43,7 +43,7 @@ class NavBar extends Component {
 
         <Nav.Link key="userprofile" href="/userprofile">
         <i className="fa fa-user"></i>
-         {this.props.auth.username+"'s Account"}
+         {this.props.auth.username?this.props.auth.username: this.props.auth.contact_name+"'s Account"}
           </Nav.Link>,
 
           <Nav.Link key="logout" href="/api/logout">Logout</Nav.Link>

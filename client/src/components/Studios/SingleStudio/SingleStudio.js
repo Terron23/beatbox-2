@@ -56,6 +56,7 @@ const Studios = ({
           <Ameneties services={services} title={"Ameneties"} />
           <Bonus includes={includes} title={"Bonus"} />
           <Equipment equipment={equipment} title={"Equipment"} />
+          <Description description={rules} title={"Rules"} />
           <Reviews param={param} />
         </div>
         <div className="col-12 col-lg-4 web-search">
@@ -123,6 +124,7 @@ class SingleStudio extends Component {
             if (this.props.match.params.id == studio._id) {
               return (
                 <Studios
+                key={studio._id}
                 param = {this.props.match.params.id }
                   studioName={studio.studio_name}
                   price={studio.studio_price}
