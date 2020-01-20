@@ -40,7 +40,6 @@ render() {
     if (!this.props.auth) {
       return "";
     }
-    console.log(this.props.history)
     const {studioname, studioid } = this.state;
     return (
       <Wrapper>

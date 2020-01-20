@@ -98,8 +98,14 @@ export function handleQueryString(query){
 //Function to show ratings
 export function handleRating(val=0){
   let arr = []
-for(let i =0; i< val; i++){
-arr.push(i)
+for(let i =0; i< 5; i++){
+  if(val > 0){
+    arr.push(<i style={{color:"gold"}} className="fa fa-star"></i>)
+    val = val-1
+  }
+  else{
+arr.push(<i className="fa fa-star"></i>)
+  }
 }
-return arr.map(star=><i className="fa fa-star"></i>);
+return arr.map(star=>star);
 }

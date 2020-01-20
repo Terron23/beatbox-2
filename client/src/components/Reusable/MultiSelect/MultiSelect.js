@@ -137,7 +137,7 @@ class SelectBox extends React.Component {
   };
   render() {
     let { hide, text } = this.state;
-    let { custom, id, placeholder, label } = this.props;
+    let { custom, id, placeholder, label, required } = this.props;
     return (
       <div className="form-style-1">
         <label>{label}</label>
@@ -150,6 +150,7 @@ class SelectBox extends React.Component {
           onClick={this.handleReveal}
           id={id}
           placeholder={placeholder}
+          required={required}
         />
 
         <ul style={{ listStyle: "none" }} className={hide ? "d-none" : ""}>

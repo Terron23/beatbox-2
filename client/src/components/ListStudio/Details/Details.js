@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { fetchUser, fetchStudioType } from "../../../actions";
 import Title from "../../assets/Title";
-import Input from "../../assets/Input";
-import TextArea from "../../assets/TextArea";
+import Input from "../../Reusable/FormElements/Input/Input";
+import TextArea from "../../Reusable/FormElements/TextArea/TextArea";
 import MultiSelect from "../../Reusable/MultiSelect/MultiSelect";
 import "../AddStudioForm/css/style.css";
 
@@ -105,6 +105,7 @@ class Details extends Component {
                   custom={false}
                   other_id="na"
                   text_id="na_select"
+                  required="true"
                 />
 
                 <TextArea
@@ -113,6 +114,7 @@ class Details extends Component {
                   label="Studio Description"
                   placeholder="Enter Studio's Description "
                   classProp="form-style-1"
+                  required="true"
                 />
 
                 <Input
@@ -121,6 +123,7 @@ class Details extends Component {
                   label="Capacity"
                   placeholder="Enter Number of People Allowed. Enter 0 if Undecided."
                   classProp="form-style-1"
+                  required="true"
                 />
                
 
@@ -138,6 +141,7 @@ class Details extends Component {
                   custom={true}
                   other_id="equipment_other"
                   text_id="equipment_select"
+                  required="true"
                 />
 
                 <MultiSelect
@@ -155,6 +159,7 @@ class Details extends Component {
                   custom={true}
                   other_id="amen"
                   text_id="amen_select"
+                  required="true"
                 />
 
                 <MultiSelect
@@ -170,6 +175,7 @@ class Details extends Component {
                   custom={true}
                   other_id="incl"
                   text_id="incl_select"
+                  required="true"
                 />
 
                 <hr />

@@ -8,6 +8,8 @@ const uri = keys.postgresConnectionString;
 const stripe = require("stripe")(keys.STRIPE_API_SECRET);
 const bcrypt = require("bcrypt");
 
+
+
 const Pool = require("pg").Pool;
 const pool = new Pool({
   user: user,
@@ -204,6 +206,7 @@ const postListing = (req, res) => {
 
 const postPayment = async (req, res) => {
   const { studioid, payment, token, email } = req.body;
+  console.log(token)
   let { status } = await stripe.charges.create({
     amount: payment * 100,
     currency: "usd",

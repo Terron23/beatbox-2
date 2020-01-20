@@ -1,12 +1,12 @@
 import React from "react";
 import {Row, Col} from 'react-bootstrap'
 
-const Features = ({capacity, studioType, price, rating}) => {
+const Features = ({capacity, studioType, price, rating, venue}) => {
   return (
     <div>
       <div className="room-features-area d-flex flex-wrap mb-50 row">
       <h6>
-          Capacity: <span> { capacity.length > 0 ? `Max person ${capacity}` : 'Contact Owner'}</span>
+          Venue: <span> {venue}</span>
         </h6>
       <h6>
           Studio Type: <span>{studioType}</span>

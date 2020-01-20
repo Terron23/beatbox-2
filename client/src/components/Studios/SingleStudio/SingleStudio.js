@@ -33,7 +33,8 @@ const Studios = ({
   setShow,
   studioForm,
   studioType,
-  rating
+  rating, 
+  venue
 }) => {
   return (
     <Wrapper>
@@ -49,6 +50,7 @@ const Studios = ({
             price={price}
             studioType={studioType}
             rating={rating}
+            venue={venue}
           />
           <Description description={description} title={"Description"} />
           <Ameneties services={services} title={"Ameneties"} />
@@ -138,6 +140,7 @@ class SingleStudio extends Component {
                   handleClose={this.handleClose}
                   handleShow={this.handleShow}
                   rating={studio.rating}
+                  venue={studio.studio_venue}
                 />
               );
             } else {

@@ -10,7 +10,8 @@ const StudioSearchTemplate = ({
   studioType,
   city,
   availibility,
-  dateQuery=""
+  dateQuery="",
+  venue
 }) => (
   <div className="single-room-area d-flex align-items-center mb-50">
     <div className="room-thumbnail">
@@ -27,6 +28,9 @@ const StudioSearchTemplate = ({
       <div className="studio-content">
         <h6>
           Studio Type: <span>{studioType}</span>
+        </h6>
+        <h6>
+          Venue: <span>{venue}</span>
         </h6>
         <h6>
           Location: <span>{city}</span>

@@ -114,24 +114,24 @@ export default () => {
       >
         <StudioType img={yoga} studioTitle="Relax & Let Go" 
         studioSubTitle="Yoga Studios" description=""   
-        link={"/search-studio/17"}/>
+        link={"/search-studio/23"}/>
         <StudioType img={music} studioTitle="Make Music Not War" 
         studioSubTitle="Recording - Music" description=""  
-        link={"/search-studio/15"}/>
+        link={"/search-studio/22"}/>
         <StudioType img={photo} studioTitle="Conduct Professional Photo Shoots" 
         studioSubTitle="Photography Studios" description=""  
-        link={"/search-studio/19"} />
+        link={"/search-studio/25"} />
 
         <StudioType img={art} studioTitle="Paint and Sip" 
         studioSubTitle="Art Studios" description=""  
-        link={"/search-studio/21"}/>
+        link={"/search-studio/28"}/>
 
         <StudioType img={dance} studioTitle="Express Yourself" 
         studioSubTitle="Dance Studios" description="" 
-        link={"/search-studio/18"}/>
+        link={"/search-studio/27"}/>
 
         <StudioType img={film} studioSubTitle="Film Studios" studioTitle="Make Your Directorial Debut" description="" 
-        link={"/search-studio/20"}/>
+        link={"/search-studio/24"}/>
       </Carousel>
       <ViewAll />
     </section>

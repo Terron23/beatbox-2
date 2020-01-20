@@ -2,7 +2,9 @@ var dotenv = require("dotenv");
 dotenv.load();
 const _ = require("lodash");
 const db = require("../models/queries");
-const request = require('superagent');;
+const request = require('superagent');
+const keys = require('../config/keys');
+const email_subscribe = keys.EMAIL_SUBSCRIBE;
 
 module.exports = app => {
   app.get("/api/v2/logout", (req, res) => {
@@ -28,7 +30,7 @@ module.exports = app => {
     request
     .post('https://' + "us4" + '.api.mailchimp.com/3.0/lists/6b41331243/members')
     .set('Content-Type', 'application/json;charset=utf-8')
-    .set('Authorization', 'Basic ' + new Buffer('any:' + 'e670080209400d0a1824fed57f9151a7-us4').toString('base64'))
+    .set('Authorization', 'Basic ' + new Buffer('any:' + email_subscribe).toString('base64'))
     .send({
       'email_address': req.body.email_address,
       'status': 'subscribed',

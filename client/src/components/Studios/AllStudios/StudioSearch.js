@@ -112,6 +112,7 @@ class StudioSearch extends Component {
             city={studio.city}
             availibility={Object.values(studio.availibility)}
             dateQuery={this.state.startDate}
+            venue={studio.studio_venue}
           />
         );
       });
@@ -279,6 +280,7 @@ class StudioSearch extends Component {
                   revealCal={reveal}
                   hide="web-search"
                   clearCal={this.clearCal}
+                  
                 />
               ) : (
                 ""
