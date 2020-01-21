@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ListStudioForm from '../../Reusable/Forms/ListStudio/ListStudio'
-import './css/style.css';
+import ListStudioForm from "../../Reusable/Forms/ListStudio/ListStudio";
+import FormNav from "../FormNavigation/SideNav";
+import { Row, Col } from "react-bootstrap";
+import "./css/style.css";
 
 class ListStudio extends Component {
   constructor(props) {
     super(props);
-   
   }
-
 
   handleSubmit = event => {
     event.preventDefault();
@@ -27,49 +27,51 @@ class ListStudio extends Component {
     let rules = "";
     let guest = 0;
     let studioType = event.target.studioType.value;
-    let studioImage=""
-        axios
-          .post("/api/v2/post-listing", {
-            studioName,
-            price,
-            rules,
-            name,
-            email,
-            address1,
-            address2,
-            postalCode,
-            city,
-            region,
-            phone,
-            venue,
-            studioImage,
-            guest,
-            studioType
-          })
-          .then(res => {
-           
-            this.props.history.push(`/design/${studioName}/${res.data[0]._id}`);
-          }).catch(err => alert(err));
+    let studioImage = "";
+    axios
+      .post("/api/v2/post-listing", {
+        studioName,
+        price,
+        rules,
+        name,
+        email,
+        address1,
+        address2,
+        postalCode,
+        city,
+        region,
+        phone,
+        venue,
+        studioImage,
+        guest,
+        studioType
+      })
+      .then(res => {
+        this.props.history.push(`/design/${studioName}/${res.data[0]._id}`);
+      })
+      .catch(err => alert(err));
   };
 
-
-
-  
-
   render() {
- 
     return (
-     <ListStudioForm title="Add Studio Form" 
-     handleSubmit={this.handleSubmit} 
-     ad2Val="N/A" buttonText="Next"
-     handleFiles={this.handleFiles}
-     classProp="form-style-1"
-     showTitle={true}
-     />
+      <Row>
+        <Col xs={3}>
+          <FormNav active1="active"/>
+        </Col>
+        <Col>
+          <ListStudioForm
+            title="Add Studio Form"
+            handleSubmit={this.handleSubmit}
+            ad2Val="N/A"
+            buttonText="Next"
+            handleFiles={this.handleFiles}
+            classProp="form-style-1"
+            showTitle={true}
+          />
+        </Col>
+      </Row>
     );
   }
 }
-
-
 
 export default ListStudio;

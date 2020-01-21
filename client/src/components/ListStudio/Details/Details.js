@@ -6,6 +6,8 @@ import Title from "../../assets/Title";
 import Input from "../../Reusable/FormElements/Input/Input";
 import TextArea from "../../Reusable/FormElements/TextArea/TextArea";
 import MultiSelect from "../../Reusable/MultiSelect/MultiSelect";
+import FormNav from "../FormNavigation/SideNav";
+import { Row, Col } from "react-bootstrap";
 import "../AddStudioForm/css/style.css";
 
 class Details extends Component {
@@ -80,6 +82,9 @@ class Details extends Component {
       return "Loading...";
     }
     return (
+      <Row>
+        <Col xs={3}><FormNav active3="active"/></Col>
+        <Col>
       <div className="container-fluid site-section">
         <div className="container">
           <Title header="Add Studio Details" />
@@ -203,6 +208,8 @@ class Details extends Component {
           </div>
         </div>
       </div>
+      </Col>
+      </Row>
     );
   }
 }

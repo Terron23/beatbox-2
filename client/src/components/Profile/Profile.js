@@ -33,37 +33,32 @@ class Profile extends Component {
   handleStudioListed = () => {
     return this.props.studio.map((studio, i) => {
       if (studio.user_fk == this.props.auth._id) {
-        return (<Accordion>
-          <Card>
-    <Card.Header>
-     <Accordion.Toggle as={Button}  variant="link" eventKey={i}>
-
-        {studio.studio_name}
-      </Accordion.Toggle>
-      </Card.Header>
-      </Card>
-      <Accordion.Collapse eventKey={i}>
-          <ListStudioForm
-            contactVal={studio.contact_name}
-            phoneVal={studio.contact_phone}
-            venueVal={studio.studio_venue}
-            ad1Val={studio.address1}
-            ad2Val={studio.address2}
-            postalVal={studio.postal_code}
-            regionVal={studio.state}
-            cityVal={studio.city}
-            emailVal={studio.contact_email}
-            studioNameVal={studio.studio_name}
-            priceVal={studio.studio_price}
-            search={studio.studio_type_fk}
-            idVal={studio._id}
-            buttonText="Edit & Save"
-            title={`Edit ${studio.studio_name}`}
-            showTitle={false}
-            handleSubmit={e => this.handleSubmit(e, "studios")}
-          />
-          </Accordion.Collapse>
-          </Accordion>
+        return (
+      
+<div className="col-md-4 studio-card" style={{border: "1px lightgray solid", padding:"20px"}}>
+        <p>{studio.studio_name}</p>
+          
+    </div>
+          // <ListStudioForm
+          //   contactVal={studio.contact_name}
+          //   phoneVal={studio.contact_phone}
+          //   venueVal={studio.studio_venue}
+          //   ad1Val={studio.address1}
+          //   ad2Val={studio.address2}
+          //   postalVal={studio.postal_code}
+          //   regionVal={studio.state}
+          //   cityVal={studio.city}
+          //   emailVal={studio.contact_email}
+          //   studioNameVal={studio.studio_name}
+          //   priceVal={studio.studio_price}
+          //   search={studio.studio_type_fk}
+          //   idVal={studio._id}
+          //   buttonText="Edit & Save"
+          //   title={`Edit ${studio.studio_name}`}
+          //   showTitle={false}
+          //   handleSubmit={e => this.handleSubmit(e, "studios")}
+          // />
+       
         );
       }
     });

@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import homeBg from './images/10-accessories-home-studio.jpg'
-import yogaBg from './images/yoga-bg.jpeg'
+import homeBg from './images/color.jpg'
 import "./css/venue.css";
 
 const VenueType = ({ img, description, link = "/", bg }) => {
   return (
   
-      <div className="col-md-4 venue-card single-service--area" id={bg}>
-        <div className="service-content ">
+      <div className="col-md-4 venue-card single-service--area">
+        <div className="service-content venue-service">
 
           <Link to={link}>
             <h5>
-              <i className={`${img}`}></i> {description}
+              <i className={`${img}`}></i> <br />{description}
             </h5>
           </Link>
          

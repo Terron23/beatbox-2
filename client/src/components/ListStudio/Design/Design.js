@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import { fetchUser } from "../.././../actions";
 import Title from "./../../assets/Title";
-import Input from "./../../assets/Input";
 import StudioDropZone from "./sub_components/Dropzone"
+import FormNav from "../FormNavigation/SideNav";
+import { Row, Col } from "react-bootstrap";
 import './css/style.css'
 
 const Wrapper = ({ children, }) => (
@@ -42,15 +42,18 @@ render() {
     }
     const {studioname, studioid } = this.state;
     return (
+      <Row>
+        <Col xs={3}><FormNav active2="active"/></Col>
+        <Col>
       <Wrapper>
 <StudioDropZone 
 studioid={studioid} 
 studioname={studioname}
 history = {this.props.history}
-/>
-
-     
-      </Wrapper>
+/> 
+ </Wrapper>
+ </Col>
+ </Row>
     );
   }
 }
